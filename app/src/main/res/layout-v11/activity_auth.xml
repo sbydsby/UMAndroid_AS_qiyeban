@@ -1,0 +1,238 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context=".AuthActivity"
+    android:background="#e0e0e0" >
+
+    <TextView
+        android:id="@+id/hint_msg"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:gravity="center"
+        android:textColor="#0a63b5"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_big3">
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/middle_Linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_5"
+        android:orientation="horizontal" 
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/left_grid"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.28"
+            android:background="@drawable/shape_corner_line"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_5" >
+
+            <TextView
+                android:id="@+id/operation_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/operation_default"
+                android:textColor="#095da6"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_big1">
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/operation_action_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/middle_grid"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/padding_5"
+            android:layout_weight="0.21"
+            android:background="@drawable/shape_corner_line"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_5" >
+
+            <TextView
+                android:id="@+id/operation_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/operation_default"
+                android:textColor="#095da6"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_big1" >
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/operation_count_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/right_grid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_5"
+            android:layout_weight="0.31"
+            android:background="@drawable/shape_corner_line"
+            android:padding="@dimen/padding_5" >
+
+            <TextView
+                android:id="@+id/operation_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/operation_success_count"
+                android:paddingTop="@dimen/padding_top"
+                android:text="@string/operation_success"
+                android:textColor="#0962b6"
+                android:textSize="@dimen/text_size_big2" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/operation_fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/operation_success"
+                android:layout_toLeftOf="@+id/operation_fail_count"
+                android:text="@string/operation_fail"
+                android:textColor="#0962b6"
+                android:textSize="@dimen/text_size_big2" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/operation_success_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/operation_success"
+                android:layout_toLeftOf="@+id/operation_count_time"
+                android:text="@string/operation_done_count0"
+                android:textColor="#bb1716" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/operation_fail_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/operation_fail"
+                android:layout_toLeftOf="@+id/operation_count_time"
+                android:text="@string/operation_done_count0"
+                android:textColor="#bb1716"  />
+
+            <LinearLayout
+                android:id="@+id/operation_count_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding_5"
+                android:paddingRight="@dimen/padding_5" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/operation_default"
+                    android:src="@drawable/uncheck" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/CameraActivity_TakeInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.99"
+        android:layout_marginTop="10px"
+         >
+    </FrameLayout>
+    <!-- height:450dp -->
+    
+    <TextView
+        android:id="@+id/CountTime_Warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#095da6"  />
+
+</LinearLayout>

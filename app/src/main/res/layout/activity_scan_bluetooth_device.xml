@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/home_bg"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/LayoutPart1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#f8f8f8" 
+        android:clickable="true"
+        android:focusable="true">
+        
+      <RadioGroup  
+        android:id="@+id/radioGroup1"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_alignParentLeft="true"  
+        android:layout_alignParentRight="true"  
+        android:layout_alignParentTop="true" 
+        android:layout_marginLeft="10dp">  
+  
+        <RadioButton  
+            android:id="@+id/radio0"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginLeft="5dp"
+            android:checked="true"  
+            android:text="RSA" 
+            android:textColor="#000000"
+            android:textSize="20sp"
+            style="@style/tab_center"
+            android:visibility="gone" />  
+           
+         <View
+             android:id="@+id/view0"  
+             android:layout_width="fill_parent"
+             android:layout_height="1dp"
+             android:layout_below="@id/radio0"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:background="#b5b5b5" 
+             android:visibility="gone" />
+         
+          <RadioButton  
+            android:id="@+id/radio1"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:checked="true"  
+            android:text="RSA" 
+            android:textColor="#000000"
+            android:textSize="20sp"
+            style="@style/tab_center"
+            android:visibility="gone" />  
+           
+         <View
+             android:id="@+id/view1"  
+             android:layout_width="fill_parent"
+             android:layout_height="1dp"
+             android:layout_below="@id/radio1"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:background="#b5b5b5" 
+             android:visibility="gone" />
+         
+          <RadioButton  
+            android:id="@+id/radio2"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:checked="true"  
+            android:text="RSA" 
+            android:textColor="#000000"
+            android:textSize="20sp"
+            style="@style/tab_center"
+            android:visibility="gone" />  
+           
+         <View
+             android:id="@+id/view2"  
+             android:layout_width="fill_parent"
+             android:layout_height="1dp"
+             android:layout_below="@id/radio2"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:background="#b5b5b5" 
+             android:visibility="gone" />
+         
+          <RadioButton  
+            android:id="@+id/radio3"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:checked="true"  
+            android:text="RSA" 
+            android:textColor="#000000"
+            android:textSize="20sp"
+            style="@style/tab_center" 
+            android:visibility="gone"/>  
+           
+         <View
+             android:id="@+id/view3"  
+             android:layout_width="fill_parent"
+             android:layout_height="1dp"
+             android:layout_below="@id/radio3"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:background="#b5b5b5"  
+             android:visibility="gone"/>
+         
+          <RadioButton  
+            android:id="@+id/radio4"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:checked="true"  
+            android:text="RSA" 
+            android:textColor="#000000"
+            android:textSize="20sp"
+            style="@style/tab_center" 
+            android:visibility="gone"/>  
+           
+         <View
+             android:id="@+id/view4"  
+             android:layout_width="fill_parent"
+             android:layout_height="1dp"
+             android:layout_below="@id/radio4"
+             android:layout_marginLeft="5dp"
+             android:layout_marginRight="5dp"
+             android:background="#b5b5b5"  
+             android:visibility="gone"/>
+      </RadioGroup>   
+    </RelativeLayout> 
+    
+    <TextView
+         android:id="@+id/textLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/radioGroup1"
+         android:layout_marginTop="15dp"
+         android:layout_marginLeft="25dp"
+         android:text="提示:序列号位于蓝牙key背面"
+         android:textColor="#767676"
+         android:textSize="15sp"
+         />
+    
+    <RelativeLayout
+	    android:id="@+id/layout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal" 
+        android:layout_below="@id/textLabel">
+	   <ImageView
+             android:id="@+id/edit"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="20dp"
+             android:layout_marginRight="20dp"
+             android:src="@drawable/button_ok" />     
+    </RelativeLayout>
+
+</LinearLayout>

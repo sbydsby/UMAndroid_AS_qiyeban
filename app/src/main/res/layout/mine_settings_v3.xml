@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:item="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:background="@color/gray_light">
+
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_light"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/bg_yellow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_mine_title"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="48dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="48dp">
+
+                <!-- android:background="@drawable/bg_mine_black"  -->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mine" />
+
+                <TextView
+                    android:id="@+id/showName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="135111199999"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/shiming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weishiming" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:id="@+id/item_changepwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            item:left_icon_drawable="@drawable/mine_changepwd"
+            item:main_text="@string/mine_changepassword"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow" />
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:id="@+id/item_certtype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            item:left_icon_drawable="@drawable/mine_certtype"
+            item:main_text="@string/mine_certtype"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow"
+            item:sub_text="@string/certtype_mobile" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_devider" />
+        
+        <LinearLayout
+            android:id="@+id/item_localfp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white" >
+
+            <com.sheca.umandroid.layout.ComplicatedItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                item:left_icon_drawable="@drawable/mine_fp"
+                item:right_icon_drawable="@drawable/arrow"
+                item:main_text="@string/mine_fp"
+                item:main_text_color="@color/black_light2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_ifaa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            >
+
+            <com.sheca.umandroid.layout.ComplicatedItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                item:left_icon_drawable="@drawable/mine_fp"
+                item:main_text="@string/mine_fp"
+                item:main_text_color="@color/black_light2" />
+
+            <com.suke.widget.SwitchButton
+                android:id="@+id/switch_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_devider" />
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:visibility="gone"
+            android:id="@+id/item_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            item:left_icon_drawable="@drawable/mine_record"
+            item:main_text="@string/mine_record"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow" />
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:id="@+id/item_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            item:left_icon_drawable="@drawable/mine_version"
+            item:main_text="@string/mine_version"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_devider" />
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:id="@+id/item_protocol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            item:left_icon_drawable="@drawable/mine_protocol"
+            item:main_text="@string/mine_protocol"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_devider" />
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:id="@+id/item_cs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            item:left_icon_drawable="@drawable/mine_cs"
+            item:main_text="@string/mine_cs"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_devider" />
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:id="@+id/item_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            item:left_icon_drawable="@drawable/mine_about"
+            item:main_text="@string/mine_about"
+            item:main_text_color="@color/black_light2"
+            item:right_icon_drawable="@drawable/arrow" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/action_exit2"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,136 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}">
+
+    <RelativeLayout
+        android:id="@+id/Layout_cert"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/Layout_cert1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/nocertview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/no_cert" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_cert"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/black_light3"
+                />
+
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/module_apply_cert"
+                style="@style/btn_ok"
+                />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/Layout_cert2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/Layout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="20dp"
+                    android:text="证书列表"
+                    android:textColor="#545454"
+                    android:textSize="19sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Layout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Layout1"
+                android:layout_marginTop="10dp"
+                android:focusable="true">
+
+                <!--  ProgressBar
+                    android:id="@+id/cert_progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" /-->
+
+                <ListView
+                    android:id="@+id/lv_applications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:dividerHeight="3dp"
+                    android:padding="10dp"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Layout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Layout_cert"
+        android:background="@drawable/dibubg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/applycertbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/renlianshibiebutton" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/applycertbtn"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:text="人脸识别  自助申请"
+            android:textColor="#6089bd"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</RelativeLayout>

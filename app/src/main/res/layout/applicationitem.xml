@@ -1,0 +1,121 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:background="@drawable/bg_round_darkgray"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="3dip"
+        android:padding="1dip" >
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/cert_icon" />
+    </LinearLayout>
+    
+     <ImageView
+            android:id="@+id/list_image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:src="@drawable/signlable" 
+            android:visibility="gone"/>
+    
+     <TextView
+        android:id="@+id/tv_CommonName"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:layout_toRightOf="@+id/list_image1"
+        android:text="令狐冲"
+        android:textColor="#d3c18f"
+        android:textSize="20sp"
+        android:textStyle="bold" 
+        android:paddingTop="10dp"/>
+	
+	<ImageView
+            android:id="@+id/list_image6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_CommonName"
+            android:src="@drawable/certtype" 
+            android:visibility="gone"/>
+    
+     <TextView
+        android:id="@+id/certtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/list_image6"
+        android:text="证书"
+        android:textColor="#828282"
+        android:paddingTop="10dp"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+     
+    
+    <ImageView
+		android:id="@+id/iv_download"
+		android:layout_width="50dp"
+		android:layout_height="50dp"
+		android:layout_toRightOf="@+id/tv_CommonName"
+		android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        />
+    
+     <ImageView
+            android:id="@+id/list_image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_CommonName"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/cert_rsa" />
+         
+    <TextView
+        android:id="@+id/tv_CommonName1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:layout_below="@id/tv_CommonName"
+		android:layout_toRightOf="@+id/list_image2"
+		android:layout_marginTop="25dp"
+        android:text="令狐冲"
+        android:textColor="#878787"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+     <ImageView
+            android:id="@+id/list_image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_CommonName"
+            android:layout_toRightOf="@+id/tv_CommonName1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/time"
+            android:visibility="gone" />
+    
+    <TextView
+        android:id="@+id/tv_ApplyTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:layout_below="@id/tv_CommonName"
+		android:layout_toRightOf="@+id/list_image3"     
+        android:text="ApplyTime"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:textColor="#d3c18f"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    
+</RelativeLayout >

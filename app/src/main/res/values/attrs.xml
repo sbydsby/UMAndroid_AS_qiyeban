@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ComplicatedItem">
+    <attr name="item_background_color" format="reference|integer" />
+
+    <attr name="left_icon_drawable" format="reference" />
+    <attr name="right_icon_drawable" format="reference" />
+
+    <attr name="main_text" format="string|reference|integer" />
+    <attr name="main_text_color" format="reference|color" />
+    <attr name="main_text_size" format="dimension|string|reference|integer" />
+
+    <attr name="sub_text" format="string|reference|integer" />
+    <attr name="sub_text_color" format="reference|color" />
+    <attr name="sub_text_size" format="dimension|string|reference|integer" />
+</declare-styleable>
+
+    <declare-styleable name="TextEditItem">
+        <attr name="teitem_background_color" format="reference|integer" />
+
+        <attr name="tv_text" format="string|reference|integer" />
+        <attr name="tv_text_color" format="reference|color" />
+        <attr name="tv_text_size" format="dimension|string|reference|integer" />
+
+        <attr name="edit_hint" format="string|reference|integer" />
+        <attr name="edit_text_color" format="reference|color" />
+        <attr name="edit_text_size" format="dimension|string|reference|integer" />
+    </declare-styleable>
+
+</resources>

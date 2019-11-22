@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+
+        <Button
+            android:id="@+id/btn_change_cert"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="50dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/change_cert"/>
+        
+        <Button
+            android:id="@+id/btn_del_cert"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/btn_login"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/del_cert"/>
+        
+        <Button
+            android:id="@+id/btn_view_cert"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/btn_login"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/chakanzhengshu"  />
+
+</LinearLayout>

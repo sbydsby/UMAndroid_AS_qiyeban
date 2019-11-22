@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:background="@drawable/mydialogshape">
+ 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/toprl"
+        android:layout_above="@+id/bottomoll">
+      
+        <ImageView
+           android:id="@+id/login_exit"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="3px"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="3px"
+           android:adjustViewBounds="true"
+           android:src="@drawable/loginexit" /> 
+           
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:text="确定吗?"
+            android:textColor="@color/black"
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请填写验证码"
+            android:textColor="@color/grey"
+            android:layout_marginTop="100px"
+            android:layout_centerHorizontal="true" 
+            android:textSize="15sp" />
+        
+       
+    
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        android:layout_below="@+id/toprl"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone" 
+        />
+ 
+    <RelativeLayout
+        android:id="@+id/bottomoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" 
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/acceptbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="确定"
+                android:textColor="@color/orange"
+                android:background="@null"
+                android:layout_marginTop="12dp"
+                android:textSize="18sp"
+                />
+ 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                />
+            <Button
+                android:id="@+id/refusebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="取消"
+                android:textColor="@color/orange"
+                android:background="@null"
+                android:textSize="18sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    
+
+   
+    <!-- 
+    <com.sheca.umandroid.layout.VerificationCodeInput
+       android:digits="1234567890"
+       android:id="@+id/verificationCodeInput"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="25dp"
+       android:layout_centerHorizontal="true" 
+       ver:box="6"
+       ver:box_bg_normal="@drawable/verification_edit_bg_normal"
+       ver:box_bg_focus="@drawable/verification_edit_bg_focus"
+       ver:child_h_padding="5dp"/>
+         -->
+</RelativeLayout>

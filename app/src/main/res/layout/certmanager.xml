@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+    
+        <Button
+            android:id="@+id/btn_face_auth"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="20dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/face_auth" />
+
+        <Button
+            android:id="@+id/btn_apply_cert"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/btn_face_auth"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/apply_cert" />
+        
+        <Button
+            android:id="@+id/btn_apply_cert_byface"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/btn_apply_cert"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/renlianshibie"/>
+        
+        <Button
+            android:id="@+id/btn_view_cert"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/btn_apply_cert_byface"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/chakanzhengshu"/>
+        
+        <Button
+            android:id="@+id/btn_use_cert"
+            android:layout_width="259dp"
+            android:layout_height="63dp"  
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/btn_view_cert"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/cert_use" />
+
+</LinearLayout>

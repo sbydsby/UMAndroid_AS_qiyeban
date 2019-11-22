@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scan_bg"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/form_exit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginTop="30px"
+                android:adjustViewBounds="true"
+                android:src="@drawable/loginexit" />
+
+            <ImageView
+                android:id="@+id/btn_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_back"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:src="@drawable/scan_logo_decrypt" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textAppLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="解密应用:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textAppView"
+                android:layout_width="260dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/textAppLabel"
+                android:ellipsize="end"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="16dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/textOrgView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:background="#ffffff"
+                    android:ellipsize="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </ScrollView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textCertView"
+                android:layout_width="290dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="2dp"
+                android:background="#ffffff"
+                android:ellipsize="end"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/btnCertView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/logindown" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/textPwd"
+                android:layout_width="fill_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/prompt_dao_password"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="#d3d3d3"></EditText>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativelayoutFinger"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/finger_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/fingerprint"
+                android:contentDescription="@string/title"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/gesture_image"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/pwdgesture"
+                android:contentDescription="@string/title"
+                android:gravity="center" />
+
+
+            <TextView
+                android:id="@+id/finger_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/finger_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="点击图片使用指纹或手势密码登录"
+                android:textColor="#d3d3d3"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gesture_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gesture_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="点击手势密码图片使用手势密码登录"
+                android:textColor="#d3d3d3"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:id="@+id/pwdkeyboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/finger_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/finger_txt"
+                android:background="@drawable/pwdkeyboard"
+                android:gravity="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativelayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/btn_login_yellow"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/app_ok" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativelayoutGesture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/Gesture_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="切换手势密码"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

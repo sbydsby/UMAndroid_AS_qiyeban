@@ -1,0 +1,156 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin"
+    tools:context=".ResultActivity" 
+    android:background="@drawable/face_loading">
+
+    <ImageView
+           android:id="@+id/indicater"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="2dp"
+           android:src="@drawable/icon_face_guide_2" />
+
+    <RelativeLayout
+            android:id="@+id/relativelayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"    
+            android:orientation="horizontal" >
+  
+        <TextView
+            android:id="@+id/auth_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:textColor="#c8ab5c" 
+            android:text="人脸识别审核中 ..."
+            android:textSize="18sp"
+            android:textStyle="bold" />
+       
+       <TextView  
+           android:id="@+id/auth_result_description" 
+           android:layout_width="wrap_content"   
+           android:layout_height="wrap_content"  
+           android:layout_gravity="center"
+           android:layout_marginTop="30dp"
+           android:textColor="#57cee6" 
+           android:text="未能检测出人脸,请重试"
+           android:textSize="15sp"
+           android:textStyle="bold" />
+            
+     </RelativeLayout>
+    
+     <RelativeLayout
+            android:id="@+id/relativelayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"    
+            android:orientation="horizontal" 
+            android:layout_below="@id/relativelayout1">
+
+       <pl.droidsonroids.gif.GifImageView
+         android:id="@+id/face_loading"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" 
+         android:gravity="center"
+         android:layout_marginTop="10dp" />
+    
+       <pl.droidsonroids.gif.GifImageView  
+         android:id="@+id/face_err"  
+         android:layout_width="wrap_content"  
+         android:layout_height="wrap_content"
+         android:layout_below="@id/face_loading"
+         android:layout_marginTop="10dp" 
+         android:gravity="center" /> 
+         
+      </RelativeLayout>
+
+      <RelativeLayout
+             android:id="@+id/relativelayout01"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="20dp"
+             android:orientation="horizontal" 
+             android:visibility="gone"  >
+    
+       <TextView
+          android:id="@+id/auth_result_label"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textColor="#545454"
+          android:textSize="@dimen/text_size_big3" 
+          android:textStyle="bold"
+          android:text="审核结果:"/>   
+          
+      
+        <TextView
+          android:id="@+id/auth_result_description_label"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="30dp"
+          android:layout_below="@id/auth_result_label"
+          android:textColor="#545454"
+          android:textSize="@dimen/text_size_big3" 
+          android:textStyle="bold"
+          android:text="失败原因:"/>   
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+             android:id="@+id/relativelayout3"
+             android:layout_width="fill_parent"
+             android:layout_height="100dp"
+             android:layout_marginLeft="30.0px"
+             android:layout_marginRight="30.0px"
+             android:layout_marginTop="15dp"
+             android:gravity="center"    
+             android:orientation="horizontal" 
+             android:layout_below="@id/relativelayout2" >
+       <Button
+           android:id="@+id/login_btn_next"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+           android:layout_gravity="center"
+           android:adjustViewBounds="true"
+           android:background="@drawable/face_auth_again"/>
+      
+   </RelativeLayout>
+   
+   
+    <RelativeLayout
+             android:id="@+id/relativelayout4"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10.0px"
+             android:layout_marginRight="10.0px"
+             android:layout_marginTop="20dp"
+             android:layout_below="@id/relativelayout3"
+             android:orientation="horizontal" >
+       
+        <Button
+           android:id="@+id/faillink"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:adjustViewBounds="true"
+           android:layout_marginRight="12.0dip"
+           android:background="@drawable/rengong" />
+        
+         <Button
+           android:id="@+id/facedesc"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:adjustViewBounds="true"
+           android:layout_alignParentRight="true"
+           android:background="@drawable/facehelp" />
+                 
+    </RelativeLayout>
+</LinearLayout>

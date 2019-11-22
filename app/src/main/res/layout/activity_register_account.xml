@@ -1,0 +1,220 @@
+﻿<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/home_bg">
+
+    <!--  ProgressBar
+        android:id="@+id/reg_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" /-->
+    
+    <ScrollView
+        android:id="@+id/reg_form"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:layout_marginTop="20dp">
+
+              <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                   <EditText
+                        android:id="@+id/account"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:hint="@string/prompt_account_phone"
+                        android:textColorHint="#d3d3d3"
+                        android:inputType="phone"
+                        android:maxLines="1" 
+                        android:textColor="#000000" 
+                        android:background="@null"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/edit_cursor_color"/>
+                   <View
+                      android:layout_width="fill_parent"
+                      android:layout_height="1dp"
+                      android:layout_below="@id/account"
+                      android:background="#b5b5b5" />     
+                   
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relativeLayout1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/phonecode"
+                        android:layout_width="257dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="3dp"
+                        android:hint="@string/prompt_account_phone_msg"
+                        android:textColorHint="#d3d3d3"
+                        android:maxLines="1" 
+                        android:textColor="#000000" 
+                        android:background="@null"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/edit_cursor_color"/>
+                    
+                     <Button
+                        android:id="@+id/btnCode"
+                        android:layout_width="100dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@id/phonecode"
+                        android:text="@string/action_message_code" 
+                        android:textColor="#ffffff"
+                        android:background="@drawable/btn_selector" />
+                     
+                      <View
+                         android:id="@+id/codeView"
+                         android:layout_width="260dp"
+                         android:layout_height="1dp"
+                         android:layout_marginTop="6dp"
+                         android:layout_below="@id/phonecode"
+                         android:background="#b5b5b5" />     
+                     <TextView
+                        android:id="@+id/textVoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/codeView"
+                        android:text="收不到验证码?试试语音验证码。"
+                        android:textColor="#ccab5c"
+                        android:textSize="12sp" />
+                    
+                </RelativeLayout>
+                
+                 <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relativeLayout2" 
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="3dp"
+                        android:hint="@string/prompt_account_password"
+                        android:textColorHint="#d3d3d3"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#000000" 
+                        android:background="@null"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/edit_cursor_color" />      
+
+                    <View
+                       android:layout_width="fill_parent"
+                       android:layout_height="1dp"
+                       android:layout_below="@id/password"
+                       android:background="#b5b5b5" />     
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relativeLayout3" 
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp">
+                    
+                    <EditText
+                        android:id="@+id/password2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="3dp"
+                        android:hint="@string/prompt_account_password2"
+                        android:textColorHint="#d3d3d3"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true" 
+                        android:textColor="#000000" 
+                        android:background="@null"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/edit_cursor_color"/>
+                    <View             
+                       android:layout_width="fill_parent"
+                       android:layout_height="1dp"
+                       android:layout_below="@id/password2"
+                       android:background="#b5b5b5" />     
+   
+                </RelativeLayout>
+
+                <RelativeLayout
+                     android:id="@+id/relativeLayout5"
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@id/relativeLayout4" 
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp">
+                 <ImageView
+                     android:id="@+id/btnReg"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="20dp"
+                     android:src="@drawable/zhuce" 
+                     android:gravity="center" 
+                     android:layout_gravity="center"
+                     android:layout_centerVertical="true"/>
+              </RelativeLayout>
+              
+               <RelativeLayout
+                    android:id="@+id/relativeLayout6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relativeLayout5" 
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp">
+                
+                      <TextView
+                        android:id="@+id/txtUserProl1"   
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="注册即视为同意"
+                        android:textColor="#7ac7f3"
+                        android:textSize="15sp" />
+                      
+                      <TextView
+                        android:id="@+id/txtUserProl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/txtUserProl1"
+                        android:text=" [移证通服务协议]"
+                        android:textColor="#7ac7f3"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/maintop" />
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/grey_dark"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/um_menu"
+            android:drawableTop="@drawable/selector_home"
+            android:text="@string/menu_selected"
+            />
+
+		<RadioButton
+            android:id="@+id/rb_cert"
+            style="@style/um_menu"
+            android:drawableTop="@drawable/selector_cert"
+            android:text="@string/menu_certificate"
+              />
+
+        <RadioButton
+            android:id="@+id/rb_service"
+            style="@style/um_menu"
+            android:drawableTop="@drawable/selector_scan"
+            android:text="@string/menu_scan"
+           />
+
+        <RadioButton
+            android:id="@+id/rb_seal"
+            style="@style/um_menu"
+            android:drawableTop="@drawable/selector_seal"
+            android:text="@string/menu_seal"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_settings"
+            style="@style/um_menu"
+            android:drawableTop="@drawable/selector_settings"
+            android:text="@string/menu_me"
+             />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"    
+    android:orientation="horizontal"
+    android:padding="15dip" >
+
+     <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="fill_parent" 
+            android:layout_height="80dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/touxiang_acc" />
+
+    <TextView
+        android:id="@+id/sealname"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_image"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="certname"
+        android:textColor="#000000"
+        android:textSize="18sp" />	
+
+     <TextView
+        android:id="@+id/validtime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sealname"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="duration"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+</RelativeLayout>

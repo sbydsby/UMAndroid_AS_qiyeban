@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="userId："
+            android:textSize="16dp"
+            />
+
+        <EditText
+            android:id="@+id/et_user_id"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="user1"
+            android:textSize="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="transactionType："
+            android:textSize="16dp"
+            />
+
+        <EditText
+            android:id="@+id/et_transaction_type"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="transId："
+            android:textSize="16dp"
+            />
+
+        <EditText
+            android:id="@+id/et_transaction_id"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="transId"
+            android:textSize="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="transPayload："
+            android:textSize="16dp"
+            />
+
+        <EditText
+            android:id="@+id/et_transaction_payload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="transPayload"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35px"
+            />
+
+        <Button
+            android:id="@+id/btUpdateIfaaUrl"
+            android:layout_height="wrap_content"
+            android:layout_width="200px"
+            android:text="@string/Update"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btIsSupportIFAA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/isSupportIFAA" />
+
+        <Button
+            android:id="@+id/btIfaaCheckStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ifaaCheckStatus" />
+
+        <Button
+            android:id="@+id/btExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exit" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Switch
+            android:id="@+id/ifaaSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setIfaaOn" />
+
+        <Button
+            android:id="@+id/btAuth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/authenticator" />
+
+        <Button
+            android:id="@+id/btGetAppID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/getAppID" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_auth"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdge="vertical"
+            android:paddingBottom="20dp"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/tvShowInfos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@color/gray_light"
+            android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:textIsSelectable="true" />
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvClean"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:background="@android:color/background_light"
+                android:clickable="true"
+                android:paddingBottom="15px"
+                android:paddingTop="5px"
+                android:text="clean"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

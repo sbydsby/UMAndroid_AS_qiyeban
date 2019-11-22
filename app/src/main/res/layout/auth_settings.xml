@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/title_activity_settings"
+    android:background="#000000" >
+
+    <PreferenceCategory android:title="@string/setting" >
+
+        <EditTextPreference
+            android:defaultValue="@string/server_address_defvalue"
+            android:key="@string/server_address_key"
+            android:summary="@string/server_address_summary"
+            android:title="@string/server_address_title" />
+
+        <ListPreference
+            android:defaultValue="@string/surface_size_defvalue"
+            android:dialogTitle="@string/surface_size_title"
+            android:entries="@array/surface_size_name"
+            android:entryValues="@array/surface_size_value"
+            android:key="@string/surface_size_key"
+            android:negativeButtonText="@string/cancel"
+            android:summary="@string/surface_size_summary"
+            android:title="@string/surface_size_title" />
+
+        <ListPreference
+            android:defaultValue="@string/auto_bestphoto_count_defvalue"
+            android:dialogTitle="@string/auto_bestphoto_count_title"
+            android:entries="@array/auto_bestphoto_count_name"
+            android:entryValues="@array/auto_bestphoto_count_value"
+            android:key="@string/bestphoto_count_key"
+            android:negativeButtonText="@string/cancel"
+            android:summary="@string/auto_bestphoto_count_summary"
+            android:title="@string/auto_bestphoto_count_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/debug" >
+
+        <CheckBoxPreference
+            android:defaultValue="@string/frame_show_defvalue"
+            android:key="@string/frame_show_key"
+            android:summary="@string/auto_frame_show_setting_summary"
+            android:summaryOff="@string/auto_frame_show_switch_summary_off"
+            android:summaryOn="@string/auto_frame_show_switch_summary_on"
+            android:title="@string/auto_frame_show_switch_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/permission" >
+
+        <SwitchPreference
+            android:defaultValue="@string/surface_size_defvalue"
+            android:disableDependentsState="true"
+            android:key="@string/isneilflag_key"
+            android:title="@string/isneilflag_title" />
+
+        <EditTextPreference
+            android:dependency="@string/isneilflag_key"
+            android:key="@string/username_key"
+            android:summary="@string/username_summary"
+            android:title="@string/username_title" />
+
+        <EditTextPreference
+            android:dependency="@string/isneilflag_key"
+            android:key="@string/password_key"
+            android:summary="@string/password_summary"
+            android:title="@string/password_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

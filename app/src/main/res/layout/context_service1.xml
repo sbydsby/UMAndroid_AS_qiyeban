@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:layout_gravity="fill_horizontal"
+    android:background="@drawable/home_bg"
+    android:orientation="vertical">
+    
+    <RelativeLayout
+       android:id="@+id/Layout_my_service"
+       android:layout_width="fill_parent"
+       android:layout_height="200dp"
+       android:background="@drawable/service_logo">      
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/tvtelenum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="021-962600"
+        android:textColor="#888888"
+        android:textStyle="bold"
+        android:textSize="30sp" />
+                
+    <com.sheca.umandroid.layout.DashboardLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/Layout_my_service"
+        android:layout_marginTop="10dp">
+        <Button
+            android:id="@+id/button_hotline"
+            style="@style/DashboardButton"
+            android:layout_gravity="fill"
+            android:drawableTop="@drawable/moudle_hotline"
+            android:textColor="#000000"
+            android:text="@string/moudle_hotline" />
+        
+        <Button
+            android:id="@+id/button_site"
+            style="@style/DashboardButton"
+            android:layout_gravity="fill"
+            android:drawableTop="@drawable/moudle_site"
+            android:textColor="#000000"
+            android:text="@string/moudle_site" />
+        
+        <Button
+            android:id="@+id/button_online_sevice"
+            style="@style/DashboardButton"
+            android:layout_gravity="fill"
+            android:drawableTop="@drawable/moudle_online_sevice"
+            android:textColor="#000000"
+            android:text="@string/moudle_online_sevice" />
+        
+        <Button
+            android:id="@+id/button_question"
+            style="@style/DashboardButton"
+            android:layout_gravity="fill"
+            android:drawableTop="@drawable/moudle_question"
+            android:textColor="#000000"
+            android:text="@string/moudle_question" />
+
+    </com.sheca.umandroid.layout.DashboardLayout>
+	
+</RelativeLayout>

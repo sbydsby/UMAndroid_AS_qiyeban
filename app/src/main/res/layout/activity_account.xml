@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f8f8f8"
+    android:orientation="vertical" >
+    
+  <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+   <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+   <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+       <LinearLayout
+          android:id="@+id/thumbnail"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_marginRight="15dip"
+          android:padding="5dip" >
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="99dip"
+            android:layout_height="121dip"
+            android:src="@drawable/my_photo" />
+    </LinearLayout>
+    
+        <TextView
+          android:id="@+id/organization"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignTop="@+id/thumbnail"
+          android:layout_toRightOf="@+id/thumbnail"
+          android:layout_marginLeft="20dp"
+          android:text="账户名称"
+          android:textColor="#3c3a3b"
+          android:paddingTop="20dp"
+          android:textSize="20sp" />
+        
+        <ImageView
+            android:id="@+id/list_image2"
+            android:layout_width="0dip"
+            android:layout_height="0dip"
+            android:layout_below="@id/organization"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/thumbnail" />
+       
+          <TextView
+                android:id="@+id/tv_account_value"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/organization"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/list_image2"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="#868686"
+                android:textSize="15sp"/>
+          
+                   <View
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/thumbnail"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:background="#bbbbbb" />
+	</RelativeLayout>
+	
+	 <RelativeLayout
+	    android:id="@+id/layout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" 
+        android:layout_below="@id/layout1">
+             
+	     <TextView
+           android:id="@+id/accnamelabel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="30dp"
+           android:text="姓名"
+           android:textColor="#3c3a3b"
+           android:textSize="20sp" />  
+           
+	     <TextView
+           android:id="@+id/accname"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/accnamelabel"
+           android:layout_marginLeft="70dp"
+           android:text=""
+           android:textColor="#868686"
+           android:textSize="20sp" />  
+           
+	           <View
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/accname"
+                        android:background="#bbbbbb" />
+	</RelativeLayout>
+	
+	  <RelativeLayout
+	    android:id="@+id/layout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" 
+        android:layout_below="@id/layout2">
+             
+	     <TextView
+           android:id="@+id/nolabel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="30dp"
+           android:text="身份证号"
+           android:textColor="#3c3a3b"
+           android:textSize="20sp" />  
+           
+	     <TextView
+           android:id="@+id/accno"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/nolabel"
+           android:layout_marginLeft="30dp"
+           android:text=""
+           android:textColor="#868686"
+           android:textSize="20sp" />  
+           
+	           <View
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/accno"
+                        android:background="#bbbbbb" />
+	</RelativeLayout>
+	
+	  <RelativeLayout
+	    android:id="@+id/layout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" 
+        android:layout_below="@id/layout3">
+             
+	     <TextView
+           android:id="@+id/mobilelabel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="30dp"
+           android:text="手机号码"
+           android:textColor="#3c3a3b"
+           android:textSize="20sp" />  
+           
+	     <TextView
+           android:id="@+id/accmobile"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/mobilelabel"
+           android:layout_marginLeft="30dp"
+           android:text=""
+           android:textColor="#868686"
+           android:textSize="20sp" />  
+           
+	           <View
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/accmobile"
+                        android:background="#bbbbbb" />
+	</RelativeLayout>
+	
+	<RelativeLayout
+	    android:id="@+id/layout5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" 
+        android:layout_below="@id/layout4">
+	   <ImageView
+             android:id="@+id/logout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="20dp"
+             android:layout_marginRight="20dp"
+             android:src="@drawable/act_logout" />     
+    </RelativeLayout>
+	  
+   </RelativeLayout>
+  </ScrollView>
+</LinearLayout>

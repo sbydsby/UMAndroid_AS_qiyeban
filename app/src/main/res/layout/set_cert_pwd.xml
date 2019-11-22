@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_set_prikey_password"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" 
+    android:background="#f8f8f8"
+    >
+
+    <android.widget.EditText
+	    android:id="@+id/et_cert_org_password"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/prompt_cert_orgpassword"
+	    android:textColorHint="#d3d3d3"
+	    android:layout_centerHorizontal="true"
+	    android:ems="10"
+	    android:inputType="textPassword" 
+	    android:textColor="#000000" >
+	    <requestFocus />
+	</android.widget.EditText>
+    
+	<android.widget.EditText
+	    android:id="@+id/et_cert_password1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="14dp"
+	    android:hint="@string/prompt_cert_password1"
+	    android:textColorHint="#d3d3d3"
+	    android:layout_below="@+id/et_cert_org_password"
+	    android:layout_centerHorizontal="true"
+	    android:ems="10"
+	    android:inputType="textPassword" 
+	    android:textColor="#000000" >
+	    <requestFocus />
+	</android.widget.EditText>
+	
+	<android.widget.EditText
+	    android:id="@+id/et_cert_password2"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="14dp"
+	    android:hint="@string/prompt_cert_password2"
+	    android:textColorHint="#d3d3d3"
+	    android:layout_below="@+id/et_cert_password1"
+	    android:layout_centerHorizontal="true"
+	    android:ems="10"
+	    android:inputType="textPassword" 
+	    android:textColor="#000000" >
+	</android.widget.EditText>
+
+</RelativeLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/face_loading">
+    
+   <RelativeLayout
+                android:id="@+id/Layout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/manual_check_tip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:gravity="center" 
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/manuchecktip1" />
+        
+        <ImageView
+            android:id="@+id/manual_check_tip_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:gravity="center" 
+            android:layout_gravity="center"
+            android:layout_below="@id/manual_check_tip1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/manuchecktipok" 
+             />
+        
+    </RelativeLayout>    
+        
+   <RelativeLayout
+                android:id="@+id/Layout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Layout1">
+        <ImageView
+            android:id="@+id/manual_check_tip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:gravity="center" 
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/manuchecktip2" />
+          
+     </RelativeLayout>   
+         
+    <RelativeLayout
+                android:id="@+id/Layout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Layout2">
+        
+         <ImageView
+            android:id="@+id/btn_manual_check_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:gravity="center" 
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/button_ok" 
+            />
+         
+         <ImageView
+            android:id="@+id/btn_manual_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:gravity="center" 
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/btn_manual_check_ok"
+            android:src="@drawable/manu_check" />
+  
+    </RelativeLayout>   
+</LinearLayout>

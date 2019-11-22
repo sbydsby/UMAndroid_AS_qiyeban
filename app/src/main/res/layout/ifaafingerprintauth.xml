@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fpdialog"
+    android:layout_width="295dp"
+    android:layout_height="248dp"
+    android:background="@drawable/backgroud"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dip"
+            android:adjustViewBounds="true"
+            android:background="#00000000"
+            android:contentDescription="@string/title"
+            android:onClick="fpExit"
+            android:paddingLeft="13.3dip"
+            android:paddingRight="13.3dip"
+            android:paddingBottom="13.3dip"
+            android:paddingTop="19dip"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/dialog_title"
+            android:textColor="#000000"
+            android:textSize="18dp" 
+            android:visibility="gone"  />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dip"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/dialog_title_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fingerprint"
+            android:contentDescription="@string/title"
+            android:gravity="center" 
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/fptext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="115dip"
+        android:gravity="center"
+        android:text="@string/input"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+   
+</LinearLayout>

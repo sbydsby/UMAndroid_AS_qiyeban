@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/home_bg">
+    
+    <RelativeLayout
+	    android:id="@+id/payLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginTop="0dp"
+        android:gravity="center">
+                
+	    <ImageView
+          android:id="@+id/indicater"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="2dp"
+          android:src="@drawable/icon_face_guide_3" />
+	
+	 </RelativeLayout>
+	
+	 <RelativeLayout
+	            android:id="@+id/payLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/payLayout1"   
+                android:orientation="horizontal" 
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:background="#ffffff">
+                
+	            <ImageView
+                  android:id="@+id/payresult"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:src="@drawable/payerr" />
+
+                 <TextView
+                    android:id="@+id/paydesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/payresult"    
+                    android:layout_centerHorizontal="true"  
+                    android:layout_marginTop="5dp"  
+                    android:text="021-962600"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+                 
+                  <TextView
+                    android:id="@+id/paystate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/paydesc"    
+                    android:layout_centerHorizontal="true"  
+                    android:layout_marginTop="5dp"  
+                    android:text="021-962600"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+                 
+            </RelativeLayout>
+	
+	           <ImageView
+                    android:id="@+id/paybutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/payLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/button_ok" />
+	  
+	
+</LinearLayout>

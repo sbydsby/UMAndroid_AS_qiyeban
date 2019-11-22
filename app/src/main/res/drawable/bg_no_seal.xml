@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    //shape用于定义形状，有四种形状(矩形rectangle| 椭圆oval | 直线line | 圆形ring)
+
+    <item>
+        <shape android:shape="rectangle" >
+            <solid android:color="@color/gray_light"/>
+            <size android:height="200dp" />
+        </shape>
+
+    </item>
+
+    <item android:bottom="100dp">
+        <shape android:shape="rectangle" >
+            <solid android:color="@color/bg_yellow"/>
+            <size android:height="100dp" />
+        </shape>
+    </item>
+
+    <item android:top="30dp" android:bottom="30dp" android:left="30dp" android:right="30dp"
+        android:drawable="@drawable/seal_noseal" >
+    </item>
+
+</layer-list>

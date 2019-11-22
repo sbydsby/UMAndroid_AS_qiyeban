@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/payLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/indicater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cert_step1" 
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/payLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/payLayout"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/certalg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="2dp"
+                android:text="证书算法"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ListView
+                android:id="@+id/lv_certalg"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_below="@id/certalg"
+                android:layout_marginTop="3dp"
+                android:dividerHeight="1sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/payLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/payLayout1"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/certvalid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="2dp"
+                android:text="证书有效期"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ListView
+                android:id="@+id/lv_certvalid"
+                android:divider="@null"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_below="@id/certvalid"
+                android:layout_marginTop="3dp"
+                android:dividerHeight="0sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/payLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/payLayout2"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/paytype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="2dp"
+                android:text="支付方式"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <ListView
+                android:id="@+id/lv_paytype"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_below="@id/paytype"
+                android:layout_marginTop="3dp"
+                android:dividerHeight="1sp" />
+            /ListView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/payLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/payLayout3"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/paybutton"
+                style="@style/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="@string/app_ok" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>
+
+

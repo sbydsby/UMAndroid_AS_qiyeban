@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/title_activity_settings" >
+
+    <PreferenceCategory android:title="@string/setting" >
+
+        <EditTextPreference
+            android:defaultValue="@string/server_address_defvalue"
+            android:key="@string/server_address_key"
+            android:summary="@string/server_address_summary"
+            android:title="@string/server_address_title" />
+
+        <EditTextPreference
+            android:defaultValue="@string/project_id_defvalue"
+            android:key="@string/project_id_key"
+            android:summary="@string/setting_projectid_summary"
+            android:title="@string/project_id_title" />
+
+        <ListPreference
+            android:defaultValue="@string/auto_bestphoto_count_defvalue"
+            android:dialogTitle="@string/auto_bestphoto_count_title"
+            android:entries="@array/auto_bestphoto_count_name"
+            android:entryValues="@array/auto_bestphoto_count_value"
+            android:key="@string/bestphoto_count_key"
+            android:negativeButtonText="@string/cancel"
+            android:summary="@string/auto_bestphoto_count_summary"
+            android:title="@string/auto_bestphoto_count_title" />
+
+        <ListPreference
+            android:defaultValue="@string/is_open_tick_default_value"
+            android:dialogTitle="@string/is_open_tick_dialog_title"
+            android:entries="@array/is_open_tick_value"
+            android:entryValues="@array/is_open_tick_value_name"
+            android:key="@string/is_open_tick_key"
+            android:negativeButtonText="@string/cancel"
+            android:summary="@string/is_open_tick_dialog_summary"
+            android:title="@string/is_open_tick_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/version_info" >
+
+        <Preference
+            android:key="@string/version_info_key"
+            android:order="1"
+            android:summary=""
+            android:title="@string/version_control_info" >
+        </Preference>
+
+        <Preference
+            android:key="@string/app_version_key"
+            android:order="2"
+            android:summary=""
+            android:title="@string/app_version" >
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/function_options" >
+            
+        <!-- 选择动作 -->
+        <MultiSelectListPreference
+            android:entries="@array/action_options"
+            android:entryValues="@array/action_options_value"
+            android:key="@string/action_options_key"
+            android:summary="无"
+            android:title="@string/title_action_options"
+            android:defaultValue="@array/action_options_value" />
+        
+        <!-- 执行次数 -->
+        <ListPreference
+            android:defaultValue="@string/action_count_default_value"
+            android:dialogTitle="@string/title_action_count_options"
+            android:entries="@array/action_count_options"
+            android:entryValues="@array/action_count_options_value"
+            android:key="@string/action_count_options_key"
+            android:negativeButtonText="@string/cancel"
+            android:summary="@string/action_count_default"
+            android:title="@string/action_count_options_title" />
+        <!-- 完成难度 -->
+
+        <ListPreference
+            android:defaultValue="@string/difficulty_level_default_value"
+            android:dialogTitle="@string/title_difficulty_level_options"
+            android:entries="@array/difficulty_level_options"
+            android:entryValues="@array/difficulty_level_options_value"
+            android:key="@string/difficulty_level_options_key"
+            android:negativeButtonText="@string/cancel"
+            android:summary="@string/difficulty_level_default"
+            android:title="@string/difficulty_level_options_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

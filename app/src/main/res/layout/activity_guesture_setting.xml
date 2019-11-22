@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:item="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light"
+    android:orientation="vertical"
+    tools:context=".GestureSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        >
+
+        <com.sheca.umandroid.layout.ComplicatedItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            item:main_text="@string/psd_gesture_toggle"
+            item:main_text_color="@color/black_light2" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/sb_gesture"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <com.sheca.umandroid.layout.ComplicatedItem
+        android:id="@+id/item_gesture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        item:main_text="@string/psd_change_gesture"
+        item:main_text_color="@color/black_light2"
+        item:right_icon_drawable="@drawable/arrow" />
+
+</LinearLayout>

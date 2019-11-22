@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="总部" >
+        <Preference
+            android:key="zongbu"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="上海CA" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="浦东新区" >
+        <Preference
+            android:key="pudong1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="市民中心（投资促进中心）" >
+        </Preference>
+        <Preference
+            android:key="pudong2"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="市民分中心（投资促进分中心）" >
+        </Preference>
+        <Preference
+            android:key="pudong3"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="综合办事大厅" >
+        </Preference>
+        <Preference
+            android:key="pudong4"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="中国（上海）自由贸易试验区综合服务大厅" >
+        </Preference>
+        <Preference
+            android:key="pudong5"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="上海临港行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="宝山区" >
+        <Preference
+            android:key="baoshan1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="企业服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="金山区" >
+        <Preference
+            android:key="jinshan1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="闵行区" >
+        <Preference
+            android:key="minhang1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="人民政府证照办理中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="青浦区" >
+        <Preference
+            android:key="qingpu1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="奉贤区" >
+        <Preference
+            android:key="fengxian1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="投资管理服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="黄浦区" >
+        <Preference
+            android:key="huangpu1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="黄浦区行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="普陀区" >
+        <Preference
+            android:key="putuo1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="企业服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="崇明县" >
+        <Preference
+            android:key="chongming1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="嘉定区" >
+        <Preference
+            android:key="jiading1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="徐汇区" >
+        <Preference
+            android:key="xuhui1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="徐汇区服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="长宁区" >
+        <Preference
+            android:key="changning1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="长宁区行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="杨浦区" >
+        <Preference
+            android:key="yangpu1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="招商服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="闸北区" >
+        <Preference
+            android:key="zhabei1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="行政服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="虹口区" >
+        <Preference
+            android:key="hongkou1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="招商服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="松江区" >
+        <Preference
+            android:key="songjiang1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="企业服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+    <com.sheca.umandroid.preference.MyPreferenceCategory android:title="静安区" >
+        <Preference
+            android:key="jingan1"
+            android:layout="@layout/sites_preference_decorate"
+            android:title="企业服务中心" >
+        </Preference>
+    </com.sheca.umandroid.preference.MyPreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"  
+    android:layout_height="fill_parent"  
+    android:orientation="horizontal" 
+    android:background="@drawable/bg_home">
+
+     <ImageView 
+           android:id="@+id/login"
+           android:layout_width="180dp"
+           android:layout_height="180dp"
+           android:layout_marginTop="20dp"
+           android:layout_gravity="center"
+           android:layout_centerHorizontal="true"
+           android:src="@drawable/seal_ok" /> 
+           
+     <TextView
+            android:id="@+id/txtView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"  
+            android:layout_below="@id/login"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="你的印章已制作成功"
+            android:textColor="#c7ae5e"
+            android:textSize="22dp" />
+     
+     <ImageView 
+           android:id="@+id/save_seal_ok"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/txtView1"
+           android:layout_marginTop="80dp"          
+           android:layout_marginLeft="15dp"
+	       android:layout_marginRight="15dp"
+           android:layout_gravity="center"
+           android:layout_centerHorizontal="true"
+           android:src="@drawable/save_seal_ok" /> 
+    
+</RelativeLayout>

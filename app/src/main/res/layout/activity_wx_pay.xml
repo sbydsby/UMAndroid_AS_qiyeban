@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin"
+    tools:context="${relativePackage}.${activityClass}" 
+    android:background="@drawable/face_loading">
+
+   <RelativeLayout
+            android:id="@+id/relativelayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"    
+            android:orientation="horizontal" >
+  
+        <TextView
+            android:id="@+id/loading_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:textColor="#ffffff" 
+            android:text="人脸识别审核中 ..."
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+   </RelativeLayout>  
+    
+   <RelativeLayout
+            android:id="@+id/relativelayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:gravity="center"    
+            android:orientation="horizontal"  
+            android:layout_below="@id/relativelayout1">
+
+       <pl.droidsonroids.gif.GifImageView
+         android:id="@+id/launch_loading"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" 
+         android:gravity="center"
+         android:layout_marginTop="10dp" />
+
+    </RelativeLayout>
+      
+    <RelativeLayout
+            android:id="@+id/relativelayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"    
+            android:orientation="horizontal"  
+            android:layout_below="@id/relativelayout2">
+
+       <ImageView
+            android:id="@+id/btn_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@drawable/again" />
+
+   </RelativeLayout>
+</LinearLayout>

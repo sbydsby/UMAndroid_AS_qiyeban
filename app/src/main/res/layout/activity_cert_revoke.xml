@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray_light"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}">
+
+    <ScrollView
+        android:id="@+id/delete_form"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout0"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ></RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relativeLayout0"
+
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:background="@color/white"
+                >
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/textCertPwd"
+                    android:background="#b5b5b5" />
+
+                <EditText
+                    android:id="@+id/textCertPwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/transparent"
+                    android:cursorVisible="true"
+                    android:ems="10"
+                    android:hint="@string/prompt_pwd"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="#d3d3d3"
+                    android:textCursorDrawable="@drawable/edit_cursor_color"></EditText>
+
+                <View
+                    android:id="@+id/passwordview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#b5b5b5" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relativeLayout1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/cert_revoke"
+                    android:textColor="@color/red"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relativeLayout5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp">
+
+                <Button
+                    android:id="@+id/btnRevoke"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/app_ok"
+                    style="@style/btn_ok"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

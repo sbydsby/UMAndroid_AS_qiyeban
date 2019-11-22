@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation"
+    >
+
+    <string name="app_name" >移证通</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="title_activity_face_guide">FaceGuideActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_capture">CaptureActivity</string>
+    <string name="title_activity_log">LogActivity</string>
+    <string name="title_activity_logs">LogsActivity</string>
+    <string name="title_activity_account">账号管理</string>
+    <string name="title_activity_network">NetworkActivity</string>
+    <string name="title_activity_network_online">NetworkOnlineActivity</string>
+    <string name="title_activity_networks">NetworksActivity</string>
+    <string name="title_activity_hotline">HotlineActivity</string>
+    <string name="title_activity_faqs">FAQsActivity</string>
+    <string name="title_activity_faq">FAQActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_setting_guide">SettingGuideActivity</string>
+    <string name="title_activity_setting_launch">SettingLaunchActivity</string>
+    <string name="title_activity_setting_version">SettingVersionActivity</string>
+    <string name="title_activity_reg_account">RegAccountActivity</string>
+    <string name="title_activity_my_settings">SettingsActivity</string>
+    <string name="title_activity_my_settings_new">SettingsActivityNew</string>
+    <string name="title_activity_settings_cert_type">SettingCertTypeActivity</string>
+    <string name="title_activity_settings_log_uploade_type">SettingSaveTypeActivity</string>
+    <string name="title_activity_settings_save_type">SettingLogUploadTypeActivity</string>
+    <string name="title_activity_cert_detail">CertDetailActivity</string>
+    <string name="title_activity_cert_list">CertListActivity</string>
+    <string name="title_activity_cert_delete">CertDeleteActivity</string>
+    <string name="title_activity_cert_pwd">CertChangePwdActivity</string>
+    <string name="title_activity_dao_face">DaoFaceActivity</string>
+    <string name="title_activity_user_protocol">UserProtocolActivity</string>
+    <string name="title_activity_forget_pwd">ForgetPasswordActivity</string>
+    <string name="title_activity_forget_pwd_valid">ForgetPasswordValidActivity</string>
+    <string name="title_activity_set_pwd">SetPasswordActivity</string>
+    <string name="title_activity_manu_check">ManualCheckActivity</string>
+    <string name="title_activity_manu_check_fail">ManualCheckFailActivity</string>
+    <string name="title_activity_scan_bluetooth">ScanBlueToothActivity</string>
+
+    <string name="title_activity_card_reg">身份证识别</string>
+
+    <string name="ib_account">account</string>
+    <string name="ImageButton_back">back</string>
+    <string name="iv_unitrust">unitrust</string>
+    <string name="iv_log_certdetail">iv_log_certdetail</string>
+    <string name="iv_advertisement">iv_advertisement</string>
+    <string name="iv_arrow_go_desc">iv_arrow_go_desc</string>
+    <string name="menu_home">首页</string>
+    <string name="menu_cert">证书</string>
+    <string name="menu_service">服务</string>
+    <string name="menu_settings">我</string>
+    <string name="module_apply_cert">申请证书</string>
+    <string name="module_download_cert">下载证书</string>
+    <string name="module_change_cert">设置别名</string>
+    <string name="module_renew_cert">更新证书</string>
+    <string name="module_revoke_cert">撤销证书</string>
+    <string name="module_scan">扫一扫</string>
+    <string name="module_scan_line">— 扫一扫 —</string>
+    <string name="module_logs">使用记录</string>
+    <string name="module_test">洛安测试</string>
+    <string name="module_log">记录明细</string>
+    <string name="module_setting">系统设置</string>
+    <string name="module_password">帐户密码</string>
+    <string name="moudle_hotline">热线电话</string>
+    <string name="moudle_site">服务网点</string>
+    <string name="moudle_online_sevice">在线客服</string>
+    <string name="moudle_question">常见问题</string>
+    <string name="moudle_view_cert">查看证书</string>
+    <string name="moudle_change_pwd_cert">修改密码</string>
+    <string name="moudle_reset_pwd_cert">重置密码</string>
+    <string name="moudle_unlock_cert">解锁密码</string>
+    <string name="moudle_delete_cert">删除证书</string>
+    <string name="moudle_input_cert">导入证书</string>
+    <string name="certdetail_version">证书版本</string>
+    <string name="certdetail_certsn">证书序列号</string>
+    <string name="certdetail_certsn2">证书序列号:</string>
+    <string name="certdetail_leftdays">有效期剩余</string>
+    <string name="certdetail_notBefore">有效期起</string>
+    <string name="certdetail_notAfter">有效期止</string>
+    <string name="certdetail_issuer">颁发者</string>
+    <string name="certdetail_subject">使用者</string>
+    <string name="certdetail_signatureAlg">签名算法</string>
+    <string name="certdetail_certchainURL">证书链发布地址</string>
+    <string name="certdetail_certtype">证书类型</string>
+    <string name="certdetail_savetype">存储介质</string>
+    <string name="certdetail_devicesn">介质序列号</string>
+    <string name="certdetail_certkeysize">公钥长度</string>
+    <string name="certdetail_subjectUID">主体唯一标识符</string>
+    <string name="certdetail_icnumber">工商注册号</string>
+    <string name="certdetail_taxnumber">税号</string>
+    <string name="certdetail_orgcode">组织机构代码</string>
+    <string name="certdetail_insnumber">社会保险号</string>
+    <string name="certdetail_accfundnumber">住房公积金账号</string>
+    <string name="certdetail_instinumber">事业单位证书号</string>
+    <string name="certdetail_assnumber">社会组织法人编码</string>
+    <string name="certdetail_govnumber">政府机关法人编码</string>
+    <string name="certdetail_lawlicence">律师事务所执业许可证</string>
+    <string name="certdetail_indilicence">个体工商户营业执照</string>
+    <string name="certdetail_foreigncode">外国企业常驻代表机构登记证</string>
+    <string name="certdetail_crednumber">统一社会信用代码</string>
+    <string name="log_type">记录类型</string>
+    <string name="log_time">记录时间</string>
+    <string name="log_certsn">证书序列号</string>
+    <string name="log_certdetail">证书详情</string>
+    <string name="log_notes">签名原文</string>
+    <string name="log_signature">数字签名</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="current_account_label">当前帐号</string>
+    <string name="logout">退出当前帐号</string>
+    <string name="title_activity_application">待下载证书</string>
+    <string name="prompt_cert_orgpassword">原证书密码（8至16位）</string>
+    <string name="prompt_cert_password1">新证书密码（8至16位）</string>
+    <string name="prompt_cert_password2">再次输入新证书密码</string>
+    <string name="prompt_prikey_password">输入证书密码（8至16位）</string>
+    <string name="prompt_prikey_password2">再次输入证书密码（8至16位）</string>
+    <string name="title_activity_dao">sheca签名登录</string>
+    <string name="title_activity_scan_dao">sheca扫码签名登录</string>
+    <string name="prompt_pwd">输入证书密码</string>
+    <string name="cert_name">输入证书别名</string>
+    <string name="cert_sms_code">填写验证码</string>
+    <string name="send_message">发送验证码</string>
+    <string name="forget_cert_pws"><u>重置证书密码</u></string>
+
+    <!--  人脸识别字符配置 -->
+    <string name="app_auth_name">人证一致</string>
+    <string name="action_settings">设置</string>
+    <string name="title_setpwd">设置证书密码</string>
+    <string name="action_exit">退出</string>
+    <string name="action_exit2">退出账号</string>
+    <string name="title_activity_gif_view">GifViewActivity</string>
+    <string name="title_activity_picture">拍取照片</string>
+    <string name="title_activity_settings">常用设置</string>
+    <string name="title_activity_auth">活体检测</string>
+    <string name="title_activity_auth2">身份采集</string>
+    <string name="title_activity_input">输入信息</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="prompt_name">请输入姓名</string>
+    <string name="prompt_id">请输入身份证号</string>
+    <string name="label_name">姓名</string>
+    <string name="label_id">身份证</string>
+    <string name="label_idnumber">身份证号</string>
+    <string name="label_hint_result">认证结果</string>
+    <string name="action_next">下一步</string>
+    <string name="action_finish">重新提交</string>
+    <string name="action_restart">重新开始</string>
+    <string name="operation_count1">1次</string>
+    <string name="operation_count2">2次</string>
+    <string name="operation_count3">3次</string>
+    <string name="operation_action_lefthead">向左转头</string>
+    <string name="operation_action_righthead">向右转头</string>
+    <string name="operation_action_openmouth">张嘴</string>
+    <string name="operation_action_closeeye">闭眼</string>
+    <string name="operation_action_uphead">向上抬头</string>
+    <string name="operation_action_downhead">向下低头</string>
+    <string name="operation_success">成功</string>
+    <string name="operation_fail">失败</string>
+    <string name="operation_done_count0">(0/3)</string>
+    <string name="operation_done_count1">(1/3)</string>
+    <string name="operation_done_count2">(2/3)</string>
+    <string name="operation_done_count3">(3/3)</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="hint_msg_nodo_warn">请按提示指令操作</string>
+    <string name="hint_msg_nodo_fail">未按提示操作，本次识别失败</string>
+    <string name="hint_msg_straight_camera">请正对摄像头</string>
+    <string name="hint_msg_close_camera">请靠近摄像头</string>
+    <string name="hint_msg_nobody">无人</string>
+    <string name="hint_msg_moreface">检测到多张人脸，重新开始！</string>
+    <string name="hint_msg_timeout">超时，本次识别失败</string>
+    <string name="title_activity_result">认证结果</string>
+    <string name="label_result_success">已通过</string>
+    <string name="label_result_fail">未通过</string>
+    <string name="label_result_notsure">无法判定</string>
+    <string name="label_auth_success">您的身份信息审核已通过</string>
+    <string name="label_auth_fail">您的身份信息审核失败</string>
+    <string name="label_auth_unknown">您的身份信息审核结果未定</string>
+    <string name="label_auth_unqualified">照片质量不合格</string>
+    <string name="label_auth_timeout">连接超时，请稍后重试</string>
+    <string name="label_auth_compare_error">ESB服务器内部错误</string>
+    <string name="label_auth_police_error">公安服务器内部错误</string>
+    <string name="label_auth_body_fail">活体检测失败</string>
+    <string name="label_auth_idphoto_fail">二代身份证照片不合格</string>
+    <string name="label_auth_name_notsame">姓名不一致</string>
+    <string name="label_auth_id_service_result">服务结果:库中无此号</string>
+    <string name="label_auth_noidphoto">暂无身份证照片，无法识别</string>
+    <string name="label_auth_nobestphoto">您的身份信息审核失败,最优人脸照片无法识别</string>
+    <string name="label_auth_notaskguid">开启流程失败，无法识别</string>
+    <string name="label_auth_noidentycode">身份证号码为必填项</string>
+    <string name="label_auth_formatidentycode">身份证号码格式不正确</string>
+    <string name="label_auth_noidentyname">姓名为必填项</string>
+    <string name="label_auth_formatidentyname">姓名为必填项</string>
+    <string name="label_auth_nophoto">照片为必填项</string>
+    <string name="label_auth_formatphoto">照片格式不正确</string>
+    <string name="label_auth_checkfacefail">检测人脸失败</string>
+    <string name="label_auth_checkfacemore">检测到多张人脸</string>
+    <string name="label_auth_formatclienttype">无效的客户端类型</string>
+    <string name="label_auth_clienttypenotmatch">客户端类型不匹配</string>
+    <string name="operation_default">--</string>
+    <string name="label_loading_txt1">正在审核，请稍候...</string>
+    <string name="settings_camera_frame_show">显示帧率</string>
+    <string name="cancel">取消</string>
+    <string name="permission">权限</string>
+    <string name="debug">调试</string>
+    <string name="setting">设置</string>
+    <string name="settings_system">系统设置</string>
+    <string name="auto_frame_show_switch_title">帧率显示</string>
+    <string name="auto_bestphoto_count_title">保存照片</string>
+    <string name="server_address_title">服务器URL</string>
+    <string name="isneilflag_title">匿名登录</string>
+    <string name="username_title">帐号</string>
+    <string name="password_title">密码</string>
+    <string name="surface_size_title">拍照画幅</string>
+    <string name="auto_bestphoto_count_summary">设置保存照片数量</string>
+    <string name="server_address_summary">设置后台服务器地址</string>
+    <string name="auto_frame_show_setting_summary">帧率显示设置</string>
+    <string name="auto_frame_show_switch_summary_on">开启帧率显示</string>
+    <string name="auto_frame_show_switch_summary_off">关闭帧率显示</string>
+    <string name="username_summary">提供您帐号</string>
+    <string name="password_summary">提供您密码</string>
+    <string name="surface_size_summary">画幅大小设置</string>
+    <string name="frame_show_key">frame_show_key</string>
+    <string name="bestphoto_count_key">bestphoto_count_key</string>
+    <string name="isneilflag_key">isneilflag_key</string>
+    <string name="username_key">username_key</string>
+    <string name="password_key">password_key</string>
+    <string name="server_address_key">server_address_key</string>
+    <string name="surface_size_key">surface_size_key</string>
+    <!-- <string name="server_address_defvalue">http://www.junyufr.com/CAAPPProject5/</string> -->
+    <string name="server_address_defvalue">http://www.junyufr.com/CAAPPProject5/</string>
+    <string name="auto_bestphoto_count_defvalue">1</string>
+    <string name="frame_show_defvalue">false</string>
+    <string name="surface_size_defvalue">1</string>
+
+    <string name="intsig_copyright">Sheca© 1999-2016. All Rights Reserved.</string>
+
+    <string-array name="auto_bestphoto_count_name">
+        <item>1张(默认，省流量，速度快)</item>
+        <item>2张(适中)</item>
+        <item>3张(耗流量，速度慢)</item>
+    </string-array>
+    <string-array name="auto_bestphoto_count_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="surface_size_name">
+        <item>全屏 16:9</item>
+        <item>标准 4:3</item>
+    </string-array>
+    <string-array name="surface_size_value">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <string name="camera_preview_btn">重拍</string>
+    <string name="camera_capture_btn">拍照</string>
+    <string name="blank_space"> </string>
+    <string name="picture_none">您尚未拍取正脸照片，无法进行下一步！</string>
+    <string name="picture_face_size">人脸过小，请近距离拍照</string>
+    <string name="picture_face_pose">姿态不正确，请正对摄像头拍照</string>
+    <string name="picture_face_position">人脸位置不正确，请对准头像框拍照</string>
+    <string name="picture_face_none">检测人脸失败，请对准头像框拍照</string>
+    <string name="picture_face_more">检测到多张人脸，只能拍取单个人脸</string>
+    <string name="picture_error">检测自拍照发生错误！</string>
+    <string name="picture_next">请点击下一步继续操作</string>
+    <string name="card_scan_next">请将身份证正面置于线框内进行自动识别</string>
+    <string name="card_scan_back">若照片不清晰,请重新拍摄</string>
+
+    <string name="udesk_help_tips">帮助中心</string>
+    <string name="udesk_conversion_tips">咨询会话</string>
+    <string name="udesk_form_tips">留言表单</string>
+    <string name="udesk_utils_tips">开发者功能</string>
+    <string name="udesk_reset_init">重置域名和App Key</string>
+    <string name="udesk_from_agentid">指定分配客服</string>
+    <string name="udesk_from_groupid">指定分配客服组</string>
+    <string name="udesk_unread_msg">获取未读消息</string>
+    <string name="udesk_unread_msgcount">获取未读消息数量</string>
+    <string name="udesk_update_userinfo">更新客户信息</string>
+    <string name="udesk_update_uitemplemt">更换UI模板</string>
+    <string name="udesk_conversion_bysetting_menu">咨询菜单</string>
+    <string name="udesk_send_commodity_link">发送商品链接</string>
+    <string name="udesk_update_nick_name">姓名</string>
+    <string name="udesk_update_hint_nick_name">请输入客户姓名</string>
+    <string name="udesk_update_email">邮箱</string>
+    <string name="udesk_update_hint_email">请输入客户邮箱</string>
+    <string name="udesk_update_tel">电话</string>
+    <string name="udesk_update_hint_tel">请输入客户电话</string>
+    <string name="udesk_update_des">描述</string>
+    <string name="udesk_update_hint_des">请输入描述内容</string>
+    <string name="udesk_by_agentid">指定分配客服</string>
+    <string name="udesk_agentid">客服ID</string>
+    <string name="udesk_agentid_empty_show">客服ID不能为空！</string>
+    <string name="udesk_by_groupid">指定分配客服组</string>
+    <string name="udesk_groupid">客服组ID</string>
+    <string name="udesk_groupid_empty_show">客服组ID不能为空！</string>
+    <string name="udesk_no_unreadmsg">没有未读消息</string>
+    <string name="udesk_unreadmsg">未读消息</string>
+    <string name="udesk_unreadmsg_count">获取未读消息数量</string>
+    <string name="udesk_update_ui">更换UI模版</string>
+    <string name="udesk_defult">原生</string>
+    <string name="udesk_jindian">经典</string>
+
+    <!--  人脸识别4.4  -->
+    <string name="img_describe">--</string>
+    <string name="project_name">人证一致</string>
+    <string name="notice_login_input">请输入登录信息</string>
+    <string name="login_name">姓名</string>
+    <string name="login_idcard">身份证</string>
+    <string name="rem_pwd">保存信息</string>
+    <string name="login">登录</string>
+    <string name="login2">登 录</string>
+    <string name="idcard_scan">证件扫描</string>
+    <string name="btn_next">下一步</string>
+    <string name="picture_IdPhoto_hint1">拍摄身份证正面照片</string>
+    <string name="picture_IdPhoto_hint2">证件文字需清晰可读，照片需端正</string>
+    <string name="picture_IdPhoto_hint3">请确保证件</string>
+    <string name="picture_IdPhoto_hint4">四角端正完整</string>
+    <string name="picture_IdPhoto_hint5">如不清晰，请”重拍“</string>
+    <string name="body_auth">身份审核</string>
+    <string name="envir_detec">环境检测</string>
+    <string name="body_check">活体检测</string>
+    <string name="check_detail">查看详情</string>
+    <string name="result_title">认证结果</string>
+    <string name="re_start">重新开始</string>
+    <string name="back">返回</string>
+    <string name="function_options">功能调节</string>
+
+    <string name="title_action_options">动作选择</string>
+    <string name="action_count_default_value">3</string>
+    <string name="title_action_count_options">执行次数</string>
+    <string name="action_count_default">3次</string>
+    <string name="action_count_options_title">执行次数</string>
+    <string name="difficulty_level_default_value">1</string>
+    <string name="title_difficulty_level_options">完成难度</string>
+    <string name="difficulty_level_default">普通</string>
+    <string name="difficulty_level_options_title">完成难度</string>
+    <string name="operation_action_shakehead">左右摇头</string>
+    <string name="toast_null_name">姓名是必填项！</string>
+    <string name="toast_invalid_name">姓名只能包含中文、字母和数字，请重新输入！</string>
+    <string name="toast_null_idcard">身份证是必填项！</string>
+    <string name="toast_invalid_idcard">身份证号码格式不正确，请重新输入！</string>
+    <string name="label_loading_txt2">即将活体检测</string>
+    <string name="label_cancel_net">已取消联网</string>
+    <string name="label_result_none">比对异常</string>
+    <string name="hint_envir_success">环境正常</string>
+    <string name="picture_face_sidelight">侧面光线过强</string>
+    <string name="picture_face_dusky">光线过暗</string>
+
+    <string name="project_id_defvalue">M2ta6aDVnRFiIpPeBuoTPAfT/0U=</string>
+    <string name="version_id_key">version_id</string>
+    <string name="version_des_key">version_des</string>
+    <string name="project_id_key">project_id_key</string>
+    <string name="save_photo_key">save_photo_key</string>
+    <string name="auto_pic_key">auto_pic_key</string>
+    <string name="check_only_body_key">check_only_body_key</string>
+    <string name="setting_projectid_summary">设置项目编号</string>
+    <string name="project_id_title">项目ID</string>
+    <string name="save_photo_switch_title">保存照片</string>
+    <string name="version_info">版本信息</string>
+    <string name="version_info_key">version_info_key</string>
+    <string name="app_version_key">app_version_key</string>
+    <string name="version_control_info">版本控制信息</string>
+    <string name="app_version">app版本号</string>
+    <string name="open_tick_defvalue">true</string>
+    <string name="choose_tick_key">choose_tick_key</string>
+    <string name="is_open_tick">tick背景声</string>
+    <string name="is_open_tick_default_value">开启</string>
+    <string name="is_open_tick_dialog_title">是否打开倒计时声音？</string>
+    <string name="is_open_tick_dialog_summary">设置倒计时</string>
+    <string name="is_open_tick_key">is_open_tick_key</string>
+    <string name="is_open_tick_title">倒计时声音</string>
+
+    <string name="title">验证页面</string>
+    <string name="waiting">识别中</string>
+    <string name="input">请验证指纹</string>
+    <string name="dialog_title">移证通指纹密码</string>
+    <string name="verify_success">指纹验证成功</string>
+    <string name="verify_not_match">指纹不匹配</string>
+    <string name="verify_timeout">指纹校验超时</string>
+    <string name="verify_cancel">取消指纹校验</string>
+    <string name="verify_faile">指纹校验失败</string>
+
+    <string name="menu_selected">精选</string>
+    <string name="menu_certificate">证书</string>
+    <string name="menu_scan">扫码</string>
+    <string name="menu_seal">印章</string>
+    <string name="menu_me">我的</string>
+
+    <string name="scan_login">扫码登录</string>
+    <string name="scan_sign">扫码签名</string>
+    <string name="scan_decrypt">扫码解密</string>
+    <string name="scan_seal">扫码签章</string>
+
+    <string name="selected_smrz">实名认证</string>
+    <string name="selected_sqzs">申请证书</string>
+    <string name="selected_sqyz">申请印章</string>
+    <string name="selected_xzzs">下载证书</string>
+
+    <string name="sig_seal">— 证书印章 —</string>
+    <string name="account_login">账户登录</string>
+    <string name="account_login2">账户密码登录</string>
+    <string name="account_name">账户名称</string>
+    <string name="account_password">账户密码</string>
+
+    <string name="login_sms">验证码登录</string>
+    <string name="login_forget">忘记密码</string>
+
+    <string name="day">天</string>
+    <string name="cert_holder">证书持有者</string>
+
+    <string name="yishiming">已实名</string>
+    <string name="weishiming">未实名</string>
+
+    <string name="mine_changepassword">设置账户密码</string>
+    <string name="mine_certtype">证书介质</string>
+    <string name="mine_fp">本地免密</string>
+    <string name="mine_record">使用记录</string>
+    <string name="mine_version">版本信息</string>
+    <string name="mine_protocol">用户协议</string>
+    <string name="mine_cs">客户服务</string>
+    <string name="mine_about">关于我们</string>
+    <string name="mine_gesture">手势密码</string>
+    <string name="mine_set_gesture">设置手势密码</string>
+    <string name="mine_validate_gesture">验证手势密码</string>
+
+    <string name="certtype_mobile">移动设备</string>
+
+
+    <string-array name="is_open_tick_value">
+        <item>开启</item>
+        <item>关闭</item>
+    </string-array>
+    <string-array name="is_open_tick_value_name">
+        <item>开启</item>
+        <item>关闭</item>
+    </string-array>
+
+    <!-- 动作选择 -->
+    <string-array name="action_options">
+        <item>眨眼</item>
+        <item>张嘴</item>
+        <item>抬头</item>
+    </string-array>
+
+    <string-array name="action_options_value">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- 动作次数选择 -->
+    <string-array name="action_count_options">
+        <item>1次</item>
+        <item>2次</item>
+        <item>3次</item>
+    </string-array>
+    <string-array name="action_count_options_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- 动作难度 -->
+    <string-array name="difficulty_level_options">
+        <item>简单</item>
+        <item>普通</item>
+        <item>困难</item>
+    </string-array>
+
+    <string-array name="difficulty_level_options_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+    <string name="action_count_options_key">action_count_options_key</string>
+    <string name="difficulty_level_options_key">difficulty_level_options_key</string>
+    <string name="action_options_key">action_options_key</string>
+
+    <string name="app_back">返回</string>
+    <string name="app_again">重试</string>
+    <string name="app_back_main">返回首页</string>
+    <string name="app_ok">确定</string>
+    <string name="app_login">登录</string>
+    <string name="app_change_login">切换登录方式</string>
+    <string name="app_cancel">取消</string>
+    <string name="app_continue">继续</string>
+    <string name="app_tip">提示</string>
+    <string name="app_send">发送</string>
+    <string name="app_set">设置</string>
+    <string name="app_save">保存</string>
+    <string name="app_delete">删除</string>
+    <string name="app_nextstep">下一步</string>
+    <string name="app_prevstep">上一步</string>
+    <string name="app_finish">完成</string>
+    <string name="app_find">查找</string>
+    <string name="app_edit">编辑</string>
+    <string name="app_look">查看</string>
+
+    <!-- applet -->
+    <string name="applet_secimg_title">填写验证码</string>
+    <string name="applet_secimg_change">换一张图片</string>
+    <string name="applet_seccode_tip">验证码不能为空</string>
+    <string name="applet_seccode_fail_tip">验证码错误，请重新输入</string>
+
+    <!-- verify -->
+    <string name="verify_password_null_tip">密码不能为空，请输入密码</string>
+
+    <!-- format -->
+    <string name="fmt_date">M月d日</string>
+    <string name="fmt_longdate">yyyy年M月d日</string>
+    <string name="fmt_datetime" formatted="false">M月d日 %skk:mm</string>
+    <string name="fmt_patime">kk:mm</string>
+    <string name="fmt_longtime" formatted="false">yyyy年M月d日 %skk:mm</string>
+    <string name="fmt_in60min" formatted="false">%d分钟前</string>
+    <string name="fmt_justnow">1分钟内</string>
+    <string name="fmt_dawn">凌晨</string>
+    <string name="fmt_morning">早上</string>
+    <string name="fmt_noon">中午</string>
+    <string name="fmt_afternoon">下午</string>
+    <string name="fmt_evening">晚上</string>
+    <string name="fmt_pre_yesterday">昨天</string>
+    <string name="fmt_iap_err" formatted="false">网络连接不可用，请稍候重试</string>
+
+    <string name="hello">Hello World, SDKSampleActivity!</string>
+    <string name="app_share">分享</string>
+
+    <string name="enter">这是SDK_Sample的入口界面</string>
+    <string name="reg">将该app注册到微信</string>
+    <string name="goto_send">跳转到发消息界面</string>
+    <string name="goto_pay">跳转到支付界面</string>
+    <string name="goto_fav">跳转到收藏界面</string>
+    <string name="launch_wx">启动微信</string>
+    <string name="check_timeline_supported">检查是否支持发送到朋友圈</string>
+
+    <string name="send_to_wx_title">发送到微信</string>
+    <string name="get_from_wx_title">从微信接收</string>
+    <string name="show_from_wx_title">显示微信请求的消息</string>
+    <string name="pay_by_wx_title">通过微信支付</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unknown">发送返回</string>
+
+    <string name="launch_from_wx">Launch From Weixin</string>
+
+    <!-- WXMediaMessage -->
+    <string name="input_openid">输入openid</string>
+    <string name="input_scope">输入scope</string>
+
+    <string name="send">发送到微信</string>
+    <string name="receive">从微信接收</string>
+
+    <string name="is_timeline">是否分享到朋友圈</string>
+    <string name="send_text">发送文本</string>
+    <string name="send_text_default">这段文字发送自微信SDK示例程序</string>
+
+    <string name="send_img">发送图片</string>
+    <string-array name="send_img_item">
+        <item>发送图片的二进制数据</item>
+        <item>发送图片的本地路径</item>
+        <item>发送图片的URL</item>
+    </string-array>
+    <string name="send_img_file_not_exist">文件不存在</string>
+
+    <string name="send_file">发送文件</string>
+    <string-array name="send_file_item">
+        <item>发送文件的二进制数据</item>
+        <item>发送文件的本地路径</item>
+    </string-array>
+    <string name="send_file_file_not_exist">文件不存在</string>
+
+    <string name="send_pic">发送照片</string>
+
+    <string name="send_music">发送音乐</string>
+    <string-array name="send_music_item">
+        <item>发送音乐url</item>
+        <item>发送低带宽音乐url</item>
+    </string-array>
+
+    <string name="send_video">发送视频</string>
+    <string-array name="send_video_item">
+        <item>发送视频url</item>
+        <item>发送低带宽视频url</item>
+    </string-array>
+
+    <string name="send_webpage">发送网页</string>
+    <string-array name="send_webpage_item">
+        <item>发送网页url</item>
+    </string-array>
+
+    <string name="send_appdata">发送app消息</string>
+    <string-array name="send_appdata_item">
+        <item>发送app文件本地路径</item>
+        <item>发送app二进制数据</item>
+        <item>发送无附件的app</item>
+    </string-array>
+
+    <string name="send_emoji">发送表情消息</string>
+    <string-array name="send_emoji_item">
+        <item>发送表情本地路径</item>
+        <item>发送表情二进制数据</item>
+    </string-array>
+
+    <string-array name="send_emoji_item_format">
+        <item>发送GIF图片</item>
+        <item>发送非GIF图片</item>
+    </string-array>
+
+    <!-- GetFromWXActivity -->
+    <string name="share_text_to_weixin">回应文本到微信</string>
+    <string name="share_text_default">这段文字回应自微信SDK示例程序</string>
+    <string name="share_url_to_weixin">回应URL到微信</string>
+    <string name="share_pic_to_weixin">回应图片到微信</string>
+    <string name="share_music_to_weixin">回应音乐到微信</string>
+    <string name="share_video_to_weixin">回应视频到微信</string>
+    <string name="share_appdata_to_weixin">回应app消息到微信</string>
+
+    <string name="register_as_weixin_app_sender">注册微信事件发送器</string>
+    <string name="get_token_from_weixin">获取微信访问Token</string>
+    <string name="unregister_from_weixin">从微信反注册</string>
+
+    <string name="show_from_wx_tip">这个界面用于显示微信向第三方app请求显示的信息</string>
+
+    <!-- PayActivity -->
+    <string name="pay_by_wx">客户端签名微信支付</string>
+    <string name="pay_by_wxap">服务器端签名微信支付</string>
+    <string name="check_pay">检查微信版本是否支持支付</string>
+    <string name="input_reqkey">输入reqkey</string>
+    <string name="input_package_value">输入package value</string>
+    <string name="input_sign">输入sign</string>
+    <string name="getting_access_token">正在获取access token...</string>
+    <string name="get_access_token_succ">获取access token成功</string>
+    <string name="get_access_token_fail" formatted="false">获取access token失败，原因%s</string>
+    <string name="getting_prepayid">正在获取预支付订单...</string>
+    <string name="paying">支付中</string>
+    <string name="get_prepayid_succ">获取prepayid成功</string>
+    <string name="get_prepayid_fail" formatted="false">获取prepayid失败，原因%s</string>
+
+    <!-- WXPayEntryActivity -->
+    <string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+
+    <string name="mine_copyright">上海市数字证书认证有限公司\n版权所有</string>
+
+    <string name="version">版本号 %s</string>
+
+    <string name="hint_input_certpwd">请输入证书密码（8-16位）</string>
+    <string name="hint_input_certpwd_agin">再次输入证书密码（8-16位）</string>
+    <string name="hint_input_certname">证书别名（选填）</string>
+    <string name="cert_success">您的证书申请成功</string>
+
+    <string name="hint_auth_success">实名认证成功</string>
+    <string name="hint_auth_failure">实名认证失败</string>
+
+    <string name="sms_mobile">手机号码</string>
+    <string name="sms_code">短信验证码</string>
+    <string name="sms_getcode">获取验证码</string>
+    <string name="auth_choice_hint1">请选择身份采集的方式</string>
+    <string name="auth_choice_takephoto">拍摄身份证照片</string>
+    <string name="auth_choice_input">手动输入身份证信息</string>
+    <string name="cert_revoke">该证书将被撤销，此操作不可回退</string>
+
+    <string name="module_apply_seal">申请印章</string>
+    <string name="no_cert">您目前没有可下载证书</string>
+
+    <string name="auth_fail">人脸识别失败</string>
+    <string name="applycert_fail">申请证书失败</string>
+    <string name="fail_getaccount">获取账户信息失败</string>
+    <string name="fail_scan">调取扫码接口失败</string>
+    <string name="fail_certlist">获取证书列表失败</string>
+    <string name="fail_download">下载证书失败</string>
+    <string name="fail_renew">更新证书失败</string>
+    <string name="fail_payorder">获取订单号失败</string>
+    <string name="fail_payuni">微信支付异常</string>
+    <string name="fail_personal">获取个人信息失败</string>
+    <string name="fail_accountseal">获取账户印章失败</string>
+    <string name="fail_applyseal">申请印章失败</string>
+
+    <string name="cert_status_expire">证书已过期</string>
+
+    <string name="psd_gesture">手势免密</string>
+    <string name="psd_finger">指纹免密</string>
+    <string name="psd_lface">人脸免密</string>
+    <string name="psd_ifaa_face">ifaa人脸免密</string>
+
+    <string name="psd_gesture_toggle">手势免密开关</string>
+    <string name="psd_change_gesture">修改手势密码</string>
+
+    <string name="scan_success_sign">扫码签名成功</string>
+    <string name="scan_success_sign_batch">扫码批量签名成功</string>
+    <string name="scan_success_decypt">扫码解密成功</string>
+    <string name="scan_success_seal">扫码签章成功</string>
+
+    <string name="error_psd">密码长度应为8-16位</string>
+    <string name="error_psd2">确认密码不一致，请修改</string>
+
+    <string name="version_alert">您的Android系统版本(%1$s)过低，无法使用移证通最新版。请使用移证通低版本或升级您的手机系统。</string>
+
+   <!-- IFAA -->
+    <string name="IFAA">IFAA</string>
+    <string name="deviceID">DeviceID</string>
+    <string name="register">REG</string>
+    <string name="deregister">DEREG</string>
+    <string name="authenticator">AUTH</string>
+    <string name="status">STATUS</string>
+    <string name="enroll">ENROLL</string>
+    <string name="hasEnrolled">Enrolled?</string>
+    <string name="getAuthData">Get AuthData</string>
+    <string name="getToken">Get TOKEN</string>
+    <string name="cleanToken">Clean TOKEN</string>
+    <string name="isIFAASupport">IFAA Support?</string>
+    <string name="touchServer">Touch Server</string>
+    <string name="Update">更新</string>
+    <string name="usingGateWay">Using GateWay</string>
+
+    <string name="exit">退出</string>
+    <string name="setIfaaOn">开通</string>
+    <string name="getAppID">AppID</string>
+    <string name="getDeviceID">DeviceID</string>
+    <string name="isSupportIFAA">检查是否支持IFAA</string>
+    <string name="ifaaCheckStatus">检查IFAA注册状态</string>
+    <string name="CommonDemo">回调实现Demo</string>
+    <string name="RXJAVA_Demo">RxJava+okHttp 实现Demo</string>
+
+</resources>

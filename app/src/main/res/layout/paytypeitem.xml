@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <ImageView
+            android:id="@+id/paytypepic"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/weixin" />
+    
+    <ImageView
+            android:id="@+id/paytypeext"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/tuijian" />
+
+    <LinearLayout
+        android:id="@+id/thumbnail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="6dip" >
+
+        <ImageView
+            android:id="@+id/arrow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/cb_checked_yellow" />
+    </LinearLayout>
+
+</RelativeLayout>

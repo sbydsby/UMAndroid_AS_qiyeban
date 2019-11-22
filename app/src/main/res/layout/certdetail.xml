@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey3"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/bg_yellow"
+                android:layout_height="80dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"
+                android:background="@drawable/bg_round_darkgray"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@string/certdetail_subject"
+                    />
+
+                <TextView
+                    android:id="@+id/usernamevalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
+                    android:text="aaaaaaa"
+                    />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/certdetail_version"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvversion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView1"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_certsn"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertsn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView2"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout4"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_notBefore"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvbeforetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView4"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout5"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_notAfter"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvaftertime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView5"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_issuer"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvissue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView3"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout6"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_subject"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvsubject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView6"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout7"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_signatureAlg"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvsignalg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView7"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/rl_certchainURL"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_certchainURL"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertchainpath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView9"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout10"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_savetype"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvsavetype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView10"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutsn"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textViewsn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_devicesn"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvdevicesn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textViewsn"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutKeySize"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textViewKeySize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_certkeysize"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertKeySize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textViewKeySize"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/rl_subjectUID"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_subjectUID"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertunicode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView11"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout12"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_icnumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcerticnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView12"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout13"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_taxnumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcerttaxnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView13"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout14"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_orgcode"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertorgcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView14"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout15"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_insnumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertinsnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView15"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout16"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_accfundnumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertaccfundnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView16"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout17"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_instinumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertinstinumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView17"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout18"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_assnumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertassnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView18"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout19"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_govnumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertgovnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView19"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout20"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_lawlicence"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertlawlicence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView20"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout21"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_indilicence"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertindilicence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView21"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout22"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_foreigncode"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertforeigncode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView22"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout23"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/certdetail_crednumber"
+                android:textColor="@color/black_light2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvcertcrednumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/textView23"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grey2"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey3" />
+    </LinearLayout>
+
+</ScrollView>

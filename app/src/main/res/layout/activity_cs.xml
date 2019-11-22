@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light"
+    android:paddingTop="20dp"
+    android:orientation="vertical">
+
+    <com.sheca.umandroid.layout.ComplicatedItem
+        android:id="@+id/cs_hotline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_icon_drawable="@drawable/cs_tel"
+        app:main_text="@string/moudle_hotline"
+        app:right_icon_drawable="@drawable/arrow" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_devider" />
+
+    <com.sheca.umandroid.layout.ComplicatedItem
+        android:id="@+id/cs_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_icon_drawable="@drawable/cs_shop"
+        app:main_text="@string/moudle_site"
+        app:right_icon_drawable="@drawable/arrow" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_devider" />
+
+    <com.sheca.umandroid.layout.ComplicatedItem
+        android:id="@+id/cs_online"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_icon_drawable="@drawable/cs_online"
+        app:main_text="@string/moudle_online_sevice"
+        app:right_icon_drawable="@drawable/arrow" 
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_devider"
+         />
+
+    <com.sheca.umandroid.layout.ComplicatedItem
+        android:id="@+id/cs_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_icon_drawable="@drawable/cs_question"
+        app:main_text="@string/moudle_question"
+        app:right_icon_drawable="@drawable/arrow" />
+
+
+</LinearLayout>
