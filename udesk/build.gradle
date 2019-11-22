@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 23
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation files('libs/bugly_crash_release__2.1.jar')
+    implementation files('libs/udesk-asmack-8-4.0.6.jar')
+    implementation files('libs/udesk-okio-1.6.0.jar')
+    implementation files('libs/udesk-universal-image-loader-1.9.4.jar')
+    implementation files('libs/udesk_dns.jar')
+    implementation files('libs/udesk_okhttp3.jar')
+    implementation files('libs/udesk_qiniu_android_sdk_7.2.2.jar')
+    implementation files('libs/udesk_rxjava.jar')
+    implementation files('libs/udesk_sdk_3.4.jar')
+}
