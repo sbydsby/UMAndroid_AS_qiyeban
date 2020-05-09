@@ -216,7 +216,7 @@ public class SettingFingerTypeActivity extends Activity{
 		setContentView(R.layout.activity_setting_finger_type);
 
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
-		((TextView) findViewById(R.id.header_text)).setText("指纹");
+		((TextView) findViewById(R.id.header_text)).setText("指纹免密");
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/font.ttf");
 		((TextView) findViewById(R.id.header_text)).setTypeface(typeFace);
 		TextPaint tp = ((TextView) findViewById(R.id.header_text)).getPaint();
@@ -774,8 +774,8 @@ public class SettingFingerTypeActivity extends Activity{
 	private void  setIFAADisable(boolean isInit){
 		closeProgDlg();
 		Editor editor = sharedPrefs.edit();
-
-		editor.putBoolean(CommonConst.SETTINGS_FINGER_ENABLED, true);	  //使用指纹模块
+		final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+		editor.putBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, true);	  //使用指纹模块
 		editor.commit();
 
 		LaunchActivity.isIFAAFingerOpend = true;
@@ -797,8 +797,8 @@ public class SettingFingerTypeActivity extends Activity{
 		closeProgDlg();
 		Toast.makeText(SettingFingerTypeActivity.this, "注销成功", Toast.LENGTH_SHORT).show();
     	Editor editor = sharedPrefs.edit();
-
-    	editor.putBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);    //不使用指纹模块
+		final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+    	editor.putBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);    //不使用指纹模块
 		editor.commit();
 
 		LaunchActivity.isIFAAFingerOpend = false;

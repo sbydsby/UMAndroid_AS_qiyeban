@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+
+    <LinearLayout
+        android:id="@+id/ll_normal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/img_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_switch" />
+
+    </LinearLayout>
+<View
+    android:layout_width="match_parent"
+    android:background="@color/black_light2"
+    android:layout_height="1dp"/>
+    <LinearLayout
+        android:id="@+id/ll_diy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:orientation="horizontal">
+<TextView
+    android:layout_width="wrap_content"
+    android:text="其他: "
+    android:textColor="@color/black"
+    android:layout_gravity="center_vertical"
+    android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/umsp_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="服务器地址"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/img_diy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_switch"
+            android:visibility="invisible" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/black_light2"
+        android:layout_height="1dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="UCM服务器地址:"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/ucm_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入UCM服务器地址"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_loign_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_login_yellow"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/app_ok"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/default_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:text="恢复默认地址"
+        android:textColor="@color/bg_yellow"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</LinearLayout>

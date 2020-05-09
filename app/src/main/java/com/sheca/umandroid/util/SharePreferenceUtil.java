@@ -47,6 +47,11 @@ public class SharePreferenceUtil {
         return sharedPrefs.getString(key, null);
     }
 
+    public String getString(String key,String defaultValue){
+        load();
+        return sharedPrefs.getString(key, defaultValue);
+    }
+
     public void setInt(String key,int value){
         load();
         SharedPreferences.Editor editor = sharedPrefs.edit();

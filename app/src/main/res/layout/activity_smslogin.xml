@@ -81,6 +81,17 @@
             android:layout_marginTop="5dp"
             android:background="#b5b5b5" />
 
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:id="@+id/tv_login_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+
+            android:text="@string/account_login2" />
+
         <Button
             android:id="@+id/login"
             style="@style/btn_ok"
@@ -89,14 +100,26 @@
             android:layout_marginTop="50dp"
             android:text="@string/app_login" />
 
-        <TextView
-            android:id="@+id/tv_login_acc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
+        <LinearLayout
             android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
-            android:gravity="center"
-            android:text="@string/account_login2" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/switch_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:text="切换服务器"
+            android:textColor="@color/bg_yellow"
+            android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 
 

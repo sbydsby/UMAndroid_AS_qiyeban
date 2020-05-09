@@ -25,18 +25,22 @@ import com.esandinfo.etas.biz.EtasStatus;
 import com.esandinfo.etas.utils.MyLog;
 import com.esandinfo.utils.EtasExcecuteObservable;
 import com.ifaa.sdk.api.AuthenticatorManager;
-import com.sheca.thirdparty.lockpattern.util.LockPatternUtil;
+import com.sheca.javasafeengine;
 import com.sheca.umandroid.dao.AccountDao;
+import com.sheca.umandroid.dao.CertDao;
+import com.sheca.umandroid.dao.SealInfoDao;
 import com.sheca.umandroid.model.APPResponse;
+import com.sheca.umandroid.model.Cert;
+import com.sheca.umandroid.model.SealInfo;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.ParamGen;
-import com.sheca.umplus.dao.CertDao;
-import com.sheca.umplus.dao.SealInfoDao;
+
 import com.sheca.umplus.dao.UniTrust;
-import com.sheca.umplus.model.Cert;
-import com.sheca.umplus.model.SealInfo;
+
+
+import org.spongycastle.util.encoders.Base64;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -119,11 +123,11 @@ public class SealSignActivity extends BaseActivity {
 
         certSn = getIntent().getStringExtra("certSn");
         CertDao certDao = new CertDao(this);
-        cert = certDao.getCertByCertsn(certSn, "");
+        cert = certDao.getCertByCertsn(certSn, AccountHelper.getUsername(this));
 
 
         SealInfoDao sealInfoDao = new SealInfoDao(this);
-        seal = sealInfoDao.getSealByCertsn(certSn, "");
+        seal = sealInfoDao.getSealByCertsn(certSn, AccountHelper.getUsername(this));
         if (seal != null) {
 //            Log.e("地址",seal.getPicdata());
             imgSeal.setImageBitmap(CommUtil.stringtoBitmap(seal.getPicdata()));
@@ -133,14 +137,59 @@ public class SealSignActivity extends BaseActivity {
     }
 
 
+
+
+//    private String getPWDHash(String strPWD) {
+//        String strPWDHash = "";
+//
+//        javasafeengine oSE = new javasafeengine();
+//        byte[] bText = strPWD.getBytes();
+//        byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+//        strPWDHash = new String(Base64.encode(bDigest));
+//
+//        return strPWDHash;
+//    }
+
+    private  String   getPWDHash(String strPWD,Cert cert){
+        String strPWDHash = "";
+
+        if(null == cert)
+            return strPWD;
+//		if(CommonConst.USE_FINGER_TYPE == cert.getFingertype()){
+//			if(!"".equals(cert.getCerthash())) {
+//				//return cert.getCerthash();
+//				if(!"".equals(strPWD) && strPWD.length() > 0)
+//					return strPWD;
+//			}else
+//			    return strPWD;
+//		}
+
+//		if (!"".equals(strPWD) && strPWD.length() > 0)
+//			return strPWD;
+
+
+        javasafeengine oSE = new javasafeengine();
+        byte[] bText = strPWD.getBytes();
+        byte[] bDigest = oSE.digest(bText, "SHA-256", "SUN");   //做摘要
+        if(cert.getFingertype()   == CommonConst.USE_FINGER_TYPE)
+            bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+
+        strPWDHash = new String(Base64.encode(bDigest));
+
+        return strPWDHash;
+
+//		return strPWD;
+    }
+
+
     private void scan() {
-        if (!cert.getCerthash().equals(textPwd.getText().toString().trim())) {
+        if (!cert.getCerthash().equals(getPWDHash(textPwd.getText().toString().trim(),cert))) {
             Toast.makeText(this, "证书保护口令错误", Toast.LENGTH_LONG).show();
             return;
         }
 
        final String params = ParamGen.Scan(this, getIntent().getStringExtra("result"),
-                cert.getId() + "", textPwd.getText().toString().trim());
+                cert.getId() + "", getPWDHash(textPwd.getText().toString().trim(),cert));
 
         new Thread(new Runnable() {
             @Override

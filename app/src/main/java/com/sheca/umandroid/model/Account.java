@@ -89,7 +89,7 @@ public class Account {
 	}
 	
 	public int getActive() {
-		return active;
+		return 1;
 	}
 
 	public void setActive(int active) {

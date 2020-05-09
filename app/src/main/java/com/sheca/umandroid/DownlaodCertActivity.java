@@ -1117,15 +1117,15 @@ public class DownlaodCertActivity extends com.facefr.activity.BaseActivity {
         return p10;
     }
 
-    private String DownloadCert(String requestNumber, int saveType, final String certType) throws Exception {
-        CertController certController = new CertController();
-        String res = certController.downloadCert(this, requestNumber, certType);
-        return res;
-    }
+//    private String DownloadCert(String requestNumber, int saveType, final String certType) throws Exception {
+//        CertController certController = new CertController();
+//        String res = certController.downloadCert(this, requestNumber, certType);
+//        return res;
+//    }
 
-    private String DownloadSM2Cert(String requestNumber, int saveType, String certType) throws Exception {
-        return DownloadCert(requestNumber, saveType, certType);
-    }
+//    private String DownloadSM2Cert(String requestNumber, int saveType, String certType) throws Exception {
+//        return DownloadCert(requestNumber, saveType, certType);
+//    }
 
 
     private void saveCert(final String requestNumber, final DownloadCertResponse response, final int saveType, final int certType) {

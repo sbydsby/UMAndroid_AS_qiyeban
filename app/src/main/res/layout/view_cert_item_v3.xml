@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="15dp"
-        android:paddingRight="80dp"
         android:paddingTop="5dp"
+        android:paddingRight="80dp"
         android:paddingBottom="30dp">
 
         <LinearLayout
@@ -23,83 +23,100 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/certdetail_certsn2"
-                android:textColor="@color/white" 
+                android:textColor="@color/white"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/certsn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
+                android:layout_weight="1"
                 android:text="12324567890"
                 android:textColor="@color/white"
-                android:visibility="gone"  />
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-          <TextView
-              android:id="@+id/tv_cert_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/certdetail_leftdays"
-              android:layout_weight="1"
-            android:textColor="@color/cert_text"
-            android:textSize="18sp" />
-        
-          <TextView
+
+            <TextView
+                android:id="@+id/certtypemore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:paddingLeft="5dp"
+                android:text="Test"
+                android:textColor="#550C0F" />
+
+            <TextView
+
                 android:id="@+id/certtype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+
                 android:background="@drawable/tv_stroke_white"
                 android:paddingLeft="5dp"
                 android:text="Test"
                 android:textColor="@color/cert_type_text" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_leftday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/certafter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/cert_text"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/day"
-                android:textColor="@color/cert_text"
-                android:textSize="20sp" />
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:text="@string/cert_holder"
-            android:textColor="@color/bg_yellow" 
-            android:visibility="gone"/>
+            android:textColor="@color/bg_yellow"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/certnickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:text="XXXXXXXXX"
-            android:textColor="@color/white"
-            android:textSize="15sp"  />
+            android:textColor="@color/cert_text"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_leftday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cert_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/certdetail_leftdays"
+            android:textColor="@color/cert_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/certafter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/cert_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day"
+            android:textColor="@color/cert_text"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -111,8 +128,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/cert_seal"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>
 

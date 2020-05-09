@@ -61,7 +61,7 @@ public class CertEncFragment extends Fragment {
 			certDao = new CertDao(context);
 			
 			mCert = certDao.getCertByID(certID);	
-			if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+			if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
 				viewSM2EncCert();
 			else
 				viewEncCert();

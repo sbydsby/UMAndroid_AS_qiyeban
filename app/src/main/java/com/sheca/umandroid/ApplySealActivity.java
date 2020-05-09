@@ -25,6 +25,7 @@ import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.OperationLog;
 import com.sheca.umandroid.model.SealInfo;
 import com.sheca.umandroid.presenter.SealController;
+import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.WebClientUtil;
 
@@ -202,6 +203,7 @@ public class ApplySealActivity extends Activity {
 						sealInfo.setCertsn(localCert.getCertsn());
 						sealInfo.setCert(localCert.getCertificate());
 						sealInfo.setSdkID(mCertId);
+						sealInfo.setSealname(strSealName);
 
 						SealInfoDao sealInfoDao = new SealInfoDao(getApplicationContext());
 						sealInfoDao.addSeal(sealInfo,account);
@@ -211,7 +213,7 @@ public class ApplySealActivity extends Activity {
 
 						Log.d("unitrust","sealInfoDao.addSeal 成功");
 
-						Toast.makeText(getApplicationContext(),response.getReturnMsg(),Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(),"印章申请成功",Toast.LENGTH_SHORT).show();
 
 						//设置跳入到主页，更新印章
 						Intent intent = new Intent(ApplySealActivity.this,MainActivity.class);
@@ -263,7 +265,7 @@ public class ApplySealActivity extends Activity {
 	
 
 	private  String  applySeal() throws Exception{
-		String responseStr = sealController.applySeal(this,strPicDate,""+mCertId,strCertPsd);
+		String responseStr = sealController.applySeal(this,strPicDate,""+mCertId, strCertPsd);
 		return responseStr;
 	}
 	

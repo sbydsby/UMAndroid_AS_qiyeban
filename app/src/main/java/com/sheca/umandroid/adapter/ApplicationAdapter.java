@@ -68,7 +68,7 @@ public class ApplicationAdapter extends BaseAdapter {
 			//else
 				//orgName.setText("个人移动证书");
 				
-			if(CommonConst.CERT_TYPE_SM2.equals(certmap.get("CertType")) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(certmap.get("CertType"))){
+			if(CommonConst.CERT_TYPE_SM2.equals(certmap.get("CertType")) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(certmap.get("CertType"))||certmap.get("CertType").contains("SM2")){
 				certType.setText(CommonConst.CERT_SM2_NAME+"证书");
 				itemListCertType.setImageResource(R.drawable.cert_sm2);
 			}else{

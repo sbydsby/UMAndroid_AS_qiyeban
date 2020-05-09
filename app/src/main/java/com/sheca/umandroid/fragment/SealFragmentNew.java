@@ -2,6 +2,7 @@ package com.sheca.umandroid.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -49,6 +50,7 @@ import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.CertDao;
 import com.sheca.umandroid.dao.LogDao;
 import com.sheca.umandroid.dao.SealInfoDao;
+import com.sheca.umandroid.model.APPResponse;
 import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.DownloadCertResponse;
 import com.sheca.umandroid.model.OperationLog;
@@ -58,7 +60,10 @@ import com.sheca.umandroid.presenter.SealPresenter;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
+import com.sheca.umandroid.util.MyAsycnTaks;
+import com.sheca.umandroid.util.ParamGen;
 import com.sheca.umandroid.util.WebClientUtil;
+import com.sheca.umplus.dao.UniTrust;
 
 import net.sf.json.JSONObject;
 
@@ -152,20 +157,23 @@ public class SealFragmentNew extends Fragment {
     private String strENVSN = "";
 
     private SealPresenter sealPresenter;
-    
-	/* 
-	 private GestureDetector mGestureDetector;
 
-	 private OnTouchListener myTouch = new OnTouchListener(){
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
-			return mGestureDetector.onTouchEvent(event);
-		}
-    	
+    /*
+     private GestureDetector mGestureDetector;
+
+     private OnTouchListener myTouch = new OnTouchListener(){
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return mGestureDetector.onTouchEvent(event);
+        }
+
     };*/
+    boolean certType = false;//false个人 true单位
+
+    UniTrust uniTrust;
 
     @SuppressLint("ResourceAsColor")
-	@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         activity = getActivity();
@@ -173,6 +181,9 @@ public class SealFragmentNew extends Fragment {
         try {
             view = inflater.inflate(R.layout.fragment_seal, container, false);
             context = view.getContext();
+
+
+            uniTrust = new UniTrust(activity, false);
 
             jse = new javasafeengine();
             certDao = new CertDao(context);
@@ -190,19 +201,46 @@ public class SealFragmentNew extends Fragment {
             Typeface typeFace = Typeface.createFromAsset(activity.getAssets(), "fonts/font.ttf");
             tv_title.setTypeface(typeFace);
 
+            ImageView tv_right = (ImageView) activity.findViewById(R.id.tv_right);
+            tv_right.setImageResource(R.drawable.switch_org);
+            tv_right.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (certType == false) {
+                        certType = true;
+                        tv_right.setImageResource(R.drawable.switch_person);
+                    } else {
+                        certType = false;
+                        tv_right.setImageResource(R.drawable.switch_org);
+                        view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+                    }
+
+                    if (relativeLayout != null) {
+                        relativeLayout.removeAllViews();
+                    }
+                    if (views != null) {
+                        views.clear();
+                    }
+                    successTime = 0;
+                    positionNow = 0;
+                    count = 1;
+                    showSealList();
+                }
+            });
+
             iv_unitrust.setVisibility(ImageButton.GONE);
             ib_account.setVisibility(ImageView.GONE);
             tv_title.setVisibility(TextView.VISIBLE);
 
-            CommUtil.setTitleColor(getActivity(),R.color.bg_yellow,
+            CommUtil.setTitleColor(getActivity(), R.color.bg_yellow,
                     R.color.black);
 
             if (accountDao.count() == 0) {
                 clearSealList();
                 Intent intent = new Intent(context, LoginActivity.class);
-               startActivity(intent);
-               //activity.finish();
-               return view;
+                startActivity(intent);
+                //activity.finish();
+                return view;
             }
 
             if (!AccountHelper.hasLogin(getContext())) {
@@ -218,7 +256,7 @@ public class SealFragmentNew extends Fragment {
             ht = new HandlerThread("es_device_working_thread");
             ht.start();
             workHandler = new Handler(ht.getLooper());
-            sealPresenter = new SealPresenter(getContext(), accountDao, certDao, workHandler,getActivity());
+            sealPresenter = new SealPresenter(getContext(), accountDao, certDao, workHandler, getActivity());
 
             showSealList();
         } catch (Exception ex) {
@@ -226,12 +264,39 @@ public class SealFragmentNew extends Fragment {
             strr += "";
         }
 
+        Button button_download_seal = (Button) view.findViewById(R.id.button_download_seal);
+        button_download_seal.setOnClickListener(new View.OnClickListener() {//下载印章
+            @Override
+            public void onClick(View v) {
+
+
+                SealInfo sealInfo = mSealInfoDao.getSealByID(certID);
+                sealInfo.setDownloadstatus(1);
+                mSealInfoDao.updateSealInfo(sealInfo, AccountHelper.getUsername(getActivity()));
+
+                if (relativeLayout != null) {
+                    relativeLayout.removeAllViews();
+                }
+                if (views != null) {
+                    views.clear();
+                }
+                count = 1;
+                showSealList();
+
+//                if (!AccountHelper.hasLogin(getContext())) {
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    startActivity(intent);
+//                }
+            }
+        });
+
         return view;
     }
 
     @Override
     public void onDestroyView() {
         view.findViewById(R.id.button_apply_seal).setVisibility(ImageButton.GONE);
+        view.findViewById(R.id.button_download_seal).setVisibility(ImageButton.GONE);
 
         super.onDestroyView();
     }
@@ -239,6 +304,7 @@ public class SealFragmentNew extends Fragment {
     private List<Map<String, String>> getData() throws Exception {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         List<SealInfo> sealList = new ArrayList<SealInfo>();
+        List<String> certSn = new ArrayList<String>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -250,6 +316,8 @@ public class SealFragmentNew extends Fragment {
             strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
 
         sealList = mSealInfoDao.getAllSealInfos(strActName);
+
+
         for (SealInfo sealInfo : sealList) {
             Cert cert = certDao.getCertByCertsn(sealInfo.getCertsn(), strActName);
             if (null == cert)
@@ -262,6 +330,28 @@ public class SealFragmentNew extends Fragment {
 
             if (null == cert.getCertificate() || "".equals(cert.getCertificate()))
                 continue;
+
+            if (certType == false && getCertType(cert) == true) {//true表示单位证书 false表示个人证书
+                continue;
+            }
+            if (certType == true && getCertType(cert) == false) {//true表示单位证书 false表示个人证书
+
+                continue;
+            }
+
+            boolean hasSameCert = false;
+            for (int i = 0; i < certSn.size(); i++) {//去掉被否决的印章
+                if (certSn.get(i).equals(sealInfo.getCertsn())) {
+                    hasSameCert = true;
+                }
+            }
+            if (hasSameCert) {
+                continue;
+            } else {
+                certSn.add(sealInfo.getCertsn());
+            }
+
+
 
             if (cert.getStatus() == Cert.STATUS_DOWNLOAD_CERT || cert.getStatus() == Cert.STATUS_RENEW_CERT) {
                 Map<String, String> map = new HashMap<String, String>();
@@ -279,22 +369,32 @@ public class SealFragmentNew extends Fragment {
                 map.put("validState", "" + getCertValidState(cert.getCertificate()));
                 map.put("picdata", sealInfo.getPicdata());
                 map.put("sealsn", sealInfo.getSealsn());
-                
-                if(CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) )
-				    map.put("certtype", CommonConst.CERT_SM2_NAME);	
-				else
-					map.put("certtype", CommonConst.CERT_RSA_NAME);	
 
-                if(isCertTested(cert.getCertificate()))
-					map.put("isTested","true");
-				else
-					map.put("isTested","false");
-                
+
+                Log.e("下载状态", sealInfo.getDownloadstatus() + "");
+                map.put("downloadstatus", sealInfo.getDownloadstatus() + "");
+
+                if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) || cert.getCerttype().contains("SM2"))
+                    map.put("certtype", CommonConst.CERT_SM2_NAME);
+                else
+                    map.put("certtype", CommonConst.CERT_RSA_NAME);
+
+                if (isCertTested(cert.getCertificate()))
+                    map.put("isTested", "true");
+                else
+                    map.put("isTested", "false");
+
                 list.add(map);
             }
         }
 
         return list;
+    }
+
+    private boolean getCertType(Cert cert) {  //true 单位证书 false个人证书
+        Log.e("类型", cert.getCerttype());
+        return !cert.getCerttype().contains("个人");
+
     }
 
 
@@ -316,14 +416,14 @@ public class SealFragmentNew extends Fragment {
 
 
     private void showSealList() {
-    	if(accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
-           view.findViewById(R.id.button_apply_seal).setVisibility(RelativeLayout.GONE);
-    	else
-    	   view.findViewById(R.id.button_apply_seal).setVisibility(RelativeLayout.VISIBLE);
+        if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+            view.findViewById(R.id.button_apply_seal).setVisibility(RelativeLayout.GONE);
+        else
+            view.findViewById(R.id.button_apply_seal).setVisibility(RelativeLayout.VISIBLE);
 
         try {
             //清空之前的list
-            if(mData!=null){
+            if (mData != null) {
                 mData.clear();
             }
             mData = getData();
@@ -423,6 +523,58 @@ public class SealFragmentNew extends Fragment {
 		});	*/
     }
 
+
+//    private void querySingle(int nowPosition) {
+//        new MyAsycnTaks() {
+//            @Override
+//            public void preTask() {
+//
+//            }
+//
+//            @Override
+//            public void doinBack() {
+//                String result = uniTrust.QuerySealStatus(ParamGen.querySealByID(getActivity(), mList.get(nowPosition).getId() + ""));
+//                APPResponse response = new APPResponse(result);
+//
+//                try {
+//                    if (response.getReturnCode() == 0) {
+//                        JSONObject jb = response.getResult();
+//                        String status = jb.optString("sealStatus");
+//                        sealStatus.add(Integer.parseInt(status));
+//
+//
+//                    } else {
+//                        sealStatus.add(6);
+//
+//                    }
+//
+//                } catch (Exception e) {
+//                    sealStatus.add(6);
+//                    dismissDg();
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void postTask() {
+//                successTime++;
+//
+//                if (successTime == mList.size()) {
+//
+//                    removeRsaSeal();
+//
+//                } else {
+//                    if (successTime < mList.size()) {
+//                        querySingle(successTime);
+//                    }
+//                }
+//
+//            }
+//        }.execute();
+//
+//    }
+
     /*
     private  void  showLeftCert(){
         if(cunIndex == 0)
@@ -476,6 +628,7 @@ public class SealFragmentNew extends Fragment {
             }
         });
 
+
         view.findViewById(R.id.Layout_my_info).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -519,15 +672,35 @@ public class SealFragmentNew extends Fragment {
         instantiated(mData.size(), ITEM_COUNT);//实例化ViewPager
         adapter = new ViewCertPagerAdapter(views);// 构造adapter
         viewPager.setAdapter(adapter);// 设置适配器
+
+
+        if (certType == false) {
+            view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+        } else {
+            if (mData.size() > 0) {
+                if ("1".equals(mData.get(0).get("downloadstatus"))) {
+                    view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+                } else {
+                    view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.VISIBLE);
+                }
+                successTime = 0;
+                querySingle(successTime);
+            }
+
+
+        }
     }
-    
+
     @SuppressLint("ResourceAsColor")
-	private void hideBackground(int pageNum){
-		if (pageNum>0){
-			view.findViewById(R.id.Layout_my_info).setBackgroundColor(android.R.color.transparent);
-			view.findViewById(R.id.Layout_no_cert_info).setBackgroundColor(android.R.color.transparent);
-		}
-	}
+    private void hideBackground(int pageNum) {
+//        if (pageNum > 0) {
+//            view.findViewById(R.id.Layout_my_info).setBackgroundColor(android.R.color.transparent);
+//            view.findViewById(R.id.Layout_no_cert_info).setBackgroundColor(android.R.color.transparent);
+//        } else {
+//            view.findViewById(R.id.Layout_my_info).setBackgroundResource(R.drawable.bg_no_seal);
+//            view.findViewById(R.id.Layout_no_cert_info).setBackgroundResource(R.drawable.bg_no_seal);
+//        }
+    }
 
     //实例化pagerview中ImageView、TextView 方法,输入数组长度、每页item数
     @SuppressLint("NewApi")
@@ -545,14 +718,29 @@ public class SealFragmentNew extends Fragment {
 
                 Bitmap bitMap = bitMapScale(stringtoBitmap(mData.get(i).get("picdata")), 0.3f);
                 views.get(i).findViewById(R.id.list_image).setVisibility(RelativeLayout.VISIBLE);
-                ((ImageView) views.get(i).findViewById(R.id.list_image)).setImageBitmap(bitMap);
+
+//                Log.e("印章状态", mData.get(i).get("status"));
+
+                if (certType == false) {//true表示单位证书 false表示个人证书
+                    ((ImageView) views.get(i).findViewById(R.id.list_image)).setImageBitmap(bitMap);
+                } else {
+                    if (mData.get(i).get("downloadstatus").equals("1")) {
+                        ((ImageView) views.get(i).findViewById(R.id.list_image)).setImageBitmap(bitMap);
+                    } else {
+                        ((ImageView) views.get(i).findViewById(R.id.list_image)).setImageResource(R.drawable.no_seal_icon);
+
+                    }
+
+                }
+
+
                 ((ImageView) views.get(i).findViewById(R.id.list_image)).invalidate();
-                
-                if("true".equals(mData.get(0).get("isTested"))){
-                	views.get(i).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview_test);
-                }else{
-					views.get(i).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview_normal);
-				}
+
+//                if ("true".equals(mData.get(0).get("isTested"))) {
+//                    views.get(i).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview);
+//                } else {
+//                    views.get(i).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview);
+//                }
             }
 
             certID = Integer.valueOf(mData.get(0).get("id"));
@@ -606,14 +794,35 @@ public class SealFragmentNew extends Fragment {
             }
 
             certID = Integer.valueOf(mData.get(positionNow).get("id"));
-            
-            if("true".equals(mData.get(positionNow).get("isTested"))){
-            	views.get(positionNow).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview_test);
-            }else{
-            	views.get(positionNow).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview_normal);
+
+            if ("true".equals(mData.get(positionNow).get("isTested"))) {
+                views.get(positionNow).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview);
+            } else {
+                views.get(positionNow).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview);
             }
-            
-            
+
+
+            if ("true".equals(mData.get(positionNow).get("isTested"))) {
+                views.get(positionNow).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview);
+            } else {
+                views.get(positionNow).findViewById(R.id.Layout_seal_item).setBackgroundResource(R.drawable.certcardview);
+            }
+
+            if (certType == false) {
+                view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+            } else {
+
+
+                if ("1".equals(mData.get(positionNow).get("downloadstatus"))) {
+                    view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+                } else {
+                    view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.VISIBLE);
+                }
+                setUI();
+
+            }
+
+
         }
 
         public void onPageScrolled(int arg0, float arg1, int arg2) {// 滑动中。。。
@@ -725,7 +934,7 @@ public class SealFragmentNew extends Fragment {
 
                                             String responseStr = "";
 
-                                            if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+                                            if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2"))
                                                 responseStr = UploadSM2Pkcs10(handler, mCert.getCertsn(), mCert.getCerttype(), mCert.getSavetype(), mCert.getStatus(), prikeyPassword);
                                             else
                                                 responseStr = UploadPkcs10(handler, mCert.getCertsn(), mCert.getCerttype(), mCert.getSavetype(), mCert.getStatus(), prikeyPassword);
@@ -752,7 +961,7 @@ public class SealFragmentNew extends Fragment {
 
                                                 //设置时间间隔，等待后台签发证书
                                                 String threadSleepTime = activity.getString(R.string.Thread_Sleep);
-                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())) {
+                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                                                     certSaveType = CommonConst.SAVE_CERT_TYPE_SM2;
                                                     Thread.sleep(Long.parseLong(threadSleepTime) * 2);   //签发sm2证书等待时间需10秒
                                                 } else {
@@ -761,7 +970,7 @@ public class SealFragmentNew extends Fragment {
                                                 }
 
                                                 //下载证书
-                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2"))
                                                     responseStr = DownloadSM2Cert(strENVSN, mCert.getSavetype(), mCert.getCerttype());
                                                 else
                                                     responseStr = DownloadCert(strENVSN, mCert.getSavetype(), mCert.getCerttype());
@@ -976,7 +1185,7 @@ public class SealFragmentNew extends Fragment {
         if (CommonConst.SAVE_CERT_TYPE_BLUETOOTH == cert.getSavetype() || CommonConst.SAVE_CERT_TYPE_SIM == cert.getSavetype()) {
             return true;
         } else {
-            if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype())) {
+            if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) || cert.getCerttype().contains("SM2")) {
                 if (null == ShcaCciStd.gSdk || ShcaCciStd.errorCode != 0)
                     initShcaCciStdService();
 
@@ -1058,7 +1267,7 @@ public class SealFragmentNew extends Fragment {
                 if (null == devInfo)
                     gEsDev.connect(EsIBankDevice.TYPE_BLUETOOTH, sharedPrefs.getString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, ""));
 
-                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())) {
+                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                     if (null != gEsDev.readSM2SignatureCert() && !"".equals(gEsDev.readSM2SignatureCert()))
                         nRet = gEsDev.detroySM2SignCert(certPwd);
                     if (null != gEsDev.readSM2EncryptCert() && !"".equals(gEsDev.readSM2EncryptCert()))
@@ -1071,7 +1280,7 @@ public class SealFragmentNew extends Fragment {
                 if (!ScanBlueToothSimActivity.gKsSdk.isConnected())
                     ScanBlueToothSimActivity.gKsSdk.connect(sharedPrefs.getString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, ""), "778899", 500);
 
-                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())) {
+                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                     if (null != ScanBlueToothSimActivity.gKsSdk.readSM2SignatureCert() && !"".equals(ScanBlueToothSimActivity.gKsSdk.readSM2SignatureCert()))
                         nRet = ScanBlueToothSimActivity.gKsSdk.detroySM2KeyPairAndCert(certPwd);
                 } else {
@@ -1982,7 +2191,7 @@ public class SealFragmentNew extends Fragment {
             strCertName = "";
         }
 
-        if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()))
+        if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) || cert.getCerttype().contains("SM2"))
             strCertName += CommonConst.CERT_SM2_NAME + strBlank;
         else
             strCertName += CommonConst.CERT_RSA_NAME + strBlank;
@@ -2027,5 +2236,200 @@ public class SealFragmentNew extends Fragment {
         return resizeBmp;
     }
 
+    boolean hasInit = false;
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (activity != null && hasInit == false) {
+//
+//
+//            hasInit = true;
+//            ImageView tv_right = (ImageView) activity.findViewById(R.id.tv_right);
+//
+//            tv_right.setVisibility(View.VISIBLE);
+//            if (certType == false) {
+//                tv_right.setImageResource(R.drawable.switch_org);
+//            } else {
+//                tv_right.setImageResource(R.drawable.switch_person);
+//            }
+//
+//        }
+//    }
+
+    int successTime = 0;
+    private ArrayList<Integer> sealStatus = new ArrayList<>();
+
+    //检查印章状态
+    private void querySingle(int nowPosition) {
+        new MyAsycnTaks() {
+            @Override
+            public void preTask() {
+
+            }
+
+            @Override
+            public void doinBack() {
+                String result = uniTrust.QuerySealStatus(ParamGen.querySealByID(getActivity(), mData.get(nowPosition).get("id") + ""));
+                APPResponse response = new APPResponse(result);
+
+                try {
+                    if (response.getReturnCode() == 0) {
+                        JSONObject jb = response.getResult();
+                        String status = jb.optString("sealStatus");
+                        sealStatus.add(Integer.parseInt(status));
+
+                        SealInfo sealInfo = mSealInfoDao.getSealByID(Integer.parseInt(mData.get(nowPosition).get("id")));
+                        sealInfo.setState(Integer.parseInt(status));
+                        mSealInfoDao.updateSealInfo(sealInfo, AccountHelper.getUsername(getActivity()));
+
+                    } else {
+                        sealStatus.add(6);
+
+                    }
+
+                } catch (Exception e) {
+                    sealStatus.add(6);
+
+                }
+
+
+            }
+
+            @Override
+            public void postTask() {
+                successTime++;
+
+                if (successTime == mData.size()) {
+
+                    setUI();
+
+                } else {
+                    if (successTime < mData.size()) {
+                        querySingle(successTime);
+                    }
+                }
+
+            }
+        }.execute();
+
+    }
+
+
+    private void setUI() {//取完所有印章状态后的操作
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mData.size() > 0) {
+
+                    if ("1".equals(mData.get(positionNow).get("downloadstatus"))) {//已下载
+
+                        view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+//                        if ("1".equals(mData.get(positionNow).get("downloadstatus"))) {
+//                            view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.GONE);
+//                        } else {
+//                            view.findViewById(R.id.button_download_seal).setVisibility(RelativeLayout.VISIBLE);
+//                        }
+                    } else {
+
+
+                        if (sealStatus.size() > 0) {
+
+                            int nowStatus = sealStatus.get(positionNow);
+                            if (nowStatus == 1) {//可下载
+                                view.findViewById(R.id.button_download_seal).setVisibility(View.VISIBLE);
+//                                mTvSealTip.setText(R.string.seal_state_tip);
+//                                mTvDownloadSeal.setVisibility(View.VISIBLE);
+                            } else {//不可下载
+//                                llDownload.setVisibility(View.VISIBLE);
+                                view.findViewById(R.id.button_download_seal).setVisibility(View.GONE);
+                                String stateStr = "";
+                                switch (nowStatus) {
+                                    case 1:
+                                        stateStr = "印章状态:可下载";
+                                        break;
+
+                                    case 2:
+                                        stateStr = "印章状态:过期";
+                                        break;
+                                    case 3:
+                                        stateStr = "印章状态:吊销";
+                                        break;
+                                    case 4:
+                                        stateStr = "印章状态:冻结";
+                                        break;
+                                    case 5:
+                                        stateStr = "印章状态:否决";
+                                        break;
+                                    case 6:
+                                        stateStr = "印章状态:待审核";
+                                        break;
+
+                                }
+
+//                                mTvSealTip.setText(stateStr);
+                            }
+
+                        } else {
+                            view.findViewById(R.id.button_download_seal).setVisibility(View.GONE);
+                        }
+                    }
+                } else {
+                    view.findViewById(R.id.button_download_seal).setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+    }
+
+
+//    int nowSealPosition = 0;
+//
+//    private void saveSealStatus() {
+//        nowSealPosition = 0;
+//
+//
+//        setSealState(nowSealPosition);
+//
+//
+//    }
+
+
+//    private void setSealState(int nowPosition) {
+//
+//
+//        new MyAsycnTaks() {
+//            @Override
+//            public void preTask() {
+//
+//            }
+//
+//            @Override
+//            public void doinBack() {
+//
+//mData.get(nowPosition).get()
+//
+//
+//            }
+//
+//            @Override
+//            public void postTask() {
+//                nowSealPosition++;
+//
+//                if (nowSealPosition == sealStatus.size()) {
+//
+////                    AccountHelper.getCertList(TabSealFragmentNew.this, 2);
+//
+//                } else {
+//                    if (nowSealPosition < sealStatus.size()) {
+//                        setSealState(nowSealPosition);
+//                    }
+//                }
+//
+//            }
+//        }.execute();
+//
+//
+//    }
 }

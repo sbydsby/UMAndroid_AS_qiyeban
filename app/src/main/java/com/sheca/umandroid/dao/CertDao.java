@@ -3,8 +3,11 @@ package com.sheca.umandroid.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.sheca.umandroid.model.Cert;
+import com.sheca.umandroid.util.AccountHelper;
+import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umplus.util.PKIUtil;
 
@@ -130,10 +133,25 @@ public class CertDao {
 		db.close();
 		return cert;
 	}
+
+
+		//根据Sm2证书idcert取出配套的rsa证书
+		public Cert getOtherCert(int certId,Context context) {
+			Cert sm2Cert = getCertByID(certId);
+			Cert rsaCert = null;
+			List<Cert> rsaList = getAllCerts(AccountHelper.getUsername(context));
+			for (int i = 0; i < rsaList.size(); i++) {
+				if (CommUtil.getCertDetail(rsaList.get(i), 17).equals(CommUtil.getCertDetail(sm2Cert, 17))) {
+					rsaCert = rsaList.get(i);
+					return rsaCert;
+				}
+			}
+			return null;
+		}
 	
 	public Cert getCertByCertsn(String certsn,String accountName) {
 		Cert cert = null;
-		Cursor result = db.query(DBHelper.TBL_CERT, "certsn='" + certsn + "' and accountname='"+accountName+"'");
+		Cursor result = db.query(DBHelper.TBL_CERT, "certsn='" + certsn.toLowerCase() + "' and accountname='"+accountName+"'");
 		result.moveToFirst();
 		if (!result.isAfterLast()) {
 			cert = new Cert();
@@ -337,6 +355,56 @@ public class CertDao {
 		db.close();
 		return certList;
 	}
+
+
+
+
+
+	//查询所有的证书
+	public List<Cert> getAllCertLocal(){
+		List<Cert> certList = new ArrayList<Cert>();
+		Cert mCert=null;
+		Cursor result = db.query(DBHelper.TBL_CERT, "");
+		result.moveToFirst();
+		while (!result.isAfterLast()) {
+			mCert = new Cert();
+//			mCert.setId(result.getInt(0));
+			mCert.setCertsn(result.getString(1));
+			mCert.setEnvsn(result.getString(2));
+			mCert.setPrivatekey(result.getString(3));
+			mCert.setCertificate(result.getString(4));
+			mCert.setKeystore(result.getString(5));
+			mCert.setEnccertificate(result.getString(6));
+			mCert.setEnckeystore(result.getString(7));
+			mCert.setCertchain(result.getString(8));
+			mCert.setStatus(result.getInt(9));
+			mCert.setAccountname(result.getString(10));
+			mCert.setNotbeforetime(result.getString(11));
+			mCert.setValidtime(result.getString(12));
+			mCert.setUploadstatus(result.getInt(13));
+			mCert.setCerttype(result.getString(14));
+			mCert.setSignalg(result.getInt(15));
+			mCert.setContainerid(result.getString(16));
+			mCert.setAlgtype(result.getInt(17));
+			mCert.setSavetype(result.getInt(18));
+			mCert.setDevicesn(result.getString(19));
+			mCert.setCertname(result.getString(20));
+			mCert.setCerthash(result.getString(21));
+			mCert.setFingertype(result.getInt(22));
+			mCert.setSealsn(result.getString(23));
+			mCert.setSealstate(result.getInt(24));
+			mCert.setSdkID(result.getInt(25));
+			mCert.setCertlevel(result.getInt(26));
+
+			certList.add(mCert);
+			result.moveToNext();
+		}
+		result.close();
+		db.close();
+		return certList;
+	}
+
+
 
 	public void updateCert(Cert cert,String accountName) {
 		ContentValues values = new ContentValues();

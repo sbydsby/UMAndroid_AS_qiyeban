@@ -163,7 +163,8 @@ public class MineFragmentV3 extends Fragment {
      */
     protected void onVisible() {
         //相当于Fragment的onResume，为true时，Fragment已经可见
-        isNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+        final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+        isNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
         switchButton = (SwitchButton) view.findViewById(R.id.switch_button);
         if (!String.valueOf(isNotificationFinger).equals(String.valueOf(isUserNotificationFinger)))
             nShowView++;
@@ -176,7 +177,8 @@ public class MineFragmentV3 extends Fragment {
      */
     protected void onHidden() {
         //相当于Fragment的onPause，为false时，Fragment不可见
-        isNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+        final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+        isNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
         switchButton = (SwitchButton) view.findViewById(R.id.switch_button);
         //if(!String.valueOf(isNotificationFinger).equals(String.valueOf(isUserNotificationFinger)))
         //switchButton.setChecked(isNotificationFinger);
@@ -185,7 +187,15 @@ public class MineFragmentV3 extends Fragment {
     @Override
     public void onResume() {//和activity的onResume绑定，Fragment初始化的时候必调用，但切换fragment的hide和visible的时候可能不会调用！
         super.onResume();
-
+//        if(getActivity()!=null) {
+//            ImageView tv_right = (ImageView) getActivity().findViewById(R.id.tv_right);
+//
+////        if (isVisibleToUser) {
+//            tv_right.setVisibility(View.GONE);
+////        } else {
+////            tv_right.setVisibility(View.GONE);
+////        }
+//        }
         if (isAdded() && !isHidden()) {//用isVisible此时为false，因为mView.getWindowToken为null
             onVisible();
             isVisible = true;
@@ -230,7 +240,7 @@ public class MineFragmentV3 extends Fragment {
                 view.findViewById(R.id.shiming).setVisibility(RelativeLayout.GONE);
             } else {
                 view.findViewById(R.id.shiming).setVisibility(RelativeLayout.VISIBLE);
-                if (accountDao.getLoginAccount().getStatus() == 2 || accountDao.getLoginAccount().getStatus() == 3 || accountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
+                if (accountDao.getLoginAccount().getStatus() == 5 || accountDao.getLoginAccount().getStatus() == 3 || accountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
                     ((ImageView) view.findViewById(R.id.shiming)).setImageDrawable(getResources().getDrawable((R.drawable.yishiming)));
                 } else {
                     ((ImageView) view.findViewById(R.id.shiming)).setImageDrawable(getResources().getDrawable((R.drawable.weishiming)));
@@ -341,7 +351,8 @@ public class MineFragmentV3 extends Fragment {
         });
 
         //ifaa指纹开关默认关闭
-        isUserNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+        final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+        isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
 
         //指纹开关
         switchButton = (SwitchButton) view.findViewById(R.id.switch_button);
@@ -366,7 +377,8 @@ public class MineFragmentV3 extends Fragment {
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 //TODO 
                 nShowView++;
-                isUserNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+                final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+                isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
 
                 if (nShowView % 2 != 0) {
                     if (isChecked) {

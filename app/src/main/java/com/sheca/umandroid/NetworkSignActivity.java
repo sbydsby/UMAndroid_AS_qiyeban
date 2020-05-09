@@ -40,7 +40,7 @@ public class NetworkSignActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制竖屏
 		
 		handler = new Handler(NetworkSignActivity.this.getMainLooper());
-		mWebView = (WebView) findViewById(R.id.webView); 
+		mWebView = (WebView) findViewById(R.id.webView);
 		mWebView.getSettings().setJavaScriptEnabled(true);
 		
 	    if(mWebView != null) {
@@ -168,7 +168,7 @@ public class NetworkSignActivity extends Activity {
     
     private  void showSealPreview(String strPic){
     	Intent intent = new Intent(NetworkSignActivity.this, SealPreviewActivity.class);
-        intent.putExtra("SealPic", strPic); 
+        intent.putExtra("SealPic", strPic);
         startActivity(intent);
         NetworkSignActivity.this.finish();
     }

@@ -245,7 +245,7 @@ public class PayActivity extends com.facefr.activity.BaseActivity implements OnR
 
         if (PASSWORD_PAGE == requestCode && resultCode == Activity.RESULT_OK) {
             String psd = data.getExtras().getString("psd");
-            strPsdHash = psd;
+            strPsdHash = CommUtil.getPWDHash(psd);
             if (CommonConst.CERT_VALID_NAME_THREE_MONTH.equals(mCertValid))
                 showDownloadCertActivity();
             else

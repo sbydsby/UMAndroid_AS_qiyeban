@@ -1,5 +1,7 @@
 package com.sheca.umandroid.model;
 
+import com.sheca.umandroid.util.CommonConst;
+
 import net.sf.json.JSONObject;
 
 public class APPResponse extends BaseResponse{

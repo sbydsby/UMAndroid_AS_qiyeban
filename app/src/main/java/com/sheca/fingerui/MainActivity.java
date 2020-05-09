@@ -25,8 +25,19 @@ import com.ifaa.sdk.auth.Constants;
 import com.ifaa.sdk.auth.IAuthenticator;
 import com.ifaa.sdk.auth.message.AuthenticatorMessage;
 import com.ifaa.sdk.auth.message.AuthenticatorResponse;
+import com.igexin.sdk.PushManager;
+import com.sheca.umandroid.QuickSignAcitvity;
 import com.sheca.umandroid.R;
 import com.sheca.umandroid.dao.AccountDao;
+import com.sheca.umandroid.service.GeTuiIntentService;
+import com.sheca.umandroid.service.GeTuiService;
+import com.sheca.umandroid.util.AccountHelper;
+import com.sheca.umandroid.util.CommonConst;
+import com.sheca.umandroid.util.SharePreferenceUtil;
+
+import net.sf.json.JSONObject;
+
+import static com.excelsecu.util.LibUtil.getApplicationContext;
 
 public class MainActivity extends Activity {
     public static String TAG = MainActivity.class.getSimpleName();
@@ -34,12 +45,14 @@ public class MainActivity extends Activity {
     private int authType = Constants.TYPE_FINGERPRINT;
     private String userid = "test";
     private String secData = "";
-    
-    private static final int FINGER_CODE = 0;	
+
+    private static final int FINGER_CODE = 0;
 
     public enum Process {
         REG_GETREQ, REG_SENDRESP, AUTH_GETREQ, AUTH_SENDRESP, DEREG_GETREQ
-    };
+    }
+
+    ;
 
     private Handler handler;
     private final int MSG_REGENABLE = 1;
@@ -47,7 +60,7 @@ public class MainActivity extends Activity {
     private String token = "";
 
     private Process curProcess = Process.REG_GETREQ;
-    public  static IAuthenticator authenticator;
+    public static IAuthenticator authenticator;
     private Button regBtn;
     private Button authBtn;
     private Button deregBtn;
@@ -55,8 +68,9 @@ public class MainActivity extends Activity {
     private Button userstatusBtn;
     private Button enrollBtn;
     private TextView textView;
-    
+
     private AccountDao mAccountDao = null;
+    private Class userPushService = GeTuiService.class;
 
     private AuthenticatorCallback regCallback = new AuthenticatorCallback() {
         @Override
@@ -69,7 +83,7 @@ public class MainActivity extends Activity {
             String data = response.getData();
             curProcess = Process.REG_SENDRESP;
             if (response.getResult() == AuthenticatorResponse.RESULT_SUCCESS) {
-                  IFAAFingerprintOpenAPI.getInstance().sendIFAARegResponeAsyn(MainActivity.this,data, secData, callback);
+                IFAAFingerprintOpenAPI.getInstance().sendIFAARegResponeAsyn(MainActivity.this, data, secData, callback);
                 //IFAAFingerprintOpenAPI.getInstance().sendRegResponeAsyn(data, secData, callback);
             } else {
                 MainActivity.this.runOnUiThread(new Runnable() {
@@ -94,7 +108,7 @@ public class MainActivity extends Activity {
             String data = response.getData();
             curProcess = Process.AUTH_SENDRESP;
             if (response.getResult() == AuthenticatorResponse.RESULT_SUCCESS) {
-                  IFAAFingerprintOpenAPI.getInstance().sendIFAAAuthResponeAsyn(MainActivity.this,data, secData, callback);
+                IFAAFingerprintOpenAPI.getInstance().sendIFAAAuthResponeAsyn(MainActivity.this, data, secData, callback);
                 //IFAAFingerprintOpenAPI.getInstance().sendAuthResponeAsyn(data, secData, callback);
             } else {
                 MainActivity.this.runOnUiThread(new Runnable() {
@@ -143,19 +157,19 @@ public class MainActivity extends Activity {
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                        	if (info.equals("isReg")) {
-                        		saveToken(IFAAFingerprintOpenAPI.getInstance().getToken());
+                            if (info.equals("isReg")) {
+                                saveToken(IFAAFingerprintOpenAPI.getInstance().getToken());
                                 token = IFAAFingerprintOpenAPI.getInstance().getToken();
                                 handler.sendEmptyMessage(MSG_REGDISABLE);
-                        	}else if(info.equals("init")){
-                        		saveToken("");
+                            } else if (info.equals("init")) {
+                                saveToken("");
                                 handler.sendEmptyMessage(MSG_REGENABLE);
-                        	}else {
-                               startFPActivity(false);
-                               AuthenticatorMessage requestMessage = new AuthenticatorMessage(AuthenticatorMessage.MSG_REGISTER_REQUEST, 2);
-                               requestMessage.setData(info);
-                               authenticator.process(requestMessage, regCallback);
-                        	}
+                            } else {
+                                startFPActivity(false);
+                                AuthenticatorMessage requestMessage = new AuthenticatorMessage(AuthenticatorMessage.MSG_REGISTER_REQUEST, 2);
+                                requestMessage.setData(info);
+                                authenticator.process(requestMessage, regCallback);
+                            }
 
                         }
                     });
@@ -222,7 +236,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         if (!AuthenticatorManager.isSupportIFAA(this, authType)) {
-        
+
             regBtn.setEnabled(false);
             authBtn.setEnabled(false);
             deregBtn.setEnabled(false);
@@ -230,7 +244,7 @@ public class MainActivity extends Activity {
             userstatusBtn.setEnabled(false);
             enrollBtn.setEnabled(false);
             Toast.makeText(this, "该设备不支持IFAA协议", Toast.LENGTH_LONG).show();
-         
+
         }
     }
 
@@ -258,26 +272,26 @@ public class MainActivity extends Activity {
         }
 
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
-		((TextView) findViewById(R.id.header_text)).setText("ifaa指纹测试");
-		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/font.ttf");
-		((TextView) findViewById(R.id.header_text)).setTypeface(typeFace);
-		TextPaint tp = ((TextView) findViewById(R.id.header_text)).getPaint();
-		tp.setFakeBoldText(true); 
-		
-		mAccountDao = new AccountDao(MainActivity.this);
-		regIFAARegRequest(false);
+        ((TextView) findViewById(R.id.header_text)).setText("ifaa指纹测试");
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/font.ttf");
+        ((TextView) findViewById(R.id.header_text)).setTypeface(typeFace);
+        TextPaint tp = ((TextView) findViewById(R.id.header_text)).getPaint();
+        tp.setFakeBoldText(true);
 
-		ImageButton cancelScanButton = (ImageButton) this
-				.findViewById(R.id.btn_goback);
+        mAccountDao = new AccountDao(MainActivity.this);
+        regIFAARegRequest(false);
 
-		cancelScanButton.setOnClickListener(new OnClickListener() {
+        ImageButton cancelScanButton = (ImageButton) this
+                .findViewById(R.id.btn_goback);
 
-			@Override
-			public void onClick(View v) {
-				MainActivity.this.finish();
-			}
-		});
-        
+        cancelScanButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.finish();
+            }
+        });
+
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -298,7 +312,7 @@ public class MainActivity extends Activity {
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            	regIFAARegRequest(true);
+                regIFAARegRequest(true);
             }
         });
 
@@ -307,7 +321,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 curProcess = Process.AUTH_GETREQ;
                 String info = AuthenticatorManager.getAuthData(MainActivity.this, mAccountDao.getLoginAccount().getName());
-                IFAAFingerprintOpenAPI.getInstance().getIFAAAuthRequestAsyn(MainActivity.this,mAccountDao.getLoginAccount().getName(),info, callback);
+                IFAAFingerprintOpenAPI.getInstance().getIFAAAuthRequestAsyn(MainActivity.this, mAccountDao.getLoginAccount().getName(), info, callback);
                 //IFAAFingerprintOpenAPI.getInstance().getAuthRequestAsyn(info, callback);
                 secData = info;
                 Log.i(TAG, "auth info:" + info);
@@ -319,8 +333,8 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 curProcess = Process.DEREG_GETREQ;
                 String info = AuthenticatorManager.getAuthData(MainActivity.this, mAccountDao.getLoginAccount().getName());
-                IFAAFingerprintOpenAPI.getInstance().getIFAADeregRequestAsyn(MainActivity.this,mAccountDao.getLoginAccount().getName(),info, callback);
-               // IFAAFingerprintOpenAPI.getInstance().getDeregRequestAsyn(info, callback);
+                IFAAFingerprintOpenAPI.getInstance().getIFAADeregRequestAsyn(MainActivity.this, mAccountDao.getLoginAccount().getName(), info, callback);
+                // IFAAFingerprintOpenAPI.getInstance().getDeregRequestAsyn(info, callback);
                 secData = info;
                 Log.i(TAG, "auth info:" + info);
             }
@@ -351,7 +365,11 @@ public class MainActivity extends Activity {
 
             }
         });
+
+//        initGetui();
     }
+
+
 
     public void startFPActivity(boolean isAuthenticate) {
         Intent intent = new Intent();
@@ -362,20 +380,20 @@ public class MainActivity extends Activity {
         intent.setClass(this, FingerPrintAuthActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
-        
-       // this.startActivityForResult(intent, FINGER_CODE);   	
+
+        // this.startActivityForResult(intent, FINGER_CODE);
     }
-    
-    
+
+
     private void regIFAARegRequest(boolean regFlag) {
-    	curProcess = Process.REG_GETREQ;
+        curProcess = Process.REG_GETREQ;
         String info = AuthenticatorManager.getAuthData(MainActivity.this, mAccountDao.getLoginAccount().getName());
         String deviceId = authenticator.getDeviceId();
-        IFAAFingerprintOpenAPI.getInstance().getIFAARegRequestAsyn(MainActivity.this,mAccountDao.getLoginAccount().getName(),info,deviceId,regFlag, callback);
+        IFAAFingerprintOpenAPI.getInstance().getIFAARegRequestAsyn(MainActivity.this, mAccountDao.getLoginAccount().getName(), info, deviceId, regFlag, callback);
         //IFAAFingerprintOpenAPI.getInstance().getRegRequestAsyn(info, callback);
         secData = info;
 
-        Log.i(TAG, "reg info:" + info);	
+        Log.i(TAG, "reg info:" + info);
     }
 
     private final String TOKENFILE = "user";
@@ -396,7 +414,6 @@ public class MainActivity extends Activity {
 
 
     /**
-     *
      * @author qiyi.wxc
      * @version $Id: FingerprintBroadcastUtil.java, v 0.1 2015年12月14日 下午7:44:55 qiyi.wxc Exp $
      */
@@ -404,7 +421,7 @@ public class MainActivity extends Activity {
 
         //The is the broadcast for update UI status
         public final static String BROADCAST_FINGERPRINTSENSOR_STATUS_ACTION = "com.ifaa.sdk.authenticatorservice.broadcast.FINGERPRINTSENSOR_STATUS_ACTION";
-        public final static String FINGERPRINTSENSOR_STATUS_VALUE            = "com.ifaa.sdk.authenticatorservice.broadcast.FINGERPRINTSENSOR_STATUS_VALUE";
+        public final static String FINGERPRINTSENSOR_STATUS_VALUE = "com.ifaa.sdk.authenticatorservice.broadcast.FINGERPRINTSENSOR_STATUS_VALUE";
 
         //Send the UI Status of the FingerPrint Result and Change the UI
         public static void sendIdentifyStatusChangeMessage(Context context, int resultCode) {
@@ -421,20 +438,23 @@ public class MainActivity extends Activity {
         }
 
     }
-    
-    
+
+
     @Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == FINGER_CODE) {
-			if (resultCode == MainActivity.RESULT_OK) {				
-				new FingerPrintToast(MainActivity.this, FingerPrintToast.ST_REGSUCCESS).show("input pwd");
-			}
-			if (resultCode == MainActivity.RESULT_CANCELED) {
-				//new FingerPrintToast(MainActivity.this, FingerPrintToast.ST_REGSUCCESS).show("cancel");
-				//MainActivity.this.finish();
-			}
-		}else {
-			super.onActivityResult(requestCode, resultCode, data);
-		}
-	}
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FINGER_CODE) {
+            if (resultCode == MainActivity.RESULT_OK) {
+                new FingerPrintToast(MainActivity.this, FingerPrintToast.ST_REGSUCCESS).show("input pwd");
+            }
+            if (resultCode == MainActivity.RESULT_CANCELED) {
+                //new FingerPrintToast(MainActivity.this, FingerPrintToast.ST_REGSUCCESS).show("cancel");
+                //MainActivity.this.finish();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+
 }

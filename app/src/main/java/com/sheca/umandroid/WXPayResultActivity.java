@@ -116,7 +116,7 @@ public class WXPayResultActivity extends Activity{
 		mAccountDao = new AccountDao(WXPayResultActivity.this);
 		findViewById(R.id.indicater).setVisibility(RelativeLayout.VISIBLE);
 		
-		if(mAccountDao.getLoginAccount().getStatus() == 2 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4)  //账户已实名认证
+		if(mAccountDao.getLoginAccount().getStatus() == 5 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4)  //账户已实名认证
 			  ((ImageView)findViewById(R.id.indicater)).setImageDrawable(getResources().getDrawable((R.drawable.icon_noface_guide_2)));  
 		else
 			  ((ImageView)findViewById(R.id.indicater)).setImageDrawable(getResources().getDrawable((R.drawable.icon_face_guide_3)));  
@@ -158,7 +158,7 @@ public class WXPayResultActivity extends Activity{
 //////					intent.putExtra("loginId", strLoginId);
 
 				   CertController certController = new CertController();
-				   String responseStr = certController.downloadCert(WXPayResultActivity.this,strReqNumber,strCertType);
+				   String responseStr = certController.downloadCert(WXPayResultActivity.this,strReqNumber,strCertType,AccountHelper.getRealName(getApplicationContext()));
 				   final APPResponse response = new APPResponse(responseStr);
 
 				   if (response.getReturnCode() == 0 ) {

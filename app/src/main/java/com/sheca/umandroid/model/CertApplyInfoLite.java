@@ -7,7 +7,8 @@ public class CertApplyInfoLite {
 	private String RequestNumber;
 	private String CommonName;	
 	private String ApplyTime;
-	private int ApplyStatus;
+//	private int ApplyStatus;
+private int status;
 	private String BizSN;
 	private String CertType;
 	private int SignAlg;
@@ -30,11 +31,11 @@ public class CertApplyInfoLite {
 	}
 
 	public int getApplyStatus() {
-		return ApplyStatus;
+		return status;
 	}
 
 	public void setApplyStatus(int applyStatus) {
-		ApplyStatus = applyStatus;
+		status = applyStatus;
 	}
 
 	public String getRequestNumber() {

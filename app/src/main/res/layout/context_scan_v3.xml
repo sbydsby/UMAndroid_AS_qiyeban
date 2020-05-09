@@ -12,11 +12,29 @@
         android:orientation="vertical">
 
 
-        <com.sheca.umandroid.adapter.ImageCycleEdgeView
-            android:id="@+id/ad_view"
+        <!--<com.sheca.umandroid.adapter.ImageCycleEdgeView-->
+            <!--android:id="@+id/ad_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp" />-->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="wrap_content">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/bg_yellow"></View>
+            <ImageView
+                android:layout_marginTop="50dp"
+                android:scaleType="fitXY"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+
+                android:background="@drawable/banner_new1" />
+
+        </RelativeLayout>
 
         <TextView
             style="@style/selected_text_title"

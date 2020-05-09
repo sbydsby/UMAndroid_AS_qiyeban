@@ -95,7 +95,17 @@ public class CertDetailActivity extends FragmentActivity {
 			  }		
 		});
     	
-    	if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype())){
+//    	if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype())){
+//    		if( null != mCert.getEnccertificate() && !"".equals(mCert.getEnccertificate()))
+//    		    findViewById(R.id.cert_tab).setVisibility(RelativeLayout.VISIBLE);
+//    		else
+//    			findViewById(R.id.cert_tab).setVisibility(RelativeLayout.GONE);
+//    	}else{
+//    		findViewById(R.id.cert_tab).setVisibility(RelativeLayout.GONE);
+//    	}
+
+
+		    	if(mCert.getCerttype().contains("SM2")){
     		if( null != mCert.getEnccertificate() && !"".equals(mCert.getEnccertificate()))
     		    findViewById(R.id.cert_tab).setVisibility(RelativeLayout.VISIBLE);
     		else

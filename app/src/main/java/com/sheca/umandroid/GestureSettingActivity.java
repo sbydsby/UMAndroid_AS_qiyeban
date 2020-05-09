@@ -53,14 +53,14 @@ public class GestureSettingActivity extends BaseActivity2 {
                          startActivity(intent);
                 	  }else{
                     	  Editor editor = sharedPrefs.edit();
-                    	  editor.putBoolean(CommonConst.SETTINGS_GESTURE_OPENED+LockPatternUtil.getActName(), true);	
+                    	  editor.putBoolean(CommonConst.SETTINGS_GESTURE_OPENED+LockPatternUtil.getActName(), true);
                     	  editor.commit();
                     	  
                     	  findViewById(R.id.item_gesture).setVisibility(RelativeLayout.VISIBLE);
                       }
                   }else{
                 	  Editor editor = sharedPrefs.edit();
-                	  editor.putBoolean(CommonConst.SETTINGS_GESTURE_OPENED+LockPatternUtil.getActName(), false);	
+                	  editor.putBoolean(CommonConst.SETTINGS_GESTURE_OPENED+LockPatternUtil.getActName(), false);
                 	  editor.commit();
                 	  
                 	  findViewById(R.id.item_gesture).setVisibility(RelativeLayout.GONE);

@@ -17,6 +17,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,6 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ import com.ifaa.sdk.api.AuthenticatorManager;
 import com.ifaa.sdk.auth.AuthenticatorCallback;
 import com.ifaa.sdk.auth.message.AuthenticatorMessage;
 import com.ifaa.sdk.auth.message.AuthenticatorResponse;
+import com.igexin.sdk.PushManager;
 import com.intsig.idcardscancaller.CardScanActivity;
 import com.junyufr.szt.activity.AuthMainActivity;
 import com.sheca.fingerui.FingerPrintAuthLoginActivity;
@@ -64,6 +67,7 @@ import com.sheca.umandroid.model.AppInfo;
 import com.sheca.umandroid.model.AppInfoEx;
 import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.CertApplyInfoLite;
+import com.sheca.umandroid.presenter.BasePresenter;
 import com.sheca.umandroid.presenter.LoginController;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommonConst;
@@ -85,6 +89,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -154,6 +160,18 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
     private String secData = "";
 
     private UniTrust uniTrust;
+
+
+    private String mUID = "";
+
+
+    LinearLayout ll_pwd, ll_sms;
+    EditText et_sms;
+    Button btn_sms;
+
+
+    boolean isSMSLogin = false;//false表示密码登录 true表示验证码登录
+
 
     private IFAAFingerprintOpenAPI.Callback callback = new IFAAFingerprintOpenAPI.Callback() {
         @Override
@@ -234,8 +252,11 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
     private void loadLisence() {
         new Thread() {
             public void run() {
-                uniTrust.setSignPri(CommonConst.UM_APP_PRIVATE_KEY);
-                String mStrVal = uniTrust.LoadLicense(ParamGen.getLoadLisenceParams());
+//                uniTrust.setSignPri(CommonConst.UM_APP_PRIVATE_KEY);
+//                uniTrust.setStrPubKey(CommonConst.UM_APP_PUBLIC_KEY);
+                uniTrust.setUMSPServerUrl(CommonConst.UM_APP_UMSP_SERVER, AccountHelper.getUMSPAddress(LoginActivity.this));
+                uniTrust.setUCMServerUrl(CommonConst.UM_APP_UCM_SERVER, AccountHelper.getUCMAddress(LoginActivity.this));
+                String mStrVal = uniTrust.LoadLicense(ParamGen.getLoadLisenceParams(LoginActivity.this));
                 Log.d("unitrust", mStrVal);
                 String strRetMsg;
 
@@ -243,18 +264,678 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
                 final int retCode = response.getReturnCode();
                 final String retMsg = response.getReturnMsg();
 
-                if (retCode != com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(LoginActivity.this, retCode + retMsg, Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (retCode != com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
+
+                            Toast.makeText(LoginActivity.this, "应用初始化失败", Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+                            SharedPreferences sharedPrefs = LoginActivity.this.getSharedPreferences("sheca_settings", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPrefs.edit();
+                            editor.putString("authKeyID", CommonConst.UM_APP_AUTH_KEY);
+                            editor.commit();
+                            attemptAccountLogin(mAccountView.getText().toString(), mPasswordView.getText().toString());
                         }
-                    });
-                }
+
+                    }
+                });
+
 
             }
         }.start();
     }
+
+
+    private void loadLisence(final boolean isSendSms) {
+        new Thread() {
+            public void run() {
+                UniTrust uniTrust = new UniTrust(LoginActivity.this, false);
+//                uniTrust.setSignPri(CommonConst.UM_APP_PRIVATE_KEY);
+//                uniTrust.setStrPubKey(CommonConst.UM_APP_PUBLIC_KEY);
+                uniTrust.setUMSPServerUrl(CommonConst.UM_APP_UMSP_SERVER, AccountHelper.getUMSPAddress(LoginActivity.this));
+                uniTrust.setUCMServerUrl(CommonConst.UM_APP_UCM_SERVER, AccountHelper.getUCMAddress(LoginActivity.this));
+                String mStrVal = uniTrust.LoadLicense(ParamGen.getLoadLisenceParams(LoginActivity.this));
+                Log.d("unitrust", mStrVal);
+                String strRetMsg;
+
+                APPResponse response = new APPResponse(mStrVal);
+                final int retCode = response.getReturnCode();
+                final String retMsg = response.getReturnMsg();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (retCode != com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
+
+                            Toast.makeText(LoginActivity.this, "应用初始化失败", Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+
+                            SharedPreferences sharedPrefs = LoginActivity.this.getSharedPreferences("sheca_settings", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPrefs.edit();
+                            editor.putString("authKeyID", CommonConst.UM_APP_AUTH_KEY);
+                            editor.commit();
+
+
+                            if (isSendSms) {
+                                getMsgCode();
+                            } else {
+                                if (mIsReg) {
+                                    regNewAccount();
+                                } else {
+                                    loginAccountByCode();  //账户短信验证码登录
+                                }
+                            }
+                        }
+
+                    }
+                });
+
+
+            }
+        }.start();
+    }
+
+
+    private void loginAccountByCode() {
+        mAccountView.setError(null);
+        et_sms.setError(null);
+
+        String account = mAccountView.getText().toString();
+        String msgcode = et_sms.getText().toString();
+
+        String strErrTip = "";
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid account name.
+        if (TextUtils.isEmpty(account)) {
+            mAccountView.setError(getString(R.string.error_account_required));
+            focusView = mAccountView;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_account_required);
+        } else if (!isAccountValid(account)) {
+            mAccountView.setError(getString(R.string.error_invalid_account));
+            focusView = mAccountView;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_invalid_account);
+        }
+
+        if (TextUtils.isEmpty(msgcode)) {
+            et_sms.setError(getString(R.string.error_invalid_code));
+            focusView = et_sms;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_invalid_code);
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first form field with an error.
+            focusView.requestFocus();
+            Toast.makeText(LoginActivity.this, strErrTip, Toast.LENGTH_SHORT).show();
+        } else {
+            showProgDlg("用户短信验证码登录中...");
+
+            if (!userLoginByValidationCode(account, msgcode)) {
+                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+            closeProgDlg();
+
+        }
+    }
+
+
+    /**
+     * 验证码动态登录的请求
+     *
+     * @param mobile
+     * @param code
+     * @return
+     */
+
+    public boolean userLoginByValidationCode(final String mobile, final String code) {
+        String returnStr = "";
+
+        //异步调用UMSP服务：用户登录
+        String timeout = LoginActivity.this.getString(R.string.WebService_Timeout);
+        String urlPath = LoginActivity.this.getString(R.string.UMSP_Service_LoginByDynamicCode);
+
+//		Map<String,String> postParams = new HashMap<String,String>();
+//		postParams.put(CommonConst.PARAM_ACCOUNT_NAME, mobile);
+//		postParams.put(CommonConst.PARAM_APPID, CommonConst.UM_APPID);
+//		postParams.put(CommonConst.PARAM_CODE, code);
+//		postParams.put(CommonConst.PARAM_MOBILE, mobile);
+//
+
+
+        //清空本地缓存
+//			WebClientUtil.cookieStore = null;
+
+//			String postParam = "";
+//			postParam = "accountName="+URLEncoder.encode(mobile, "UTF-8")+
+//					    "&appID="+URLEncoder.encode(CommonConst.UM_APPID, "UTF-8")+
+//		                "&code="+URLEncoder.encode(code, "UTF-8")+
+//                        "&mobile="+URLEncoder.encode(mobile, "UTF-8") ;
+//			responseStr = WebClientUtil.getHttpClientPost(urlPath,postParam,Integer.parseInt(timeout));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String strInfo = ParamGen.getUserLoginByValidationCodeParams(mobile, code);
+                    UniTrust dao = new UniTrust(LoginActivity.this, false); //UM SDK+调用类，第二参数表示是否显示提示界面
+                    String responseStr = dao.LoginByMAC(strInfo);
+
+                    final APPResponse response = new APPResponse(responseStr);
+                    int resultStr = response.getReturnCode();
+                    final String retMsg = response.getReturnMsg();
+
+
+                    if (resultStr == 0) {
+                        String token = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+                        final com.sheca.umplus.model.Account accountPlus = getPersonInfo(token, mobile);
+//					final String mAccountInfo = getPersonActive(token, mobile);
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, token);
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_REALNAME, accountPlus.getIdentityName());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_STATUS, accountPlus.getStatus());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_ACCOUNT_UID, accountPlus.getAccountuid());
+
+                        int status = Integer.valueOf(accountPlus.getStatus());
+                        int active = Integer.valueOf(accountPlus.getActive());
+                        int type = Integer.valueOf(accountPlus.getType());
+                        int saveType = Integer.valueOf(accountPlus.getSaveType());
+                        int certType = Integer.valueOf(accountPlus.getCertType());
+                        int loginType = Integer.valueOf(accountPlus.getLoginType());
+
+                        com.sheca.umandroid.model.Account account = new com.sheca.umandroid.model.Account(
+                                accountPlus.getName(),
+                                accountPlus.getPassword(),
+                                status,
+                                active,
+                                accountPlus.getIdentityName(),
+                                accountPlus.getIdentityCode(),
+                                accountPlus.getCopyIDPhoto(),
+                                type,
+                                accountPlus.getAppIDInfo(),
+                                accountPlus.getOrgName(),
+                                saveType,
+                                certType,
+                                loginType);
+
+                        if (null == mAccountDao) {
+                            mAccountDao = new AccountDao(getApplicationContext());
+                        }
+                        mAccountDao.add(account);
+
+                        //com.sheca.umandroid.util.WebClientUtil.mCookieStore = com.sheca.umplus.util.WebClientUtil.mCookieStore;
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                //获取枚举证书及枚举印章信息,只有老版本才需要进行备份处理
+                                int mLocalCode = SharePreferenceUtil.getInstance(LoginActivity.this).getInt(CommonConst.PARAM_V26_DBCHECK);
+                                if (mLocalCode < 0) {
+                                    getEnumInfo(accountPlus);
+                                    //备份完成后，设置为1
+                                    SharePreferenceUtil.getInstance(LoginActivity.this).setInt(CommonConst.PARAM_V26_DBCHECK, 1);
+                                }
+
+
+                                //
+                                if (!mIsReg) {
+
+                                    AccountHelper.clearAllUserData(LoginActivity.this);
+                                    String mTokenID = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_UID, mUID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_USERNAME, mobile);
+                                    AccountHelper.uid = mUID;
+
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_REALNAME, accountPlus.getIdentityName());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_STATUS, accountPlus.getStatus());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
+
+
+                                    boolean isFirstLogin = SharePreferenceUtil.getInstance(getApplicationContext()).getBoolean((CommonConst.FIRST_SMS_LOGIN + mobile));
+
+
+                                    if (!isFirstLogin) {
+                                        Intent intent = new Intent(LoginActivity.this, SetPasswordActivity.class);
+                                        startActivity(intent);
+                                        LoginActivity.this.finish();
+                                    } else {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("Message", "用户登录成功");
+                                        startActivity(intent);
+                                        LoginActivity.this.finish();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(LoginActivity.this, SetPasswordActivity.class);
+                                    startActivity(intent);
+                                    AccountHelper.clearAllUserData(LoginActivity.this);
+                                    String mTokenID = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_UID, mUID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_USERNAME, mobile);
+                                    AccountHelper.uid = mUID;
+                                    LoginActivity.this.finish();
+                                }
+
+
+                            }
+
+
+                        });
+
+
+                    } else if (resultStr == 10010) {
+//	    	m_ActState = getPersonalInfo();
+//		    mAccountDao.add( new Account(mobile, m_PWDHash, m_ActState,0,m_ActName,m_ActIdentityCode,m_ActCopyIDPhoto,m_ActType,CommonConst.UM_APPID,m_OrgName,CommonConst.SAVE_CERT_TYPE_PHONE,CommonConst.SAVE_CERT_TYPE_SM2,CommonConst.LOGIN_BY_MSG));
+
+//		    try {
+//				getAllAppInfos(mobile);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//					runOnUiThread(new Runnable() {
+//						@Override
+//						public void run() {
+//							Intent intent = new Intent(SMSLoginActivity.this, PasswordActivity.class);
+//							intent.putExtra("Account", mobile);
+//							startActivity(intent);
+//							SMSLoginActivity.this.finish();
+//						}
+//					});
+
+                    } else {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(LoginActivity.this, retMsg, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();
+
+        return true;
+    }
+
+
+    private void regNewAccount() {
+        mAccountView.setError(null);
+        et_sms.setError(null);
+
+        String account = mAccountView.getText().toString();
+        String msgcode = et_sms.getText().toString();
+
+        String strErrTip = "";
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid account name.
+        if (TextUtils.isEmpty(account)) {
+            mAccountView.setError(getString(R.string.error_account_required));
+            focusView = mAccountView;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_account_required);
+        } else if (!isAccountValid(account)) {
+            mAccountView.setError(getString(R.string.error_invalid_account));
+            focusView = mAccountView;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_invalid_account);
+        }
+
+//		if(TextUtils.isEmpty(msgcode)){
+//			etSMSCode.setError(getString(R.string.error_invalid_code));
+//			focusView = etSMSCode;
+//			cancel = true;
+//
+//			strErrTip = getString(R.string.error_invalid_code);
+//		}
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first form field with an error.
+            focusView.requestFocus();
+            Toast.makeText(LoginActivity.this, strErrTip, Toast.LENGTH_SHORT).show();
+        } else {
+            showProgDlg("账户注册中...");
+//            progDialog.showProgDlgCert("账户注册中...");
+            regUMAccount(account, msgcode);
+            if (!mIsReg) {
+                Toast.makeText(LoginActivity.this, "账户注册失败", Toast.LENGTH_SHORT).show();
+            }
+
+            closeProgDlg();
+//            progDialog.closeProgDlgCert();
+        }
+    }
+
+    /**
+     * 注册账户的网络请求，获取uid
+     *
+     * @param account
+     * @param msgcode
+     */
+    private void regUMAccount(final String account, final String msgcode) {
+        //javasafeengine jse = new javasafeengine();
+        //byte[] bRan = jse.random(8, "SHA1PRNG", "SUN");
+        //m_Password = new String(bRan);
+
+
+        //异步调用UMSP服务：用户注册
+//			String timeout = SMSLoginActivity.this.getString(R.string.WebService_Timeout);
+//			String urlPath = SMSLoginActivity.this.getString(R.string.UMSP_Service_RegisterPersonalAccount);
+//
+//			Map<String,String> postParams = new HashMap<String,String>();
+//			postParams.put("accountName", mAccount);
+//			postParams.put("pwdHash", getPWDHash(mPassword));    //账户口令需要HASH并转为BASE64字符串
+//			postParams.put("appID", CommonConst.UM_APPID);
+//			postParams.put("validationCode", mMsgCode);
+
+
+        //responseStr = WebClientUtil.httpPost(urlPath, postParams, Integer.parseInt(timeout));
+
+//				String postParam = "accountName="+URLEncoder.encode(mAccount, "UTF-8")+
+//                                   "&pwdHash="+URLEncoder.encode( getPWDHash(mPassword), "UTF-8")+
+//                                   "&appID="+URLEncoder.encode(CommonConst.UM_APPID, "UTF-8")+
+//                                   "&validationCode="+URLEncoder.encode( mMsgCode, "UTF-8");
+//				responseStr = WebClientUtil.getHttpClientPost(urlPath,postParam,Integer.parseInt(timeout));
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String strInfo = ParamGen.getRegisterAccountParams(account, msgcode);
+                    UniTrust dao = new UniTrust(LoginActivity.this, false);   //UM SDK+调用类，第二参数表示是否显示提示界面
+                    final String responseStr = dao.RegisterPersonalAccount(strInfo);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            APPResponse response = new APPResponse(responseStr);
+                            int resultStr = response.getReturnCode();
+                            String returnStr = response.getReturnMsg();
+
+                            if (resultStr == 0) {
+                                //						Message message = new Message();
+                                //						message.what = 2;
+                                //						handler.sendMessage(message);
+                                mIsReg = true;
+                                JSONObject jbRet = response.getResult();
+                                mUID = jbRet.getString(CommonConst.PARAM_CCOUNT_UID);
+//                                getValidationCode(account);
+                                String ranPwdHash = account + "" + account;
+
+                                attemptAccountLogin(account, ranPwdHash);
+                            } else {
+
+                                Toast.makeText(LoginActivity.this, returnStr, Toast.LENGTH_SHORT).show();
+//                                mIsReg = false;
+                            }
+
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+
+    /**
+     * 获取验证码的方法
+     */
+    private void getMsgCode() {
+        final Handler handler = new Handler(LoginActivity.this.getMainLooper());
+        final String account = mAccountView.getText().toString();
+        String strErrTip = "";
+
+        boolean cancel = false;
+        View focusView = null;
+
+        mAccountView.setError(null);
+        // Check for a valid account name.
+        if (TextUtils.isEmpty(account)) {
+            mAccountView.setError(getString(R.string.error_account_required));
+            focusView = mAccountView;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_account_required);
+        } else if (!isAccountValid(account)) {
+            mAccountView.setError(getString(R.string.error_invalid_account));
+            focusView = mAccountView;
+            cancel = true;
+
+            strErrTip = getString(R.string.error_invalid_account);
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first form field with an error.
+            focusView.requestFocus();
+            btn_sms.setText("获取验证码");
+
+            Toast.makeText(this, strErrTip, Toast.LENGTH_SHORT).show();
+        } else {
+
+            //1：检测账户是否注册、未注册进行注册、已注册直接登录
+            checkAccounts(account);
+
+        }
+    }
+
+
+    /**
+     * 检测账户是否注册
+     *
+     * @param phone
+     */
+    private void checkAccounts(final String phone) {
+
+
+//			//异步调用UMSP服务：检测当前账户是否已注册
+//			String timeout = SMSLoginActivity.this.getString(R.string.WebService_Timeout);
+//			String urlPath = SMSLoginActivity.this.getString(R.string.UMSP_Service_IsAccountExisted);
+//
+//			Map<String,String> postParams = new HashMap<String,String>();
+//			postParams.put("accountName", phone);
+//			postParams.put("appID", CommonConst.UM_APPID);
+        final String strInfo = ParamGen.getCheckIsAccountExistedParams(phone);
+
+
+        //清空本地缓存
+//				WebClientUtil.cookieStore = null;
+//				//responseStr = WebClientUtil.httpPost(urlPath, postParams, Integer.parseInt(timeout));
+//
+//				String postParam = "accountName="+URLEncoder.encode(phone, "UTF-8")+
+//	                               "&appID="+URLEncoder.encode(CommonConst.UM_APPID, "UTF-8");
+//				responseStr = WebClientUtil.getHttpClientPost(urlPath,postParam,Integer.parseInt(timeout));
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UniTrust dao = new UniTrust(LoginActivity.this, false);   //UM SDK+调用类，第二参数表示是否显示提示界面
+                    String responseStr = dao.IsAccountExisted(strInfo);
+
+                    JSONObject jb = JSONObject.fromObject(responseStr);
+                    final String resultStr = jb.getString(CommonConst.RETURN_CODE);
+                    String returnStr = jb.getString(CommonConst.RETURN_MSG);
+                    final String result = jb.getString(CommonConst.RETURN_RESULT);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (resultStr.equals("0")) {      //账户已经存在
+
+                                if (result.equals("true")) {
+                                    mIsReg = false;
+                                } else {
+
+                                    mIsReg = true;
+                                }
+
+
+                                getValidationCode(phone);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "获取账户信息失败", Toast.LENGTH_LONG).show();
+
+//                                //注册账户
+//                                regNewAccount();
+                            }
+                            btn_sms.setText("获取验证码");
+                            //获取验证码方法
+
+                        }
+                    });
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    /**
+     * 获取验证码的网络请求
+     *
+     * @param phone
+     */
+    private void getValidationCode(String phone) {
+
+        //异步调用UMSP服务：获取短信验证码
+//			String timeout = SMSLoginActivity.this.getString(R.string.WebService_Timeout);
+//			String urlPath = SMSLoginActivity.this.getString(R.string.UMSP_Service_GetValidationCode);
+//			Map<String,String> postParams = new HashMap<String,String>();
+//			postParams.put("mobile", phone);
+//			postParams.put("codeType", "0");
+
+
+        //responseStr = WebClientUtil.httpPost(urlPath, postParams, Integer.parseInt(timeout));
+        String codeType = "";
+        if (mIsReg)
+            codeType = "1";
+        else
+            codeType = "2";
+
+//				String postParam = "mobile="+URLEncoder.encode(phone, "UTF-8")+
+//                                   "&codeType="+URLEncoder.encode(codeType, "UTF-8");
+//                                   //"&authKeyID="+URLEncoder.encode(CommonConst.YGT_APP_AUTH_KEY, "UTF-8");
+//		        responseStr = WebClientUtil.getHttpClientPost(urlPath,postParam,Integer.parseInt(timeout));
+
+        final String strInfo = ParamGen.getValidationCodeParams(phone, codeType);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UniTrust dao = new UniTrust(LoginActivity.this, false);   //UM SDK+调用类，第二参数表示是否显示提示界面
+                    String responseStr = dao.GetMAC(strInfo);
+
+                    JSONObject jb = JSONObject.fromObject(responseStr);
+                    final String resultStr = jb.getString(CommonConst.RETURN_CODE);
+                    final String returnStr = jb.getString(CommonConst.RETURN_MSG);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (resultStr.equals("0")) {
+
+                                //findViewById(R.id.textVoice).setVisibility(RelativeLayout.VISIBLE);
+                                showCountDown(COUNT_DOWN_NUM);   //显示倒计时
+                                Toast.makeText(LoginActivity.this, "短信验证码发送成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "短信验证码错误" + returnStr, Toast.LENGTH_SHORT).show();
+                                btn_sms.setText("获取验证码");
+                            }
+
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();
+
+    }
+
+    private final int COUNT_DOWN_NUM = 60;  //设置倒计时60秒
+    private int count = COUNT_DOWN_NUM;
+
+    private Timer timer = new Timer();
+    private TimerTask task = null;
+
+    private void showCountDown(final int countDownNum) {
+        btn_sms.setEnabled(false);
+        btn_sms.setText("等待60秒");
+        //mHandler.postDelayed(mRunnable, 1000*60);
+        timer = new Timer();
+        task = new TimerTask() {
+            public void run() {
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        };
+
+        timer.schedule(task, 0, 1000);
+    }
+
+    final Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    update();
+                    break;
+                case 2:
+                    mIsReg = true;
+//	            	RegAccountSuccess();
+                    break;
+            }
+
+            super.handleMessage(msg);
+        }
+
+    };
+
+    private void update() {
+        count--;
+        if (count > 0) {
+            btn_sms.setText("等待" + count + "秒");
+        } else {
+            btn_sms.setText("获取验证码");
+            btn_sms.setEnabled(true);
+            timer.cancel();
+            timer = null;
+            task.cancel();
+            task = null;
+            count = COUNT_DOWN_NUM;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,13 +944,31 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
         setContentView(R.layout.activity_login_v3);
 
         uniTrust = new UniTrust(this, false);
-        loadLisence();
+
 
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         // //取得InputMethodRelativeLayout组件
         layout = (InputMethodRelativeLayout) this.findViewById(R.id.loginpage);
         // //设置监听事件
         layout.setOnSizeChangedListenner(this);
+
+
+        ll_pwd = (LinearLayout) this.findViewById(R.id.ll_pwd);
+
+        ll_sms = (LinearLayout) this.findViewById(R.id.ll_sms);
+
+
+        et_sms = (EditText) this.findViewById(R.id.et_sms);
+        btn_sms = (Button) this.findViewById(R.id.btn_sms);
+        btn_sms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_sms.setText("正在发送...");
+
+                loadLisence(true);
+
+            }
+        });
 
         ImageView cancelButton = (ImageView) this.findViewById(R.id.login_exit);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -282,6 +981,15 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
                     startActivity(intent);
                     LoginActivity.this.finish();
                 }
+            }
+        });
+
+        TextView switch_service = (TextView) this.findViewById(R.id.switch_service);
+        switch_service.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SwitchServerActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -351,28 +1059,49 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                if (isSMSLogin) {
+                    loadLisence(false);
+                } else {
+                    mIsReg=false;
+                    attemptLogin();
+                }
             }
         });
 
 
-        Button mRegAct = (Button) findViewById(R.id.regaccount);   //账户短信验证码登录
+        TextView mRegAct = (TextView) findViewById(R.id.regaccount);   //账户短信验证码登录
         mRegAct.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SMSLoginActivity.class);
-                Bundle bundle = new Bundle();
-                if (mIsDao)
-                    bundle.putString("message", "dao");
 
-                if (!TextUtils.isEmpty(mAccountView.getText().toString())) {
-                    bundle.putString("mobile", mAccountView.getText().toString());
+                if (isSMSLogin) {//切换到密码登录
+                    isSMSLogin = false;
+                    mRegAct.setText("验证码登录");
+                    ll_pwd.setVisibility(View.VISIBLE);
+                    ll_sms.setVisibility(View.GONE);
+
+                } else {//切换到验证码登录
+                    isSMSLogin = true;
+                    mRegAct.setText("账户密码登录");
+                    ll_pwd.setVisibility(View.GONE);
+                    ll_sms.setVisibility(View.VISIBLE);
+
                 }
 
-                intent.putExtras(bundle);
-                startActivity(intent);
-                LoginActivity.this.finish();
-//					regAccount();
+
+//                Intent intent = new Intent(LoginActivity.this, SMSLoginActivity.class);
+//                Bundle bundle = new Bundle();
+//                if (mIsDao)
+//                    bundle.putString("message", "dao");
+//
+//                if (!TextUtils.isEmpty(mAccountView.getText().toString())) {
+//                    bundle.putString("mobile", mAccountView.getText().toString());
+//                }
+//
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+//                LoginActivity.this.finish();
+
             }
         });
 
@@ -446,14 +1175,20 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
         }
 
         /*((EditText) findViewById(R.id.account))*/
+
+
+        String username = SharePreferenceUtil.getInstance(this).getString(CommonConst.PARAM_USERNAME);
+        if (!TextUtils.isEmpty(username))
+            mAccountView.setText(username);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        String username = SharePreferenceUtil.getInstance(this).getString(CommonConst.PARAM_USERNAME);
-        mAccountView.setText(username);
+//        String username = SharePreferenceUtil.getInstance(this).getString(CommonConst.PARAM_USERNAME);
+//        if(!TextUtils.isEmpty(username))
+//        mAccountView.setText(username);
     }
 
     @Override
@@ -724,7 +1459,9 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
             // There was an error; don't attempt login and focus the first form field with an error.
             focusView.requestFocus();
         } else {
-            attemptAccountLogin(account, password);
+            loadLisence();
+
+
 //            handler.post(new Runnable() {
 //                @Override
 //                public void run() {
@@ -779,6 +1516,7 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
                         AccountHelper.clearAllUserData(LoginActivity.this);
                         SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, tokenID);
                         SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_USERNAME, account);
+                        PushManager.getInstance().bindAlias(LoginActivity.this, account);//注册个推别名
                         DaoActivity.strAccountName = account;
 
                         getPersoninfo(tokenID, account);
@@ -792,10 +1530,25 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
 
                         //com.sheca.umandroid.util.WebClientUtil.mCookieStore = com.sheca.umplus.util.WebClientUtil.mCookieStore;
 
-                        SharePreferenceUtil.getInstance(getApplicationContext()).setBoolean((CommonConst.FIRST_SMS_LOGIN + account),true);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+
+                        if (mIsReg) {
+                            Intent intent = new Intent(LoginActivity.this, SetPasswordActivity.class);
+                            startActivity(intent);
+//                        AccountHelper.clearAllUserData(LoginActivity.this);
+//                        String mTokenID = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+//                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+//                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_UID, mUID);
+//                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_USERNAME, mobile);
+//                        AccountHelper.uid = mUID;
+                            LoginActivity.this.finish();
+                        } else {
+
+
+                            SharePreferenceUtil.getInstance(getApplicationContext()).setBoolean((CommonConst.FIRST_SMS_LOGIN + account), true);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -943,6 +1696,13 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
 
     }
 
+    public com.sheca.umplus.model.Account getPersonInfo(String token, String username) {
+        LoginController controller = new LoginController();
+        com.sheca.umplus.model.Account personalInfo = controller.getPersonInfo(this, token, username);
+
+        return personalInfo;
+    }
+
     public void getPersoninfo(String token, String usernmae) {
         LoginController controller = new LoginController();
         accountPlus = controller.getPersonInfo(this, token, usernmae);
@@ -952,6 +1712,8 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
         SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
         SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
         SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
+        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_ACCOUNT_UID, accountPlus.getAccountuid());
+
 
         int status = Integer.valueOf(accountPlus.getStatus());
         int active = Integer.valueOf(accountPlus.getActive());
@@ -1245,7 +2007,7 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
                                 if (!mIsCompanyType) {
                                     Intent inet = null;
 
-                                    if (mAccountDao.getLoginAccount().getStatus() == 2 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
+                                    if (mAccountDao.getLoginAccount().getStatus() == 5 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
                                         if ((!"".equals(mAccountDao.getLoginAccount().getCopyIDPhoto())) && (null != mAccountDao.getLoginAccount().getCopyIDPhoto()))
                                             inet = new Intent(LoginActivity.this, AuthMainActivity.class);
                                         else
@@ -1333,7 +2095,7 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
                             if (certCount == 0) {
                                 if (!mIsCompanyType) {
                                     Intent inet = null;
-                                    if (mAccountDao.getLoginAccount().getStatus() == 2 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
+                                    if (mAccountDao.getLoginAccount().getStatus() == 5 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
                                         if ((!"".equals(mAccountDao.getLoginAccount().getCopyIDPhoto())) && (null != mAccountDao.getLoginAccount().getCopyIDPhoto()))
                                             inet = new Intent(LoginActivity.this, AuthMainActivity.class);
                                         else

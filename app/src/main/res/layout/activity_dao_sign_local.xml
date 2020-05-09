@@ -151,6 +151,10 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <RelativeLayout
+                android:id="@+id/rl_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/finger_image"
                 android:layout_width="wrap_content"
@@ -170,31 +174,31 @@
                 android:background="@drawable/pwdgesture"
                 android:contentDescription="@string/title"
                 android:gravity="center" />
-
+            </RelativeLayout>
             <TextView
                 android:id="@+id/finger_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/finger_image"
+                android:layout_below="@+id/rl_img"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="3dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="点击图片使用指纹或手势密码登录"
-                android:textColor="#d3d3d3"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/gesture_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/gesture_image"
+                android:layout_below="@+id/rl_img"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="3dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:text="点击手势密码图片使用手势密码登录"
-                android:textColor="#d3d3d3"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:visibility="gone" />
 
@@ -203,7 +207,7 @@
                 android:id="@+id/pwdkeyboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/finger_image"
+                android:layout_below="@+id/rl_img"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="3dp"

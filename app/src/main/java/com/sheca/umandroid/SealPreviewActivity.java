@@ -50,9 +50,12 @@ import com.sheca.umandroid.dao.CertDao;
 import com.sheca.umandroid.dao.SealInfoDao;
 import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.ShcaCciStd;
+import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.PKIUtil;
+import com.sheca.umandroid.util.ParamGen;
 import com.sheca.umandroid.util.WebClientUtil;
+import com.sheca.umplus.dao.UniTrust;
 
 import net.sf.json.JSONObject;
 
@@ -174,16 +177,7 @@ public class SealPreviewActivity extends Activity {
             mWebView.setWebViewClient(new WebViewClient());
             mWebView.setWebChromeClient(new WebChromeClient());
         }
-	   /* 
-	    try {
-        	if(null == ShcaCciStd.gSdk || ShcaCciStd.errorCode != 0)
-    		    initShcaCciStdService();
-        } catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			ShcaCciStd.gSdk = null;
-			//Toast.makeText(MainActivity.this,e1.getLocalizedMessage(),Toast.LENGTH_LONG).show();
-	    }*/
+
 
         jse = new javasafeengine();
         mAccountDao = new AccountDao(SealPreviewActivity.this);
@@ -192,7 +186,7 @@ public class SealPreviewActivity extends Activity {
 
         showPreviewWnd();
 
-        ImageView okBtn = ((ImageView) findViewById(R.id.apply_seal_button));
+        TextView okBtn = ((TextView) findViewById(R.id.apply_seal_button));
         okBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,7 +231,7 @@ public class SealPreviewActivity extends Activity {
         }
 
 
-        findViewById(R.id.textCertView).getBackground().setAlpha(100);  //0~255透明度值
+//        findViewById(R.id.textCertView).getBackground().setAlpha(100);  //0~255透明度值
         LaunchActivity.isIFAAFingerOK = false;
         showCert();
     }
@@ -266,6 +260,7 @@ public class SealPreviewActivity extends Activity {
 
             mCertId = Integer.valueOf(mData.get(0).get("id"));
             final Cert cert = certDao.getCertByID(mCertId);
+
             sdkid = cert.getSdkID();
 
             if (cert != null) {
@@ -1304,15 +1299,46 @@ public class SealPreviewActivity extends Activity {
 //                } else {
 //                    sign(cert);
 //                }
-                if (!cert.getCerthash().equals(mStrCertPwd)) {
+                if (!cert.getCerthash().equals(getPWDHash(mStrCertPwd,cert)) ){
                     Toast.makeText(this,"证书密码错误",Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                String strActName = mAccountDao.getLoginAccount().getName();
+                if (mAccountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+                    strActName = mAccountDao.getLoginAccount().getName() + "&" + mAccountDao.getLoginAccount().getAppIDInfo().replace("-", "");
                 localCertid = cert.getId();
-                handlerSign.sendEmptyMessage(LOGIN_SIGN_SUCCESS);
+                getCertIdByCertSn(SealPreviewActivity.this,strActName,cert.getCertsn());
+//
+
+
+//                handlerSign.sendEmptyMessage(LOGIN_SIGN_SUCCESS);
             }
         }
     }
+
+
+
+
+    public void getCertIdByCertSn(Activity context, String userName, String certSn) {
+        final UniTrust uniTrustObi = new UniTrust(context, false);
+        final String param = ParamGen.getAccountCertByCertSN(context, userName, certSn);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                com.sheca.umplus.model.Cert cert = uniTrustObi.getAccountCertByCertSN(param);
+                if (null != cert) {
+                    sdkid = cert.getId();
+                    handlerSign.sendEmptyMessage(LOGIN_SIGN_SUCCESS);
+                }
+            }
+        }).start();
+
+
+    }
+
+
+
 
     private void sign(final Cert cert) {
         String strAccountPwd = mStrCertPwd;
@@ -1540,18 +1566,12 @@ public class SealPreviewActivity extends Activity {
     private String getPWDHash(String strPWD, Cert cert) {
         String strPWDHash = "";
 
-        if (null != cert && (CommonConst.USE_FINGER_TYPE == cert.getFingertype())) {
-            if (!"".equals(cert.getCerthash())) {
-                //return cert.getCerthash();
-                if (!"".equals(strPWD) && strPWD.length() > 0)
-                    return strPWD;
-            } else
-                return strPWD;
-        }
 
         javasafeengine oSE = new javasafeengine();
         byte[] bText = strPWD.getBytes();
-        byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+        byte[] bDigest = oSE.digest(bText, "SHA-256", "SUN");   //做摘要
+        if(cert.getFingertype()   == CommonConst.USE_FINGER_TYPE)
+            bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
         strPWDHash = new String(Base64.encode(bDigest));
 
         return strPWDHash;
@@ -1566,6 +1586,8 @@ public class SealPreviewActivity extends Activity {
                 }
                 break;
                 case LOGIN_SIGN_SUCCESS: {
+                    final Cert cert = certDao.getCertByID(localCertid);
+
                     Intent intent = new Intent(SealPreviewActivity.this, ApplySealActivity.class);
                     intent.putExtra("UserType", CommonConst.ACCOUNT_TYPE_PERSONAL + "");
                     intent.putExtra("SealName", strSealName);
@@ -1576,7 +1598,7 @@ public class SealPreviewActivity extends Activity {
                     intent.putExtra("CertID", sdkid);
                     intent.putExtra("localCertid", localCertid);
 //                    intent.putExtra("psd", certPsdHash);
-                    intent.putExtra("psd", mStrCertPwd);
+                    intent.putExtra("psd", getPWDHash(mStrCertPwd,cert));
                     startActivity(intent);
                     SealPreviewActivity.this.finish();
                 }

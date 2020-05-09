@@ -871,7 +871,7 @@ public class DaoScanActivity extends Activity {
 			 }else{
                 Intent intent =  null;	
 				
-                if(mAccountDao.getLoginAccount().getStatus() == 2 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4){  //账户已实名认证
+                if(mAccountDao.getLoginAccount().getStatus() == 5 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4){  //账户已实名认证
                 	if("".equals(sharedPrefs.getString(CommonConst.SETTINGS_FACE_AUTH_SIGN, ""))){
                 		intent = new Intent(DaoScanActivity.this, com.junyufr.szt.activity.AuthMainActivity.class);
                 	    //intent = new Intent(DaoScanActivity.this, com.sheca.umandroid.PayActivity.class);

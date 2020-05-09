@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.igexin.sdk.PushManager;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.AppInfoDao;
 import com.sheca.umandroid.dao.CertDao;
@@ -26,6 +29,7 @@ import com.sheca.umandroid.presenter.LoginController;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CertEnum;
 import com.sheca.umandroid.util.CertUtils;
+import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.ParamGen;
 import com.sheca.umandroid.util.SharePreferenceUtil;
@@ -35,6 +39,8 @@ import com.sheca.umplus.model.Cert;
 import com.sheca.umplus.model.SealInfo;
 
 import net.sf.json.JSONObject;
+
+import org.apache.http.cookie.SM;
 
 import java.util.List;
 import java.util.Timer;
@@ -98,6 +104,15 @@ public class SMSLoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smslogin);
 
+        TextView switch_service = (TextView) this.findViewById(R.id.switch_service);
+        switch_service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SMSLoginActivity.this, SwitchServerActivity.class);
+                startActivity(intent);
+            }
+        });
+
         etAccount = (EditText) findViewById(R.id.et_account);   //账户名称
         etSMSCode = (EditText) findViewById(R.id.et_sms);       //短信验证码
 
@@ -106,7 +121,8 @@ public class SMSLoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 btnCode.setText("正在发送...");
-                getMsgCode();
+
+                loadLisence(true);
 
             }
         });
@@ -115,11 +131,9 @@ public class SMSLoginActivity extends Activity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mIsReg) {
-                    regNewAccount();
-                } else {
-                    loginAccountByCode();  //账户短信验证码登录
-                }
+
+                loadLisence(false);
+
 
             }
         });
@@ -482,7 +496,10 @@ public class SMSLoginActivity extends Activity {
                                 mIsReg = true;
                                 JSONObject jbRet = response.getResult();
                                 mUID = jbRet.getString(CommonConst.PARAM_CCOUNT_UID);
-                                getValidationCode(account);
+//                                getValidationCode(account);
+                                String ranPwdHash = account + "" + account;
+
+                                attemptAccountLogin(account, ranPwdHash);
                             } else {
                                 mIsReg = false;
                             }
@@ -494,6 +511,153 @@ public class SMSLoginActivity extends Activity {
                     e.printStackTrace();
                 }
             }
+        }).start();
+
+    }
+
+
+    public void attemptAccountLogin(final String accountName, final String password) {
+
+//        showProgDlg("账户登录中...");
+        final UniTrust uniTrust = new UniTrust(SMSLoginActivity.this, false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String strMsg = uniTrust.LoginByPWD(ParamGen.getLoginByPassword(accountName, password));
+
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            closeProgDlg();
+//                        }
+//                    });
+
+                    final APPResponse response = new APPResponse(strMsg);
+                    int retCode = response.getReturnCode();
+                    final String retMsg = response.getReturnMsg();
+
+                    String tokenID;
+
+                    if (retCode == com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
+                        String token = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+                        final Account accountPlus = getPersoninfo(token, accountName);
+//					final String mAccountInfo = getPersonActive(token, mobile);
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, token);
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_REALNAME, accountPlus.getIdentityName());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_STATUS, accountPlus.getStatus());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_ACCOUNT_UID, accountPlus.getAccountuid());
+                        PushManager.getInstance().bindAlias(SMSLoginActivity.this, accountName);//注册个推别名
+                        int status = Integer.valueOf(accountPlus.getStatus());
+                        int active = Integer.valueOf(accountPlus.getActive());
+                        int type = Integer.valueOf(accountPlus.getType());
+                        int saveType = Integer.valueOf(accountPlus.getSaveType());
+                        int certType = Integer.valueOf(accountPlus.getCertType());
+                        int loginType = Integer.valueOf(accountPlus.getLoginType());
+
+                        final com.sheca.umandroid.model.Account account = new com.sheca.umandroid.model.Account(
+                                accountPlus.getName(),
+                                accountPlus.getPassword(),
+                                status,
+                                active,
+                                accountPlus.getIdentityName(),
+                                accountPlus.getIdentityCode(),
+                                accountPlus.getCopyIDPhoto(),
+                                type,
+                                accountPlus.getAppIDInfo(),
+                                accountPlus.getOrgName(),
+                                saveType,
+                                certType,
+                                loginType);
+
+                        if (null == mAccountDao) {
+                            mAccountDao = new AccountDao(getApplicationContext());
+                        }
+                        mAccountDao.add(account);
+
+                        //com.sheca.umandroid.util.WebClientUtil.mCookieStore = com.sheca.umplus.util.WebClientUtil.mCookieStore;
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                //获取枚举证书及枚举印章信息,只有老版本才需要进行备份处理
+                                int mLocalCode = SharePreferenceUtil.getInstance(SMSLoginActivity.this).getInt(CommonConst.PARAM_V26_DBCHECK);
+                                if (mLocalCode < 0) {
+                                    getEnumInfo(accountPlus);
+                                    //备份完成后，设置为1
+                                    SharePreferenceUtil.getInstance(SMSLoginActivity.this).setInt(CommonConst.PARAM_V26_DBCHECK, 1);
+                                }
+
+                                PushManager.getInstance().bindAlias(SMSLoginActivity.this, accountName);//注册个推别名
+                                //
+                                if (!mIsReg) {
+
+                                    AccountHelper.clearAllUserData(SMSLoginActivity.this);
+                                    String mTokenID = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_UID, mUID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_USERNAME, accountName);
+                                    AccountHelper.uid = mUID;
+
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_REALNAME, accountPlus.getIdentityName());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_STATUS, accountPlus.getStatus());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
+
+
+                                    boolean isFirstLogin = SharePreferenceUtil.getInstance(getApplicationContext()).getBoolean((CommonConst.FIRST_SMS_LOGIN + accountName));
+
+
+                                    if (!isFirstLogin) {
+                                        Intent intent = new Intent(SMSLoginActivity.this, SetPasswordActivity.class);
+                                        startActivity(intent);
+                                        SMSLoginActivity.this.finish();
+                                    } else {
+                                        Intent intent = new Intent(SMSLoginActivity.this, MainActivity.class);
+                                        intent.putExtra("Message", "用户登录成功");
+                                        startActivity(intent);
+                                        SMSLoginActivity.this.finish();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(SMSLoginActivity.this, SetPasswordActivity.class);
+                                    startActivity(intent);
+                                    AccountHelper.clearAllUserData(SMSLoginActivity.this);
+                                    String mTokenID = response.getResult().getString(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_TOKEN, mTokenID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_UID, mUID);
+                                    SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_USERNAME, accountName);
+                                    AccountHelper.uid = mUID;
+                                    SMSLoginActivity.this.finish();
+                                }
+
+
+                            }
+
+
+                        });
+
+
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SMSLoginActivity.this, retMsg, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }).start();
 
     }
@@ -632,6 +796,7 @@ public class SMSLoginActivity extends Activity {
                         SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
                         SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
                         SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
+                        SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_ACCOUNT_UID, accountPlus.getAccountuid());
 
                         int status = Integer.valueOf(accountPlus.getStatus());
                         int active = Integer.valueOf(accountPlus.getActive());
@@ -691,7 +856,6 @@ public class SMSLoginActivity extends Activity {
                                     SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_TYPE, accountPlus.getType());
                                     SharePreferenceUtil.getInstance(getApplicationContext()).setInt(CommonConst.PARAM_ACTIVE, accountPlus.getActive());
                                     SharePreferenceUtil.getInstance(getApplicationContext()).setString(CommonConst.PARAM_IDCARD, accountPlus.getIdentityCode());
-
 
 
                                     boolean isFirstLogin = SharePreferenceUtil.getInstance(getApplicationContext()).getBoolean((CommonConst.FIRST_SMS_LOGIN + mobile));
@@ -764,11 +928,60 @@ public class SMSLoginActivity extends Activity {
         return true;
     }
 
-    /**
-     * 获取枚举信息（证书及印章）
-     *
-     * @param accountPlus
-     */
+
+    private void loadLisence(final boolean isSendSms) {
+        new Thread() {
+            public void run() {
+                UniTrust uniTrust = new UniTrust(SMSLoginActivity.this, false);
+//                uniTrust.setSignPri(CommonConst.UM_APP_PRIVATE_KEY);
+                uniTrust.setStrPubKey(CommonConst.UM_APP_PUBLIC_KEY);
+                uniTrust.setUMSPServerUrl(CommonConst.UM_APP_UMSP_SERVER, AccountHelper.getUMSPAddress(SMSLoginActivity.this));
+                uniTrust.setUCMServerUrl(CommonConst.UM_APP_UCM_SERVER, AccountHelper.getUCMAddress(SMSLoginActivity.this));
+                String mStrVal = uniTrust.LoadLicense(ParamGen.getLoadLisenceParams(SMSLoginActivity.this));
+                Log.d("unitrust", mStrVal);
+                String strRetMsg;
+
+                APPResponse response = new APPResponse(mStrVal);
+                final int retCode = response.getReturnCode();
+                final String retMsg = response.getReturnMsg();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (retCode != com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
+
+                            Toast.makeText(SMSLoginActivity.this, "应用初始化失败", Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+
+                            SharedPreferences  sharedPrefs = SMSLoginActivity.this.getSharedPreferences("sheca_settings", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPrefs.edit();
+                            editor.putString("authKeyID",CommonConst.UM_APP_AUTH_KEY);
+                            editor.commit();
+
+
+
+
+
+                            if (isSendSms) {
+                                getMsgCode();
+                            } else {
+                                if (mIsReg) {
+                                    regNewAccount();
+                                } else {
+                                    loginAccountByCode();  //账户短信验证码登录
+                                }
+                            }
+                        }
+
+                    }
+                });
+
+
+            }
+        }.start();
+    }
 
     private void getEnumInfo(final Account accountPlus) {
         //获取证书信息

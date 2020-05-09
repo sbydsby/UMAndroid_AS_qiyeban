@@ -20,24 +20,36 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.igexin.sdk.PushManager;
 import com.sheca.javasafeengine;
 import com.sheca.jshcaesstd.JShcaEsStd;
 import com.sheca.umandroid.fragment.FragmentFactory;
+import com.sheca.umandroid.model.APPResponse;
 import com.sheca.umandroid.model.ShcaCciStd;
+import com.sheca.umandroid.service.GeTuiIntentService;
+import com.sheca.umandroid.service.GeTuiService;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
+import com.sheca.umandroid.util.ParamGen;
+import com.sheca.umandroid.util.SharePreferenceUtil;
 import com.sheca.umandroid.util.SystemBarTintManager;
+import com.sheca.umandroid.util.UpdateUtil;
+import com.sheca.umplus.dao.UniTrust;
 import com.tencent.android.tpush.XGIOperateCallback;
 import com.tencent.android.tpush.XGPushClickedResult;
 import com.tencent.android.tpush.XGPushManager;
+
+import net.sf.json.JSONObject;
 
 import org.spongycastle.jce.provider.BouncyCastleProvider;
 import org.spongycastle.util.encoders.Base64;
@@ -66,12 +78,17 @@ public class MainActivity extends FragmentActivity {
     private RadioButton mSeal;
     private RadioButton mSettings;
 
+    int nowid = R.id.rb_home;
+
+    private Class userPushService = GeTuiService.class;
 
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyApplication.mainActivityNew = this;
+
 //        initLicense();
         sharedPrefs = this.getSharedPreferences(CommonConst.PREFERENCES_NAME, Context.MODE_PRIVATE);
         try {
@@ -115,19 +132,21 @@ public class MainActivity extends FragmentActivity {
         try {
             fm = getSupportFragmentManager();
             FragmentTransaction transaction = fm.beginTransaction();
-            Fragment fragment = FragmentFactory.getInstanceByIndex(R.id.rb_home);
-            transaction.add(R.id.content, fragment, "HomeFragment");
+            homeFragment = FragmentFactory.getInstanceByIndex(R.id.rb_home);
+            transaction.add(R.id.content, homeFragment, "HomeFragment");
+
+            //transaction.addToBackStack(null);//防止扫码闪退
             transaction.commit();
 
             rg = (RadioGroup) findViewById(R.id.rg_menu);
             RadioButton rb_home = (RadioButton) rg.getChildAt(0);
             rb_home.setChecked(true);
 
-            mHome=(RadioButton)findViewById(R.id.rb_home);
-            mCert=(RadioButton)findViewById(R.id.rb_cert);
-            mScan =(RadioButton)findViewById(R.id.rb_service);
-            mSeal=(RadioButton)findViewById(R.id.rb_seal);
-            mSettings=(RadioButton)findViewById(R.id.rb_settings);
+            mHome = (RadioButton) findViewById(R.id.rb_home);
+            mCert = (RadioButton) findViewById(R.id.rb_cert);
+            mScan = (RadioButton) findViewById(R.id.rb_service);
+            mSeal = (RadioButton) findViewById(R.id.rb_seal);
+            mSettings = (RadioButton) findViewById(R.id.rb_settings);
 
 //定义底部标签图片大小和位置
             Drawable drawable_home = getResources().getDrawable(R.drawable.selector_home);
@@ -154,15 +173,36 @@ public class MainActivity extends FragmentActivity {
             rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(final RadioGroup group, int checkedId) {
+                    nowid = checkedId;
                     /*if (checkedId == R.id.rb_service) {
                         Intent i = new Intent(MainActivity.this, CaptureActivity.class);
                         startActivityForResult(i, CAPTURE_CODE);
                     } else {*/
-                        FragmentTransaction transaction = fm.beginTransaction();
-                        Fragment fragment = FragmentFactory.getInstanceByIndex(checkedId);
-                        transaction.replace(R.id.content, fragment);
-                        transaction.commit();
+                    FragmentTransaction transaction = fm.beginTransaction();
+                    Fragment fragment = FragmentFactory.getInstanceByIndex(checkedId);
+                    transaction.replace(R.id.content, fragment);
+                    //transaction.addToBackStack(null);//防止扫码闪退
+                    transaction.commit();
                     //}
+
+
+                    switch (checkedId) {
+                        case R.id.rb_cert:
+                        case R.id.rb_seal:
+                            findViewById(R.id.tv_right).setVisibility(View.VISIBLE);
+
+
+                            break;
+                        default:
+                            findViewById(R.id.tv_right).setVisibility(View.GONE);
+
+                            break;
+
+
+                    }
+
+
+//                    fragment.onResume();
                 }
             });
 
@@ -177,8 +217,46 @@ public class MainActivity extends FragmentActivity {
             //Toast.makeText(MainActivity.this,ex.getLocalizedMessage(),Toast.LENGTH_LONG).show();
         }
 
+        initGetui();
+
     }
 
+    private void initGetui() {
+
+//        if (Build.VERSION.SDK_INT >= 23 && (!sdCardWritePermission || !phoneSatePermission)) {
+//            requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE},
+//                    REQUEST_PERMISSION);
+//        } else {
+        PushManager.getInstance().initialize(this.getApplicationContext(), userPushService);
+//        }
+
+        // 注册 intentService 后 PushDemoReceiver 无效, sdk 会使用 DemoIntentService 传递数据,
+        // AndroidManifest 对应保留一个即可(如果注册 DemoIntentService, 可以去掉 PushDemoReceiver, 如果注册了
+        // IntentService, 必须在 AndroidManifest 中声明)
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), GeTuiIntentService.class);
+
+    }
+
+    public void showMsg(String result) {
+        Log.e("收到透传消息", result);
+
+        if (result.contains(CommonConst.PARAM_ACCOUNT_SIGN_UID)) {//测试用
+
+            try {
+                final JSONObject jb = JSONObject.fromObject(result);
+                String accountName = jb.optString(CommonConst.PARAM_ACCOUNT_SIGN_UID);
+                String accountUid = SharePreferenceUtil.getInstance(this).getString(CommonConst.PARAM_ACCOUNT_UID);
+                if (AccountHelper.hasLogin(this) && accountName.equals(accountUid)) {
+                    Intent intent = new Intent(this, QuickSignAcitvity.class);
+                    intent.putExtra("result", result);
+                    startActivity(intent);
+                }
+            } catch (Exception e) {
+            }
+        }
+
+
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -209,6 +287,8 @@ public class MainActivity extends FragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    Fragment homeFragment;
+
     @Override
     protected void onNewIntent(Intent intent) {
         // TODO Auto-generated method stub
@@ -216,40 +296,67 @@ public class MainActivity extends FragmentActivity {
         //setIntent(intent);
         //Toast.makeText(getApplicationContext(), "onNewIntent", Toast.LENGTH_SHORT).show();
 
-        fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        Fragment fragment = FragmentFactory.getInstanceByIndex(R.id.rb_home);
-        transaction.add(R.id.content, fragment, "HomeFragment");
-        transaction.commit();
-
-        rg = (RadioGroup) findViewById(R.id.rg_menu);
         RadioButton rb_home = (RadioButton) rg.getChildAt(0);
         rb_home.setChecked(true);
+//        homeFragment.onResume();
 
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(final RadioGroup group, int checkedId) {
-                FragmentTransaction transaction = fm.beginTransaction();
-                Fragment fragment = FragmentFactory.getInstanceByIndex(checkedId);
-                transaction.replace(R.id.content, fragment);
-                transaction.commit();
-            }
-        });
+//        fm = getSupportFragmentManager();
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        homeFragment = FragmentFactory.getInstanceByIndex(R.id.rb_home);
+//        transaction.add(R.id.content, homeFragment, "HomeFragment");
+//        //transaction.addToBackStack(null);//防止扫码闪退
+//        transaction.commit();
+//
+//        rg = (RadioGroup) findViewById(R.id.rg_menu);
+//        RadioButton rb_home = (RadioButton) rg.getChildAt(0);
+//        rb_home.setChecked(true);
+//        homeFragment.onResume();
+//        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(final RadioGroup group, int checkedId) {
+//                nowid=R.id.rb_home;
+//                FragmentTransaction transaction = fm.beginTransaction();
+//                Fragment fragment = FragmentFactory.getInstanceByIndex(checkedId);
+//                transaction.replace(R.id.content, fragment);
+//                //transaction.addToBackStack(null);//防止扫码闪退
+//                transaction.commit();
+//
+//
+//
+//                switch (checkedId) {
+//                    case R.id.rb_cert:
+//                    case R.id.rb_seal:
+//                        findViewById(R.id.tv_right).setVisibility(View.VISIBLE);
+//
+//
+//                        break;
+//                    default:
+//                        findViewById(R.id.tv_right).setVisibility(View.GONE);
+//
+//                        break;
+//
+//
+//                }
+//
+//
+////                fragment.onResume();
+//            }
+//        });
 
-
+        findViewById(R.id.tv_right).setVisibility(View.GONE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         XGPushClickedResult click = XGPushManager.onActivityStarted(this);
-
+        FragmentFactory.getInstanceByIndex(nowid).onResume();
         if (!bUpdated) {
-            if (null != LaunchActivity.updateuUtil) {
-                //LaunchActivity.updateuUtil.setActicity(MainActivity.this);
-               //LaunchActivity.updateuUtil.checkToUpdate();
-            }
-
+//            if (null != LaunchActivity.updateuUtil) {
+//                LaunchActivity.updateuUtil.setActicity(MainActivity.this);
+//               LaunchActivity.updateuUtil.checkToUpdate();
+//            }
+            checkVersion();
             bUpdated = true;
         }
 
@@ -257,10 +364,11 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (10086 == requestCode){
+        if (10086 == requestCode) {
             LaunchActivity.updateuUtil.installNewApk();
         }
         super.onActivityResult(requestCode, resultCode, data);
+//        homeFragment.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -354,5 +462,67 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+
+    private void checkVersion() {
+        final UniTrust uniTrust = new UniTrust(this, false);
+
+        if (!bUpdated) {
+
+            final UpdateUtil updateUtil = new UpdateUtil(MainActivity.this, false);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String res = uniTrust.GetClientLatestInfo(ParamGen.GetClientLatestInfo(UpdateUtil.UPDATE_APP_NAME, updateUtil.getVerCode(getApplicationContext()) + ""));
+                        Log.e("更新", res);
+
+                        final APPResponse response = new APPResponse(res);
+                        final int retCode = response.getReturnCode();
+                        final String retMsg = response.getReturnMsg();
+//
+//
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+//                                dismissDg();
+
+                                if (retCode == com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
+
+                                    JSONObject jbRet = response.getResult();
+
+
+                                    String version = jbRet.getString(CommonConst.RESULT_PARAM_VERSION);
+                                    String downloadUrl = jbRet.getString(CommonConst.RESULT_PARAM_DOWNLOADURL);
+                                    String des = jbRet.getString(CommonConst.RESULT_PARAM_DESCRIPTION);
+                                    boolean isCompulsion = jbRet.getBoolean(CommonConst.RESULT_PARAM_ISUPDATE);
+
+
+                                    updateUtil.newVerName = version;
+                                    updateUtil.newVerCode = Integer.parseInt(version.replace(".", ""));
+                                    updateUtil.strDownPath = downloadUrl;
+                                    updateUtil.Description = des;
+                                    updateUtil.isCompulsion = isCompulsion ? 1 : 0;
+
+
+                                    updateUtil.checkToUpdate();
+
+                                } else {
+
+
+                                }
+
+                            }
+                        });
+
+
+                    } catch (Exception e) {
+
+                    }
+                }
+            }).start();
+            bUpdated = true;
+        }
+    }
 
 }

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.sheca.umandroid.R;
+import com.sheca.umandroid.companyCert.ICallback;
 import com.sheca.umandroid.model.SealInfo;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.ParamGen;
@@ -19,6 +20,16 @@ import java.util.concurrent.Future;
 public class SealController {
 
     ExecutorService threadPool = Executors.newSingleThreadExecutor();
+
+
+    private static SealController sealController;
+
+    public static SealController getInstance() {
+//        if (sealController == null) {
+        sealController = new SealController();
+//        }
+        return sealController;
+    }
 
     public SealInfo getAccountSealInfoBySN(final Activity act, final String sealid, final String accountName){
         final UniTrust uniTrust = new UniTrust(act, false);
@@ -46,7 +57,7 @@ public class SealController {
                                     });
                                 }
 
-                                Log.d("unitrust",sealPlus.toString());
+                                Log.d("unitrustseal",sealPlus.toString()+"   ");
 
                                 SealInfo sealInfo = new SealInfo();
 //                                sealInfo.setId(sealPlus.getId());
@@ -82,6 +93,24 @@ public class SealController {
 
         return result;
     }
+
+
+
+
+    public void applySeal(final Activity act, final String picData, final String idNumber, final String CERT_ID, final String CERT_PWD, final String sealName, final String companyName,ICallback iCallback) {
+        final UniTrust uniTrust = new UniTrust(act, false);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String result = uniTrust.ApplySeal(ParamGen.getApplySeal(act.getApplicationContext(), picData, idNumber, CERT_ID, CERT_PWD, sealName, companyName));
+                iCallback.onCallback(result);
+            }
+        }).start();
+
+    }
+
 
     public String applySeal(final Activity act, final String picData, final String CERT_ID, final String CERT_PWD){
 
@@ -126,5 +155,20 @@ public class SealController {
         }
 
         return result;
+    }
+
+
+    public void makeSeal(final Activity act, final String picData, final String idNumber, final String CERT_ID, final String CERT_PWD, final String sealName, final String companyName, String picType, ICallback iCallback) {
+        final UniTrust uniTrust = new UniTrust(act, false);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String result = uniTrust.MakeSeal(ParamGen.makeApplySeal(act.getApplicationContext(), picData, idNumber, CERT_ID, CERT_PWD, sealName, companyName,picType));
+                iCallback.onCallback(result);
+            }
+        }).start();
+
     }
 }

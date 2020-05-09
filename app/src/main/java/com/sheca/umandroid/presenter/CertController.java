@@ -1,10 +1,12 @@
 package com.sheca.umandroid.presenter;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.sheca.umandroid.R;
+import com.sheca.umandroid.companyCert.ICallback;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.MyAsycnTaks;
 import com.sheca.umandroid.util.ParamGen;
@@ -214,7 +216,7 @@ public class CertController {
         return result;
     }
 
-    public String downloadCert(final Activity act, final String requestNumber, final String certType) {
+    public String downloadCert(final Activity act, final String requestNumber, final String certType,final String certName) {
         final UniTrust uniTrust = new UniTrust(act, false);
 
         String result = null;
@@ -226,13 +228,13 @@ public class CertController {
 
                                 String params = ParamGen.getDownloadCertParams(AccountHelper.getToken(act.getApplicationContext()),
                                         requestNumber,
-                                        certType,
-                                        AccountHelper.getRealName(act.getApplicationContext()));
+                                        certType, TextUtils.isEmpty(certName)?AccountHelper.getRealName(act.getApplicationContext()):certName);
 
                                 Log.d("unitrust",params);
 
                                 String responseStr = null;
                                 try{
+                                    uniTrust.setPwdHash(true);
                                     responseStr = uniTrust.DownloadCert(params);
                                 }catch (Exception e){
                                     e.printStackTrace();
@@ -326,6 +328,76 @@ public class CertController {
                                 try{
                                     responseStr = uniTrust.ApplyCert(params);
                                 }catch (Exception e){
+                                    e.printStackTrace();
+                                    act.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(act, act.getString(R.string.applycert_fail), Toast.LENGTH_LONG).show();
+
+                                        }
+                                    });
+                                }
+
+                                return responseStr;
+                            }
+
+                            ;
+                        }
+                );
+
+        try {
+            result = future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            act.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(act, act.getString(R.string.applycert_fail), Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+        return result;
+    }
+
+
+    //申请证书
+    public void applyNewCert(final Activity act, final String realName, final String idcard, final String certType, final String psdhash, final int time, int certlevel, String requestnumber, ICallback callBack) {
+        final UniTrust uniTrust = new UniTrust(act, false);
+        String params = ParamGen.getApplyCertParams(act.getApplicationContext(),
+                certType, realName, idcard, psdhash, time, certlevel, requestnumber);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String result = uniTrust.ApplyOrgCert(params);
+                callBack.onCallback(result);
+            }
+        }).start();
+
+
+    }
+
+
+
+    public String applyCertLite(final Activity act, final String realName, final String idcard, final String certType, final String psdhash, final int time) {
+        final UniTrust uniTrust = new UniTrust(act, false);
+
+        String result = null;
+
+        Future<String> future =
+                threadPool.submit(
+                        new Callable<String>() {
+                            public String call() throws Exception {
+
+                                String params = ParamGen.getApplyCertLiteParams(act.getApplicationContext(),
+                                        certType, realName, idcard, psdhash, time);
+
+                                String responseStr = null;
+                                try {
+                                    responseStr = uniTrust.ApplyOrgCertLite(params);
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                     act.runOnUiThread(new Runnable() {
                                         @Override

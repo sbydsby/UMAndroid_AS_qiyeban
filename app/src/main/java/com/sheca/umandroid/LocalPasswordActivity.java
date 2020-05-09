@@ -34,6 +34,7 @@ public class LocalPasswordActivity extends BaseActivity2 {
         initNavBar(R.string.mine_fp,R.layout.activity_local_password);
 
         sharedPrefs = this.getSharedPreferences(CommonConst.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
         //手势
         gestureItem = findViewById(R.id.item_gesture);
         gestureItem.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +50,7 @@ public class LocalPasswordActivity extends BaseActivity2 {
         sBIFAAFace  = (SwitchButton)findViewById(R.id.sb_ifaa_face);
 
         //ifaa指纹开关默认关闭
-        isUserNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+        isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
         if (LaunchActivity.isIFAAFingerUsed) {
         	sBFinger.setVisibility(RelativeLayout.VISIBLE);
         	findViewById(R.id.item_finger).setVisibility(RelativeLayout.VISIBLE);
@@ -67,7 +68,8 @@ public class LocalPasswordActivity extends BaseActivity2 {
         sBFinger.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-            	isUserNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+                final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+            	isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
             	nShowView++;
             	
             	if(nShowView %2 != 0){
@@ -88,7 +90,7 @@ public class LocalPasswordActivity extends BaseActivity2 {
 
         //人脸免密状态设定
 
-        final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+
         isFaceNoPassState = sharedPrefs.getBoolean(mUserName+CommonConst.FACE_NOPASS, false);
 
 
@@ -107,13 +109,15 @@ public class LocalPasswordActivity extends BaseActivity2 {
         supportBIOTypes = ETASManager.getSupportBIOTypes(getApplicationContext());
         if (supportBIOTypes.contains(IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE)) {
             findViewById(R.id.item_ifaa_face).setVisibility(RelativeLayout.VISIBLE);
-            isUserNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+
+            isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
 
             sBIFAAFace.setChecked(isUserNotificationFinger);
             sBIFAAFace.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                    isUserNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+                    final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+                    isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
                     nShowView++;
 
                     if(nShowView %2 != 0){
@@ -141,8 +145,8 @@ public class LocalPasswordActivity extends BaseActivity2 {
     @Override
    	protected void onResume() {
    		super.onResume();
-   		
-   		isNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);
+        final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+   		isNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
    		if(!String.valueOf(isNotificationFinger).equals(String.valueOf(isUserNotificationFinger)))	
     		nShowView++;
     		

@@ -163,9 +163,9 @@ public class ParamGen {
     }
 
 
-    public static String getLoadLisenceParams() {
+    public static String getLoadLisenceParams(Context context) {
         String strActName = UM_APPID;
-        String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s",
+        String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
                 strActName,
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PACKAGE_NAME),
@@ -173,7 +173,16 @@ public class ParamGen {
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTHKEYID),
                 CommonConst.UM_APP_AUTH_KEY,
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
-                com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256);
+                com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256,
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APP_SECRET),
+                CommonConst.UM_APP_PRIVATE_KEY,
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_UMSP_SERVICE_URL),
+                AccountHelper.getUMAddress(context)
+
+
+        );
 
         String strSign = "";
 
@@ -185,7 +194,7 @@ public class ParamGen {
             e.printStackTrace();
         }
 
-        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
                 URLEncoder.encode(strActName),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTHKEYID),
@@ -194,12 +203,67 @@ public class ParamGen {
                 URLEncoder.encode(CommonConst.PACKAGE_NAME),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256),
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APP_SECRET),
+                URLEncoder.encode(  CommonConst.UM_APP_PRIVATE_KEY),
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_UMSP_SERVICE_URL),
+                URLEncoder.encode( AccountHelper.getUMAddress(context)),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGNATURE),
-                URLEncoder.encode(strSign));
+                URLEncoder.encode(strSign)
+
+        );
 
 
         return strInfo;
     }
+
+//    public static String getLoadLisenceParams() {
+//        String strActName = UM_APPID;
+//        String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s%s=%s",
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+//                strActName,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PACKAGE_NAME),
+//                CommonConst.PACKAGE_NAME,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTHKEYID),
+//                CommonConst.UM_APP_AUTH_KEY,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+//                com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256,
+//                URLEncoder.encode("version"),
+//                URLEncoder.encode("1.0")
+//
+//        );
+//
+//        String strSign = "";
+//
+//        try {
+//            //byte[] bDate = strOrgDate.getBytes("GBK");
+//            strSign = PKIUtil.getSign(strOrgDate.getBytes("UTF-8"), CommonConst.UM_APP_PRIVATE_KEY);
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//
+//        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s%s=%s",
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+//                URLEncoder.encode(strActName),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTHKEYID),
+//                URLEncoder.encode(CommonConst.UM_APP_AUTH_KEY),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PACKAGE_NAME),
+//                URLEncoder.encode(CommonConst.PACKAGE_NAME),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGNATURE),
+//                URLEncoder.encode(strSign) ,
+//                URLEncoder.encode("version"),
+//                URLEncoder.encode("1.0")
+//        );
+//
+//
+//        return strInfo;
+//    }
+
+
 
     public static String getLoginByPassword(String username, String password) {
         String strInfo = String.format("%s=%s&%s=%s&%s=%s",
@@ -264,7 +328,7 @@ public class ParamGen {
      */
     public static String getRegisterAccountParams(String accountName, String msgCode) {
         //String ranPwdHash = CommUtil.getPWDHash(CommUtil.getStringRandom(8));
-        String ranPwdHash = CommUtil.getPWDHash(accountName + "" + accountName);
+        String ranPwdHash = accountName + "" + accountName;
 
         String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
@@ -291,13 +355,17 @@ public class ParamGen {
             e.printStackTrace();
         }
 
-        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s",
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
                 URLEncoder.encode(accountName),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
                 URLEncoder.encode(UM_APPID),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_MAC),
-                URLEncoder.encode(msgCode));
+                URLEncoder.encode(msgCode),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PWD),
+                URLEncoder.encode(ranPwdHash)
+
+                );
 
         return strInfo;
     }
@@ -385,6 +453,24 @@ public class ParamGen {
                 URLEncoder.encode(mCertID),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_OLD_CERT_PWD),
                 URLEncoder.encode(mOldPwd),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_NEW_CERT_PWD),
+                URLEncoder.encode(mNewPwd)
+        );
+
+        return strInfo;
+    }
+
+    /**
+     * 重置证书口令
+     */
+
+    public static String ResetCertPWD(String tokenId, String mCertID, String mNewPwd) {
+//        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(tokenId),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_ID),
+                URLEncoder.encode(mCertID),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_NEW_CERT_PWD),
                 URLEncoder.encode(mNewPwd)
         );
@@ -497,6 +583,36 @@ public class ParamGen {
         return strInfo;
     }
 
+
+
+
+//    public static String getIdAuth(Context context) {
+//        String strInfo;
+//        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+//
+//            strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s",
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+//                    URLEncoder.encode(strActName),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTH_TYPE),
+//                    URLEncoder.encode(realname),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PERSON_ID),
+//                    URLEncoder.encode(idcard),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_INDENTITY_TYPE),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_FLAG_FALSE),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_COMMON_NAME),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_FLAG_FALSE),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ID_AUTH_NUMBER),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_FLAG_FALSE),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_COMMON_NAME),
+//                    URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_FLAG_FALSE),
+//
+//
+//                    );
+//
+//
+//        return strInfo;
+//    }
+
     public static String getFaceAuth(Context context) {
         String strInfo;
         if (AccountHelper.hasAuth(context)) {
@@ -595,6 +711,14 @@ public class ParamGen {
         return strInfo;
     }
 
+
+
+
+
+
+
+
+
     public static String getCertInfoListParams(String token) {
         String strInfo = String.format("%s=%s",
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
@@ -688,6 +812,332 @@ public class ParamGen {
                 URLEncoder.encode(clientName),
                 URLEncoder.encode(CommonConst.PARAM_CURENT_VERSION),
                 URLEncoder.encode(currentVersion));
+        return strInfo;
+    }
+
+    //获取二维码信息
+    public static String GetQRCodeInfo(Context act, String qrCodeSN) {
+        String token = SharePreferenceUtil.getInstance(act).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(token),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_QRCODE_SN),
+                URLEncoder.encode(qrCodeSN));
+        return strInfo;
+    }
+
+
+    //根据certSn取cert
+    public static String getAccountCertByCertSN(Context act, String userName,String certSn) {
+        String token = SharePreferenceUtil.getInstance(act).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(token),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ENCRYPT_CERTSN),
+                URLEncoder.encode(certSn),
+                URLEncoder.encode(CommonConst.PARAM_ACCOUNT_NAME_PWD),
+                URLEncoder.encode(userName)
+
+
+                );
+        return strInfo;
+    }
+
+    //获取待签名数据
+    public static String GetSignBizData(Context act, String qrCodeSN) {
+        String token = SharePreferenceUtil.getInstance(act).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(token),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGN_BIZ_NO),
+                URLEncoder.encode(qrCodeSN));
+        return strInfo;
+    }
+
+    //上传签名结果
+    public static String UploadSignValue(Context act, String qrCodeSN, String msg, boolean isSuccess) {
+        String token = SharePreferenceUtil.getInstance(act).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(token),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGN_BIZ_NO),
+                URLEncoder.encode(qrCodeSN),
+                (isSuccess ? URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGN_VALUE) : URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ERR_MSG)),
+                URLEncoder.encode(msg)
+        );
+
+
+        return strInfo;
+    }
+
+
+
+    //获取单位信息
+    public static String GetOrgInfo(Context context, String orgPaperNo) {
+        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(strActName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                URLEncoder.encode("1"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                URLEncoder.encode(orgPaperNo)
+//                ,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_LRNAME),
+//                URLEncoder.encode(lrName),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_LRPAPERTYPE),
+//                URLEncoder.encode("1")
+//                ,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_LRPAPERNO),
+//                URLEncoder.encode(lrNo)
+        );
+        return strInfo;
+    }
+
+    /**
+     * 单位信息认证
+     *
+     * @param paperNo
+     * @param
+     * @return
+     */
+    public static String getVerifyOrg(Context context, String orgName, String paperNo, String lrName, String cardNo) {
+        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(strActName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ORG_NAME),
+                URLEncoder.encode(orgName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                URLEncoder.encode("1"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                URLEncoder.encode(paperNo),
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERTIFICATION),
+                URLEncoder.encode("1"),
+
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_LRNAME),
+                URLEncoder.encode(lrName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_LRPAPERTYPE),
+                URLEncoder.encode("1"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_LRPAPERNO),
+                URLEncoder.encode(cardNo));
+
+        return strInfo;
+
+    }
+
+
+    //申请单位证书
+    public static String getApplyCertParams(Context context, String certType, String commonName, String paperNo, String psdHash, int time, int certlevel, String requestnumber) {
+        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+        //账户注册名称(可选参数)
+        String idCard = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_IDCARD);
+        String agentName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_REALNAME);
+        String agentMobile = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_USERNAME);
+
+
+
+
+
+        String exInfo = "{\"1.2.156.10260.4.1.1\":\"" + idCard + "\"}";
+
+//        String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_TYPE),
+//                certType,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_COMMON_NAME),
+//                commonName,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+//                paperNo,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+//                "1",
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+//                com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_VALIDITY),
+//                com.sheca.umplus.util.CommonConst.DEFAULT_CERT_VALIDITY);
+//
+
+//        String strSign = "";
+//        try {
+//            strSign = PKIUtil.getSign(strOrgDate.getBytes("UTF-8"), CommonConst.UM_APP_PRIVATE_KEY);
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(strActName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_COMMON_NAME),
+                URLEncoder.encode(commonName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                URLEncoder.encode("1"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                URLEncoder.encode(paperNo),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_TYPE),
+                URLEncoder.encode(certType),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_PWD),
+                URLEncoder.encode(psdHash),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_VALIDITY),
+                URLEncoder.encode(time + ""),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGNATURE),
+//                URLEncoder.encode(strSign));
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AGENT_NAME),
+                URLEncoder.encode(agentName),
+//                URLEncoder.encode(agentName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AGENT_MOBILE),
+                URLEncoder.encode(agentMobile),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_LEVEL),
+                URLEncoder.encode(certlevel + ""),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PARTNER_REQ_NO),
+                URLEncoder.encode(requestnumber),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_EXT_INFOS),
+                URLEncoder.encode(exInfo)
+
+        );
+        return strInfo;
+    }
+
+    //申请印章
+    public static String getApplySeal(Context context, String picData, String idNumber, String CERT_ID, String CERT_PWD, String strSealName, String compName) {
+
+//        String idNumber = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_IDCARD);     //id_no
+//        String idName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_REALNAME);//id_name
+
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(AccountHelper.getToken(context)),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_USER_TYPE),
+                URLEncoder.encode("2"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_USER_NAME),
+                URLEncoder.encode(compName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SEAL_ID),
+                URLEncoder.encode(idNumber),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_SEALNAME),
+                URLEncoder.encode(strSealName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PIC_DATA),
+                URLEncoder.encode(picData),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PIC_TYPE),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.SEAL_PIC_TYPE),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_ID),
+                URLEncoder.encode(CERT_ID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_PWD),
+                URLEncoder.encode(CERT_PWD));
+
+        return strInfo;
+    }
+
+    //申请印章（已有印模图片）
+    public static String makeApplySeal(Context context, String picData, String idNumber, String CERT_ID, String CERT_PWD, String strSealName, String compName, String picType) {
+
+//        String idNumber = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_IDCARD);     //id_no
+//        String idName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_REALNAME);//id_name
+
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(AccountHelper.getToken(context)),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_USER_TYPE),
+                URLEncoder.encode("2"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_USER_NAME),
+                URLEncoder.encode(compName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SEAL_ID),
+                URLEncoder.encode(idNumber),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_SEALNAME),
+                URLEncoder.encode(strSealName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PIC_DATA),
+                URLEncoder.encode(picData),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PIC_TYPE),
+                URLEncoder.encode(picType),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_ID),
+                URLEncoder.encode(CERT_ID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_PWD),
+                URLEncoder.encode(CERT_PWD));
+
+        return strInfo;
+    }
+
+
+    /**
+     * 获取登录账户所有单位对象的集合
+     */
+    public static String getAcountAllOrg(String mTokenID, String mAccountName) {
+        String strInfo = String.format("%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(mTokenID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
+                URLEncoder.encode(mAccountName));
+        return strInfo;
+    }
+
+
+
+    //付费证书
+    public static String getApplyCertLiteParams(Context context, String certType, String commonName, String paperNo, String psdHash, int time) {
+        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+
+//        String agentName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_REALNAME);
+//        String agentMobile = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_USERNAME);
+//        String idCard = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_IDCARD);
+
+                String agentName = "邵博阳";
+        String agentMobile ="13701766266";
+        String idCard = "310109199205263514";
+        String exInfo = "{\"1.2.156.10260.4.1.1\":\"" + idCard + "\"}";
+
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(strActName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_COMMON_NAME),
+                URLEncoder.encode(commonName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                URLEncoder.encode("1"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                URLEncoder.encode(paperNo),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_TYPE),
+                URLEncoder.encode(certType),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_PWD),
+                URLEncoder.encode(psdHash),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_VALIDITY),
+                URLEncoder.encode(time + ""),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGNATURE),
+//                URLEncoder.encode(strSign));
+
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AGENT_NAME),
+                URLEncoder.encode(agentName),
+//                URLEncoder.encode(agentName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AGENT_MOBILE),
+                URLEncoder.encode(agentMobile),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_EXT_INFOS),
+                URLEncoder.encode(exInfo),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_CERT_LEVEL),
+                URLEncoder.encode("1")
+
+
+        );
+        return strInfo;
+    }
+
+
+    //查印章
+    public static String querySealByID(Context context, String sealId) {
+        String strActName = SharePreferenceUtil.getInstance(context).getString(CommonConst.PARAM_TOKEN);
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+                URLEncoder.encode(strActName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SEAL_TYPE),
+                URLEncoder.encode("2"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_SEALID),
+                URLEncoder.encode(sealId)
+
+        );
+
         return strInfo;
     }
 }

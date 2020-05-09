@@ -241,8 +241,8 @@ public class MySettingsActivityNew extends Activity{
 				startActivity(i);
 			}
 		});
-		
-		final boolean isNotificationFinger = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_ENABLED, false);   //ifaa指纹开关默认关闭
+		final String mUserName = sharedPrefs.getString(CommonConst.PARAM_USERNAME, "");
+		final boolean isNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);   //ifaa指纹开关默认关闭
 		if (!isNotificationFinger) 
 			((TextView) findViewById(R.id.textFingerType)).setText("关闭");
 		else

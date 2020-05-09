@@ -120,7 +120,7 @@ public class CertUnlockActivity extends Activity {
 			strCertName = "";
 		}
 		
-		if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+		if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
 			strCertName += CommonConst.CERT_SM2_NAME+strBlank;
 		else
 			strCertName += CommonConst.CERT_RSA_NAME+strBlank;

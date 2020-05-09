@@ -61,7 +61,14 @@
             android:drawableTop="@drawable/selected_sqyz"
             android:text="@string/selected_sqyz"
             android:textColor="#000000" />
-
+        <Button
+            android:visibility="gone"
+            android:id="@+id/button_download_seal"
+            style="@style/DashboardButton2"
+            android:layout_gravity="fill"
+            android:drawableTop="@drawable/selected_sqyz"
+            android:text="下载印章"
+            android:textColor="#000000" />
 
     </com.sheca.umandroid.layout.DashboardLayout>
 

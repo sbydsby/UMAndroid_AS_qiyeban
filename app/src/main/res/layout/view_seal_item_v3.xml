@@ -25,15 +25,7 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/touxiang_acc" />
 
-         <TextView
-           android:id="@+id/sealname"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="印章别名:"
-           android:layout_marginTop="10dp"
-           android:gravity="center_horizontal"
-           android:textColor="@color/cert_text"
-           android:textSize="15sp" />
+
          
           <ImageView
             android:id="@+id/show_cert"
@@ -97,6 +89,18 @@
           android:visibility="gone" />
          
     </LinearLayout>
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/sealname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="印章别名:"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="18dp"
+
+        android:textColor="@color/cert_text"
+        android:textSize="15sp" />
 
     <ImageView
         android:layout_width="wrap_content"

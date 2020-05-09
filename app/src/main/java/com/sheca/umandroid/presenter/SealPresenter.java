@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.excelsecu.slotapi.EsIBankDevice;
@@ -18,6 +20,7 @@ import com.sheca.umandroid.LoginActivity;
 import com.sheca.umandroid.NetworkSignActivity;
 import com.sheca.umandroid.R;
 import com.sheca.umandroid.ScanBlueToothSimActivity;
+import com.sheca.umandroid.companyCert.SealChoiceActivity;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.CertDao;
 import com.sheca.umandroid.dao.SealInfoDao;
@@ -40,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-public class SealPresenter extends BasePresenter{
+public class SealPresenter extends BasePresenter {
 
     private Context context;
     private AccountDao accountDao;
@@ -49,14 +52,14 @@ public class SealPresenter extends BasePresenter{
     private SharedPreferences sharedPrefs;
     private Activity activity;
 
-    public SealPresenter(Context context, AccountDao accountDao, CertDao certDao, Handler workHandler,Activity activity) {
+    public SealPresenter(Context context, AccountDao accountDao, CertDao certDao, Handler workHandler, Activity activity) {
         super(context);
         this.context = context;
         this.accountDao = accountDao;
         this.certDao = certDao;
         this.workHandler = workHandler;
         this.activity = activity;
-        
+
         sharedPrefs = context.getSharedPreferences(CommonConst.PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
@@ -79,12 +82,20 @@ public class SealPresenter extends BasePresenter{
                     showFaceReg();   //进行人脸识别
             } else {
                 try {
+
+//                    Intent intent = new Intent(context, SealChoiceActivity.class);
+//                    context.startActivity(intent);
+
                     if (!isContainSeal()) {
                         Toast.makeText(context, "所有证书已申请印章", Toast.LENGTH_SHORT).show();
                         return;
                     } else {
-                        Intent intent = new Intent(context, NetworkSignActivity.class);
-                        context.startActivity(intent);
+                                            Intent intent = new Intent(context, SealChoiceActivity.class);
+                    context.startActivity(intent);
+
+
+//                        Intent intent = new Intent(context, NetworkSignActivity.class);
+//                        context.startActivity(intent);
 
                     }
                 } catch (Exception ex) {
@@ -114,7 +125,7 @@ public class SealPresenter extends BasePresenter{
                     if (cert.getStatus() == Cert.STATUS_DOWNLOAD_CERT) {
                         SealInfoDao mSealInfoDao = new SealInfoDao(context);
                         SealInfo sealInfo = mSealInfoDao.getSealByCertsn(cert.getCertsn(), strActName);
-                        if (null == sealInfo) {
+                        if (null == sealInfo||sealInfo.getState()==5) {
                             isNoSeal = true;
                             break;
                         }
@@ -214,7 +225,54 @@ public class SealPresenter extends BasePresenter{
                         Toast.makeText(context, "验证证书失败", Toast.LENGTH_SHORT).show();
                 }
             }
+        } else if (!cert.getCerttype().contains("SM2")) {
+            int i = -1;
+            try {
+                if (CommonConst.INPUT_RSA_SIGN.equals(cert.getEnvsn()))
+                    i = PKIUtil.verifyCertificate(cert.getCertificate(), CommonConst.RSA_CERT_CHAIN);
+                else
+                    i = PKIUtil.verifyCertificate(cert.getCertificate(), cert.getCertchain());
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+            if (i == CommonConst.RET_VERIFY_CERT_OK) {
+                return true;
+            } else {
+                return false;
+            }
+
+//            return true;
+
+        } else if (cert.getCerttype().contains("SM2")) {
+            String strSignCert = "";
+
+            int i = -1;
+            try {
+                strSignCert = cert.getCertificate();
+                if (CommonConst.INPUT_SM2_SIGN.equals(cert.getEnvsn()))
+                    i = PKIUtil.verifySM2Certificate(cert.getCertificate(), CommonConst.SM2_CERT_CHAIN);
+                else
+                    i = PKIUtil.verifySM2Certificate(strSignCert, cert.getCertchain());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            if (i == 0) {
+                return true;
+            } else if (i == 1) {
+                return false;
+            } else {
+                return false;
+            }
+
+
+//            return true;
+
         }
+
 
         return false;
     }
@@ -357,7 +415,15 @@ public class SealPresenter extends BasePresenter{
                                     }
                                 });
 
-                                applyByFace();
+                                if (AccountHelper.hasAuth(context)) { //账户已实名认证
+                                    applyByFace();
+                                } else {
+                                    Intent intent = new Intent(context, AuthChoiceActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    intent.putExtra("isPayAndAuth", "isPayAndAuth");
+                                    intent.putExtras(bundle);
+                                    context.startActivity(intent);
+                                }
                             } else {
                                 handler.post(new Runnable() {
                                     @Override
@@ -409,9 +475,9 @@ public class SealPresenter extends BasePresenter{
         }
 
         Intent intent = null;
-        if (accountDao.getLoginAccount().getStatus() == 2 || accountDao.getLoginAccount().getStatus() == 3 || accountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
+        if (accountDao.getLoginAccount().getStatus() == 5 || accountDao.getLoginAccount().getStatus() == 3 || accountDao.getLoginAccount().getStatus() == 4) {  //账户已实名认证
             AuthController controller = new AuthController();
-            controller.faceAuth(activity,true);
+            controller.faceAuth(activity, true);
         } else {
             intent = new Intent(context, AuthChoiceActivity.class);
             intent.putExtra("needPay", "true");

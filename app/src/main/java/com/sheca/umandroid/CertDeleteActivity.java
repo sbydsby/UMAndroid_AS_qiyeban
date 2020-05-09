@@ -210,7 +210,7 @@ public class CertDeleteActivity extends Activity {
 						else
 						   doDeleteCertByNoBlueTooth(certID);
 					}else{
-						if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())) {
+						if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
 							doDeleteSM2Cert(certID);
 						}else {
 							doDeleteCert(certID);
@@ -844,27 +844,30 @@ public class CertDeleteActivity extends Activity {
 		
 		if(null == cert)
 			return strPWD;
-		if(CommonConst.USE_FINGER_TYPE == cert.getFingertype()){
-			if(!"".equals(cert.getCerthash())) {
-				//return cert.getCerthash();
-				if(!"".equals(strPWD) && strPWD.length() > 0)
-					return strPWD;
-			}else
-			    return strPWD;
-		}
+//		if(CommonConst.USE_FINGER_TYPE == cert.getFingertype()){
+//			if(!"".equals(cert.getCerthash())) {
+//				//return cert.getCerthash();
+//				if(!"".equals(strPWD) && strPWD.length() > 0)
+//					return strPWD;
+//			}else
+//			    return strPWD;
+//		}
 
-		if (!"".equals(strPWD) && strPWD.length() > 0)
-			return strPWD;
+//		if (!"".equals(strPWD) && strPWD.length() > 0)
+//			return strPWD;
 
-/*
+
 		javasafeengine oSE = new javasafeengine();
 		byte[] bText = strPWD.getBytes();
-		byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+		byte[] bDigest = oSE.digest(bText, "SHA-256", "SUN");   //做摘要
+		if(cert.getFingertype()   == CommonConst.USE_FINGER_TYPE)
+			bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+
 		strPWDHash = new String(Base64.encode(bDigest));
 
 		return strPWDHash;
-		*/
-		return strPWD;
+
+//		return strPWD;
 	}
     
 	private void showProgDlg(String strMsg){

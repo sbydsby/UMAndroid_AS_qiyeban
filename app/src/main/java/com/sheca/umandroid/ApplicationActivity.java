@@ -192,10 +192,10 @@ public class ApplicationActivity extends Activity{
 			ApplicationActivity.this.finish();
 		} else {
 			if(mAccountDao.getLoginAccount().getActive() == 0){
-				Intent intent = new Intent(this, PasswordActivity.class);
-			    intent.putExtra("Account", mAccountDao.getLoginAccount().getName());
-			    startActivity(intent);
-			    ApplicationActivity.this.finish();  
+//				Intent intent = new Intent(this, PasswordActivity.class);
+//			    intent.putExtra("Account", mAccountDao.getLoginAccount().getName());
+//			    startActivity(intent);
+//			    ApplicationActivity.this.finish();
 			}
 			
 			applyCert = (ImageView)this.findViewById(R.id.applycertbtn);
@@ -295,7 +295,7 @@ public class ApplicationActivity extends Activity{
 		}
 
 		Intent intent = null;
-		if(mAccountDao.getLoginAccount().getStatus() == 2 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4){  //账户已实名认证
+		if(mAccountDao.getLoginAccount().getStatus() == 5 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4){  //账户已实名认证
 			AuthController controller = new AuthController();
 			controller.faceAuth(ApplicationActivity.this,true);
 		}else {
@@ -345,7 +345,7 @@ public class ApplicationActivity extends Activity{
 							 }
 						 }
 
-	            		 
+
 						 //处理服务返回值
 						 final List<CertApplyInfoLite> applications = new ArrayList<CertApplyInfoLite>();
 						 if(null != transitListArray && transitListArray.size() > 0){
@@ -353,11 +353,11 @@ public class ApplicationActivity extends Activity{
 							 JSONObject jbRet =  transitListArray.getJSONObject(i) ;
 							 if(null == jbRet.getString(CommonConst.PARAM_REQUEST_NUMBER) || "null".equals(jbRet.getString(CommonConst.PARAM_REQUEST_NUMBER)) || "".equals(jbRet.getString(CommonConst.PARAM_REQUEST_NUMBER)))
 								continue;
-								
+
 							 CertApplyInfoLite certApplyInfo = new CertApplyInfoLite();
 							 certApplyInfo.setRequestNumber(jbRet.getString(CommonConst.PARAM_REQUEST_NUMBER));
 							 certApplyInfo.setCommonName(jbRet.getString(CommonConst.PARAM_COMMON_NAME));
-							 certApplyInfo.setApplyTime(jbRet.getString(CommonConst.PARAM_APPLY_NAME));						
+							 certApplyInfo.setApplyTime(jbRet.getString(CommonConst.PARAM_APPLY_NAME));
 							 certApplyInfo.setApplyStatus(Integer.parseInt(jbRet.getString(CommonConst.PARAM_APPLY_STATUS_EX)));
 						     certApplyInfo.setBizSN(jbRet.getString(CommonConst.PARAM_ENCRYPT_CERTSN));
 						     certApplyInfo.setCertType(jbRet.getString(CommonConst.PARAM_CERT_TYPE));
@@ -370,12 +370,12 @@ public class ApplicationActivity extends Activity{
 
 						   }
 						 }
-						
+
 						 //绑定applications到mApplicationsView
 						 String[] from = { "CommonName", "ApplyTime"};
 						 int[] to = { R.id.tv_CommonName, R.id.tv_ApplyTime};
 						 mApplications = getData(applications);
-						 						 
+
 						 final ApplicationAdapter adapter = new ApplicationAdapter(ApplicationActivity.this,mApplications);
 						 //final SimpleAdapter adapter = new SimpleAdapter(ApplicationActivity.this, mApplications, R.layout.applicationitem, from, to);
 						 handler.post(new Runnable() {
@@ -385,7 +385,7 @@ public class ApplicationActivity extends Activity{
 									if(mApplications.size() == 0){
 										findViewById(R.id.Layout_cert1).setVisibility(RelativeLayout.VISIBLE);
 										findViewById(R.id.Layout_cert2).setVisibility(RelativeLayout.GONE);
-																				
+
 										if(mAccountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
 											noCertView.setImageDrawable(getResources().getDrawable(R.drawable.no_cert_company));
 										else
@@ -393,19 +393,19 @@ public class ApplicationActivity extends Activity{
 									} else{
 										findViewById(R.id.Layout_cert1).setVisibility(RelativeLayout.GONE);
 										findViewById(R.id.Layout_cert2).setVisibility(RelativeLayout.VISIBLE);
-										
+
 										/*
 										if(mIsScanDao)
 											findViewById(R.id.Layout3).setVisibility(RelativeLayout.GONE);
 										else
 										    findViewById(R.id.Layout3).setVisibility(RelativeLayout.VISIBLE);
 										*/
-										
+
 									}
 									closeProgDlg();
 								}
-							}); 
-						
+							});
+
 						 //调用多个UMSP服务进行证书下载
 						 mApplicationsView.setOnItemClickListener(new OnItemClickListener() {
 								@Override
@@ -418,15 +418,15 @@ public class ApplicationActivity extends Activity{
 									if(mBBTDeviceUsed)
 									   setBlueToothPwd(handler,position);
 									else
-									   doApplyCertByCertList(handler,position);  	
+									   doApplyCertByCertList(handler,position);
 								}
-							});		
-						 
+							});
+
 						    if(mIsDao){
 						       if(mAccountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_PERSONAL)
 						          applyByFace();
 							}
-						 
+
 					}else {
 						handler.post(new Runnable() {
 							 @Override
@@ -463,39 +463,37 @@ public class ApplicationActivity extends Activity{
         }).start();
 		
 	}
-	
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-	    // set context menu title
-		menu.setHeaderTitle("删除该证书");   
-		menu.add(0, 0, 0, "删除");
-		menu.add(0, 1, 0, "取消");   
-	}
-	
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-	    // 得到当前被选中的item信息
-	    AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-	   // Log.v("1", "context item seleted ID="+ menuInfo.id);
-	    
-	    switch(item.getItemId()){
-	       case 0:
-	          // do something	 
-	    	  //if("4".equals(mApplications.get(Integer.parseInt(menuInfo.id+"")).get("ApplyStatus")))
-	    		  //Toast.makeText(ApplicationActivity.this, "该证书申请待审核,无法删除",Toast.LENGTH_SHORT).show();
-	    	  //else 
-	    	      showDeleteCertApply(mApplications.get(Integer.parseInt(menuInfo.id+"")).get("RequestNumber"),
-	    	    		              mApplications.get(Integer.parseInt(menuInfo.id+"")).get("BizSN"));
-	          break;
-	       case 1:
-	          // do something
-	          break; 
-	    default:
-	        return super.onContextItemSelected(item);
-	    }
-	    
-	    return true;
-	}
+	//长按删除
+//	@Override
+//	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+//	    // set context menu title
+//		menu.setHeaderTitle("删除该证书");
+//		menu.add(0, 0, 0, "删除");
+//		menu.add(0, 1, 0, "取消");
+//	}
+
+	//长按删除
+//	@Override
+//	public boolean onContextItemSelected(MenuItem item) {
+//	    // 得到当前被选中的item信息
+//	    AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+//	   // Log.v("1", "context item seleted ID="+ menuInfo.id);
+//
+//	    switch(item.getItemId()){
+//	       case 0:
+//
+//	    	      showDeleteCertApply(mApplications.get(Integer.parseInt(menuInfo.id+"")).get("RequestNumber"),
+//	    	    		              mApplications.get(Integer.parseInt(menuInfo.id+"")).get("BizSN"));
+//	          break;
+//	       case 1:
+//	          // do something
+//	          break;
+//	    default:
+//	        return super.onContextItemSelected(item);
+//	    }
+//
+//	    return true;
+//	}
 	
 	private void setBlueToothPwd(final Handler handler,final int position) {
 		Builder builder = new Builder(ApplicationActivity.this);		
@@ -666,20 +664,24 @@ public class ApplicationActivity extends Activity{
             		    }
 
 							String res;
-							if (CommonConst.CERT_TYPE_SM2.equals(mApplications.get(position).get("CertType")) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mApplications.get(position).get("CertType"))) {
-//								UploadSM2Pkcs10(requestNumber,mApplications.get(position).get("CommonName"),mApplications.get(position).get("CertType"),mApplications.get(position).get("SignAlg"),mSaveType);
-								res = DownloadCert(requestNumber, CommonConst.CERT_TYPE_SM2);
-							} else {
-//								UploadPkcs10(requestNumber,mApplications.get(position).get("CommonName"),mApplications.get(position).get("CertType"),mApplications.get(position).get("SignAlg"),mSaveType);
-								res = DownloadCert(requestNumber, CommonConst.CERT_TYPE_RSA);
-							}
+
+						res = DownloadCert(requestNumber, mApplications.get(position).get("CertType"),mApplications.get(position).get("CommonName"));
+
+
+//							if (CommonConst.CERT_TYPE_SM2.equals(mApplications.get(position).get("CertType")) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mApplications.get(position).get("CertType"))) {
+////								UploadSM2Pkcs10(requestNumber,mApplications.get(position).get("CommonName"),mApplications.get(position).get("CertType"),mApplications.get(position).get("SignAlg"),mSaveType);
+//								res = DownloadCert(requestNumber, CommonConst.CERT_TYPE_SM2);
+//							} else {
+////								UploadPkcs10(requestNumber,mApplications.get(position).get("CommonName"),mApplications.get(position).get("CertType"),mApplications.get(position).get("SignAlg"),mSaveType);
+//								res = DownloadCert(requestNumber, CommonConst.CERT_TYPE_RSA);
+//							}
 
 							final APPResponse response = new APPResponse(res);
 							runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
 									closeProgDlg();
-									Toast.makeText(getApplicationContext(), response.getReturnMsg(), Toast.LENGTH_SHORT).show();
+									Toast.makeText(getApplicationContext(), response.getReturnMsg(), Toast.LENGTH_LONG).show();
 								}
 							});
 							if (response.getReturnCode() == 0 ) {
@@ -693,11 +695,13 @@ public class ApplicationActivity extends Activity{
 									mCertDao = new CertDao(getApplicationContext());
 								}
 								mCertDao.addCert(cert, AccountHelper.getUsername(getApplicationContext()));
-								Toast.makeText(ApplicationActivity.this," 下载证书成功",Toast.LENGTH_SHORT).show();
-								Log.d("unitrust", "mCertDao.addCert 成功");
-								ApplicationActivity.this.finish();;
+//								Toast.makeText(ApplicationActivity.this," 下载证书成功",Toast.LENGTH_LONG).show();
+//								Log.d("unitrust", "mCertDao.addCert 成功");
+								Intent intent = new Intent(ApplicationActivity.this, MainActivity.class);
+								startActivity(intent);
+								ApplicationActivity.this.finish();
 							}else{
-								Toast.makeText(ApplicationActivity.this,"失败："+response.getReturnMsg(),Toast.LENGTH_SHORT).show();
+//								Toast.makeText(ApplicationActivity.this,"失败："+response.getReturnMsg(),Toast.LENGTH_SHORT).show();
 							}
 
 //						} else if (returnStr.equals("1")) {  //待签发
@@ -1156,8 +1160,8 @@ public class ApplicationActivity extends Activity{
 	}
 	
 	
-	private String DownloadCert(String requestNumber,String certType) throws Exception {
-        String responseStr = controller.downloadCert(this,requestNumber,certType);
+	private String DownloadCert(String requestNumber,String certType,String certName) throws Exception {
+        String responseStr = controller.downloadCert(this,requestNumber,certType,certName);
     	return responseStr;
 	}
 	
@@ -1515,7 +1519,7 @@ public class ApplicationActivity extends Activity{
 						   mCertDao.updateCert(cert,strActName);
 						}
 						
-						if(CommonConst.CERT_TYPE_SM2.equals(certType) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(certType)){
+						if(CommonConst.CERT_TYPE_SM2.equals(certType) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(certType)||certType.contains("SM2")){
 						    cert = mCertDao.getCertByEnvsn(requestNumber+"-e",strActName);
 						    if(null != cert){
 						       cert.setUploadstatus(Cert.STATUS_UPLOAD_CERT);
@@ -1993,7 +1997,7 @@ public class ApplicationActivity extends Activity{
     	  int actStatus =  mAccountDao.getLoginAccount().getStatus();
     	  
     	  Intent intent = null;
-    	  if(actStatus == 2 || actStatus == 3 || actStatus == 4){  //账户已实名认证
+    	  if(actStatus == 5 || actStatus == 3 || actStatus == 4){  //账户已实名认证
    			 return true;
    		  }else{
    			  intent = new Intent(ApplicationActivity.this, AuthChoiceActivity.class);

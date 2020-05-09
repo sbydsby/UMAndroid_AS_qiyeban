@@ -2,6 +2,8 @@ package com.sheca.umandroid;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -12,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -22,10 +25,24 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
+
+
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facefr.util.CheckPermServer;
@@ -47,6 +64,7 @@ import com.sheca.umandroid.model.AppInfo;
 import com.sheca.umandroid.model.AppInfoEx;
 import com.sheca.umandroid.model.ShcaCciStd;
 import com.sheca.umandroid.presenter.LoginController;
+import com.sheca.umandroid.test.MainActivityNew;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
@@ -118,6 +136,8 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
     private int mPresentVersionCode = 26;//数据库备份，当前版本号
     private CertDao mCerDao = null;
     private SealInfoDao mSealInfoDao = null;
+
+    public static final String[] PERMISSION_LAUNCH_TEST = new String[]{"android.permission.CAMERA", "android.permission.READ_PHONE_STATE", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.RECORD_VIDEO", "android.permission.RECORD_AUDIO"};
 
     public String getSystemVersion() {
         return android.os.Build.VERSION.RELEASE;
@@ -195,6 +215,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
         }
 
+
         sharedPrefs = this.getSharedPreferences(CommonConst.PREFERENCES_NAME, Context.MODE_PRIVATE);
         //isNotification = sharedPrefs.getBoolean(CommonConst.SETTINGS_NOTIFICATION_ENABLED, false);
 
@@ -222,8 +243,8 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
         ht = new HandlerThread("ccit_working_thread1");
         ht.start();
         workHandler = new Handler(ht.getLooper());
-
         if (!mCheckPermServer.permissionSet(LaunchActivity.this, CheckPermServer.PERMISSION_LAUNCH))
+//        if (!mCheckPermServer.permissionSet(LaunchActivity.this, PERMISSION_LAUNCH_TEST))
             showPermissionLaunch();
         //getHttpsCert();
         //pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -360,7 +381,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
                             if (bLogined) {
                                 if (accountDao.count() > 0) {
                                     // loginUMSPService(accountDao.getLoginAccount().getName());
-
+//                                    startActivity(new Intent(LaunchActivity.this, MainActivityNew.class));
                                     autoLogin();
                                 } else {
                                     //if (!mCheckPermServer.permissionSet(LaunchActivity.this,CheckPermServer.PERMISSION_LAUNCH)){
@@ -464,7 +485,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
 
 
                 String mStrVal = uniTrust.userAutoLogin(ParamGen.getAutoLoginParam(AccountHelper.getToken(LaunchActivity.this)));
-
+                Log.e("自动登录", mStrVal);
                 try {
                     APPResponse response = new APPResponse(mStrVal);
                     final int retCode = response.getReturnCode();
@@ -481,6 +502,8 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
 //                                    mIvMine.setVisibility(View.GONE);
 //                                    dismissDg();
 //                                    checkVersion();
+
+
                                 gotoNextActivity();
 
 //                                            Toast.makeText(MainActivity.this, retCode + retMsg, Toast.LENGTH_LONG).show();
@@ -535,6 +558,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
                 try {
                     res = uniTrust.Logout(ParamGen.getLogout(AccountHelper.getToken(getApplicationContext())));
                 } catch (Exception e) {
+                    setAccountLogoutStatus();
                     AccountHelper.clearAllUserData(getApplicationContext());
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
@@ -549,44 +573,40 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
                 int retCode = response.getReturnCode();
                 final String retMsg = response.getReturnMsg();
 
-                if (retCode == com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
+//                if (retCode == com.sheca.umplus.util.CommonConst.RETURN_CODE_OK) {
 
-                    setAccountLogoutStatus();
+                setAccountLogoutStatus();
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 //                            Toast.makeText(getContext(), "账户退出成功", Toast.LENGTH_SHORT).show();
 //                            if (isUserNotificationFinger){
 //                                Toast.makeText(getContext(), "使用指纹登录需重启应用", Toast.LENGTH_SHORT).show();
 //                            }
 
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
 
-                            SharedPreferences.Editor editor = sharedPrefs.edit();
-                            editor.putString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, "");
-                            editor.commit();
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                        editor.putString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, "");
+                        editor.commit();
+
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+
 
 //                            JShcaEsStd gEsDev = JShcaEsStd.getIntence(v());
 //                            gEsDev.disconnect();
-                        }
-                    });
-                } else {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(getContext(),retMsg,Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
                     }
                 });
+//                } else {
+////                    getActivity().runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////                            Toast.makeText(getContext(),retMsg,Toast.LENGTH_SHORT).show();
+////                        }
+////                    });
+//
 
             }
         }).start();
@@ -676,20 +696,33 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
 
 
     private void gotoNextActivity() {
+//        showUserRules();//用户协议
+
+
         //SharedPreferences preferences = getSharedPreferences(CommonConst.PREFERENCES_NAME, Activity.MODE_PRIVATE);
         int savedVersionCode = sharedPrefs.getInt(CommonConst.VERSION_CODE, -1);
         if (savedVersionCode == -1) {
-            // 首次运行程序，跳转引导页
-            Intent i = new Intent(LaunchActivity.this, GuideActivity.class);
-            startActivity(i);
-            //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
-            this.finish();
+//            // 首次运行程序，跳转引导页
+//
+            if (!AccountHelper.isAgreeUserRules(LaunchActivity.this)) {
+
+                        showUserRules();//用户协议
+
+
+            } else {
+                Intent i = new Intent(LaunchActivity.this, GuideActivity.class);
+                startActivity(i);
+                //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+                this.finish();
+            }
         } else {
             // 已经运行过程序
             try {
                 int presentVersionCode = getVersionCode();
                 if (savedVersionCode == presentVersionCode) {
                     // 版本号一致，跳转首页
+
+
                     Intent i = new Intent(LaunchActivity.this, MainActivity.class);
                     startActivity(i);
                     //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
@@ -706,6 +739,122 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
                 Log.e(CommonConst.TAG, e.getMessage(), e);
             }
         }
+    }
+
+
+    public void showUserRules() {//用户协议
+        AlertDialog.Builder builder = new AlertDialog.Builder(LaunchActivity.this,R.style.dialogstyle);
+
+        builder.setCancelable(false);
+
+        View view = LayoutInflater.from(this).inflate(R.layout.item_notice_start, null, false);
+        builder.setView(view);
+        TextView txt_cancel = (TextView) view.findViewById(R.id.txt_cancel);
+        TextView txt_ok = (TextView) view.findViewById(R.id.txt_ok);
+        WebView webView=(WebView) view.findViewById(R.id.web);
+        webView.loadUrl(CommonConst.RULES_SERVER);
+//        webView.loadUrl(" https://test-ssc.mohrss.gov.cn/indep/veriPassWord?_api_signature=Uz2IT09B5SdC3RaFU5SUWcDbOoQ%3D&_api_name=get_token&_api_version=1.0.0&_api_access_key=aa340822ef4745d294cdb13ec757393a&security=MDIckNwy2jMaf%2FsE1CxdnP%2FLlTDx%2FdE2qhQye8SqL3z%2BncaUZeDa16Mv8x7%2BGQeYGDHONcHzhyj4MUHiMwgWM%2BJUNPTwTW%2Fxy8SdZlxrYBw3zDDKBktFe54s3nzyQYbJhyoHiGhEHLamMkhmgoIqHBAiQ37H2uQXCulGhw9XqtfQSlZLIc7hNtigrvvsLWXcxc1zRj4J1EtV%2BNgZTNQptGjoNirEevcWL2kYJjLzmUo%3D&api_access_key=aa340822ef4745d294cdb13ec757393a&return_url=&_api_timestamp=1584692313503&isWebView=1");
+
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setUseWideViewPort(true);  //将图片调整到适合webView的大小
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setDomStorageEnabled(true);
+
+//        TextView txt_content = (TextView) view.findViewById(R.id.txt_content);
+//        txt_content.setText(getString(R.string.fryzt_rule1) + getString(R.string.fryzt_rule2) + getString(R.string.fryzt_rule3));
+//
+//        String rule1 = getString(R.string.fryzt_rule1);
+//        String rule2 = getString(R.string.fryzt_rule2);
+//        String rule3 = getString(R.string.fryzt_rule3);
+//
+//        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+//        ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(getResources()
+//                .getColor(R.color.bg_blue));
+//        String mTitleAgreement = rule1 + rule2 + rule3;
+//        spannableStringBuilder.append(mTitleAgreement);
+//        spannableStringBuilder.setSpan(foregroundColorSpan, rule1.length(), (rule1 + rule2).length(),
+//                Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+//
+//        //设置协议点击事件
+//        ClickableSpan clickableSpan = new ClickableSpan() {
+//            @Override
+//            public void onClick(View widget) {
+//                //这里的判断是为了去掉在点击后字体出现的背景色
+//                if (widget instanceof TextView) {
+//                    ((TextView) widget).setHighlightColor(Color.TRANSPARENT);
+//                }
+//                Intent intent = new Intent(LaunchActivity.this, UserProtocolActivity.class);
+//                startActivity(intent);
+//
+//            }
+//
+//            @Override
+//            public void updateDrawState(TextPaint ds) {
+//                super.updateDrawState(ds);
+//                //去除下划线
+//                ds.setColor(getResources().getColor(R.color.bg_blue));
+//                ds.setUnderlineText(false);
+//            }
+//        };
+//        spannableStringBuilder.setSpan(clickableSpan, rule1.length(), (rule1 + rule2).length(),
+//                Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+//        txt_content.setText(spannableStringBuilder);
+//        txt_content.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+        AlertDialog dia = builder.show();
+//        dia.setView(dia.getWindow().getDecorView(),0,0,0,0);
+
+        WindowManager m = getWindowManager();
+        Display d = m.getDefaultDisplay();  //为获取屏幕宽、高
+        android.view.WindowManager.LayoutParams p = dia.getWindow().getAttributes();  //获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.5);   //高度设置为屏幕的0.3
+        p.width = (int) (d.getWidth() * 0.8);    //宽度设置为屏幕的0.5
+        dia.getWindow().setAttributes(p);     //设置生效
+
+
+//        dia.getWindow().setBackgroundDrawableResource(R.drawable.dialog_rules);
+
+        dia.setCanceledOnTouchOutside(false);//禁止点外部
+//        dia.setOnKeyListener(new DialogInterface.OnKeyListener() {//不可點返回鍵取消
+//
+//            @Override
+//
+//            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+//
+//                if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+//
+//                    return true;
+//
+//                } else {
+//
+//                    return false; // 默认返回 false
+//
+//                }
+//
+//            }
+//
+//        });
+        txt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dia.dismiss();
+                finish();
+                System.exit(0);
+            }
+        });
+        txt_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LaunchActivity.this, GuideActivity.class);
+                startActivity(i);
+                //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+              finish();
+            }
+        });
+
     }
 
     private int getVersionCode() throws Exception {
@@ -900,6 +1049,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
                 getAllAppInfos();
                 //testUCMMoudle();
 
+//                if (!mCheckPermServer.permissionSet(LaunchActivity.this, CheckPermServer.PERMISSION_LAUNCH)) {
                 if (!mCheckPermServer.permissionSet(LaunchActivity.this, CheckPermServer.PERMISSION_LAUNCH)) {
                     gotoNextActivity();
                 }

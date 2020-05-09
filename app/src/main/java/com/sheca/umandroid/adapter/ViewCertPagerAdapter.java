@@ -2,6 +2,7 @@ package com.sheca.umandroid.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -31,7 +32,10 @@ public class ViewCertPagerAdapter extends PagerAdapter {
 
 	@Override
 	public void destroyItem(View arg0, int arg1, Object arg2) {
-		((ViewPager) arg0).removeView(listViews.get(arg1 % size));
+
+		((ViewPager) arg0).removeView(listViews.get(arg1 % (listViews == null ? 0 : listViews.size())));
+
+
 	}
 
 	@Override

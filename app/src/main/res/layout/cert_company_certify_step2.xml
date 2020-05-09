@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/bg_yellow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:padding="5dp"
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@id/view_toolbar"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintLeft_toLeftOf="@id/view_toolbar"
+            app:layout_constraintRight_toRightOf="@id/view_toolbar"
+            app:layout_constraintTop_toTopOf="@id/view_toolbar" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/view_toolbar"
+            app:layout_constraintLeft_toLeftOf="@id/view_toolbar"
+            app:layout_constraintRight_toRightOf="@id/view_toolbar"
+            app:layout_constraintTop_toTopOf="@id/view_toolbar" />
+
+        <!--<com.sheca.legalcertificate.widget.TimeLineView-->
+            <!--android:id="@+id/timeline"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:visibility="gone"-->
+            <!--app:item_step1_name="@string/cert_manage_certify_step2"-->
+            <!--app:item_step2_name="@string/cert_manage_certify_step3"-->
+            <!--app:item_step3_name="@string/cert_manage_certify_step4"-->
+
+            <!--app:item_step4_visible="false"-->
+            <!--app:item_timeline_step1_color="@drawable/radius_red"-->
+            <!--app:item_timeline_step2_color="@drawable/radius_gray"-->
+            <!--app:item_timeline_step3_color="@drawable/radius_gray"-->
+            <!--app:item_timeline_step_line1_color="@drawable/line_gray"-->
+            <!--app:item_timeline_step_line2_color="@drawable/line_gray"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/tv_title" />-->
+
+        <!--<View-->
+            <!--android:id="@+id/guide_line"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="8dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:background="@color/grey3"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/timeline" />-->
+
+
+        <!--<EditText-->
+            <!--android:visibility="gone"-->
+            <!--android:id="@+id/et_input_name"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/guide_line" />-->
+
+
+        <EditText
+            android:maxLength="18"
+             android:id="@+id/et_input_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="请输入统一信用代码"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="*请输入与单位名称匹配的统一信用代码"
+            android:textColor="#D53F52"
+            android:textSize="12sp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_input_number" />
+        <!--<View-->
+        <!--android:id="@+id/guide_line2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="8dp"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:background="@color/grey_background"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/et_input_number" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_cert_legal_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/cert_manage_certify_legal_info"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/guide_line2" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_cert_legal_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/cert_manage_certify_legal_name"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tv_cert_legal_title" />-->
+
+        <!--<EditText-->
+        <!--android:id="@+id/et_input_legal_name"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:hint="@string/cert_manage_certify_company_input3"-->
+        <!--android:textSize="14sp"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tv_cert_legal_name" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_cert_legal_id"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/cert_manage_certify_company_id"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/et_input_legal_name" />-->
+
+        <!--<EditText-->
+        <!--android:id="@+id/et_input_legal_id"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:hint="@string/cert_manage_certify_input_id"-->
+        <!--android:textSize="14sp"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tv_cert_legal_id" />-->
+
+        <TextView
+            android:id="@+id/tv_cert_pwd_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/selector_register_bg_yellow"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/hint"
+            app:layout_constraintRight_toRightOf="@id/hint"
+            app:layout_constraintTop_toBottomOf="@id/hint" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

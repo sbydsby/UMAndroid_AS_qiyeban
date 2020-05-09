@@ -326,7 +326,7 @@ public class ApplyCertRequestActivity extends com.facefr.activity.BaseActivity i
 			mAccount = mAccountDao.getLoginAccount().getName();
 			//strPersonCardPhoto = person.getStrCopyIDPhoto();
 			
-			if(mAccountDao.getLoginAccount().getStatus() == 2 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4)  //账户已实名认证
+			if(mAccountDao.getLoginAccount().getStatus() == 5 || mAccountDao.getLoginAccount().getStatus() == 3 || mAccountDao.getLoginAccount().getStatus() == 4)  //账户已实名认证
 				 ((ImageView)findViewById(R.id.indicater)).setImageDrawable(getResources().getDrawable((R.drawable.icon_noface_guide_3)));
 			else
 				 ((ImageView)findViewById(R.id.indicater)).setImageDrawable(getResources().getDrawable((R.drawable.icon_face_guide_4)));  

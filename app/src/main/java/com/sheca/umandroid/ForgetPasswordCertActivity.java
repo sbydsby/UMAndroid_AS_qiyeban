@@ -430,7 +430,7 @@ public class ForgetPasswordCertActivity extends Activity {
 				       }
 			});
 
-			findViewById(R.id.textCertView).getBackground().setAlpha(100);  //0~255透明度值
+//			findViewById(R.id.textCertView).getBackground().setAlpha(100);  //0~255透明度值
     	}catch (Exception e) {
 			Log.e(CommonConst.TAG, e.getMessage(), e);
 			Toast.makeText(ForgetPasswordCertActivity.this, "获取证书错误！", Toast.LENGTH_LONG).show();
@@ -1586,7 +1586,7 @@ public class ForgetPasswordCertActivity extends Activity {
 			strCertName = "";
 		}
 		
-		if(CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()))
+		if(CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype())||cert.getCerttype().contains("SM2"))
 			strCertName += CommonConst.CERT_SM2_NAME+strBlank;
 		else
 			strCertName += CommonConst.CERT_RSA_NAME+strBlank;

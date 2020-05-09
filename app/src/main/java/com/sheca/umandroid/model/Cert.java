@@ -12,7 +12,7 @@ public class Cert {
 
     public static int STATUS_IS_SEAL = 1;
     public static int STATUS_NO_SEAL = 0;
-
+    public static int STATUS_RETURN = 5;//被否决
     private int id;
     private int sdkID;
     private String certsn;

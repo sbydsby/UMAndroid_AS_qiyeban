@@ -396,7 +396,7 @@ public class SealFragment extends Fragment {
 		}
 		
 		Intent intent = null;
-		if(accountDao.getLoginAccount().getStatus() == 2 || accountDao.getLoginAccount().getStatus() == 3 || accountDao.getLoginAccount().getStatus() == 4){  //账户已实名认证
+		if(accountDao.getLoginAccount().getStatus() == 5 || accountDao.getLoginAccount().getStatus() == 3 || accountDao.getLoginAccount().getStatus() == 4){  //账户已实名认证
 			if("".equals(sharedPrefs.getString(CommonConst.SETTINGS_FACE_AUTH_SIGN, ""))){
 				intent = new Intent(activity, com.junyufr.szt.activity.AuthMainActivity.class);
 				//intent = new Intent(activity, com.sheca.umandroid.PayActivity.class);

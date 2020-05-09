@@ -389,13 +389,13 @@ public class PasswordActivity extends Activity {
 			mTask = null;
 
 			if (success) {
-				Toast toast = Toast.makeText(getApplicationContext(),"修改成功", Toast.LENGTH_SHORT);  //显示时间较长
+				Toast toast = Toast.makeText(getApplicationContext(),"设置账户密码成功", Toast.LENGTH_SHORT);  //显示时间较长
 				toast.setGravity(Gravity.CENTER, 0, 0);  // 居中显示
 				toast.show();
 				finish();
 			} else {
 				//Toast.makeText(LoginActivity.this, mError, Toast.LENGTH_LONG).show();
-				Toast toast = Toast.makeText(getApplicationContext(),"修改失败"+strErr, Toast.LENGTH_LONG);  //显示时间较长
+				Toast toast = Toast.makeText(getApplicationContext(),"设置账户密码失败"+strErr, Toast.LENGTH_LONG);  //显示时间较长
 				toast.setGravity(Gravity.CENTER, 0, 0);  // 居中显示 
 				toast.show();
 				mNewPasswordView.requestFocus();

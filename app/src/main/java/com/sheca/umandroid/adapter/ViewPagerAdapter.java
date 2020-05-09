@@ -68,9 +68,9 @@ public class ViewPagerAdapter extends PagerAdapter {
 					}
 				});
 			}
-	
+
 		}
-		
+
 		return views.get(arg1);
 	}
 

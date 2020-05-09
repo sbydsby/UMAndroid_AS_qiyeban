@@ -195,14 +195,10 @@ public class CertRevokeActivity extends Activity {
 		
 	private  void showRenvokeCert(boolean isLogin){
 	  if(isLogin){
-		    if(CommonConst.SAVE_CERT_TYPE_BLUETOOTH == mCert.getSavetype() || CommonConst.SAVE_CERT_TYPE_SIM == mCert.getSavetype()){	
-		        doRenvokeCertByBlueTooth(certID);
-	        }else{
-		        if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+		        if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
 			        doRenvokeSM2Cert(certID);
               else
       	        doRenvokeRSACert(certID);
-	       }		       
 	  }else{
 		Builder builder = new Builder(CertRevokeActivity.this);
 		builder.setMessage("确认是否撤销证书？");
@@ -215,7 +211,7 @@ public class CertRevokeActivity extends Activity {
 			        if(CommonConst.SAVE_CERT_TYPE_BLUETOOTH == mCert.getSavetype() || CommonConst.SAVE_CERT_TYPE_SIM == mCert.getSavetype()){	
 				        doRenvokeCertByBlueTooth(certID);
 			        }else{
-				        if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+				        if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
 					        doRenvokeSM2Cert(certID);
 		                else
 		        	        doRenvokeRSACert(certID);
@@ -266,7 +262,13 @@ public class CertRevokeActivity extends Activity {
 				public void run() {		
 					try {			
 //			           doRevokeCert(handler,certId,getPWDHash(sPwd,cert));
-			           doRevokeCert(handler,certId,sPwd);
+//			           doRevokeCert(handler,certId,sPwd);
+
+						String strActName = mAccountDao.getLoginAccount().getName();
+						if (mAccountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+							strActName = mAccountDao.getLoginAccount().getName() + "&" + mAccountDao.getLoginAccount().getAppIDInfo().replace("-", "");
+
+						getCertIdByCertSn(CertRevokeActivity.this, strActName, cert.getCertsn(), getPWDHash(sPwd,cert), handler,certId);
 					}catch(Exception ex){
 						closeProgDlg();
 						Toast.makeText(CertRevokeActivity.this, "网络连接或访问服务异常", Toast.LENGTH_SHORT).show();
@@ -316,7 +318,12 @@ public class CertRevokeActivity extends Activity {
 					public void run() {		
 						try {			
 //				           doRevokeCert(handler,certId,getPWDHash(sPwd,cert));
-				           doRevokeCert(handler,certId,sPwd);
+							String strActName = mAccountDao.getLoginAccount().getName();
+							if (mAccountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+								strActName = mAccountDao.getLoginAccount().getName() + "&" + mAccountDao.getLoginAccount().getAppIDInfo().replace("-", "");
+
+							getCertIdByCertSn(CertRevokeActivity.this, strActName, cert.getCertsn(), getPWDHash(sPwd,cert), handler,certId);
+
 						}catch(Exception ex){
 							closeProgDlg();
 							Toast.makeText(CertRevokeActivity.this, "网络连接或访问服务异常", Toast.LENGTH_SHORT).show();
@@ -451,7 +458,7 @@ public class CertRevokeActivity extends Activity {
 				        });
 				        
 				        try{			
-					        doRevokeCert(handler,certId,sPwd);
+					        //doRevokeCert(handler,certId,sPwd);
 						}catch(Exception ex){
 							closeProgDlg();
 							Toast.makeText(CertRevokeActivity.this, "网络连接或访问服务异常", Toast.LENGTH_SHORT).show();
@@ -473,9 +480,46 @@ public class CertRevokeActivity extends Activity {
 			Toast.makeText(CertRevokeActivity.this,"请输入蓝牙key密码", Toast.LENGTH_SHORT).show();
 		}	
 	}
+
+	int certId=0;
+
+	public void getCertIdByCertSn(Activity context, String userName, String certSn,final  String newPwd,final Handler handler,final int oldcertId) {
+		final UniTrust uniTrustObi = new UniTrust(context, false);
+		final String param = ParamGen.getAccountCertByCertSN(context, userName, certSn);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				com.sheca.umplus.model.Cert cert = uniTrustObi.getAccountCertByCertSN(param);
+				if (null != cert) {
+					certId = cert.getId();
+					try {
+						doRevokeCert(handler,oldcertId,certId,newPwd);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else{
+
+					certDao.deleteCert(certID);
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							Toast.makeText(CertRevokeActivity.this, "证书撤销成功",Toast.LENGTH_SHORT).show();
+
+							Intent intent = new Intent(CertRevokeActivity.this, MainActivity.class);
+							startActivity(intent);
+							finish();
+						}
+					});
+
+				}
+			}
+		}).start();
+
+
+	}
 	
-	
-	private  void  doRevokeCert(final Handler handler, final int certID, final String certPwd) throws Exception{
+
+	private  void  doRevokeCert(final Handler handler, final int  oldcertId,final int certID, final String certPwd) throws Exception{
 	   handler.post(new Runnable() {
 		     @Override
 		      public void run() {
@@ -483,8 +527,8 @@ public class CertRevokeActivity extends Activity {
 		      }
 		});
 		
-		final Cert mCert = certDao.getCertByID(certID);
-		final int mSDKCertId = mCert.getSdkID();
+		final Cert mCert = certDao.getCertByID(oldcertId);
+		final int mSDKCertId = certID;
 		int nRet = -1;
 //
 //		String timeout = CertRevokeActivity.this.getString(R.string.WebService_Timeout);
@@ -679,24 +723,18 @@ public class CertRevokeActivity extends Activity {
 	   
 	private  String   getPWDHash(String strPWD,Cert cert){
 		String strPWDHash = "";
-		
-		if(null != cert && (CommonConst.USE_FINGER_TYPE == cert.getFingertype())){
-			if(!"".equals(cert.getCerthash())) {
-				//return cert.getCerthash();
-				if(!"".equals(strPWD) && strPWD.length() > 0)
-					return strPWD;
-			}else
-			    return strPWD;
-		}
 
-		if(null != cert) {
-			if (!"".equals(strPWD) && strPWD.length() > 0)
-				return strPWD;
-		}
+//		if(null != cert) {
+//			if (!"".equals(strPWD) && strPWD.length() > 0)
+//				return strPWD;
+//		}
 
 		javasafeengine oSE = new javasafeengine();
 		byte[] bText = strPWD.getBytes();
-		byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+		byte[] bDigest = oSE.digest(bText, "SHA-256", "SUN");   //做摘要
+		if(cert.getFingertype()   == CommonConst.USE_FINGER_TYPE)
+			bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+
 		strPWDHash = new String(Base64.encode(bDigest));
 		
 		return strPWDHash;

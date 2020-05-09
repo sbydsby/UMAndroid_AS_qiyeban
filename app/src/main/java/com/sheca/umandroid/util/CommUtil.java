@@ -19,9 +19,15 @@ import android.widget.Toast;
 import com.sheca.javasafeengine;
 import com.sheca.umandroid.CertDeleteActivity;
 import com.sheca.umandroid.R;
+import com.sheca.umandroid.model.Cert;
+
 
 import org.spongycastle.util.encoders.Base64;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -368,5 +374,81 @@ public class CommUtil {
             e.printStackTrace();
         }
         return bitmap;
+    }
+
+
+    //获取当前年月日时秒分
+    public static String getNowTime() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date=new Date();
+        String time =  formatter.format(date);
+        return time;
+
+    }
+
+
+
+    /**
+     * 文件转base64字符串
+     *
+     * @param file
+     * @return
+     */
+    public static String fileToBase64(File file) {
+        String base64 = null;
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            byte[] bytes = new byte[in.available()];
+            int length = in.read(bytes);
+            base64 = android.util.Base64.encodeToString(bytes, 0, length, android.util.Base64.DEFAULT);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return base64;
+
+    }
+
+    /*
+   解析证书内容展示
+  */
+    public static String getCertDetail(Cert cert, int itemNo) {
+        javasafeengine jse = new javasafeengine();
+        String result = "";
+        byte[] bCert = Base64.decode(cert.getCertificate());
+//        String commonName = jse.getCertDetail(17, bCert);//证书主题名
+//        String organization = jse.getCertDetail(14, bCert);//组织机构名
+//        String strNotBeforeTime = jse.getCertDetail(11, bCert);//证书开始时间
+//        String strValidTime = jse.getCertDetail(12, bCert);//证书截止时间
+//        Date fromDate = sdf.parse(strNotBeforeTime);
+//        Date toDate = sdf.parse(strValidTime);
+
+        try {
+            result = jse.getCertDetail(itemNo, bCert);//证书主题名
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    public static boolean isPersonNO(String temp) {//检测身份证号
+        Pattern p = Pattern.compile("^(\\d{14}|\\d{17})(X|x|\\d)$");
+        Matcher m = p.matcher(temp);
+        return m.matches();
     }
 }

@@ -2,15 +2,20 @@ package com.sheca.umandroid;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.support.multidex.MultiDex;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +35,10 @@ import dalvik.system.DexClassLoader;
 public class MyApplication extends Application {
 	protected static MyApplication instance;  
 	private String strErr ="";
+
+    private static GetuiHandler handler;
+
+    public static MainActivity mainActivityNew;
 	
 	@Override
 	public void onCreate() {
@@ -54,7 +63,7 @@ public class MyApplication extends Application {
                     .discCacheFileNameGenerator(new Md5FileNameGenerator()).tasksProcessingOrder(QueueProcessingType.LIFO).build();
             ImageLoader.getInstance().init(config);
 
-            dexTool();
+//            dexTool();
 
             instance = this;
             Thread.setDefaultUncaughtExceptionHandler(restartHandler); // 程序崩溃时触发线程  以下用来捕获程序崩溃异常
@@ -80,8 +89,43 @@ public class MyApplication extends Application {
 				
 			}
 		}).start();
-		*/	
+		*/
+
+        if (handler == null) {//个推
+            handler = new GetuiHandler();
+        }
 	}
+    public static void sendMessage(Message msg) {
+        handler.sendMessage(msg);
+    }
+    public static class GetuiHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+//                    payloadData.append((String) msg.obj);
+//                    payloadData.append("\n");
+                    if (mainActivityNew != null) {
+//                        if (MainActivityNew.tLogView != null) {
+//                            MainActivityNew.tLogView.append(msg.obj + "\n");
+//                        }
+                        mainActivityNew.showMsg(msg.obj+"");
+
+                    }
+                    break;
+
+                case 1:
+                    if (mainActivityNew != null) {
+//                        if (MainActivityNew.tLogView != null) {
+//                            MainActivityNew.tView.setText((String) msg.obj);
+                        mainActivityNew.showMsg(msg.obj+"");
+                    }
+//                    }
+                    break;
+            }
+        }
+    }
 	
 
     @SuppressLint("NewApi")
@@ -162,6 +206,10 @@ public class MyApplication extends Application {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
         instance.startActivity(intent);  
         android.os.Process.killProcess(android.os.Process.myPid());  //结束进程之前可以把你程序的注销或者退出代码放在这段代码之前  
-    } 
-
+    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 }

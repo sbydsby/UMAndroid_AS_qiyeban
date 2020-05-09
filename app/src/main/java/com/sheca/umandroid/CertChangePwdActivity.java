@@ -142,12 +142,14 @@ public class CertChangePwdActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CertChangePwdActivity.this, CertResetActivity.class);
-				intent.putExtra("CertId",certID+"");
+                intent.putExtra("CertId", certID + "");
                 startActivity(intent);
                 finish();
             }
         });
     }
+
+    boolean hasChangePws = false;
 
 
     private void changePassword() {
@@ -213,20 +215,25 @@ public class CertChangePwdActivity extends Activity {
                 // There was an error; don't attempt continue and focus the first form field with an error.
                 focusView.requestFocus();
             } else {
-                if (CommonConst.SAVE_CERT_TYPE_BLUETOOTH == mCert.getSavetype() || CommonConst.SAVE_CERT_TYPE_SIM == mCert.getSavetype()) {
-                    doChangeCertPwdByBlueTooth();
-                } else {
-                    if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())) {
+                if(mCert.getFingertype()==CommonConst.USE_FINGER_TYPE) {
+                    changeOldCertPwd(mCert, mOriginalPasswordView.getText().toString(),mNewPasswordView.getText().toString().trim());
+                }else{
+                    certId=mCert.getSdkID();
+                    if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
                         doChangeSM2CertPwd();
                         //根据SDK改变证书密码
-                        doSDKChangePwd(newPassword, newPassword);
+                        doSDKChangePwd(mNewPasswordView.getText().toString(), mNewPasswordView.getText().toString(),certId);
                     } else {
                         doChangeCertPwd();
-                        doSDKChangePwd(originalPassword, newPassword);
+                        doSDKChangePwd(mOriginalPasswordView.getText().toString(), mNewPasswordView.getText().toString(),certId);
                     }
 
 
+
                 }
+
+
+
             }
         } catch (Exception exc) {
             Log.e(CommonConst.TAG, exc.getMessage(), exc);
@@ -240,16 +247,16 @@ public class CertChangePwdActivity extends Activity {
      * @param oldPwd
      * @param newPwd
      */
-    private void doSDKChangePwd(final String oldPwd, final String newPwd) {
+    private void doSDKChangePwd(final String oldPwd, final String newPwd,final  int certId) {
         new MyAsycnTaks() {
 
             @Override
             public void preTask() {
 //				String hasholdPwd = getPWDHash(oldPwd, null);
 //				String hashnewPwd = getPWDHash(newPwd, null);
-                int msdkCertID = mCert.getSdkID();
+                int msdkCertID = certId;
                 String mTokenId = SharePreferenceUtil.getInstance(getApplicationContext()).getString(CommonConst.PARAM_TOKEN);
-                strInfo = ParamGen.fixCertPassWord(mTokenId, msdkCertID + "", oldPwd, newPwd);
+                strInfo = ParamGen.fixCertPassWord(mTokenId, msdkCertID + "", CommUtil.getPWDHash(oldPwd), CommUtil.getPWDHash(newPwd));
             }
 
             @Override
@@ -269,6 +276,75 @@ public class CertChangePwdActivity extends Activity {
 
                     //if (CertChangePwdActivity.this.isFinishing()) {
                     CertChangePwdActivity.this.finish();
+                    //}
+
+                    //Toast.makeText(CertChangePwdActivity.this, "证书修改密码成功",Toast.LENGTH_SHORT).show();
+
+                } else {
+                    closeProgDlg();
+                    //Toast.makeText(CertChangePwdActivity.this, "证书修改密码失败:"+resultStr+","+retMsg,Toast.LENGTH_SHORT).show();
+                }
+            }
+        }.execute();
+
+    }
+
+    public void getCertIdByCertSn(Activity context, String userName, String certSn,final  String newPwd,final  String newPwd1) {
+        final UniTrust uniTrustObi = new UniTrust(context, false);
+        final String param = ParamGen.getAccountCertByCertSN(context, userName, certSn);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                com.sheca.umplus.model.Cert cert = uniTrustObi.getAccountCertByCertSN(param);
+                if (null != cert) {
+                    certId = cert.getId();
+                    doSDKResetPwd(certId,newPwd,newPwd1);
+                }
+            }
+        }).start();
+
+
+    }
+
+    private void doSDKResetPwd(final int certId, final String newPwd, final String newPwd1) {
+        new MyAsycnTaks() {
+
+            @Override
+            public void preTask() {
+//				String hasholdPwd = getPWDHash(oldPwd, null);
+//				String hashnewPwd = getPWDHash(newPwd, null);
+                int msdkCertID = certId;
+                String mTokenId = SharePreferenceUtil.getInstance(getApplicationContext()).getString(CommonConst.PARAM_TOKEN);
+                strInfo = ParamGen.ResetCertPWD(mTokenId, msdkCertID + "", CommUtil.getPWDHash(newPwd));
+            }
+
+            @Override
+            public void doinBack() {
+                UniTrust mUnitTrust = new UniTrust(CertChangePwdActivity.this, false);
+                responResult = mUnitTrust.ResetCertPWD(strInfo);
+            }
+
+            @Override
+            public void postTask() {
+                final APPResponse response = new APPResponse(responResult);
+                int resultStr = response.getReturnCode();
+                final String retMsg = response.getReturnMsg();
+                if (0 == resultStr) {
+                    closeProgDlg();
+                    hasChangePws = true;
+
+                    if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                        doChangeSM2CertPwd();
+                        //根据SDK改变证书密码
+                        doSDKChangePwd(newPwd1, newPwd1,certId);
+                    } else {
+                        doChangeCertPwd();
+                        doSDKChangePwd(newPwd, newPwd1,certId);
+                    }
+                    CommUtil.resetPasswordLocked(CertChangePwdActivity.this, mCert.getId());
+
+                    //if (CertChangePwdActivity.this.isFinishing()) {
+                    //CertChangePwdActivity.this.finish();
                     //}
 
                     //Toast.makeText(CertChangePwdActivity.this, "证书修改密码成功",Toast.LENGTH_SHORT).show();
@@ -308,7 +384,7 @@ public class CertChangePwdActivity extends Activity {
                     .toByteArray()));
             cert.setKeystore(newKeyStore);
             cert.setCerthash(getPWDHash(mNewPasswordView.getText().toString(), cert));
-
+            cert.setSdkID(certId);
             String strActName = accountDao.getLoginAccount().getName();
             if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
                 strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
@@ -358,6 +434,7 @@ public class CertChangePwdActivity extends Activity {
                 Toast.makeText(CertChangePwdActivity.this, "修改证书密码成功", Toast.LENGTH_SHORT).show();
 
                 cert.setCerthash(getPWDHash(mNewPasswordView.getText().toString(), cert));
+                cert.setSdkID(certId);
                 String strActName = accountDao.getLoginAccount().getName();
                 if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
                     strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
@@ -605,34 +682,132 @@ public class CertChangePwdActivity extends Activity {
     }
 
 
+    private String getPWDHash1(String strPWD) {
+        String strPWDHash = "";
+
+
+
+       /* if (!"".equals(strPWD) && strPWD.length() > 0)
+            return strPWD;
+		*/
+        javasafeengine oSE = new javasafeengine();
+        byte[] bText = strPWD.getBytes();
+        byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
+        strPWDHash = new String(Base64.encode(bDigest));
+
+        return strPWDHash;
+    }
+
     private String getPWDHash(String strPWD, Cert cert) {
         String strPWDHash = "";
 
         if (null == cert)
             return strPWD;
 
+
+       /* if (!"".equals(strPWD) && strPWD.length() > 0)
+            return strPWD;
+		*/
+        javasafeengine oSE = new javasafeengine();
+        byte[] bText = strPWD.getBytes();
+        byte[] bDigest = oSE.digest(bText, "SHA-256", "SUN");   //做摘要
+        strPWDHash = new String(Base64.encode(bDigest));
+
+        return strPWDHash;
+    }
+
+    int certId=0;
+
+    private boolean changeOldCertPwd(Cert cert, String oldPwd,String newPwd) {
         if (CommonConst.USE_FINGER_TYPE == cert.getFingertype()) {
-            if (!"".equals(cert.getCerthash())) {
-                //return cert.getCerthash();
-                if (!"".equals(strPWD) && strPWD.length() > 0)
-                    return strPWD;
-            } else
-                return strPWD;
+            if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                int retCode = -1;
+
+                try {
+                    if (null != gUcmSdk)
+                        retCode = initShcaUCMService();
+
+                    if (retCode != 0) {
+                        Toast.makeText(CertChangePwdActivity.this, "密码分割组件初始化失败", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+
+                    int ret = gUcmSdk.verifyUserPinWithCID(cert.getContainerid(), getPWDHash1(oldPwd));
+                    if (ret != 0) {
+                        Toast.makeText(CertChangePwdActivity.this, "原证书密码错误", Toast.LENGTH_SHORT).show();
+                        return false;
+                    } else {
+                        ret = gUcmSdk.changeUserPinWithCID(cert.getContainerid(),
+                                getPWDHash1(oldPwd),
+                                getPWDHash1(oldPwd));
+
+                        if (ret == 0) {
+                            Cert newCert = cert;
+                            newCert.setCerthash(getPWDHash(oldPwd, cert));
+                            newCert.setFingertype(CommonConst.USE_NO_FINGER_TYPE);
+                            String strActName = accountDao.getLoginAccount().getName();
+                            if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+                                strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
+
+                            certDao.updateCert(newCert, strActName);
+
+
+//                            doSDKResetPwd(oldPwd);
+                            getCertIdByCertSn(CertChangePwdActivity.this,strActName,newCert.getCertsn(),oldPwd,newPwd);
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                    return false;
+                }
+            } else {
+                Cert newCert = cert;
+                String sKeyStore = cert.getKeystore();
+                byte[] bKeyStore = Base64.decode(sKeyStore);
+                ByteArrayInputStream kis = new ByteArrayInputStream(bKeyStore);
+                ByteArrayOutputStream kos = new ByteArrayOutputStream();
+
+                KeyStore oStore = null;
+                try {
+                    oStore = KeyStore.getInstance("PKCS12");
+                    oStore.load(kis, getPWDHash1(oldPwd).toCharArray());
+
+                } catch (Exception e) {
+                    Toast.makeText(CertChangePwdActivity.this, "原证书密码错误", Toast.LENGTH_SHORT).show();
+                    //CommUtil.showErrPasswordMsg(CertChangePwdActivity.this,cert.getId());
+                    return false;
+                }
+
+                try {
+                    oStore.store(kos, getPWDHash(oldPwd, cert).toCharArray());
+                    String newKeyStore = new String(Base64.encode(kos.toByteArray()));
+                    newCert.setKeystore(newKeyStore);
+                    newCert.setCerthash(getPWDHash(oldPwd, cert));
+                    newCert.setFingertype(CommonConst.USE_NO_FINGER_TYPE);
+
+                    String strActName = accountDao.getLoginAccount().getName();
+                    if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+                        strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
+
+                    certDao.updateCert(newCert, strActName);
+
+//                    doSDKResetPwd(oldPwd);
+
+                    getCertIdByCertSn(CertChangePwdActivity.this,strActName,newCert.getCertsn(),oldPwd, newPwd);
+                    //CertChangePwdActivity.this.finish();
+                } catch (Exception e) {
+                    return false;
+                }
+
+            }
+        } else {
+            return true;
         }
 
-        if (!"".equals(strPWD) && strPWD.length() > 0)
-            return strPWD;
-		/*
-		javasafeengine oSE = new javasafeengine();
-		byte[] bText = strPWD.getBytes();
-		byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
-		strPWDHash = new String(Base64.encode(bDigest));
-
-		return strPWDHash;
-		*/
-
-        return strPWD;
+        return true;
     }
+
 
     private void showProgDlg(String strMsg) {
         progDialog = new ProgressDialog(this);

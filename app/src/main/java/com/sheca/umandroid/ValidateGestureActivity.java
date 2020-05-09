@@ -27,10 +27,10 @@ public class ValidateGestureActivity extends BaseActivity2 {
                 //此处返回验证结果，true表示验证通过
                 if (isSuccess){
                     Toast.makeText(getApplicationContext(), com.sheca.thirdparty.R.string.validate_correct, Toast.LENGTH_SHORT).show();
-                    
+
                     Intent resultIntent = new Intent();
                     ValidateGestureActivity.this.setResult(RESULT_OK, resultIntent);
-                    ValidateGestureActivity.this.finish();	
+                    ValidateGestureActivity.this.finish();
                 }else{
                     Toast.makeText(getApplicationContext(), com.sheca.thirdparty.R.string.validate_fail, Toast.LENGTH_SHORT).show();
                 }

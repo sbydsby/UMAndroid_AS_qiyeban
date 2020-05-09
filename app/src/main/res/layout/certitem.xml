@@ -120,7 +120,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/list_image5"
-        android:text="duration"
+        android:text="移动设备"
         android:textColor="#000000"
         android:textSize="15sp" />
      

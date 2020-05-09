@@ -174,7 +174,7 @@ public class CertResetActivity extends Activity {
      * @param phone
      */
     private void getValidationCode(final String phone) {
-        final String strInfo = ParamGen.getValidationCodeParams(phone, "1");
+        final String strInfo = ParamGen.getValidationCodeParams(phone, "5");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -337,15 +337,23 @@ public class CertResetActivity extends Activity {
                 if (CommonConst.SAVE_CERT_TYPE_BLUETOOTH == mCert.getSavetype() || CommonConst.SAVE_CERT_TYPE_SIM == mCert.getSavetype()) {
                     doChangeCertPwdByBlueTooth();
                 } else {
-                    if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())) {
-                        doChangeSM2CertPwd();
-                        //根据SDK改变证书口令
-                        doSDKChangePwd(newPassword, newPassword);
-                    } else {
-                        doChangeCertPwd();
-                        doSDKChangePwd(originalPassword, newPassword);
-                    }
+                    if (mCert.getFingertype() == CommonConst.USE_FINGER_TYPE) {
+                        String strActName = accountDao.getLoginAccount().getName();
+                        if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
+                            strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
 
+                        getCertIdByCertSn(CertResetActivity.this,strActName,mCert.getCertsn(),newPassword, newPassword);
+                    } else {
+                        certId=mCert.getSdkID();
+                        if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                            doChangeSM2CertPwd();
+                            //根据SDK改变证书口令
+                            doSDKChangePwd(newPassword, newPassword,mCert.getId());
+                        } else {
+                            doChangeCertPwd();
+                            doSDKChangePwd(originalPassword, newPassword,mCert.getId());
+                        }
+                    }
 
                 }
             }
@@ -361,22 +369,22 @@ public class CertResetActivity extends Activity {
      * @param oldPwd
      * @param newPwd
      */
-    private void doSDKChangePwd(final String oldPwd, final String newPwd) {
+    private void doSDKChangePwd(final String oldPwd, final String newPwd,final int certid) {
         new MyAsycnTaks() {
 
             @Override
             public void preTask() {
 //				String hasholdPwd = getPWDHash(oldPwd, null);
 //				String hashnewPwd = getPWDHash(newPwd, null);
-                int msdkCertID = mCert.getSdkID();
+                int msdkCertID = certid;
                 String mTokenId = SharePreferenceUtil.getInstance(getApplicationContext()).getString(CommonConst.PARAM_TOKEN);
-                strInfo = ParamGen.fixCertPassWord(mTokenId, msdkCertID + "", mCert.getCerthash(), newPwd);
+                strInfo = ParamGen.ResetCertPWD(mTokenId, msdkCertID + "", CommUtil.getPWDHash(newPwd));
             }
 
             @Override
             public void doinBack() {
                 UniTrust mUnitTrust = new UniTrust(CertResetActivity.this, false);
-                responResult = mUnitTrust.ChangeCertPWD(strInfo);
+                responResult = mUnitTrust.ResetCertPWD(strInfo);
             }
 
             @Override
@@ -386,7 +394,7 @@ public class CertResetActivity extends Activity {
                 final String retMsg = response.getReturnMsg();
                 if (0 == resultStr) {
                     closeProgDlg();
-                    CommUtil.resetPasswordLocked(CertResetActivity.this, mCert.getId());
+
 
                     //if (CertResetActivity.this.isFinishing()) {
                     CertResetActivity.this.finish();
@@ -429,7 +437,8 @@ public class CertResetActivity extends Activity {
                     .toByteArray()));
             cert.setKeystore(newKeyStore);
             cert.setCerthash(getPWDHash(mNewPasswordView.getText().toString(), cert));
-
+            cert.setFingertype(CommonConst.USE_NO_FINGER_TYPE);
+            cert.setSdkID(certId);
             String strActName = accountDao.getLoginAccount().getName();
             if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
                 strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
@@ -471,14 +480,22 @@ public class CertResetActivity extends Activity {
                 return;
             }
 
-            ret = gUcmSdk.changeUserPinWithCID(cert.getContainerid(),
-                    cert.getCerthash(),
-                    getPWDHash(mNewPasswordView.getText().toString(), cert));
+            if(cert.getFingertype() == CommonConst.USE_FINGER_TYPE)
+               ret = gUcmSdk.changeUserPinWithCID(cert.getContainerid(),
+                        cert.getCerthash(),
+                       cert.getCerthash());
+            else
+               ret = gUcmSdk.changeUserPinWithCID(cert.getContainerid(),
+                       cert.getCerthash(),
+                       getPWDHash(mNewPasswordView.getText().toString(), cert));
 
             if (ret == 0) {
                 Toast.makeText(CertResetActivity.this, "重置证书口令成功", Toast.LENGTH_SHORT).show();
 
                 cert.setCerthash(getPWDHash(mNewPasswordView.getText().toString(), cert));
+                cert.setFingertype(CommonConst.USE_NO_FINGER_TYPE);
+                cert.setSdkID(certId);
+
                 String strActName = accountDao.getLoginAccount().getName();
                 if (accountDao.getLoginAccount().getType() == CommonConst.ACCOUNT_TYPE_COMPANY)
                     strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
@@ -506,6 +523,32 @@ public class CertResetActivity extends Activity {
                     .show();
             return;
         }
+    }
+
+    int certId = 0;
+
+    public void getCertIdByCertSn(Activity context, String userName, String certSn, final String oldpwd, final String newpwd) {
+        final UniTrust uniTrustObi = new UniTrust(context, false);
+        final String param = ParamGen.getAccountCertByCertSN(context, userName, certSn);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                com.sheca.umplus.model.Cert cert = uniTrustObi.getAccountCertByCertSN(param);
+                if (null != cert) {
+                    certId = cert.getId();
+                    if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                        doChangeSM2CertPwd();
+                        //根据SDK改变证书口令
+                        doSDKChangePwd(newpwd, newpwd,certId);
+                    } else {
+                        doChangeCertPwd();
+                        doSDKChangePwd(oldpwd, newpwd,certId);
+                    }
+                }
+            }
+        }).start();
+
+
     }
 
 
@@ -741,18 +784,17 @@ public class CertResetActivity extends Activity {
                 return strPWD;
         }
 
-        if (!"".equals(strPWD) && strPWD.length() > 0)
+      /*  if (!"".equals(strPWD) && strPWD.length() > 0)
             return strPWD;
-		/*
-		javasafeengine oSE = new javasafeengine();
-		byte[] bText = strPWD.getBytes();
-		byte[] bDigest = oSE.digest(bText, "SHA-1", "SUN");   //做摘要
-		strPWDHash = new String(Base64.encode(bDigest));
-
-		return strPWDHash;
 		*/
+        javasafeengine oSE = new javasafeengine();
+        byte[] bText = strPWD.getBytes();
+        byte[] bDigest = oSE.digest(bText, "SHA-256", "SUN");   //做摘要
+        strPWDHash = new String(Base64.encode(bDigest));
 
-        return strPWD;
+        return strPWDHash;
+
+
     }
 
     private void showProgDlg(String strMsg) {

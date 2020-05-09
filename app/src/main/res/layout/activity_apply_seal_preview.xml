@@ -5,14 +5,14 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-      <WebView 
-        android:id="@+id/webView" 
+      <WebView
+        android:id="@+id/webView"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_width="fill_parent" 
-        android:layout_height="230dp" 
-        /> 
+        android:layout_width="fill_parent"
+        android:layout_height="230dp"
+        />
         
        <ImageView
             android:id="@+id/list_image"
@@ -92,13 +92,18 @@
              android:layout_marginLeft="16dp"
              android:layout_marginRight="16dp"
              android:orientation="horizontal" >
-         <ImageView
+         <TextView
+             android:padding="8dp"
             android:id="@+id/apply_seal_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+             android:text="确定"
+             android:textSize="15sp"
+             android:gravity="center"
+             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/apply_seal_ok" />
+            android:background="@drawable/btn_login_yellow" />
  
       </RelativeLayout>
    

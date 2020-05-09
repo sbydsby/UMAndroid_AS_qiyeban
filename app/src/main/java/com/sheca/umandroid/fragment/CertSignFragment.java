@@ -66,10 +66,15 @@ public class CertSignFragment extends Fragment {
 			mCert = certDao.getCertByID(certID);
 
 			tvUserName = (TextView)view.findViewById(R.id.usernamevalue);
-			if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
-				viewSM2SignCert();
-			else
-				viewSignCert();
+//			if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()))
+//				viewSM2SignCert();
+//			else
+//				viewSignCert();
+
+		if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
+			viewSM2SignCert();
+		else
+			viewSignCert();
 
 		    return view;
 	}
@@ -156,7 +161,7 @@ public class CertSignFragment extends Fragment {
 				RelativeLayout relativeLayout2 = (RelativeLayout) view
 						.findViewById(R.id.rl_subjectUID);
 	
-				if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())){
+				if(CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")){
 					view.findViewById(R.id.relativeLayoutKeySize).setVisibility(RelativeLayout.GONE);
 				}else{
 					PublicKey publickey = oX509Cert.getPublicKey();
