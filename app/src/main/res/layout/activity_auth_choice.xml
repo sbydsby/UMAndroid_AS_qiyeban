@@ -25,6 +25,7 @@
         />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/btn_takephoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/auth_choice_input"
+        android:text="实名认证"
         style="@style/btn_ok"
         />
 

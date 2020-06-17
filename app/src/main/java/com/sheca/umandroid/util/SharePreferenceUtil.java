@@ -35,6 +35,11 @@ public class SharePreferenceUtil {
         return sharedPrefs.getBoolean(key, false);
     }
 
+    public boolean getBoolean_true(String key){
+        load();
+        return sharedPrefs.getBoolean(key, true);
+    }
+
     public void setString(String key,String value){
         load();
         SharedPreferences.Editor editor = sharedPrefs.edit();

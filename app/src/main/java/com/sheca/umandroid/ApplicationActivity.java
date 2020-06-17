@@ -42,6 +42,8 @@ import com.sheca.jshcaucmstd.JShcaUcmStd;
 import com.sheca.jshcaucmstd.JShcaUcmStdRes;
 import com.sheca.jshcaucmstd.myWebClientUtil;
 import com.sheca.shcaesdeviceinfo.shcaEsDeviceInfo;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.adapter.ApplicationAdapter;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.CertDao;
@@ -187,8 +189,19 @@ public class ApplicationActivity extends Activity{
 		
 		if (!isLoggedIn) {
 			//若账号未登录，跳转到登录页面
-			Intent intent = new Intent(ApplicationActivity.this, LoginActivity.class);													
-			startActivity(intent);	
+//			Intent intent = new Intent(ApplicationActivity.this, LoginActivity.class);
+//			startActivity(intent);
+			if (!AccountHelper.hasLogin(ApplicationActivity.this)) {
+				if (AccountHelper.isFirstLogin(ApplicationActivity.this)) {
+					Intent intentLoignV33 = new Intent(ApplicationActivity.this, LoginActivityV33.class);
+					startActivity(intentLoignV33);
+				} else {
+					Intent intentLoignV33 = new Intent(ApplicationActivity.this, ReLoginActivityV33.class);
+					startActivity(intentLoignV33);
+				}
+			}
+
+
 			ApplicationActivity.this.finish();
 		} else {
 			if(mAccountDao.getLoginAccount().getActive() == 0){

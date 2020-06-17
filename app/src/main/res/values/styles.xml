@@ -815,4 +815,24 @@
         <item name="android:windowEnterAnimation">@anim/enter_animation</item>
         <item name="android:windowExitAnimation">@anim/exit_animation</item>
     </style>
+
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+                <item name="android:windowFrame">@null</item><!--边框-->
+                <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+                <item name="android:windowIsTranslucent">false</item><!--半透明-->
+                <item name="android:windowNoTitle">true</item><!--无标题-->
+                <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+                <item name="android:backgroundDimEnabled">true</item><!--模糊-->
+            </style>
+
+    <!--底部dialog-->
+    <style name="BottomDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/translate_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_dialog_out</item>
+    </style>
 </resources>

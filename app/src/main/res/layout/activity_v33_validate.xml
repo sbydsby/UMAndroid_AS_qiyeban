@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/camera"
+        layout="@layout/view_v33_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/v33_validate"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:hint="@string/v33_login_tip5"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="1dp" />
+
+    <EditText
+        android:id="@+id/edt_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:hint="@string/v33_login_tip6"
+        android:textSize="14sp" />
+    <View
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="1dp" />
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:enabled="false"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_login_yellow"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/action_next"
+        android:textColor="@color/white" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/iv_validate_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/validate_tip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/_20dp"
+            android:paddingBottom="@dimen/_20dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_validate_tip"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/iv_validate_tip"
+            android:paddingBottom="@dimen/_20dp"
+            android:layout_marginLeft="@dimen/_20dp"
+            />
+
+
+    </RelativeLayout>
+</LinearLayout>

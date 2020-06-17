@@ -40,17 +40,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ifaa.sdk.api.AuthenticatorManager;
-import com.ifaa.sdk.auth.AuthenticatorCallback;
-import com.ifaa.sdk.auth.message.AuthenticatorMessage;
-import com.ifaa.sdk.auth.message.AuthenticatorResponse;
 import com.igexin.sdk.PushManager;
 import com.intsig.idcardscancaller.CardScanActivity;
 import com.junyufr.szt.activity.AuthMainActivity;
-import com.sheca.fingerui.FingerPrintAuthLoginActivity;
-import com.sheca.fingerui.FingerPrintToast;
-import com.sheca.fingerui.IFAAFingerprintOpenAPI;
-import com.sheca.fingerui.MainActivity.Process;
 import com.sheca.javasafeengine;
 import com.sheca.umandroid.adapter.AccountAppInfoAdapter;
 import com.sheca.umandroid.adapter.AppInfoAdapter;
@@ -67,7 +59,6 @@ import com.sheca.umandroid.model.AppInfo;
 import com.sheca.umandroid.model.AppInfoEx;
 import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.CertApplyInfoLite;
-import com.sheca.umandroid.presenter.BasePresenter;
 import com.sheca.umandroid.presenter.LoginController;
 import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommonConst;
@@ -91,7 +82,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
@@ -155,7 +145,7 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
     private List<Map<String, String>> mData = null;
     private List<Map<String, String>> mAppData = null;
 
-    private Process curProcess = Process.REG_GETREQ;
+//    private Process curProcess = Process.REG_GETREQ;
     //	private String userid = "test";
     private String secData = "";
 
@@ -173,79 +163,79 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
     boolean isSMSLogin = false;//false表示密码登录 true表示验证码登录
 
 
-    private IFAAFingerprintOpenAPI.Callback callback = new IFAAFingerprintOpenAPI.Callback() {
-        @Override
-        public void onCompeleted(int status, final String info) {
-            switch (curProcess) {
-                case AUTH_GETREQ:
-                    LoginActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            startFPActivity(false);
-                            AuthenticatorMessage requestMessage = new AuthenticatorMessage(AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST, 2);
-                            requestMessage.setData(info);
-                            LaunchActivity.authenticator.process(requestMessage, authCallback);
+//    private IFAAFingerprintOpenAPI.Callback callback = new IFAAFingerprintOpenAPI.Callback() {
+//        @Override
+//        public void onCompeleted(int status, final String info) {
+//            switch (curProcess) {
+//                case AUTH_GETREQ:
+//                    LoginActivity.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            startFPActivity(false);
+//                            AuthenticatorMessage requestMessage = new AuthenticatorMessage(AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST, 2);
+//                            requestMessage.setData(info);
+//                            LaunchActivity.authenticator.process(requestMessage, authCallback);
+//
+//                        }
+//                    });
+//                    break;
+//                case AUTH_SENDRESP:
+//                    LoginActivity.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (info.equals("Success")) {
+//                                new FingerPrintToast(LoginActivity.this, FingerPrintToast.ST_AUTHSUCCESS).show("");
+//                            } else {
+//                                new FingerPrintToast(LoginActivity.this, FingerPrintToast.ST_AUTHFAIL).show("验证指纹失败");
+//                            }
+//                            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(LoginActivity.this, 0);
+//                        }
+//                    });
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    };
 
-                        }
-                    });
-                    break;
-                case AUTH_SENDRESP:
-                    LoginActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (info.equals("Success")) {
-                                new FingerPrintToast(LoginActivity.this, FingerPrintToast.ST_AUTHSUCCESS).show("");
-                            } else {
-                                new FingerPrintToast(LoginActivity.this, FingerPrintToast.ST_AUTHFAIL).show("验证指纹失败");
-                            }
-                            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(LoginActivity.this, 0);
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    private AuthenticatorCallback authCallback = new AuthenticatorCallback() {
-        @Override
-        public void onStatus(int status) {
-            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(LoginActivity.this, status);
-        }
-
-        @Override
-        public void onResult(final AuthenticatorResponse response) {
-            String data = response.getData();
-            curProcess = Process.AUTH_SENDRESP;
-
-            if (response.getResult() == AuthenticatorResponse.RESULT_SUCCESS) {
-                IFAAFingerprintOpenAPI.getInstance().sendAuthResponeAsyn(data, secData, callback);
-            } else {
-                LoginActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //new FingerPrintToast(LoginActivity.this, FingerPrintToast.ST_AUTHTEEFAIL).show("验证指纹失败");
-                        FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(LoginActivity.this, 0);
-
-                        if (LaunchActivity.isIFAAFingerOK) {
-                            doFingerLogin();
-                        } else {
-                            if (LaunchActivity.failCount >= 3) {
-                                findViewById(R.id.password).setVisibility(RelativeLayout.VISIBLE);
-                                findViewById(R.id.passwordview).setVisibility(RelativeLayout.VISIBLE);
-                                findViewById(R.id.sign_in_button).setVisibility(RelativeLayout.VISIBLE);
-                                findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
-                                findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
-                                findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
-                            }
-                        }
-                    }
-                });
-            }
-
-        }
-    };
+//    private AuthenticatorCallback authCallback = new AuthenticatorCallback() {
+//        @Override
+//        public void onStatus(int status) {
+//            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(LoginActivity.this, status);
+//        }
+//
+//        @Override
+//        public void onResult(final AuthenticatorResponse response) {
+//            String data = response.getData();
+//            curProcess = Process.AUTH_SENDRESP;
+//
+//            if (response.getResult() == AuthenticatorResponse.RESULT_SUCCESS) {
+//                IFAAFingerprintOpenAPI.getInstance().sendAuthResponeAsyn(data, secData, callback);
+//            } else {
+//                LoginActivity.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //new FingerPrintToast(LoginActivity.this, FingerPrintToast.ST_AUTHTEEFAIL).show("验证指纹失败");
+//                        FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(LoginActivity.this, 0);
+//
+//                        if (LaunchActivity.isIFAAFingerOK) {
+//                            doFingerLogin();
+//                        } else {
+//                            if (LaunchActivity.failCount >= 3) {
+//                                findViewById(R.id.password).setVisibility(RelativeLayout.VISIBLE);
+//                                findViewById(R.id.passwordview).setVisibility(RelativeLayout.VISIBLE);
+//                                findViewById(R.id.sign_in_button).setVisibility(RelativeLayout.VISIBLE);
+//                                findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
+//                                findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
+//                                findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
+//                            }
+//                        }
+//                    }
+//                });
+//            }
+//
+//        }
+//    };
     private SealInfoDao mSealInfoDao;
     private com.sheca.umplus.model.Account accountPlus;
 
@@ -1133,9 +1123,9 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
             findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
             findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
 
-            LaunchActivity.isIFAAFingerOK = false;
-            if (null == LaunchActivity.authenticator)
-                LaunchActivity.authenticator = AuthenticatorManager.create(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT);
+//            LaunchActivity.isIFAAFingerOK = false;
+//            if (null == LaunchActivity.authenticator)
+//                LaunchActivity.authenticator = AuthenticatorManager.create(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT);
 
             ((ImageView) this.findViewById(R.id.pwdkeyboard)).setOnClickListener(new OnClickListener() {
                 @Override
@@ -1155,14 +1145,14 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
             ((ImageView) this.findViewById(R.id.finger_image)).setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFingerCheck();
+//                    showFingerCheck();
                 }
             });
 
             ((TextView) this.findViewById(R.id.finger_txt)).setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFingerCheck();
+//                    showFingerCheck();
                 }
             });
         } else {
@@ -1785,40 +1775,45 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
     /**
      * 账号必须为手机号和电子邮箱。
      */
-    private boolean isAccountValid(String account) {
-        boolean isValid = false;
-        //手机号码
-        //移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-        //联通：130,131,132,152,155,156,185,186
-        //电信：133,1349,153,180,189
-        //String MOBILE = "^1(3[0-9]|5[0-35-9]|8[025-9]|7[0-9])\\d{8}$";
-        String MOBILE = "^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\\d{8}$";
-        Pattern mobilepattern = Pattern.compile(MOBILE);
-        Matcher mobileMatcher = mobilepattern.matcher(account);
-        //邮箱
-        //p{Alpha}：内容是必选的，和字母字符[\p{Lower}\p{Upper}]等价。
-        //w{2,15}：2~15个[a-zA-Z_0-9]字符；w{}内容是必选的。
-        //[a-z0-9]{3,}：至少三个[a-z0-9]字符,[]内的是必选的。
-        //[.]：'.'号时必选的。
-        //p{Lower}{2,}：小写字母，两个以上。
-        String EMAIL = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
-        Pattern emailpattern = Pattern.compile(EMAIL);
-        Matcher emailMatcher = emailpattern.matcher(account);
-        //验证正则表达式
-        if (mobileMatcher.matches() || emailMatcher.matches()) {
-            isValid = true;
-        }
+    private boolean isAccountValid(String input) {
+        String regex = "(1[0-9][0-9]|15[0-9]|18[0-9])\\d{8}";
+        Pattern p = Pattern.compile(regex);
+        return p.matches(regex, input);//如果不是号码，则返回false，是号码则返回true
 
-        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
-        if (account.length() != 11) {
-            return false;
-        } else {
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(account);
-            isValid = m.matches();
-        }
 
-        return isValid;
+//        boolean isValid = false;
+//        //手机号码
+//        //移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+//        //联通：130,131,132,152,155,156,185,186
+//        //电信：133,1349,153,180,189
+//        //String MOBILE = "^1(3[0-9]|5[0-35-9]|8[025-9]|7[0-9])\\d{8}$";
+//        String MOBILE = "^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\\d{8}$";
+//        Pattern mobilepattern = Pattern.compile(MOBILE);
+//        Matcher mobileMatcher = mobilepattern.matcher(account);
+//        //邮箱
+//        //p{Alpha}：内容是必选的，和字母字符[\p{Lower}\p{Upper}]等价。
+//        //w{2,15}：2~15个[a-zA-Z_0-9]字符；w{}内容是必选的。
+//        //[a-z0-9]{3,}：至少三个[a-z0-9]字符,[]内的是必选的。
+//        //[.]：'.'号时必选的。
+//        //p{Lower}{2,}：小写字母，两个以上。
+//        String EMAIL = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+//        Pattern emailpattern = Pattern.compile(EMAIL);
+//        Matcher emailMatcher = emailpattern.matcher(account);
+//        //验证正则表达式
+//        if (mobileMatcher.matches() || emailMatcher.matches()) {
+//            isValid = true;
+//        }
+//
+//        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
+//        if (account.length() != 11) {
+//            return false;
+//        } else {
+//            Pattern p = Pattern.compile(regex);
+//            Matcher m = p.matcher(account);
+//            isValid = m.matches();
+//        }
+//
+//        return isValid;
     }
 
     /**
@@ -2843,27 +2838,27 @@ public class LoginActivity extends Activity implements OnSizeChangedListenner {
         LoginActivity.this.finish();
     }
 
-    private void showFingerCheck() {
-        curProcess = Process.AUTH_GETREQ;
+//    private void showFingerCheck() {
+//        curProcess = Process.AUTH_GETREQ;
+//
+//        String info = AuthenticatorManager.getAuthData(LoginActivity.this, mAccountView.getText().toString());
+//        IFAAFingerprintOpenAPI.getInstance().getAuthRequestAsyn(info, callback);
+//        secData = info;
+//    }
 
-        String info = AuthenticatorManager.getAuthData(LoginActivity.this, mAccountView.getText().toString());
-        IFAAFingerprintOpenAPI.getInstance().getAuthRequestAsyn(info, callback);
-        secData = info;
-    }
-
-    private void startFPActivity(boolean isAuthenticate) {
-        Intent intent = new Intent();
-//	        if (isAuthenticate) {
-//	            intent.putExtra(AuthenticatorMessage.KEY_OPERATIONT_TYPE,
-//	                    AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST);
-//	        }
-        intent.setClass(this, FingerPrintAuthLoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(intent);
-
-        // this.startActivityForResult(intent, FINGER_CODE);
-
-    }
+//    private void startFPActivity(boolean isAuthenticate) {
+//        Intent intent = new Intent();
+////	        if (isAuthenticate) {
+////	            intent.putExtra(AuthenticatorMessage.KEY_OPERATIONT_TYPE,
+////	                    AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST);
+////	        }
+//        intent.setClass(this, FingerPrintAuthLoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        this.startActivity(intent);
+//
+//        // this.startActivityForResult(intent, FINGER_CODE);
+//
+//    }
 
     private void doFingerLogin() {
         String act = ((EditText) findViewById(R.id.account)).getText().toString().trim();

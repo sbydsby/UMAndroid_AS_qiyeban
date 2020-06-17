@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.sheca.fingerui.MainActivity;
 import com.sheca.umandroid.FAQsActivity;
 import com.sheca.umandroid.MeChatActivity;
 import com.sheca.umandroid.NetworkOnlineActivity;
@@ -99,10 +98,10 @@ public class ServiceFragmentNew extends Fragment {
 		return view;
 	}
 	
-	private  void  showIFAATest(){
-		Intent intent = new Intent(context, MainActivity.class);
-		startActivity(intent);
-	}
+//	private  void  showIFAATest(){
+//		Intent intent = new Intent(context, MainActivity.class);
+//		startActivity(intent);
+//	}
 
 	
 }

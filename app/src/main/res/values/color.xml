@@ -85,4 +85,15 @@
 
 
     <color name="camera_background">#80000000</color>
+
+
+    <!--    自定义验证码-->
+    <color name="bottom_line_color">#DDDDDD</color>
+    <color name="bottom_line_selected_color">#253156</color>
+    <color name="cursor_color">#76C8FD</color>
+
+    <color name="bg_blue_new">#3477B9</color>
+
+
+
 </resources>

@@ -163,6 +163,58 @@ public class ParamGen {
     }
 
 
+
+    public static String getLoadLisenceParams() {
+        String strActName = CommonConst.UM_APPID;
+        String appSecret = CommonConst.UM_APP_PRIVATE_KEY;
+        String mURL = CommonConst.SERVICE_URL;
+        String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                strActName,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PACKAGE_NAME),
+                CommonConst.PACKAGE_NAME,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTHKEYID),
+                CommonConst.UM_APP_AUTH_KEY,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_VERSION),
+                com.sheca.umplus.util.CommonConst.APP_VERSION,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APP_SECRET),
+                URLEncoder.encode(appSecret),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_UMSP_SERVICE_URL),
+                mURL
+        );
+
+//        String strSign = "";
+
+//        try {
+//            //byte[] bDate = strOrgDate.getBytes("GBK");
+//            strSign = PKIUtil.getSign(strOrgDate.getBytes("UTF-8"), CommonConst.UM_APP_PRIVATE_KEY);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+//                URLEncoder.encode(strActName),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_AUTHKEYID),
+//                URLEncoder.encode(CommonConst.UM_APP_AUTH_KEY),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PACKAGE_NAME),
+//                URLEncoder.encode(CommonConst.PACKAGE_NAME),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIG_ALG),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.CERT_ALG_RSA256),
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_VERSION),
+//                com.sheca.umplus.util.CommonConst.APP_VERSION,
+//                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_SIGNATURE),
+//                URLEncoder.encode(strSign),
+//
+//        );
+
+
+        return strOrgDate;
+    }
+
+
     public static String getLoadLisenceParams(Context context) {
         String strActName = UM_APPID;
         String strOrgDate = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
@@ -302,6 +354,23 @@ public class ParamGen {
                 URLEncoder.encode(accountName),
                 URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
                 UM_APPID);
+        return strInfo;
+    }
+
+    /**
+     * 检测账户是否已经存在参数
+     */
+    public static String getCheckIsAccountExistedParams(String accountName, String accountID) {
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
+                URLEncoder.encode(accountName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                CommonConst.UM_APPID,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                CommonConst.PAPER_TYPE,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                accountID
+        );
         return strInfo;
     }
 
@@ -1138,6 +1207,89 @@ public class ParamGen {
 
         );
 
+        return strInfo;
+    }
+
+
+
+    /**
+     * 账户注册参数
+     */
+    public static String registerAccountParams(String phone, String name, String paperNo, String pwd) {
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
+                URLEncoder.encode(phone),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_COMMON_NAME),
+                URLEncoder.encode(name),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                URLEncoder.encode(CommonConst.UM_APPID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                URLEncoder.encode("1"),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                URLEncoder.encode(paperNo),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PWD),
+                URLEncoder.encode(pwd)
+        );
+        return strInfo;
+    }
+
+    //验证短信验证码
+    public static String verifyMAC(String mobile,String mac){
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_MOBILE),
+                URLEncoder.encode(mobile),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_MAC_TYPE),
+                CommonConst.MAC_TYPE_CERT_PWD,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                URLEncoder.encode(CommonConst.UM_APPID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_MAC),
+                URLEncoder.encode(mac));
+        return strInfo;
+    }
+
+    //通过验证码重置账户密码
+    public static String resetPWD(String mobile,String pwd){
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
+                URLEncoder.encode(mobile),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                URLEncoder.encode(CommonConst.UM_APPID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PWD),
+                URLEncoder.encode(pwd));
+        return strInfo;
+    }
+
+    public static String getLoginByPassword(String accountName, String password, String accountID) {
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_ACCOUNT_NAME),
+                URLEncoder.encode(accountName),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PWD),
+                URLEncoder.encode(password),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                URLEncoder.encode(CommonConst.UM_APPID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_TYPE),
+                CommonConst.PAPER_TYPE,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_PAPER_NO1),
+                URLEncoder.encode(accountID)
+        );
+
+        return strInfo;
+    }
+
+    /**
+     * 验证短信验证码
+     */
+    public static String verifyMac(String phone, String codeType, String mac) {
+        String strInfo = String.format("%s=%s&%s=%s&%s=%s&%s=%s",
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_MOBILE),
+                phone,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_MAC_TYPE),
+                codeType,
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_APPID),
+                URLEncoder.encode(CommonConst.UM_APPID),
+                URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_MAC),
+                URLEncoder.encode(mac)
+        );
         return strInfo;
     }
 }

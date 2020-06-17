@@ -181,39 +181,43 @@ public class SMSLoginActivity extends Activity {
      * 账号必须为手机号和电子邮箱。
      */
     private boolean isAccountValid(String account) {
-        boolean isValid = false;
-        //手机号码
-        //移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-        //联通：130,131,132,152,155,156,185,186
-        //电信：133,1349,153,180,189
-        //String MOBILE = "^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
-        String MOBILE = "^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\\d{8}$";
-        Pattern mobilepattern = Pattern.compile(MOBILE);
-        Matcher mobileMatcher = mobilepattern.matcher(account);
-        //邮箱
-        //p{Alpha}：内容是必选的，和字母字符[\p{Lower}\p{Upper}]等价。
-        //w{2,15}：2~15个[a-zA-Z_0-9]字符；w{}内容是必选的。
-        //[a-z0-9]{3,}：至少三个[a-z0-9]字符,[]内的是必选的。
-        //[.]：'.'号时必选的。
-        //p{Lower}{2,}：小写字母，两个以上。
-        String EMAIL = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
-        Pattern emailpattern = Pattern.compile(EMAIL);
-        Matcher emailMatcher = emailpattern.matcher(account);
-        //验证正则表达式
-        if (mobileMatcher.matches() || emailMatcher.matches()) {
-            isValid = true;
-        }
+        String regex = "(1[0-9][0-9]|15[0-9]|18[0-9])\\d{8}";
+        Pattern p = Pattern.compile(regex);
+        return p.matches(regex, account);//如果不是号码，则返回false，是号码则返回true
 
-        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
-        if (account.length() != 11) {
-            return false;
-        } else {
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(account);
-            isValid = m.matches();
-        }
-
-        return isValid;
+//        boolean isValid = false;
+//        //手机号码
+//        //移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+//        //联通：130,131,132,152,155,156,185,186
+//        //电信：133,1349,153,180,189
+//        //String MOBILE = "^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+//        String MOBILE = "^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\\d{8}$";
+//        Pattern mobilepattern = Pattern.compile(MOBILE);
+//        Matcher mobileMatcher = mobilepattern.matcher(account);
+//        //邮箱
+//        //p{Alpha}：内容是必选的，和字母字符[\p{Lower}\p{Upper}]等价。
+//        //w{2,15}：2~15个[a-zA-Z_0-9]字符；w{}内容是必选的。
+//        //[a-z0-9]{3,}：至少三个[a-z0-9]字符,[]内的是必选的。
+//        //[.]：'.'号时必选的。
+//        //p{Lower}{2,}：小写字母，两个以上。
+//        String EMAIL = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+//        Pattern emailpattern = Pattern.compile(EMAIL);
+//        Matcher emailMatcher = emailpattern.matcher(account);
+//        //验证正则表达式
+//        if (mobileMatcher.matches() || emailMatcher.matches()) {
+//            isValid = true;
+//        }
+//
+//        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
+//        if (account.length() != 11) {
+//            return false;
+//        } else {
+//            Pattern p = Pattern.compile(regex);
+//            Matcher m = p.matcher(account);
+//            isValid = m.matches();
+//        }
+//
+//        return isValid;
     }
 
     /**
@@ -750,29 +754,7 @@ public class SMSLoginActivity extends Activity {
      */
 
     public boolean userLoginByValidationCode(final String mobile, final String code) {
-        String returnStr = "";
 
-        //异步调用UMSP服务：用户登录
-        String timeout = SMSLoginActivity.this.getString(R.string.WebService_Timeout);
-        String urlPath = SMSLoginActivity.this.getString(R.string.UMSP_Service_LoginByDynamicCode);
-
-//		Map<String,String> postParams = new HashMap<String,String>();
-//		postParams.put(CommonConst.PARAM_ACCOUNT_NAME, mobile);
-//		postParams.put(CommonConst.PARAM_APPID, CommonConst.UM_APPID);
-//		postParams.put(CommonConst.PARAM_CODE, code);
-//		postParams.put(CommonConst.PARAM_MOBILE, mobile);
-//
-
-
-        //清空本地缓存
-//			WebClientUtil.cookieStore = null;
-
-//			String postParam = "";
-//			postParam = "accountName="+URLEncoder.encode(mobile, "UTF-8")+
-//					    "&appID="+URLEncoder.encode(CommonConst.UM_APPID, "UTF-8")+
-//		                "&code="+URLEncoder.encode(code, "UTF-8")+
-//                        "&mobile="+URLEncoder.encode(mobile, "UTF-8") ;
-//			responseStr = WebClientUtil.getHttpClientPost(urlPath,postParam,Integer.parseInt(timeout));
         new Thread(new Runnable() {
             @Override
             public void run() {

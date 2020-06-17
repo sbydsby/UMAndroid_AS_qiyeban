@@ -34,11 +34,11 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.sheca.umandroid"
+        applicationId "com.sheca.umee"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 29
-        versionName "4.2.1"
+        versionCode 1
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         signingConfig signingConfigs.release
@@ -104,7 +104,9 @@ dependencies {
     implementation files('libs/CheckPasswordStrength.jar')
     implementation project(':udesk')
 
-    implementation (name:'etas-release',ext:'aar')
+    implementation (name:'esand_cloud_ifaa-release.2.2.1',ext:'aar')
+    implementation (name:'esand_cloud_core-release.1.2.0',ext:'aar')
+
     implementation files('libs/okhttp-3.8.1.jar')
     implementation files('libs/okhttputils-2_6_2.jar')
     implementation files('libs/okio-1.13.0.jar')
@@ -122,9 +124,14 @@ dependencies {
 
 //    implementation(name: 'dyrz-release', ext: 'aar')
 //    implementation(name: 'facesdk-release', ext: 'aar')
-    implementation(name: 'dyrz_v3.0.0', ext: 'aar')
-    implementation(name: 'facesdk_v3.0.0', ext: 'aar')
-//    implementation(name: 'alipaySdk-15.6.5-20190718211159-noUtdid', ext: 'aar')
+
+    implementation(name: 'dyrz_v2.7.0', ext: 'aar')
+//    implementation(name: 'dyrzssl_v1.0.0', ext: 'aar')
+//    implementation(name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
+    implementation(name: 'AuthSdkV1.1.1', ext: 'aar')
+//    implementation(name: 'dyrz_v3.0.0', ext: 'aar')
+//    implementation(name: 'facesdk_v3.0.0', ext: 'aar')
+    implementation(name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
 
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 //    implementation 'com.github.bumptech.glide:glide:4.0.0-RC1'

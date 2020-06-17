@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.esandinfo.etas.ETASManager;
-import com.esandinfo.etas.IfaaBaseInfo;
-import com.ifaa.sdk.api.AuthenticatorManager;
+import com.esandinfo.ifaa.EDISAuthManager;
+import com.esandinfo.ifaa.IFAAAuthTypeEnum;
 import com.sheca.umandroid.util.CommonConst;
 import com.suke.widget.SwitchButton;
 
@@ -26,7 +25,7 @@ public class LocalPasswordActivity extends BaseActivity2 {
     
     private int nShowView  = 0;
     private boolean isFaceNoPassState=false;
-    private List<IfaaBaseInfo.IFAAAuthTypeEnum> supportBIOTypes = null;
+    private List<IFAAAuthTypeEnum> supportBIOTypes = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +48,40 @@ public class LocalPasswordActivity extends BaseActivity2 {
         sBFinger = (SwitchButton)findViewById(R.id.sb_finger);
         sBIFAAFace  = (SwitchButton)findViewById(R.id.sb_ifaa_face);
 
+//        sBFinger.setVisibility(RelativeLayout.GONE);
+//        sBIFAAFace.setVisibility(RelativeLayout.GONE);
+        findViewById(R.id.item_finger).setVisibility(RelativeLayout.GONE);
+        findViewById(R.id.item_ifaa_face).setVisibility(RelativeLayout.GONE);
+
         //ifaa指纹开关默认关闭
         isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);
-        if (LaunchActivity.isIFAAFingerUsed) {
-        	sBFinger.setVisibility(RelativeLayout.VISIBLE);
-        	findViewById(R.id.item_finger).setVisibility(RelativeLayout.VISIBLE);
-        } else {
-            if (AuthenticatorManager.isSupportIFAA(getApplicationContext(), com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT)) {
-            	sBFinger.setVisibility(RelativeLayout.VISIBLE);
-            	findViewById(R.id.item_finger).setVisibility(RelativeLayout.VISIBLE);
-            } else {
-            	sBFinger.setVisibility(RelativeLayout.GONE);
-            	findViewById(R.id.item_finger).setVisibility(RelativeLayout.GONE);
+//        if (LaunchActivity.isIFAAFingerUsed) {
+//        	sBFinger.setVisibility(RelativeLayout.VISIBLE);
+//        	findViewById(R.id.item_finger).setVisibility(RelativeLayout.VISIBLE);
+//        } else {
+
+            List<IFAAAuthTypeEnum> supportBIOTypes = EDISAuthManager.getSupportBIOTypes(this);
+
+            if (supportBIOTypes.isEmpty()) {
+                // 如果手机不支持 IFAA , 那么不需要在做其他操作。
+//                sBFinger.setVisibility(RelativeLayout.GONE);
+//                sBIFAAFace.setVisibility(RelativeLayout.GONE);
+                findViewById(R.id.item_finger).setVisibility(RelativeLayout.GONE);
+                findViewById(R.id.item_ifaa_face).setVisibility(RelativeLayout.GONE);
+            }else{
+                if (supportBIOTypes.contains(IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT)) {
+                    sBFinger.setVisibility(RelativeLayout.VISIBLE);
+                    findViewById(R.id.item_finger).setVisibility(RelativeLayout.VISIBLE);
+                }
+
+                if (supportBIOTypes.contains(IFAAAuthTypeEnum.AUTHTYPE_FACE)) {
+                    sBIFAAFace.setVisibility(RelativeLayout.VISIBLE);
+                    findViewById(R.id.item_ifaa_face).setVisibility(RelativeLayout.VISIBLE);
+                }
+
+
             }
-        }
+//        }
 
         sBFinger.setChecked(isUserNotificationFinger);
         sBFinger.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
@@ -95,7 +114,7 @@ public class LocalPasswordActivity extends BaseActivity2 {
 
 
         //人脸免密
-        sBFace = (SwitchButton)findViewById(R.id.sb_face);
+        sBFace = (SwitchButton)findViewById(R.id.sb_ifaa_face);
         sBFace.setChecked(isFaceNoPassState);
         sBFace.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
@@ -104,10 +123,11 @@ public class LocalPasswordActivity extends BaseActivity2 {
             }
         });
 
-        findViewById(R.id.item_face).setVisibility(RelativeLayout.GONE);
+        findViewById(R.id.item_ifaa_face).setVisibility(RelativeLayout.GONE);
 
-        supportBIOTypes = ETASManager.getSupportBIOTypes(getApplicationContext());
-        if (supportBIOTypes.contains(IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE)) {
+
+
+        if (supportBIOTypes.contains(IFAAAuthTypeEnum.AUTHTYPE_FACE)) {
             findViewById(R.id.item_ifaa_face).setVisibility(RelativeLayout.VISIBLE);
 
             isUserNotificationFinger = sharedPrefs.getBoolean(mUserName+CommonConst.SETTINGS_FINGER_ENABLED, false);

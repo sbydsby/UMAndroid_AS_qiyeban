@@ -27,7 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ifaa.sdk.api.AuthenticatorManager;
+
 import com.sheca.javasafeengine;
 import com.sheca.jshcaesstd.JShcaEsStd;
 import com.sheca.umandroid.dao.AccountDao;
@@ -261,11 +261,11 @@ public class MySettingsActivityNew extends Activity{
 		if(LaunchActivity.isIFAAFingerUsed){
 		    rlFinger.setVisibility(RelativeLayout.VISIBLE);
 		}else{
-			if(AuthenticatorManager.isSupportIFAA(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT)){
-				rlFinger.setVisibility(RelativeLayout.VISIBLE);
-			}else{
-			    rlFinger.setVisibility(RelativeLayout.GONE);
-			}
+//			if(AuthenticatorManager.isSupportIFAA(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT)){
+//				rlFinger.setVisibility(RelativeLayout.VISIBLE);
+//			}else{
+//			    rlFinger.setVisibility(RelativeLayout.GONE);
+//			}
 		}
 		
 		findViewById(R.id.relativeLayoutLogout).setOnClickListener(new OnClickListener() {

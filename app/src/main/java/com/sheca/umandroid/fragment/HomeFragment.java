@@ -70,6 +70,8 @@ import com.sheca.umandroid.ScanBlueToothActivity;
 import com.sheca.umandroid.ScanBlueToothSimActivity;
 import com.sheca.umandroid.SealListActivity;
 import com.sheca.umandroid.SealSignActivity;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.adapter.CertAdapter;
 
 import com.sheca.umandroid.companyCert.CompanyCertifyStep2;
@@ -275,9 +277,19 @@ public class HomeFragment extends Fragment implements DYRZResult {
         public void onClick(View v) {
 
             if (!AccountHelper.hasLogin(getContext())) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                //activity.finish();
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+//                //activity.finish();
+
+
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+
             } else {
                 //跳转到证书申请页面；
                 Intent i = new Intent(context, ApplicationActivity.class);
@@ -292,9 +304,19 @@ public class HomeFragment extends Fragment implements DYRZResult {
         public void onClick(View v) {
 
             if (!AccountHelper.hasLogin(getContext())) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                //activity.finish();
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+//                //activity.finish();
+
+
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+
             } else {
 
 //                new Thread(new Runnable() {
@@ -364,9 +386,18 @@ public class HomeFragment extends Fragment implements DYRZResult {
         public void onClick(View v) {
 
             if (!AccountHelper.hasLogin(getContext())) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+//                getActivity().finish();
+
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+
             } else {
                 if (accountDao.getLoginAccount().getActive() == 0) {
                     Intent intent = new Intent(context, PasswordActivity.class);
@@ -492,8 +523,17 @@ public class HomeFragment extends Fragment implements DYRZResult {
         @Override
         public void onClick(View v) {
             if (!AccountHelper.hasLogin(getContext())) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+
                 return;
             }
 
@@ -530,8 +570,18 @@ public class HomeFragment extends Fragment implements DYRZResult {
         ib_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, LoginActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(context, LoginActivity.class);
+//                startActivity(i);
+
+
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+
             }
         });
 
@@ -1895,7 +1945,7 @@ public class HomeFragment extends Fragment implements DYRZResult {
         progDialog.setCancelable(false);
         progDialog.show();
 
-        new Thread() {
+         new Thread() {
             @Override
             public void run() {
                 if (signDate != null) {
@@ -3349,7 +3399,10 @@ public class HomeFragment extends Fragment implements DYRZResult {
         for (Cert cert : certList) {
             if (null == cert.getCertificate() || "".equals(cert.getCertificate()))
                 continue;
-
+            if (getCertType(cert) == false&&!com.sheca.umplus.util.PKIUtil.isAccountCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
+            if (getCertType(cert) == true&&! com.sheca.umplus.util.PKIUtil.isOrgCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
             if (verifyCert(cert, false)) {
                 if (verifyDevice(cert, false)) {
                     if (cert.getStatus() == Cert.STATUS_DOWNLOAD_CERT) {
@@ -4615,5 +4668,11 @@ public class HomeFragment extends Fragment implements DYRZResult {
                 return;
             }
         }
+    }
+
+    private boolean getCertType(Cert cert) {  //true 单位证书 false个人证书
+        Log.e("类型", cert.getCerttype());
+        return !cert.getCerttype().contains("个人");
+
     }
 }

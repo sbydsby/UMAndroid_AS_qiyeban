@@ -157,7 +157,23 @@
 -keep class com.alibaba.fastjson.** { *; }
 -keep class org.** { *; }
 -keep class net.** { *; }
--keep class com.tencent.** { *; }
+-keep class com.esandinfo.** { *; }
+-keep class com.ifaa.** { *; }
+-keep class org.ifaa.** { *; }
+
+#解决rxjava混淆问题
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+
 # SHECA相关
 
 -keep class com.intsig.** {*;}

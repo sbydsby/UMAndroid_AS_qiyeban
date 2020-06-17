@@ -50,6 +50,8 @@ import com.sheca.umandroid.LoginActivity;
 import com.sheca.umandroid.MainActivity;
 import com.sheca.umandroid.R;
 import com.sheca.umandroid.ScanBlueToothSimActivity;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.adapter.Entity;
 import com.sheca.umandroid.adapter.ViewCertPagerAdapter;
 import com.sheca.umandroid.dao.AccountDao;
@@ -65,6 +67,7 @@ import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.WebClientUtil;
+import com.sheca.umplus.util.PKIUtil;
 
 import net.sf.json.JSONObject;
 
@@ -180,7 +183,6 @@ public class CertFragmentNew extends Fragment {
             context = view.getContext();
 
 
-
             jse = new javasafeengine();
             certDao = new CertDao(context);
             accountDao = new AccountDao(context);
@@ -233,8 +235,19 @@ public class CertFragmentNew extends Fragment {
 
             if (accountDao.count() == 0) {
                 clearCertList();
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+                if (!AccountHelper.hasLogin(getActivity())) {
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+                }
+
+
                 //activity.finish();
                 return view;
             }
@@ -307,7 +320,7 @@ public class CertFragmentNew extends Fragment {
             strActName = accountDao.getLoginAccount().getName() + "&" + accountDao.getLoginAccount().getAppIDInfo().replace("-", "");
 
         certList = certDao.getAllCerts(strActName);
-        
+
         for (Cert cert : certList) {
             if (cert.getEnvsn().indexOf("-e") != -1)
                 continue;
@@ -325,9 +338,15 @@ public class CertFragmentNew extends Fragment {
                 continue;
             }
 
-          if (cert.getEnvsn().indexOf("-e") != -1) {//过滤加密证书
-              continue;
+            if (cert.getEnvsn().indexOf("-e") != -1) {//过滤加密证书
+                continue;
             }
+            if (getCertType(cert) == false&&!PKIUtil.isAccountCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
+            if (getCertType(cert) == true&&! PKIUtil.isOrgCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
+
+
 
             if (cert.getStatus() == Cert.STATUS_DOWNLOAD_CERT || cert.getStatus() == Cert.STATUS_RENEW_CERT) {
                 Map<String, String> map = new HashMap<String, String>();
@@ -345,7 +364,7 @@ public class CertFragmentNew extends Fragment {
                 map.put("organization", organization);
                 map.put("commonname", commonName);
 
-                if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype())||cert.getCerttype().contains("SM2"))
+                if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) || cert.getCerttype().contains("SM2"))
                     map.put("certtype", CommonConst.CERT_SM2_NAME);
                 else
                     map.put("certtype", CommonConst.CERT_RSA_NAME);
@@ -371,7 +390,6 @@ public class CertFragmentNew extends Fragment {
                 } else {
                     map.put("certtypemore", "个人证书");
                 }
-
 
 
                 if (isCertUpdateValid(cert.getCertificate()))
@@ -569,8 +587,18 @@ public class CertFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 if (accountDao.count() == 0) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    startActivity(intent);
+                    if (!AccountHelper.hasLogin(getActivity())) {
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
+
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    startActivity(intent);
                 } else {
                     try {
                         final Handler handler = new Handler(context.getMainLooper());
@@ -625,8 +653,17 @@ public class CertFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 if (accountDao.count() == 0) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    startActivity(intent);
+                    if (!AccountHelper.hasLogin(getActivity())) {
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
                 } else {
                     //跳转到证书申请页面；
                     Intent i = new Intent(context, ApplicationActivity.class);
@@ -770,8 +807,17 @@ public class CertFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 if (accountDao.count() == 0) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    startActivity(intent);
+                    if (!AccountHelper.hasLogin(getActivity())) {
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
                 }
             }
         });
@@ -781,8 +827,17 @@ public class CertFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 if (accountDao.count() == 0) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    startActivity(intent);
+                    if (!AccountHelper.hasLogin(getActivity())) {
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
                 }
             }
         });
@@ -791,8 +846,17 @@ public class CertFragmentNew extends Fragment {
             @Override
             public void onClick(View v) {
                 if (accountDao.count() == 0) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    startActivity(intent);
+                    if (!AccountHelper.hasLogin(getActivity())) {
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
                 }
             }
         });
@@ -1199,7 +1263,7 @@ public class CertFragmentNew extends Fragment {
 
                                             String responseStr = "";
 
-                                            if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
+                                            if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2"))
                                                 responseStr = UploadSM2Pkcs10(handler, mCert.getCertsn(), mCert.getCerttype(), mCert.getSavetype(), mCert.getStatus(), prikeyPassword);
                                             else
                                                 responseStr = UploadPkcs10(handler, mCert.getCertsn(), mCert.getCerttype(), mCert.getSavetype(), mCert.getStatus(), prikeyPassword);
@@ -1226,7 +1290,7 @@ public class CertFragmentNew extends Fragment {
 
                                                 //设置时间间隔，等待后台签发证书
                                                 String threadSleepTime = activity.getString(R.string.Thread_Sleep);
-                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                                                     certSaveType = CommonConst.SAVE_CERT_TYPE_SM2;
                                                     Thread.sleep(Long.parseLong(threadSleepTime) * 2);   //签发sm2证书等待时间需10秒
                                                 } else {
@@ -1235,7 +1299,7 @@ public class CertFragmentNew extends Fragment {
                                                 }
 
                                                 //下载证书
-                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2"))
+                                                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2"))
                                                     responseStr = DownloadSM2Cert(strENVSN, mCert.getSavetype(), mCert.getCerttype());
                                                 else
                                                     responseStr = DownloadCert(strENVSN, mCert.getSavetype(), mCert.getCerttype());
@@ -1450,7 +1514,7 @@ public class CertFragmentNew extends Fragment {
         if (CommonConst.SAVE_CERT_TYPE_BLUETOOTH == cert.getSavetype() || CommonConst.SAVE_CERT_TYPE_SIM == cert.getSavetype()) {
             return true;
         } else {
-            if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+            if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                 if (null == ShcaCciStd.gSdk || ShcaCciStd.errorCode != 0)
                     initShcaCciStdService();
 
@@ -1532,7 +1596,7 @@ public class CertFragmentNew extends Fragment {
                 if (null == devInfo)
                     gEsDev.connect(EsIBankDevice.TYPE_BLUETOOTH, sharedPrefs.getString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, ""));
 
-                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                     if (null != gEsDev.readSM2SignatureCert() && !"".equals(gEsDev.readSM2SignatureCert()))
                         nRet = gEsDev.detroySM2SignCert(certPwd);
                     if (null != gEsDev.readSM2EncryptCert() && !"".equals(gEsDev.readSM2EncryptCert()))
@@ -1545,7 +1609,7 @@ public class CertFragmentNew extends Fragment {
                 if (!ScanBlueToothSimActivity.gKsSdk.isConnected())
                     ScanBlueToothSimActivity.gKsSdk.connect(sharedPrefs.getString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, ""), "778899", 500);
 
-                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype())||mCert.getCerttype().contains("SM2")) {
+                if (CommonConst.CERT_TYPE_SM2.equals(mCert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(mCert.getCerttype()) || mCert.getCerttype().contains("SM2")) {
                     if (null != ScanBlueToothSimActivity.gKsSdk.readSM2SignatureCert() && !"".equals(ScanBlueToothSimActivity.gKsSdk.readSM2SignatureCert()))
                         nRet = ScanBlueToothSimActivity.gKsSdk.detroySM2KeyPairAndCert(certPwd);
                 } else {
@@ -2495,7 +2559,7 @@ public class CertFragmentNew extends Fragment {
             strCertName = "";
         }
 
-        if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype())||cert.getCerttype().contains("SM2"))
+        if (CommonConst.CERT_TYPE_SM2.equals(cert.getCerttype()) || CommonConst.CERT_TYPE_SM2_COMPANY.equals(cert.getCerttype()) || cert.getCerttype().contains("SM2"))
             strCertName += CommonConst.CERT_SM2_NAME + strBlank;
         else
             strCertName += CommonConst.CERT_RSA_NAME + strBlank;

@@ -23,19 +23,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ifaa.sdk.api.AuthenticatorManager;
+
+import com.esandinfo.ifaa.EDISAuthManager;
+import com.esandinfo.ifaa.IFAAAuthTypeEnum;
 import com.sheca.jshcaesstd.JShcaEsStd;
 import com.sheca.umandroid.AboutActivity;
 import com.sheca.umandroid.CSActivity;
 import com.sheca.umandroid.LaunchActivity;
 import com.sheca.umandroid.LocalPasswordActivity;
 import com.sheca.umandroid.LoginActivity;
+import com.sheca.umandroid.MainActivity;
 import com.sheca.umandroid.PasswordActivity;
 import com.sheca.umandroid.R;
 import com.sheca.umandroid.SettingFingerTypeActivity;
 import com.sheca.umandroid.SettingLogUploadTypeActivity;
 import com.sheca.umandroid.SettingVersionActivity;
 import com.sheca.umandroid.UserProtocolActivity;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.model.APPResponse;
 import com.sheca.umandroid.model.Account;
@@ -141,8 +146,17 @@ public class MineFragmentV3 extends Fragment {
 
         if (!AccountHelper.hasLogin(getContext())) {
             AccountHelper.clearAllUserData(getContext());
-            Intent intent = new Intent(context, LoginActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(context, LoginActivity.class);
+//            startActivity(intent);
+
+                if (AccountHelper.isFirstLogin(getActivity())) {
+                    Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                    startActivity(intentLoignV33);
+                } else {
+                    Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                    startActivity(intentLoignV33);
+                }
+
             getActivity().finish();
         }
     }
@@ -260,8 +274,18 @@ public class MineFragmentV3 extends Fragment {
                     intent.putExtra("Account", AccountHelper.getUsername(getContext()));
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getContext(), LoginActivity.class);
+//                    startActivity(intent);
+
+                    if (!AccountHelper.hasLogin(getActivity())) {
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
                 }
             }
         });
@@ -361,13 +385,16 @@ public class MineFragmentV3 extends Fragment {
             switchButton.setVisibility(RelativeLayout.GONE);
             view.findViewById(R.id.item_ifaa).setVisibility(RelativeLayout.GONE);
         } else {
-            if (AuthenticatorManager.isSupportIFAA(getContext(), com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT)) {
+            List<IFAAAuthTypeEnum> supportBIOTypes = EDISAuthManager.getSupportBIOTypes(getContext());
+
+            if (supportBIOTypes.isEmpty()) {
                 switchButton.setVisibility(RelativeLayout.GONE);
                 view.findViewById(R.id.item_ifaa).setVisibility(RelativeLayout.GONE);
-            } else {
+            }else {
                 switchButton.setVisibility(RelativeLayout.GONE);
                 view.findViewById(R.id.item_ifaa).setVisibility(RelativeLayout.GONE);
             }
+
         }
 
 
@@ -416,8 +443,17 @@ public class MineFragmentV3 extends Fragment {
                     res = uniTrust.Logout(ParamGen.getLogout(AccountHelper.getToken(getContext())));
                 }catch(Exception e){
                     AccountHelper.clearAllUserData(getContext());
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                    startActivity(intent);
+
+                        if (AccountHelper.isFirstLogin(getActivity())) {
+                            Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+
                     getActivity().finish();
                 }
 
@@ -441,8 +477,18 @@ public class MineFragmentV3 extends Fragment {
                                 Toast.makeText(getContext(), "使用指纹登录需重启应用", Toast.LENGTH_SHORT).show();
                             }
 
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                            startActivity(intent);
+
+                            if (!AccountHelper.hasLogin(getActivity())) {
+                                if (AccountHelper.isFirstLogin(getActivity())) {
+                                    Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                                    startActivity(intentLoignV33);
+                                } else {
+                                    Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                                    startActivity(intentLoignV33);
+                                }
+                            }
 
                             SharedPreferences.Editor editor = sharedPrefs.edit();
                             editor.putString(CommonConst.SETTINGS_BLUEBOOTH_DEVICE, "");

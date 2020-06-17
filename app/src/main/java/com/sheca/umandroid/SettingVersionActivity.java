@@ -50,9 +50,9 @@ public class SettingVersionActivity extends Activity {
 		ifaaTest.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(SettingVersionActivity.this, com.esandinfo.IfaaRxjavaDemoActivity.class);
-				startActivity(i);
-				SettingVersionActivity.this.finish();
+//				Intent i = new Intent(SettingVersionActivity.this, com.esandinfo.IfaaRxjavaDemoActivity.class);
+//				startActivity(i);
+//				SettingVersionActivity.this.finish();
 			}
 		});
 	}

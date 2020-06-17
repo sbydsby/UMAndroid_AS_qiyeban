@@ -1,425 +1,241 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+           tools:ignore="MissingTranslation"
+    >
 
-    <!-- Strings related to WebService Access -->
-    <!-- <string name="UMSP_Service_Domain">192.168.2.211</string>-->
-    <string name="WebService_Timeout">60000</string>
+    <string name="WebService_Timeout" >60000</string>
     <string name="Thread_Sleep">5000</string>
 
 
-    <!--<string name="UM_Base_Service">/ucm/umspservice/v4</string>-->
-
-    <!--<string name="UMSP_Base_Service">http://202.96.220.164/ucm/umspservice/v4</string>-->
-
-    <!--<string name="UMSP_Service_GetTPALoginRequest">http://202.96.220.164/umsp/umspservice/v4/GetTPALoginRequest</string>-->
-
-    <!--<string name="UMSP_Service_LoginFromTPA">http://202.96.220.164/umsp/umspservice/v4/LoginByPWD</string>-->
-
-    <!--<string name="UMSP_Service_ApplyCert">http://202.96.220.164/umsp/umspservice/v4/ApplyPersonCert</string>-->
-
-    <!--<string name="UMSP_Service_ApplyOrgCert">http://202.96.220.164/umsp/umspservice/v4/ApplyOrgCert</string>-->
-
-    <!--<string name="UMSP_Service_FaceRecognition">http://202.96.220.166:8080/UMAPI/FaceRecognition</string>-->
-
-    <!--<string name="UMSP_Service_Logout">http://202.96.220.164/umsp/umspservice/v4/Logout</string>-->
-
-    <!--<string name="UMSP_Service_Login">http://202.96.220.164/umsp/umspservice/v4/Login</string>-->
-
-    <!--<string name="UMSP_Service_ChangePassword">http://202.96.220.164/umsp/umspservice/v4/ChangePassword</string>-->
-
-    <!--<string name="UMSP_Service_GetCertApplyList">http://202.96.220.164/umsp/umspservice/v4/GetCertApplyList</string>-->
-
-    <!--<string name="UMSP_Service_GetCertApplyListEx">http://202.96.220.164/umsp/umspservice/v4/GetCertApplyListEx</string>-->
-
-    <!--<string name="UMSP_Service_QueryCertApplyStatus">http://202.96.220.164/umsp/umspservice/v4/QueryCertBizStatus</string>-->
-
-    <!--<string name="UMSP_Service_UploadPkcs10">http://202.96.220.164/umsp/umspservice/v4/UploadPkcs10</string>-->
-
-    <!--<string name="UMSP_Service_DownloadCert">http://202.96.220.164/umsp/umspservice/v4/DownloadCert</string>-->
-
-    <!--<string name="UMSP_Service_SetSuccessStatus">http://202.96.220.164/umsp/umspservice/v4/SetCertDelivery</string>-->
-
-    <!--<string name="UMSP_Service_GetAppLatestVersion">http://202.96.220.164/umsp/umspservice/v4/GetClientLatestInfo</string>-->
-
-    <!--<string name="UMSP_Service_ApplyCertByFaceRecognition">http://202.96.220.166:8080/UMAPI/ApplyCertByFaceRecognition</string>-->
-
-    <!--<string name="UMSP_Service_ApplyCertByFaceRecognitionRealTime">http://202.96.220.166:8080/UMAPI/ApplyCertByFaceRecognitionRealTime</string>-->
-
-    <!--<string name="UMSP_Service_GetTaskGUID">http://202.96.220.164/umsp/umspservice/v4/GetTaskGUID</string>-->
-
-    <!--<string name="UMSP_Service_RegisterPersonalAccount">http://202.96.220.164/umsp/umspservice/v4/RegisterPersonalAccount</string>-->
-
-    <!--<string name="UMSP_Service_GetValidationCode">http://202.96.220.164/umsp/umspservice/v4/GetMAC</string>-->
-
-    <!--<string name="UMSP_Service_GetAccountInfo">http://202.96.220.164/umsp/umspservice/v4/GetAccountInfo</string>-->
-
-    <!--<string name="UMSP_Service_GetPersonalInfo">http://202.96.220.164/umsp/umspservice/v4/GetPersonalInfo</string>-->
-
-    <!--<string name="UMSP_Service_GetOrgInfo">http://202.96.220.164/umsp/umspservice/v4/GetOrgInfo</string>-->
-
-    <!--<string name="UMSP_Service_IsAccountExisted">http://202.96.220.164/umsp/umspservice/v4/IsAccountExisted</string>-->
-
-    <!--<string name="UMSP_Service_VerifyMobile">http://202.96.220.164/umsp/umspservice/v4/VerifyMobile</string>-->
-
-    <!--<string name="UMSP_Service_VerifyCertSignature">http://202.96.220.164/umsp/umspservice/v4/VerifyCertSignature</string>-->
-
-    <!--<string name="UMSP_Service_SetAccountPassword">http://202.96.220.164/umsp/umspservice/v4/SetAccountPassword</string>-->
-
-    <!--<string name="UMSP_Service_IsAccountReal">http://202.96.220.164/umsp/umspservice/v4/IsAccountReal</string>-->
-
-    <!--<string name="UMSP_Service_SubmitManualCheckRequest">http://202.96.220.164/umsp/umspservice/v4/SubmitManualCheckRequest</string>-->
-
-    <!--<string name="UMSP_Service_GetManualCheckFailedReason">http://202.96.220.164/umsp/umspservice/v4/GetManualCheckFailedReason</string>-->
-
-    <!--<string name="UMSP_Service_DeleteCertApply">http://202.96.220.164/umsp/umspservice/v4/DeleteCertApply</string>-->
-
-    <!--<string name="UMSP_Service_UploadCertRecord">http://202.96.220.164/umsp/umspservice/v4/UploadRecord</string>-->
-
-    <!--<string name="UMSP_Service_GetAppInfo">http://202.96.220.164/umsp/umspservice/v4/GetAppInfo</string>-->
-
-    <!--<string name="UMSP_Service_GetAllAppInfos">http://202.96.220.164/umsp/umspservice/v4/GetAccountAppList</string>-->
-
-    <!--<string name="UMSP_Service_GetAppLicence">http://202.96.220.164/umsp/umspservice/v4/GetAppLicence</string>-->
-
-    <!--<string name="UMSP_Service_LoginByDynamicCode">http://202.96.220.164/umsp/umspservice/v4/LoginByMAC</string>-->
-
-    <!--<string name="UMSP_Service_RegisterPersonalAccountFromTPA">http://202.96.220.164/umsp/umspservice/v4/RegisterAccount</string>-->
-
-    <!--<string name="UMSP_Service_MakeSeal">http://202.96.220.164/umsp/umspservice/v4/MakeSeal</string>-->
-
-    <!--<string name="UMSP_Service_ApplySeal">http://202.96.220.164/umsp/umspservice/v4/ApplySeal</string>-->
-
-    <!--<string name="UMSP_Service_QuerySeal">http://202.96.220.164/umsp/umspservice/v4/QuerySealStatus</string>-->
-
-    <!--<string name="UMSP_Service_VerifySeal">http://202.96.220.164/umsp/umspservice/v4/GetSeal</string>-->
-
-    <!--<string name="UMSP_Service_SetSealStatus">http://202.96.220.164/umsp/umspservice/v4/SetSealStatus</string>-->
-
-    <!--<string name="UMSP_Service_VerifySealEx">http://202.96.220.164/umsp/umspservice/v4/VerifySeal</string>-->
-
-    <!--<string name="UMSP_Service_RenewCert">http://202.96.220.164/umsp/umspservice/v4/RenewCert</string>-->
-
-    <!--<string name="UMSP_Service_RevokeCert">http://202.96.220.164/umsp/umspservice/v4/RevokeCert</string>-->
-
-    <!--<string name="UMSP_Service_ReissueCert">http://202.96.220.164/umsp/umspservice/v4/ReissueCert</string>-->
-
-    <!--<string name="UMSP_Service_ModifyCert">http://202.96.220.164/umsp/umspservice/v4/ModifyCert</string>-->
-
-    <!--<string name="UMSP_Service_PreLogin">http://202.96.220.164/umsp/umspservice/v4/PreLogin</string>-->
-
-    <!--<string name="UMSP_Service_SetAccountVerification">http://202.96.220.164/umsp/umspservice/v4/SetAccountCertification</string>-->
-
-    <!--<string name="UMSP_Service_GetAccountCertification">http://202.96.220.164/umsp/umspservice/v4/GetAccountCertification</string>-->
-
-    <!--<string name="UMSP_Service_GetCertBizs">http://202.96.220.164/umsp/umspservice/v4/GetCertBizs</string>-->
-
-    <!--<string name="UMSP_Service_GetDeviceInfo">http://202.96.220.164/umsp/umspservice/v4/GetDeviceInfo</string>-->
-
-    <!--<string name="UMSP_Service_SetMobile">http://202.96.220.164/umsp/umspservice/v4/SetMobile</string>-->
-
-    <!--<string name="UMSP_Service_IFAAProxy">http://202.96.220.164/umsp/umspservice/v4/IFAAProxy</string>-->
-
-    <!--<string name="UMSP_Service_QueryAllCertApp">http://202.96.220.164/umsp/umspservice/v4/QueryAllCertApp</string>-->
-
-    <!--<string name="UMSP_Service_QueryCertApp">http://202.96.220.164/umsp/umspservice/v4/QueryCertApp</string>-->
-
-    <!--<string name="UMSP_Service_ApplyCertApp">http://202.96.220.164/umsp/umspservice/v4/ApplyCertApp</string>-->
-
-    <!--<string name="UMSP_Service_RenewCertApp">http://202.96.220.164/umsp/umspservice/v4/RenewCertApp</string>-->
-
-    <!--<string name="UMSP_Service_RevokeCertApp">http://202.96.220.164/umsp/umspservice/v4/RevokeCertApp</string>-->
-
-    <!--<string name="UMSP_Service_AuthOrg">http://202.96.220.164/umsp/umspservice/v4/AuthOrg</string>-->
-
-    <!--<string name="UMSP_Service_VerifyOrg">http://202.96.220.164/umsp/umspservice/v4/VerifyOrg</string>-->
-
-    <!--<string name="UMSP_Service_ApplyOrgPay">http://202.96.220.164/umsp/umspservice/v4/ApplyOrgPay</string>-->
-
-    <!--<string name="UMSP_Service_AuthOrgPay">http://202.96.220.164/umsp/umspservice/v4/AuthOrgPay</string>-->
-
-    <!--<string name="UMSP_Service_GetBankList">http://202.96.220.164/umsp/umspservice/v4/GetBankList</string>-->
-
-    <!--<string name="UMSP_Service_QueryOrgPay">http://202.96.220.164/umsp/umspservice/v4/QueryOrgPay</string>-->
-
-    <!--<string name="UMSP_Service_ApplyPersonCertLite">http://202.96.220.164/umsp/umspservice/v4/ApplyPersonCertLite</string>-->
-
-    <!--<string name="UMSP_Service_ApplyOrgCertLite">http://202.96.220.164/umsp/umspservice/v4/ApplyOrgCertLite</string>-->
-
-    <!--<string name="UMSP_Service_AliPay">http://202.96.220.164/umsp/umspservice/v4/AliPay</string>-->
-
-    <!--<string name="UMSP_Service_WXPay">http://202.96.220.164/umsp/umspservice/v4/WXPay</string>-->
-
-    <!--<string name="UMSP_Service_QueryPay">http://202.96.220.164/umsp/umspservice/v4/QueryPay</string>-->
-
-    <!--<string name="UMSP_Service_GetNonce">http://202.96.220.164/umsp/umspservice/v4/GetNonce</string>-->
-
-    <!--<string name="UMSP_Service_AuthLRByMAC">http://202.96.220.164/umsp/umspservice/v4/AuthLRByMAC</string>-->
-
-    <!--<string name="UMSP_Service_IsOrgCertFree">http://202.96.220.164/umsp/umspservice/v4/IsLRCertFreeApply</string>-->
-
-    <!--<string name="UMSP_Service_IsOrgCertFreeUpdate">http://202.96.220.164/umsp/umspservice/v4/IsLRCertFreeUpdate</string>-->
-
-    <!--<string name="UMSP_Service_SendSMSNotify">http://202.96.220.164/umsp/umspservice/v4/SendSMSNotify</string>-->
-
-    <!--<string name="UMSP_Service_RenewCertApply">http://202.96.220.164/umsp/umspservice/v4/RenewCertApply</string>-->
-
-    <!--<string name="UMSP_Service_RenewCertDownload">http://202.96.220.164/umsp/umspservice/v4/RenewCertDownload</string>-->
-
-    <!--<string name="UMSP_Service_AuthorizeCertApplication">http://202.96.220.164/umsp/umspservice/v4/AuthorizeCertApplication</string>-->
-
-    <!--<string name="UMSP_Service_GetAuthorizations">http://202.96.220.164/umsp/umspservice/v4/GetAuthorizations</string>-->
-
-    <!--<string name="UMSP_Service_IsPwdSet">http://202.96.220.164/umsp/umspservice/v4/IsPwdSet</string>-->
-
-    <!--<string name="UMSP_Service_IsValidApplication">http://202.96.220.164/umsp/umspservice/v4/IsValidApplication</string>-->
-
-    <!--<string name="UMSP_Service_UploadRecord">http://202.96.220.164/umsp/umspservice/v4/UploadRecord</string>-->
-    <!--<string name="UMSP_Service_GetSealPics">http://202.96.220.164/umsp/umspservice/v4/GetSealPics</string>-->
-    <!--<string name="UMSP_Service_ResetV2AccountPwd">http://202.96.220.164/umsp/umspservice/v4/ResetV2AccountPwd</string>-->
-    <!--<string name="UMSP_Service_GetCertChain">http://202.96.220.164/umsp/umspservice/v4/GetCertChain</string>-->
-    <!--<string name="UMSP_Service_GetQRCodeInfo">http://202.96.220.164/umsp/umspservice/v4/GetQRCodeInfo</string>-->
-    <!--<string name="UMSP_Service_GetOrgInfos">http://202.96.220.164/umsp/umspservice/v4/GetOrgInfos</string>-->
-
-    <!--<string name="UMSP_Service_GetSignBizData">http://202.96.220.164/umsp/umspservice/v4/GetSignBizData</string>-->
-    <!--<string name="UMSP_Service_UploadSignValue">http://202.96.220.164/umsp/umspservice/v4/UploadSignValue</string>-->
-
-    <!--<string name="UMSP_RSA_CERT_CHAIN">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</string>-->
-    <!--<string name="UMSP_SM2_CERT_CHAIN">MIIFCwYJKoZIhvcNAQcCoIIE/DCCBPgCAQExADALBgkqhkiG9w0BBwGgggTgMIICKTCCAc2gAwIBAgIQRrEGsdL91GIFwtWMqXwfxjAMBggqgRzPVQGDdQUAMDwxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEaMBgGA1UEAwwRVUNBIFNNMiBUZXN0IFJvb3QwHhcNMTMwMTAxMDAwMDAwWhcNNDkxMjMxMDAwMDAwWjA8MQswCQYDVQQGEwJDTjERMA8GA1UECgwIVW5pVHJ1c3QxGjAYBgNVBAMMEVVDQSBTTTIgVGVzdCBSb290MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEkedyH9SjOChr+JFPhBghoItFW/Zn4TSTwxry+0HD4Glf3nLO9f9ioqDMNOQkjDH6KnPOHGKlWBdeW88CTw2spqOBrjCBqzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zBmBgNVHSUBAQAEXDBaBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBwMJMCAGA1UdDgEBAAQWBBTqAewgJKTPvU2/prCfWHFDsN6dlzAMBggqgRzPVQGDdQUAA0gAMEUCIC0HjkHrHSE71uslFWmr1ccjPt10BC8EPWveskz1G02YAiEAkZKGBSz8ohxf0D4Kau/h3M3OLZjlTDyjB0cFiuOMD4IwggKvMIICU6ADAgECAhBb3Kg/62uZAMUW9HQnCqZ+MAwGCCqBHM9VAYN1BQAwPDELMAkGA1UEBhMCQ04xETAPBgNVBAoMCFVuaVRydXN0MRowGAYDVQQDDBFVQ0EgU00yIFRlc3QgUm9vdDAeFw0xMzAxMDEwMDAwMDBaFw0zNzEyMzEwMDAwMDBaMDkxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEXMBUGA1UEAwwOU0hFQ0EgU00yIFRlc3QwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAR6F/desbL7RuE9SnYS5L6rvk8DQxtKLGHtAPU+6D1o7xGYRNcNeheYC7O2ITORieJaDWxlH+qqrAKsOioO4gaKo4IBNjCCATIwRQYDVR0gAQEABDswOTA3BgkqgRwBhu86gRUwKjAoBggrBgEFBQcCARYcaHR0cDovL3d3dy5zaGVjYS5jb20vcG9saWN5LzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zA6BgNVHR8BAQAEMDAuMCygKqAohiZodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhc3ViLmNybDAiBgNVHSMBAQAEGDAWgBTqAewgJKTPvU2/prCfWHFDsN6dlzAgBgNVHQ4BAQAEFgQUnuoEUuFRuK5Nt4WTZhUpJTplntIwRgYIKwYBBQUHAQEBAQAENzA1MDMGCCsGAQUFBzAChidodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhcm9vdC5kZXIwDAYIKoEcz1UBg3UFAANIADBFAiBB0t8gh9JJ1NZabZ+FDLY2dadrdR2ooBTA3MyI0lvRZwIhAKafrS9+dzA5PHtDr4lzUKN1xM+oDW0v6oKFxf54n2OrMQA=</string>-->
-                <!---->
-
-    <!--<string name="UMSP_RSA_CERT_CHAIN_ORG">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</string>-->
-    <!--<string name="UMSP_SM2_CERT_CHAIN_ORG">MIIFCwYJKoZIhvcNAQcCoIIE/DCCBPgCAQExADALBgkqhkiG9w0BBwGgggTgMIICKTCCAc2gAwIBAgIQRrEGsdL91GIFwtWMqXwfxjAMBggqgRzPVQGDdQUAMDwxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEaMBgGA1UEAwwRVUNBIFNNMiBUZXN0IFJvb3QwHhcNMTMwMTAxMDAwMDAwWhcNNDkxMjMxMDAwMDAwWjA8MQswCQYDVQQGEwJDTjERMA8GA1UECgwIVW5pVHJ1c3QxGjAYBgNVBAMMEVVDQSBTTTIgVGVzdCBSb290MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEkedyH9SjOChr+JFPhBghoItFW/Zn4TSTwxry+0HD4Glf3nLO9f9ioqDMNOQkjDH6KnPOHGKlWBdeW88CTw2spqOBrjCBqzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zBmBgNVHSUBAQAEXDBaBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBwMJMCAGA1UdDgEBAAQWBBTqAewgJKTPvU2/prCfWHFDsN6dlzAMBggqgRzPVQGDdQUAA0gAMEUCIC0HjkHrHSE71uslFWmr1ccjPt10BC8EPWveskz1G02YAiEAkZKGBSz8ohxf0D4Kau/h3M3OLZjlTDyjB0cFiuOMD4IwggKvMIICU6ADAgECAhBb3Kg/62uZAMUW9HQnCqZ+MAwGCCqBHM9VAYN1BQAwPDELMAkGA1UEBhMCQ04xETAPBgNVBAoMCFVuaVRydXN0MRowGAYDVQQDDBFVQ0EgU00yIFRlc3QgUm9vdDAeFw0xMzAxMDEwMDAwMDBaFw0zNzEyMzEwMDAwMDBaMDkxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEXMBUGA1UEAwwOU0hFQ0EgU00yIFRlc3QwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAR6F/desbL7RuE9SnYS5L6rvk8DQxtKLGHtAPU+6D1o7xGYRNcNeheYC7O2ITORieJaDWxlH+qqrAKsOioO4gaKo4IBNjCCATIwRQYDVR0gAQEABDswOTA3BgkqgRwBhu86gRUwKjAoBggrBgEFBQcCARYcaHR0cDovL3d3dy5zaGVjYS5jb20vcG9saWN5LzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zA6BgNVHR8BAQAEMDAuMCygKqAohiZodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhc3ViLmNybDAiBgNVHSMBAQAEGDAWgBTqAewgJKTPvU2/prCfWHFDsN6dlzAgBgNVHQ4BAQAEFgQUnuoEUuFRuK5Nt4WTZhUpJTplntIwRgYIKwYBBQUHAQEBAQAENzA1MDMGCCsGAQUFBzAChidodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhcm9vdC5kZXIwDAYIKoEcz1UBg3UFAANIADBFAiBB0t8gh9JJ1NZabZ+FDLY2dadrdR2ooBTA3MyI0lvRZwIhAKafrS9+dzA5PHtDr4lzUKN1xM+oDW0v6oKFxf54n2OrMQA=</string>-->
-
-    <!--<string name="UMSP_Service_GetTaskGUIDWithoutLogin">https://umsp.sheca.com/UMSPService/v2/GetTaskGUIDWithoutLogin</string>-->
-    <!--<string name="UMSP_Service_FaceRecognitionWithoutLogin">https://umsp.sheca.com/UMSPService/v2/FaceRecognitionWithoutLogin</string>-->
-
-
-    <!--<string name="UMSP_Service_IFAA">http://bizserver.dev.esandinfo.com:80/gateway</string>-->
-    <!--<string name="UMSP_Service_Login1">https://umsp.sheca.com/UMSPService/v2/Login</string>-->
-    <!--<string name="UMSP_Service_IFAAFPApplyInitialize">https://umsp.sheca.com/UMSPService/v2/IFAAFPApplyInitialize</string>-->
-    <!--<string name="UMSP_Service_IFAAFPApply">https://umsp.sheca.com/UMSPService/v2/IFAAFPApply</string>-->
-    <!--<string name="UMSP_Service_IFAAFPVerifyInitialize">https://umsp.sheca.com/UMSPService/v2/IFAAFPVerifyInitialize</string>-->
-    <!--<string name="UMSP_Service_IFAAFPVerify">https://umsp.sheca.com/UMSPService/v2/IFAAFPVerify</string>-->
-    <!--<string name="UMSP_Service_IFAAFPDelete">https://umsp.sheca.com/UMSPService/v2/IFAAFPDelete</string>-->
-    <!--<string name="UMSP_Service_IFAAFPCheck">https://umsp.sheca.com/UMSPService/v2/IFAAFPCheck</string>-->
-    <!--<string name="UMSP_Service_WeChatPayUnifiedorder">https://umsp.sheca.com/UMSPService/v2/WeChatPayUnifiedorder</string>-->
-    <!--<string name="UMSP_Service_WeChatPayOrderquery">https://umsp.sheca.com/UMSPService/v2/WeChatPayQueryOrder</string>-->
-    <!--<string name="UMSP_Service_ApplyCertByFaceRecognitionRealTimeEx">https://umsp.sheca.com/UMSPService/v2/ApplyCertByFaceRecognitionRealTimeEx</string>-->
-    <!--<string name="UMSP_Service_GetVoiceCode">https://umsp.sheca.com/UMSPService/v2/GetVoiceCode</string>-->
-
-
-    <!--  测试系统-->
-    <!--  -->
-    <!--<string name="UMSP_Base_Service">http://202.96.220.164:8080/umspservice/v4</string>-->
-    <!--<string name="UMSP_Service_GetTPALoginRequest">http://202.96.220.164:8081/umspservice/v4/GetTPALoginRequest</string>-->
-    <!--<string name="UMSP_Service_LoginFromTPA">http://202.96.220.164:8081/umspservice/v4/LoginByPWD</string>-->
-    <!--<string name="UMSP_Service_ApplyCert">http://202.96.220.164:8081/umspservice/v4/ApplyPersonCert</string>-->
-    <!--<string name="UMSP_Service_ApplyOrgCert">http://202.96.220.164:8081/umspservice/v4/ApplyOrgCert</string>-->
-    <!--<string name="UMSP_Service_FaceRecognition">http://202.96.220.166:8080/UMAPI/FaceRecognition</string>-->
-    <!--<string name="UMSP_Service_Logout">http://202.96.220.164:8081/umspservice/v4/Logout</string>-->
-    <!--<string name="UMSP_Service_Login">http://202.96.220.164:8081/umspservice/v4/Login</string>-->
-    <!--<string name="UMSP_Service_ChangePassword">http://202.96.220.164:8081/umspservice/v4/ChangePassword</string>-->
-    <!--<string name="UMSP_Service_GetCertApplyList">http://202.96.220.164:8081/umspservice/v4/GetCertApplyList</string>-->
-    <!--<string name="UMSP_Service_GetCertApplyListEx">http://202.96.220.164:8081/umspservice/v4/GetCertApplyListEx</string>-->
-    <!--<string name="UMSP_Service_QueryCertApplyStatus">http://202.96.220.164:8081/umspservice/v4/QueryCertBizStatus</string>-->
-    <!--<string name="UMSP_Service_UploadPkcs10">http://202.96.220.164:8081/umspservice/v4/UploadPkcs10</string>-->
-    <!--<string name="UMSP_Service_DownloadCert">http://202.96.220.164:8081/umspservice/v4/DownloadCert</string>-->
-    <!--<string name="UMSP_Service_SetSuccessStatus">http://202.96.220.164:8081/umspservice/v4/SetCertDelivery</string>-->
-    <!--<string name="UMSP_Service_GetAppLatestVersion">http://202.96.220.164:8081/umspservice/v4/GetClientLatestInfo</string>-->
-    <!--<string name="UMSP_Service_ApplyCertByFaceRecognition">http://202.96.220.166:8080/UMAPI/ApplyCertByFaceRecognition</string>-->
-    <!--<string name="UMSP_Service_ApplyCertByFaceRecognitionRealTime">http://202.96.220.166:8080/UMAPI/ApplyCertByFaceRecognitionRealTime</string>-->
-    <!--<string name="UMSP_Service_GetTaskGUID">http://202.96.220.164:8081/umspservice/v4/GetTaskGUID</string>-->
-    <!--<string name="UMSP_Service_RegisterPersonalAccount">http://202.96.220.164:8081/umspservice/v4/RegisterPersonalAccount</string>-->
-    <!--<string name="UMSP_Service_GetValidationCode">http://202.96.220.164:8081/umspservice/v4/GetMAC</string>-->
-    <!--<string name="UMSP_Service_GetAccountInfo">http://202.96.220.164:8081/umspservice/v4/GetAccountInfo</string>-->
-    <!--<string name="UMSP_Service_GetPersonalInfo">http://202.96.220.164:8081/umspservice/v4/GetPersonalInfo</string>-->
-    <!--<string name="UMSP_Service_GetOrgInfo">http://202.96.220.164:8081/umspservice/v4/GetOrgInfo</string>-->
-    <!--<string name="UMSP_Service_IsAccountExisted">http://202.96.220.164:8081/umspservice/v4/IsAccountExisted</string>-->
-    <!--<string name="UMSP_Service_VerifyMobile">http://202.96.220.164:8081/umspservice/v4/VerifyMobile</string>-->
-    <!--<string name="UMSP_Service_VerifyCertSignature">http://202.96.220.164:8081/umspservice/v4/VerifyCertSignature</string>-->
-    <!--<string name="UMSP_Service_SetAccountPassword">http://202.96.220.164:8081/umspservice/v4/SetAccountPassword</string>-->
-    <!--<string name="UMSP_Service_IsAccountReal">http://202.96.220.164:8081/umspservice/v4/IsAccountReal</string>-->
-    <!--<string name="UMSP_Service_SubmitManualCheckRequest">http://202.96.220.164:8081/umspservice/v4/SubmitManualCheckRequest</string>-->
-    <!--<string name="UMSP_Service_GetManualCheckFailedReason">http://202.96.220.164:8081/umspservice/v4/GetManualCheckFailedReason</string>-->
-    <!--<string name="UMSP_Service_DeleteCertApply">http://202.96.220.164:8081/umspservice/v4/DeleteCertApply</string>-->
-    <!--<string name="UMSP_Service_UploadCertRecord">http://202.96.220.164:8081/umspservice/v4/UploadRecord</string>-->
-    <!--<string name="UMSP_Service_GetAppInfo">http://202.96.220.164:8081/umspservice/v4/GetAppInfo</string>-->
-    <!--<string name="UMSP_Service_GetAllAppInfos">http://202.96.220.164:8081/umspservice/v4/GetAccountAppList</string>-->
-    <!--<string name="UMSP_Service_GetAppLicence">http://202.96.220.164:8081/umspservice/v4/GetAppLicence</string>-->
-    <!--<string name="UMSP_Service_LoginByDynamicCode">http://202.96.220.164:8081/umspservice/v4/LoginByMAC</string>-->
-    <!--<string name="UMSP_Service_RegisterPersonalAccountFromTPA">http://202.96.220.164:8081/umspservice/v4/RegisterAccount</string>-->
-    <!--<string name="UMSP_Service_MakeSeal">http://202.96.220.164:8081/umspservice/v4/MakeSeal</string>-->
-    <!--<string name="UMSP_Service_ApplySeal">http://202.96.220.164:8081/umspservice/v4/ApplySeal</string>-->
-    <!--<string name="UMSP_Service_QuerySeal">http://202.96.220.164:8081/umspservice/v4/QuerySealStatus</string>-->
-    <!--<string name="UMSP_Service_VerifySeal">http://202.96.220.164:8081/umspservice/v4/GetSeal</string>-->
-    <!--<string name="UMSP_Service_SetSealStatus">http://202.96.220.164:8081/umspservice/v4/SetSealStatus</string>-->
-    <!--<string name="UMSP_Service_VerifySealEx">http://202.96.220.164:8081/umspservice/v4/VerifySeal</string>-->
-    <!--<string name="UMSP_Service_RenewCert">http://202.96.220.164:8081/umspservice/v4/RenewCert</string>-->
-    <!--<string name="UMSP_Service_RevokeCert">http://202.96.220.164:8081/umspservice/v4/RevokeCert</string>-->
-    <!--<string name="UMSP_Service_ReissueCert">http://202.96.220.164:8081/umspservice/v4/ReissueCert</string>-->
-    <!--<string name="UMSP_Service_ModifyCert">http://202.96.220.164:8081/umspservice/v4/ModifyCert</string>-->
-    <!--<string name="UMSP_Service_PreLogin">http://202.96.220.164:8081/umspservice/v4/PreLogin</string>-->
-    <!--<string name="UMSP_Service_SetAccountVerification">http://202.96.220.164:8081/umspservice/v4/SetAccountCertification</string>-->
-    <!--<string name="UMSP_Service_GetAccountCertification">http://202.96.220.164:8081/umspservice/v4/GetAccountCertification</string>-->
-    <!--<string name="UMSP_Service_GetCertBizs">http://202.96.220.164:8081/umspservice/v4/GetCertBizs</string>-->
-    <!--<string name="UMSP_Service_GetDeviceInfo">http://202.96.220.164:8081/umspservice/v4/GetDeviceInfo</string>-->
-    <!--<string name="UMSP_Service_SetMobile">http://202.96.220.164:8081/umspservice/v4/SetMobile</string>-->
-    <!--<string name="UMSP_Service_IFAAProxy">http://202.96.220.164:8081/umspservice/v4/IFAAProxy</string>-->
-    <!--<string name="UMSP_Service_QueryAllCertApp">http://202.96.220.164:8081/umspservice/v4/QueryAllCertApp</string>-->
-    <!--<string name="UMSP_Service_QueryCertApp">http://202.96.220.164:8081/umspservice/v4/QueryCertApp</string>-->
-    <!--<string name="UMSP_Service_ApplyCertApp">http://202.96.220.164:8081/umspservice/v4/ApplyCertApp</string>-->
-    <!--<string name="UMSP_Service_RenewCertApp">http://202.96.220.164:8081/umspservice/v4/RenewCertApp</string>-->
-    <!--<string name="UMSP_Service_RevokeCertApp">http://202.96.220.164:8081/umspservice/v4/RevokeCertApp</string>-->
-    <!--<string name="UMSP_Service_AuthOrg">http://202.96.220.164:8081/umspservice/v4/AuthOrg</string>-->
-    <!--<string name="UMSP_Service_VerifyOrg">http://202.96.220.164:8081/umspservice/v4/VerifyOrg</string>-->
-    <!--<string name="UMSP_Service_ApplyOrgPay">http://202.96.220.164:8081/umspservice/v4/ApplyOrgPay</string>-->
-    <!--<string name="UMSP_Service_AuthOrgPay">http://202.96.220.164:8081/umspservice/v4/AuthOrgPay</string>-->
-    <!--<string name="UMSP_Service_GetBankList">http://202.96.220.164:8081/umspservice/v4/GetBankList</string>-->
-    <!--<string name="UMSP_Service_QueryOrgPay">http://202.96.220.164:8081/umspservice/v4/QueryOrgPay</string>-->
-    <!--<string name="UMSP_Service_ApplyPersonCertLite">http://202.96.220.164:8081/umspservice/v4/ApplyPersonCertLite</string>-->
-    <!--<string name="UMSP_Service_ApplyOrgCertLite">http://202.96.220.164:8081/umspservice/v4/ApplyOrgCertLite</string>-->
-    <!--<string name="UMSP_Service_AliPay">http://202.96.220.164:8081/umspservice/v4/AliPay</string>-->
-    <!--<string name="UMSP_Service_WXPay">http://202.96.220.164:8081/umspservice/v4/WXPay</string>-->
-    <!--<string name="UMSP_Service_QueryPay">http://202.96.220.164:8081/umspservice/v4/QueryPay</string>-->
-    <!--<string name="UMSP_Service_GetNonce">http://202.96.220.164:8081/umspservice/v4/GetNonce</string>-->
-    <!--<string name="UMSP_Service_AuthLRByMAC">http://202.96.220.164:8081/umspservice/v4/AuthLRByMAC</string>-->
-    <!--<string name="UMSP_Service_IsOrgCertFree">http://202.96.220.164:8081/umspservice/v4/IsLRCertFreeApply</string>-->
-    <!--<string name="UMSP_Service_IsOrgCertFreeUpdate">http://202.96.220.164:8081/umspservice/v4/IsLRCertFreeUpdate</string>-->
-    <!--<string name="UMSP_Service_SendSMSNotify">http://202.96.220.164:8081/umspservice/v4/SendSMSNotify</string>-->
-    <!--<string name="UMSP_Service_RenewCertApply">http://202.96.220.164:8081/umspservice/v4/RenewCertApply</string>-->
-    <!--<string name="UMSP_Service_RenewCertDownload">http://202.96.220.164:8081/umspservice/v4/RenewCertDownload</string>-->
-    <!--<string name="UMSP_Service_AuthorizeCertApplication">http://202.96.220.164:8081/umspservice/v4/AuthorizeCertApplication</string>-->
-    <!--<string name="UMSP_Service_GetAuthorizations">http://202.96.220.164:8081/umspservice/v4/GetAuthorizations</string>-->
-    <!--<string name="UMSP_Service_IsPwdSet">http://202.96.220.164:8081/umspservice/v4/IsPwdSet</string>-->
-    <!--<string name="UMSP_Service_IsValidApplication">http://202.96.220.164:8081/umspservice/v4/IsValidApplication</string>-->
-    <!--<string name="UMSP_Service_UploadRecord">http://202.96.220.164:8081/umspservice/v4/UploadRecord</string>-->
-    <!--<string name="UMSP_Service_GetSealPics">http://202.96.220.164:8081/umspservice/v4/GetSealPics</string>-->
-    <!--<string name="UMSP_Service_ResetV2AccountPwd">http://202.96.220.164:8081/umspservice/v4/ResetV2AccountPwd</string>-->
-    <!--<string name="UMSP_Service_GetCertChain">http://202.96.220.164:8081/umspservice/v4/GetCertChain</string>-->
-    <!--<string name="UMSP_Service_GetQRCodeInfo">http://202.96.220.164:8081/umspservice/v4/GetQRCodeInfo</string>-->
-    <!--<string name="UMSP_Service_GetOrgInfos">http://202.96.220.164:8081/umspservice/v4/GetOrgInfos</string>-->
-    <!--<string name="UMSP_Service_GetSignBizData">http://202.96.220.164:8081/umspservice/v4/GetSignBizData</string>-->
-    <!--<string name="UMSP_Service_UploadSignValue">http://202.96.220.164:8081/umspservice/v4/UploadSignValue</string>-->
-    <!--<string name="UMSP_RSA_CERT_CHAIN">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</string>-->
-    <!--<string name="UMSP_SM2_CERT_CHAIN">MIIFCwYJKoZIhvcNAQcCoIIE/DCCBPgCAQExADALBgkqhkiG9w0BBwGgggTgMIICKTCCAc2gAwIBAgIQRrEGsdL91GIFwtWMqXwfxjAMBggqgRzPVQGDdQUAMDwxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEaMBgGA1UEAwwRVUNBIFNNMiBUZXN0IFJvb3QwHhcNMTMwMTAxMDAwMDAwWhcNNDkxMjMxMDAwMDAwWjA8MQswCQYDVQQGEwJDTjERMA8GA1UECgwIVW5pVHJ1c3QxGjAYBgNVBAMMEVVDQSBTTTIgVGVzdCBSb290MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEkedyH9SjOChr+JFPhBghoItFW/Zn4TSTwxry+0HD4Glf3nLO9f9ioqDMNOQkjDH6KnPOHGKlWBdeW88CTw2spqOBrjCBqzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zBmBgNVHSUBAQAEXDBaBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBwMJMCAGA1UdDgEBAAQWBBTqAewgJKTPvU2/prCfWHFDsN6dlzAMBggqgRzPVQGDdQUAA0gAMEUCIC0HjkHrHSE71uslFWmr1ccjPt10BC8EPWveskz1G02YAiEAkZKGBSz8ohxf0D4Kau/h3M3OLZjlTDyjB0cFiuOMD4IwggKvMIICU6ADAgECAhBb3Kg/62uZAMUW9HQnCqZ+MAwGCCqBHM9VAYN1BQAwPDELMAkGA1UEBhMCQ04xETAPBgNVBAoMCFVuaVRydXN0MRowGAYDVQQDDBFVQ0EgU00yIFRlc3QgUm9vdDAeFw0xMzAxMDEwMDAwMDBaFw0zNzEyMzEwMDAwMDBaMDkxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEXMBUGA1UEAwwOU0hFQ0EgU00yIFRlc3QwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAR6F/desbL7RuE9SnYS5L6rvk8DQxtKLGHtAPU+6D1o7xGYRNcNeheYC7O2ITORieJaDWxlH+qqrAKsOioO4gaKo4IBNjCCATIwRQYDVR0gAQEABDswOTA3BgkqgRwBhu86gRUwKjAoBggrBgEFBQcCARYcaHR0cDovL3d3dy5zaGVjYS5jb20vcG9saWN5LzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zA6BgNVHR8BAQAEMDAuMCygKqAohiZodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhc3ViLmNybDAiBgNVHSMBAQAEGDAWgBTqAewgJKTPvU2/prCfWHFDsN6dlzAgBgNVHQ4BAQAEFgQUnuoEUuFRuK5Nt4WTZhUpJTplntIwRgYIKwYBBQUHAQEBAQAENzA1MDMGCCsGAQUFBzAChidodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhcm9vdC5kZXIwDAYIKoEcz1UBg3UFAANIADBFAiBB0t8gh9JJ1NZabZ+FDLY2dadrdR2ooBTA3MyI0lvRZwIhAKafrS9+dzA5PHtDr4lzUKN1xM+oDW0v6oKFxf54n2OrMQA=</string>-->
-
-    <!--<string name="UMSP_Service_GetTaskGUIDWithoutLogin">https://umsp.sheca.com/UMSPService/v2/GetTaskGUIDWithoutLogin</string>-->
-    <!--<string name="UMSP_Service_FaceRecognitionWithoutLogin">https://umsp.sheca.com/UMSPService/v2/FaceRecognitionWithoutLogin</string>-->
-
-    <!--<string name="UMSP_Service_IFAA">http://bizserver.dev.esandinfo.com:80/gateway</string>-->
-
-    <!--<string name="UMSP_Service_Login1">https://umsp.sheca.com/UMSPService/v2/Login</string>-->
-    <!--<string name="UMSP_Service_IFAAFPApplyInitialize">https://umsp.sheca.com/UMSPService/v2/IFAAFPApplyInitialize</string>-->
-    <!--<string name="UMSP_Service_IFAAFPApply">https://umsp.sheca.com/UMSPService/v2/IFAAFPApply</string>-->
-    <!--<string name="UMSP_Service_IFAAFPVerifyInitialize">https://umsp.sheca.com/UMSPService/v2/IFAAFPVerifyInitialize</string>-->
-    <!--<string name="UMSP_Service_IFAAFPVerify">https://umsp.sheca.com/UMSPService/v2/IFAAFPVerify</string>-->
-    <!--<string name="UMSP_Service_IFAAFPDelete">https://umsp.sheca.com/UMSPService/v2/IFAAFPDelete</string>-->
-    <!--<string name="UMSP_Service_IFAAFPCheck">https://umsp.sheca.com/UMSPService/v2/IFAAFPCheck</string>-->
-    <!--<string name="UMSP_Service_WeChatPayUnifiedorder">https://umsp.sheca.com/UMSPService/v2/WeChatPayUnifiedorder</string>-->
-    <!--<string name="UMSP_Service_WeChatPayOrderquery">https://umsp.sheca.com/UMSPService/v2/WeChatPayQueryOrder</string>-->
-    <!--<string name="UMSP_Service_ApplyCertByFaceRecognitionRealTimeEx">https://umsp.sheca.com/UMSPService/v2/ApplyCertByFaceRecognitionRealTimeEx</string>-->
-    <!--<string name="UMSP_Service_GetVoiceCode">https://umsp.sheca.com/UMSPService/v2/GetVoiceCode</string>-->
-
-
+    <!--EE正式地址-->
+    <!--  新的正式系统https-->
     <!--  新的正式系统-->
-    <string name="UM_Base_Service">/ucm/umspservice/v4</string>
-    <string name="UMSP_Base_Service">https://umapi.sheca.com/ucm/umspservice/v4</string>
-    <string name="UMSP_Service_GetTPALoginRequest">https://umapi.sheca.com/umsp/umspservice/v4/GetTPALoginRequest</string>
-    <string name="UMSP_Service_LoginFromTPA">https://umapi.sheca.com/umsp/umspservice/v4/LoginByPWD</string>
-    <string name="UMSP_Service_ApplyCert">https://umapi.sheca.com/umsp/umspservice/v4/ApplyPersonCert</string>
-    <string name="UMSP_Service_ApplyOrgCert">https://umapi.sheca.com/umsp/umspservice/v4/ApplyOrgCert</string>
-    <string name="UMSP_Service_FaceRecognition">https://umapi.sheca.com/umsp/umspservice/v4/FaceRecognition</string>
-    <string name="UMSP_Service_Logout">https://umapi.sheca.com/umsp/umspservice/v4/Logout</string>
-    <string name="UMSP_Service_Login">https://umapi.sheca.com/umsp/umspservice/v4/Login</string>
-    <string name="UMSP_Service_ChangePassword">https://umapi.sheca.com/umsp/umspservice/v4/ChangePassword</string>
-    <string name="UMSP_Service_GetCertApplyList">https://umapi.sheca.com/umsp/umspservice/v4/GetCertApplyList</string>
-    <string name="UMSP_Service_GetCertApplyListEx">https://umapi.sheca.com/umsp/umspservice/v4/GetCertApplyListEx</string>
-    <string name="UMSP_Service_QueryCertApplyStatus">https://umapi.sheca.com/umsp/umspservice/v4/QueryCertBizStatus</string>
-    <string name="UMSP_Service_UploadPkcs10">https://umapi.sheca.com/umsp/umspservice/v4/UploadPkcs10</string>
-    <string name="UMSP_Service_DownloadCert">https://umapi.sheca.com/umsp/umspservice/v4/DownloadCert</string>
-    <string name="UMSP_Service_SetSuccessStatus">https://umapi.sheca.com/umsp/umspservice/v4/SetCertDelivery</string>
-    <string name="UMSP_Service_GetAppLatestVersion">https://umapi.sheca.com/umsp/umspservice/v4/GetClientLatestInfo</string>
-    <string name="UMSP_Service_ApplyCertByFaceRecognition">https://umapi.sheca.com/umsp/umspservice/v4/ApplyCertByFaceRecognition</string>
-    <string name="UMSP_Service_ApplyCertByFaceRecognitionRealTime">https://umapi.sheca.com/umsp/umspservice/v4/ApplyCertByFaceRecognitionRealTime</string>
-    <string name="UMSP_Service_GetTaskGUID">https://umapi.sheca.com/umsp/umspservice/v4/GetTaskGUID</string>
-    <string name="UMSP_Service_RegisterPersonalAccount">https://umapi.sheca.com/umsp/umspservice/v4/RegisterPersonalAccount</string>
-    <string name="UMSP_Service_GetValidationCode">https://umapi.sheca.com/umsp/umspservice/v4/GetMAC</string>
-    <string name="UMSP_Service_GetAccountInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetAccountInfo</string>
-    <string name="UMSP_Service_GetPersonalInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetPersonalInfo</string>
-    <string name="UMSP_Service_GetOrgInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetOrgInfo</string>
-    <string name="UMSP_Service_IsAccountExisted">https://umapi.sheca.com/umsp/umspservice/v4/IsAccountExisted</string>
-    <string name="UMSP_Service_VerifyMobile">https://umapi.sheca.com/umsp/umspservice/v4/VerifyMobile</string>
-    <string name="UMSP_Service_VerifyCertSignature">https://umapi.sheca.com/umsp/umspservice/v4/VerifyCertSignature</string>
-    <string name="UMSP_Service_SetAccountPassword">https://umapi.sheca.com/umsp/umspservice/v4/SetAccountPassword</string>
-    <string name="UMSP_Service_IsAccountReal">https://umapi.sheca.com/umsp/umspservice/v4/IsAccountReal</string>
-    <string name="UMSP_Service_SubmitManualCheckRequest">https://umapi.sheca.com/umsp/umspservice/v4/SubmitManualCheckRequest</string>
-    <string name="UMSP_Service_GetManualCheckFailedReason">https://umapi.sheca.com/umsp/umspservice/v4/GetManualCheckFailedReason</string>
-    <string name="UMSP_Service_DeleteCertApply">https://umapi.sheca.com/umsp/umspservice/v4/DeleteCertApply</string>
-    <string name="UMSP_Service_UploadCertRecord">https://umapi.sheca.com/umsp/umspservice/v4/UploadRecord</string>
-    <string name="UMSP_Service_GetAppInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetAppInfo</string>
-    <string name="UMSP_Service_GetAllAppInfos">https://umapi.sheca.com/umsp/umspservice/v4/GetAccountAppList</string>
-    <string name="UMSP_Service_GetAppLicence">https://umapi.sheca.com/umsp/umspservice/v4/GetAppLicence</string>
-    <string name="UMSP_Service_LoginByDynamicCode">https://umapi.sheca.com/umsp/umspservice/v4/LoginByMAC</string>
-    <string name="UMSP_Service_RegisterPersonalAccountFromTPA">https://umapi.sheca.com/umsp/umspservice/v4/RegisterAccount</string>
-    <string name="UMSP_Service_MakeSeal">https://umapi.sheca.com/umsp/umspservice/v4/MakeSeal</string>
-    <string name="UMSP_Service_ApplySeal">https://umapi.sheca.com/umsp/umspservice/v4/ApplySeal</string>
-    <string name="UMSP_Service_QuerySeal">https://umapi.sheca.com/umsp/umspservice/v4/QuerySealStatus</string>
-    <string name="UMSP_Service_VerifySeal">https://umapi.sheca.com/umsp/umspservice/v4/GetSeal</string>
-    <string name="UMSP_Service_SetSealStatus">https://umapi.sheca.com/umsp/umspservice/v4/SetSealStatus</string>
-    <string name="UMSP_Service_VerifySealEx">https://umapi.sheca.com/umsp/umspservice/v4/VerifySeal</string>
-    <string name="UMSP_Service_RenewCert">https://umapi.sheca.com/umsp/umspservice/v4/RenewCert</string>
-    <string name="UMSP_Service_RevokeCert">https://umapi.sheca.com/umsp/umspservice/v4/RevokeCert</string>
-    <string name="UMSP_Service_ReissueCert">https://umapi.sheca.com/umsp/umspservice/v4/ReissueCert</string>
-    <string name="UMSP_Service_ModifyCert">https://umapi.sheca.com/umsp/umspservice/v4/ModifyCert</string>
-    <string name="UMSP_Service_PreLogin">https://umapi.sheca.com/umsp/umspservice/v4/PreLogin</string>
-    <string name="UMSP_Service_SetAccountVerification">https://umapi.sheca.com/umsp/umspservice/v4/SetAccountCertification</string>
-    <string name="UMSP_Service_GetAccountCertification">https://umapi.sheca.com/umsp/umspservice/v4/GetAccountCertification</string>
-    <string name="UMSP_Service_GetCertBizs">https://umapi.sheca.com/umsp/umspservice/v4/GetCertBizs</string>
-    <string name="UMSP_Service_GetDeviceInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetDeviceInfo</string>
-    <string name="UMSP_Service_SetMobile">https://umapi.sheca.com/umsp/umspservice/v4/SetMobile</string>
-    <string name="UMSP_Service_IFAAProxy">https://umapi.sheca.com/umsp/umspservice/v4/IFAAProxy</string>
-    <string name="UMSP_Service_QueryAllCertApp">https://umapi.sheca.com/umsp/umspservice/v4/QueryAllCertApp</string>
-    <string name="UMSP_Service_QueryCertApp">https://umapi.sheca.com/umsp/umspservice/v4/QueryCertApp</string>
-    <string name="UMSP_Service_ApplyCertApp">https://umapi.sheca.com/umsp/umspservice/v4/ApplyCertApp</string>
-    <string name="UMSP_Service_RenewCertApp">https://umapi.sheca.com/umsp/umspservice/v4/RenewCertApp</string>
-    <string name="UMSP_Service_RevokeCertApp">https://umapi.sheca.com/umsp/umspservice/v4/RevokeCertApp</string>
-    <string name="UMSP_Service_AuthOrg">https://umapi.sheca.com/umsp/umspservice/v4/AuthOrg</string>
-    <string name="UMSP_Service_VerifyOrg">https://umapi.sheca.com/umsp/umspservice/v4/VerifyOrg</string>
-    <string name="UMSP_Service_ApplyOrgPay">https://umapi.sheca.com/umsp/umspservice/v4/ApplyOrgPay</string>
-    <string name="UMSP_Service_AuthOrgPay">https://umapi.sheca.com/umsp/umspservice/v4/AuthOrgPay</string>
-    <string name="UMSP_Service_GetBankList">https://umapi.sheca.com/umsp/umspservice/v4/GetBankList</string>
-    <string name="UMSP_Service_QueryOrgPay">https://umapi.sheca.com/umsp/umspservice/v4/QueryOrgPay</string>
-    <string name="UMSP_Service_ApplyPersonCertLite">https://umapi.sheca.com/umsp/umspservice/v4/ApplyPersonCertLite</string>
-    <string name="UMSP_Service_ApplyOrgCertLite">https://umapi.sheca.com/umsp/umspservice/v4/ApplyOrgCertLite</string>
-    <string name="UMSP_Service_AliPay">https://umapi.sheca.com/umsp/umspservice/v4/AliPay</string>
-    <string name="UMSP_Service_WXPay">https://umapi.sheca.com/umsp/umspservice/v4/WXPay</string>
-    <string name="UMSP_Service_QueryPay">https://umapi.sheca.com/umsp/umspservice/v4/QueryPay</string>
-    <string name="UMSP_Service_GetNonce">https://umapi.sheca.com/umsp/umspservice/v4/GetNonce</string>
-    <string name="UMSP_Service_AuthLRByMAC">https://umapi.sheca.com/umsp/umspservice/v4/AuthLRByMAC</string>
-    <string name="UMSP_Service_IsOrgCertFree">https://umapi.sheca.com/umsp/umspservice/v4/IsLRCertFreeApply</string>
-    <string name="UMSP_Service_IsOrgCertFreeUpdate">https://umapi.sheca.com/umsp/umspservice/v4/IsLRCertFreeUpdate</string>
-    <string name="UMSP_Service_SendSMSNotify">https://umapi.sheca.com/umsp/umspservice/v4/SendSMSNotify</string>
-    <string name="UMSP_Service_RenewCertApply">https://umapi.sheca.com/umsp/umspservice/v4/RenewCertApply</string>
-    <string name="UMSP_Service_RenewCertDownload">https://umapi.sheca.com/umsp/umspservice/v4/RenewCertDownload</string>
-    <string name="UMSP_Service_AuthorizeCertApplication">https://umapi.sheca.com/umsp/umspservice/v4/AuthorizeCertApplication</string>
-    <string name="UMSP_Service_GetAuthorizations">https://umapi.sheca.com/umsp/umspservice/v4/GetAuthorizations</string>
-    <string name="UMSP_Service_IsPwdSet">https://umapi.sheca.com/umsp/umspservice/v4/IsPwdSet</string>
-    <string name="UMSP_Service_IsValidApplication">https://umapi.sheca.com/umsp/umspservice/v4/IsValidApplication</string>
-    <string name="UMSP_Service_UploadRecord">https://umapi.sheca.com/umsp/umspservice/v4/UploadRecord</string>
-    <string name="UMSP_Service_GetSealPics">https://umapi.sheca.com/umsp/umspservice/v4/GetSealPics</string>
-    <string name="UMSP_Service_ResetV2AccountPwd">https://umapi.sheca.com/umsp/umspservice/v4/ResetV2AccountPwd</string>
-    <string name="UMSP_Service_GetCertChain">https://umapi.sheca.com/umsp/umspservice/v4/GetCertChain</string>
-    <string name="UMSP_Service_GetQRCodeInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetQRCodeInfo</string>
-    <string name="UMSP_Service_GetOrgInfos">https://umapi.sheca.com/umsp/umspservice/v4/GetOrgInfos</string>
-    <string name="UMSP_Service_GetSignBizData">https://umapi.sheca.com/umsp/umspservice/v4/GetSignBizData</string>
-    <string name="UMSP_Service_UploadSignValue">https://umapi.sheca.com/umsp/umspservice/v4/UploadSignValue</string>
-    <string name="UMSP_RSA_CERT_CHAIN">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</string>
-    <string name="UMSP_SM2_CERT_CHAIN">MIIEbgYJKoZIhvcNAQcCoIIEXzCCBFsCAQExADALBgkqhkiG9w0BBwGgggRDMIIBszCCAVegAwIBAgIIaeL+wBcKxnswDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMjA3MTQwMzExNTlaFw00MjA3MDcwMzExNTlaMC4xCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEPMA0GA1UEAwwGUk9PVENBMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEMPCca6pmgcchsTf2UnBeL9rtp4nw+itk1Kzrmbnqo05lUwkwlWK+4OIrtFdAqnRTV7Q9v1htkv42TsIutzd126NdMFswHwYDVR0jBBgwFoAUTDKxl9kzG8SmBcHG5YtiW/CXdlgwDAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFEwysZfZMxvEpgXBxuWLYlvwl3ZYMAwGCCqBHM9VAYN1BQADSAAwRQIgG1bSLeOXp3oB8H7b53W+CKOPl2PknmWEq/lMhtn25HkCIQDaHDgWxWFtnCrBjH16/W3Ezn7/U/Vjo5xIpDoiVhsLwjCCAogwggIsoAMCAQICEC2hpr0M52xiTmNLfWop0CowDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMzA5MTMwODEwMjVaFw0zMzA5MDgwODEwMjVaMDQxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDESMBAGA1UEAwwJU0hFQ0EgU00yMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEfdEfkS0GSlQQ8ISEVSUdvKL7tcd3bsNssWlmmOhN5VCg1iLJgMDDqhO9TFt4EDsZuvECXz8uiU+BL4pddBcMgKOCASIwggEeMB8GA1UdIwQYMBaAFEwysZfZMxvEpgXBxuWLYlvwl3ZYMA8GA1UdEwEB/wQFMAMBAf8wgboGA1UdHwSBsjCBrzBBoD+gPaQ7MDkxCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEMMAoGA1UECwwDQVJMMQwwCgYDVQQDDANhcmwwKqAooCaGJGh0dHA6Ly93d3cucm9vdGNhLmdvdi5jbi9hcmwvYXJsLmNybDA+oDygOoY4bGRhcDovL2xkYXAucm9vdGNhLmdvdi5jbjozODkvQ049YXJsLE9VPUFSTCxPPU5SQ0FDLEM9Q04wDgYDVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBSJMQSRe0Oqqpq/hB2bhu7wuHCZoDAMBggqgRzPVQGDdQUAA0gAMEUCIQCKe/9772vmcRXjynapM3RqFchrHxh4Yiy0HiqwmUNkOQIgJjDnX9H9G/Aopa1VnYvKX2cjukamH56XCet/Jeyh3zQxAA==</string>
+    <!--<string name="UM_Base_Service">/ucm/umspservice/v4</string>-->
+    <!--<string name="UMSP_Base_Service">https://umapi.sheca.com/ucm/umspservice/v4</string>-->
+    <!--<string name="UMSP_Service_GetTPALoginRequest">https://umapi.sheca.com/umsp/umspservice/v4/GetTPALoginRequest</string>-->
+    <!--<string name="UMSP_Service_LoginFromTPA">https://umapi.sheca.com/umsp/umspservice/v4/LoginByPWD</string>-->
+    <!--<string name="UMSP_Service_ApplyCert">https://umapi.sheca.com/umsp/umspservice/v4/ApplyPersonCert</string>-->
+    <!--<string name="UMSP_Service_ApplyOrgCert">https://umapi.sheca.com/umsp/umspservice/v4/ApplyOrgCert</string>-->
+    <!--<string name="UMSP_Service_FaceRecognition">https://umapi.sheca.com/umsp/umspservice/v4/FaceRecognition</string>-->
+    <!--<string name="UMSP_Service_Logout">https://umapi.sheca.com/umsp/umspservice/v4/Logout</string>-->
+    <!--<string name="UMSP_Service_Login">https://umapi.sheca.com/umsp/umspservice/v4/Login</string>-->
+    <!--<string name="UMSP_Service_ChangePassword">https://umapi.sheca.com/umsp/umspservice/v4/ChangePassword</string>-->
+    <!--<string name="UMSP_Service_GetCertApplyList">https://umapi.sheca.com/umsp/umspservice/v4/GetCertApplyList</string>-->
+    <!--<string name="UMSP_Service_GetCertApplyListEx">https://umapi.sheca.com/umsp/umspservice/v4/GetCertApplyListEx</string>-->
+    <!--<string name="UMSP_Service_QueryCertApplyStatus">https://umapi.sheca.com/umsp/umspservice/v4/QueryCertBizStatus</string>-->
+    <!--<string name="UMSP_Service_UploadPkcs10">https://umapi.sheca.com/umsp/umspservice/v4/UploadPkcs10</string>-->
+    <!--<string name="UMSP_Service_DownloadCert">https://umapi.sheca.com/umsp/umspservice/v4/DownloadCert</string>-->
+    <!--<string name="UMSP_Service_SetSuccessStatus">https://umapi.sheca.com/umsp/umspservice/v4/SetCertDelivery</string>-->
+    <!--<string name="UMSP_Service_GetAppLatestVersion">https://umapi.sheca.com/umsp/umspservice/v4/GetClientLatestInfo</string>-->
+    <!--<string name="UMSP_Service_ApplyCertByFaceRecognition">https://umapi.sheca.com/umsp/umspservice/v4/ApplyCertByFaceRecognition</string>-->
+    <!--<string name="UMSP_Service_ApplyCertByFaceRecognitionRealTime">https://umapi.sheca.com/umsp/umspservice/v4/ApplyCertByFaceRecognitionRealTime</string>-->
+    <!--<string name="UMSP_Service_GetTaskGUID">https://umapi.sheca.com/umsp/umspservice/v4/GetTaskGUID</string>-->
+    <!--<string name="UMSP_Service_RegisterPersonalAccount">https://umapi.sheca.com/umsp/umspservice/v4/RegisterPersonalAccount</string>-->
+    <!--<string name="UMSP_Service_GetValidationCode">https://umapi.sheca.com/umsp/umspservice/v4/GetMAC</string>-->
+    <!--<string name="UMSP_Service_GetAccountInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetAccountInfo</string>-->
+    <!--<string name="UMSP_Service_GetPersonalInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetPersonalInfo</string>-->
+    <!--<string name="UMSP_Service_GetOrgInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetOrgInfo</string>-->
+    <!--<string name="UMSP_Service_IsAccountExisted">https://umapi.sheca.com/umsp/umspservice/v4/IsAccountExisted</string>-->
+    <!--<string name="UMSP_Service_VerifyMobile">https://umapi.sheca.com/umsp/umspservice/v4/VerifyMobile</string>-->
+    <!--<string name="UMSP_Service_VerifyCertSignature">https://umapi.sheca.com/umsp/umspservice/v4/VerifyCertSignature</string>-->
+    <!--<string name="UMSP_Service_SetAccountPassword">https://umapi.sheca.com/umsp/umspservice/v4/SetAccountPassword</string>-->
+    <!--<string name="UMSP_Service_IsAccountReal">https://umapi.sheca.com/umsp/umspservice/v4/IsAccountReal</string>-->
+    <!--<string name="UMSP_Service_SubmitManualCheckRequest">https://umapi.sheca.com/umsp/umspservice/v4/SubmitManualCheckRequest</string>-->
+    <!--<string name="UMSP_Service_GetManualCheckFailedReason">https://umapi.sheca.com/umsp/umspservice/v4/GetManualCheckFailedReason</string>-->
+    <!--<string name="UMSP_Service_DeleteCertApply">https://umapi.sheca.com/umsp/umspservice/v4/DeleteCertApply</string>-->
+    <!--<string name="UMSP_Service_UploadCertRecord">https://umapi.sheca.com/umsp/umspservice/v4/UploadRecord</string>-->
+    <!--<string name="UMSP_Service_GetAppInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetAppInfo</string>-->
+    <!--<string name="UMSP_Service_GetAllAppInfos">https://umapi.sheca.com/umsp/umspservice/v4/GetAccountAppList</string>-->
+    <!--<string name="UMSP_Service_GetAppLicence">https://umapi.sheca.com/umsp/umspservice/v4/GetAppLicence</string>-->
+    <!--<string name="UMSP_Service_LoginByDynamicCode">https://umapi.sheca.com/umsp/umspservice/v4/LoginByMAC</string>-->
+    <!--<string name="UMSP_Service_RegisterPersonalAccountFromTPA">https://umapi.sheca.com/umsp/umspservice/v4/RegisterAccount</string>-->
+    <!--<string name="UMSP_Service_MakeSeal">https://umapi.sheca.com/umsp/umspservice/v4/MakeSeal</string>-->
+    <!--<string name="UMSP_Service_ApplySeal">https://umapi.sheca.com/umsp/umspservice/v4/ApplySeal</string>-->
+    <!--<string name="UMSP_Service_QuerySeal">https://umapi.sheca.com/umsp/umspservice/v4/QuerySealStatus</string>-->
+    <!--<string name="UMSP_Service_VerifySeal">https://umapi.sheca.com/umsp/umspservice/v4/GetSeal</string>-->
+    <!--<string name="UMSP_Service_SetSealStatus">https://umapi.sheca.com/umsp/umspservice/v4/SetSealStatus</string>-->
+    <!--<string name="UMSP_Service_VerifySealEx">https://umapi.sheca.com/umsp/umspservice/v4/VerifySeal</string>-->
+    <!--<string name="UMSP_Service_RenewCert">https://umapi.sheca.com/umsp/umspservice/v4/RenewCert</string>-->
+    <!--<string name="UMSP_Service_RevokeCert">https://umapi.sheca.com/umsp/umspservice/v4/RevokeCert</string>-->
+    <!--<string name="UMSP_Service_ReissueCert">https://umapi.sheca.com/umsp/umspservice/v4/ReissueCert</string>-->
+    <!--<string name="UMSP_Service_ModifyCert">https://umapi.sheca.com/umsp/umspservice/v4/ModifyCert</string>-->
+    <!--<string name="UMSP_Service_PreLogin">https://umapi.sheca.com/umsp/umspservice/v4/PreLogin</string>-->
+    <!--<string name="UMSP_Service_SetAccountVerification">https://umapi.sheca.com/umsp/umspservice/v4/SetAccountCertification</string>-->
+    <!--<string name="UMSP_Service_GetAccountCertification">https://umapi.sheca.com/umsp/umspservice/v4/GetAccountCertification</string>-->
+    <!--<string name="UMSP_Service_GetCertBizs">https://umapi.sheca.com/umsp/umspservice/v4/GetCertBizs</string>-->
+    <!--<string name="UMSP_Service_GetDeviceInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetDeviceInfo</string>-->
+    <!--<string name="UMSP_Service_SetMobile">https://umapi.sheca.com/umsp/umspservice/v4/SetMobile</string>-->
+    <!--<string name="UMSP_Service_IFAAProxy">https://umapi.sheca.com/umsp/umspservice/v4/IFAAProxy</string>-->
+    <!--<string name="UMSP_Service_QueryAllCertApp">https://umapi.sheca.com/umsp/umspservice/v4/QueryAllCertApp</string>-->
+    <!--<string name="UMSP_Service_QueryCertApp">https://umapi.sheca.com/umsp/umspservice/v4/QueryCertApp</string>-->
+    <!--<string name="UMSP_Service_ApplyCertApp">https://umapi.sheca.com/umsp/umspservice/v4/ApplyCertApp</string>-->
+    <!--<string name="UMSP_Service_RenewCertApp">https://umapi.sheca.com/umsp/umspservice/v4/RenewCertApp</string>-->
+    <!--<string name="UMSP_Service_RevokeCertApp">https://umapi.sheca.com/umsp/umspservice/v4/RevokeCertApp</string>-->
+    <!--<string name="UMSP_Service_AuthOrg">https://umapi.sheca.com/umsp/umspservice/v4/AuthOrg</string>-->
+    <!--<string name="UMSP_Service_VerifyOrg">https://umapi.sheca.com/umsp/umspservice/v4/VerifyOrg</string>-->
+    <!--<string name="UMSP_Service_ApplyOrgPay">https://umapi.sheca.com/umsp/umspservice/v4/ApplyOrgPay</string>-->
+    <!--<string name="UMSP_Service_AuthOrgPay">https://umapi.sheca.com/umsp/umspservice/v4/AuthOrgPay</string>-->
+    <!--<string name="UMSP_Service_GetBankList">https://umapi.sheca.com/umsp/umspservice/v4/GetBankList</string>-->
+    <!--<string name="UMSP_Service_QueryOrgPay">https://umapi.sheca.com/umsp/umspservice/v4/QueryOrgPay</string>-->
+    <!--<string name="UMSP_Service_ApplyPersonCertLite">https://umapi.sheca.com/umsp/umspservice/v4/ApplyPersonCertLite</string>-->
+    <!--<string name="UMSP_Service_ApplyOrgCertLite">https://umapi.sheca.com/umsp/umspservice/v4/ApplyOrgCertLite</string>-->
+    <!--<string name="UMSP_Service_AliPay">https://umapi.sheca.com/umsp/umspservice/v4/AliPay</string>-->
+    <!--<string name="UMSP_Service_WXPay">https://umapi.sheca.com/umsp/umspservice/v4/WXPay</string>-->
+    <!--<string name="UMSP_Service_QueryPay">https://umapi.sheca.com/umsp/umspservice/v4/QueryPay</string>-->
+    <!--<string name="UMSP_Service_GetNonce">https://umapi.sheca.com/umsp/umspservice/v4/GetNonce</string>-->
+    <!--<string name="UMSP_Service_AuthLRByMAC">https://umapi.sheca.com/umsp/umspservice/v4/AuthLRByMAC</string>-->
+    <!--<string name="UMSP_Service_IsOrgCertFree">https://umapi.sheca.com/umsp/umspservice/v4/IsLRCertFreeApply</string>-->
+    <!--<string name="UMSP_Service_IsOrgCertFreeUpdate">https://umapi.sheca.com/umsp/umspservice/v4/IsLRCertFreeUpdate</string>-->
+    <!--<string name="UMSP_Service_SendSMSNotify">https://umapi.sheca.com/umsp/umspservice/v4/SendSMSNotify</string>-->
+    <!--<string name="UMSP_Service_RenewCertApply">https://umapi.sheca.com/umsp/umspservice/v4/RenewCertApply</string>-->
+    <!--<string name="UMSP_Service_RenewCertDownload">https://umapi.sheca.com/umsp/umspservice/v4/RenewCertDownload</string>-->
+    <!--<string name="UMSP_Service_AuthorizeCertApplication">https://umapi.sheca.com/umsp/umspservice/v4/AuthorizeCertApplication</string>-->
+    <!--<string name="UMSP_Service_GetAuthorizations">https://umapi.sheca.com/umsp/umspservice/v4/GetAuthorizations</string>-->
+    <!--<string name="UMSP_Service_IsPwdSet">https://umapi.sheca.com/umsp/umspservice/v4/IsPwdSet</string>-->
+    <!--<string name="UMSP_Service_IsValidApplication">https://umapi.sheca.com/umsp/umspservice/v4/IsValidApplication</string>-->
+    <!--<string name="UMSP_Service_UploadRecord">https://umapi.sheca.com/umsp/umspservice/v4/UploadRecord</string>-->
+    <!--<string name="UMSP_Service_GetSealPics">https://umapi.sheca.com/umsp/umspservice/v4/GetSealPics</string>-->
+    <!--<string name="UMSP_Service_ResetV2AccountPwd">https://umapi.sheca.com/umsp/umspservice/v4/ResetV2AccountPwd</string>-->
+    <!--<string name="UMSP_Service_GetCertChain">https://umapi.sheca.com/umsp/umspservice/v4/GetCertChain</string>-->
+    <!--<string name="UMSP_Service_GetQRCodeInfo">https://umapi.sheca.com/umsp/umspservice/v4/GetQRCodeInfo</string>-->
+    <!--<string name="UMSP_Service_GetOrgInfos">https://umapi.sheca.com/umsp/umspservice/v4/GetOrgInfos</string>-->
+    <!--<string name="UMSP_Service_GetSignBizData">https://umapi.sheca.com/umsp/umspservice/v4/GetSignBizData</string>-->
+    <!--<string name="UMSP_Service_UploadSignValue">https://umapi.sheca.com/umsp/umspservice/v4/UploadSignValue</string>-->
+    <!--<string name="UMSP_Service_VerifyMAC">https://umapi.sheca.com/umsp/umspservice/v4/VerifyMAC</string>-->
+    <!--<string name="UMSP_Service_SetNotLoginAccountPassword">https://umapi.sheca.com/umsp/umspservice/v4/ResetAccountPassword</string>-->
+    <!--<string name="UMSP_Service_GetPriKey">https://umapi.sheca.com/umsp/umspservice/v4/GetPriKey</string>-->
+    <!---->
+    <!---->
+    <!--<string name="UMSP_RSA_CERT_CHAIN">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</string>-->
+    <!--<string name="UMSP_SM2_CERT_CHAIN">MIIEbgYJKoZIhvcNAQcCoIIEXzCCBFsCAQExADALBgkqhkiG9w0BBwGgggRDMIIBszCCAVegAwIBAgIIaeL+wBcKxnswDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMjA3MTQwMzExNTlaFw00MjA3MDcwMzExNTlaMC4xCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEPMA0GA1UEAwwGUk9PVENBMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEMPCca6pmgcchsTf2UnBeL9rtp4nw+itk1Kzrmbnqo05lUwkwlWK+4OIrtFdAqnRTV7Q9v1htkv42TsIutzd126NdMFswHwYDVR0jBBgwFoAUTDKxl9kzG8SmBcHG5YtiW/CXdlgwDAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFEwysZfZMxvEpgXBxuWLYlvwl3ZYMAwGCCqBHM9VAYN1BQADSAAwRQIgG1bSLeOXp3oB8H7b53W+CKOPl2PknmWEq/lMhtn25HkCIQDaHDgWxWFtnCrBjH16/W3Ezn7/U/Vjo5xIpDoiVhsLwjCCAogwggIsoAMCAQICEC2hpr0M52xiTmNLfWop0CowDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMzA5MTMwODEwMjVaFw0zMzA5MDgwODEwMjVaMDQxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDESMBAGA1UEAwwJU0hFQ0EgU00yMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEfdEfkS0GSlQQ8ISEVSUdvKL7tcd3bsNssWlmmOhN5VCg1iLJgMDDqhO9TFt4EDsZuvECXz8uiU+BL4pddBcMgKOCASIwggEeMB8GA1UdIwQYMBaAFEwysZfZMxvEpgXBxuWLYlvwl3ZYMA8GA1UdEwEB/wQFMAMBAf8wgboGA1UdHwSBsjCBrzBBoD+gPaQ7MDkxCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEMMAoGA1UECwwDQVJMMQwwCgYDVQQDDANhcmwwKqAooCaGJGh0dHA6Ly93d3cucm9vdGNhLmdvdi5jbi9hcmwvYXJsLmNybDA+oDygOoY4bGRhcDovL2xkYXAucm9vdGNhLmdvdi5jbjozODkvQ049YXJsLE9VPUFSTCxPPU5SQ0FDLEM9Q04wDgYDVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBSJMQSRe0Oqqpq/hB2bhu7wuHCZoDAMBggqgRzPVQGDdQUAA0gAMEUCIQCKe/9772vmcRXjynapM3RqFchrHxh4Yiy0HiqwmUNkOQIgJjDnX9H9G/Aopa1VnYvKX2cjukamH56XCet/Jeyh3zQxAA==</string>-->
 
-    <string name="UMSP_RSA_CERT_CHAIN_ORG">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</string>
+    <!--<string name="UMSP_RSA_CERT_CHAIN_ORG">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</string>-->
 
-    <string name="UMSP_SM2_CERT_CHAIN_ORG">MIIEbgYJKoZIhvcNAQcCoIIEXzCCBFsCAQExADALBgkqhkiG9w0BBwGgggRDMIIBszCCAVegAwIBAgIIaeL+wBcKxnswDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMjA3MTQwMzExNTlaFw00MjA3MDcwMzExNTlaMC4xCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEPMA0GA1UEAwwGUk9PVENBMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEMPCca6pmgcchsTf2UnBeL9rtp4nw+itk1Kzrmbnqo05lUwkwlWK+4OIrtFdAqnRTV7Q9v1htkv42TsIutzd126NdMFswHwYDVR0jBBgwFoAUTDKxl9kzG8SmBcHG5YtiW/CXdlgwDAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFEwysZfZMxvEpgXBxuWLYlvwl3ZYMAwGCCqBHM9VAYN1BQADSAAwRQIgG1bSLeOXp3oB8H7b53W+CKOPl2PknmWEq/lMhtn25HkCIQDaHDgWxWFtnCrBjH16/W3Ezn7/U/Vjo5xIpDoiVhsLwjCCAogwggIsoAMCAQICEC2hpr0M52xiTmNLfWop0CowDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMzA5MTMwODEwMjVaFw0zMzA5MDgwODEwMjVaMDQxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDESMBAGA1UEAwwJU0hFQ0EgU00yMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEfdEfkS0GSlQQ8ISEVSUdvKL7tcd3bsNssWlmmOhN5VCg1iLJgMDDqhO9TFt4EDsZuvECXz8uiU+BL4pddBcMgKOCASIwggEeMB8GA1UdIwQYMBaAFEwysZfZMxvEpgXBxuWLYlvwl3ZYMA8GA1UdEwEB/wQFMAMBAf8wgboGA1UdHwSBsjCBrzBBoD+gPaQ7MDkxCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEMMAoGA1UECwwDQVJMMQwwCgYDVQQDDANhcmwwKqAooCaGJGh0dHA6Ly93d3cucm9vdGNhLmdvdi5jbi9hcmwvYXJsLmNybDA+oDygOoY4bGRhcDovL2xkYXAucm9vdGNhLmdvdi5jbjozODkvQ049YXJsLE9VPUFSTCxPPU5SQ0FDLEM9Q04wDgYDVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBSJMQSRe0Oqqpq/hB2bhu7wuHCZoDAMBggqgRzPVQGDdQUAA0gAMEUCIQCKe/9772vmcRXjynapM3RqFchrHxh4Yiy0HiqwmUNkOQIgJjDnX9H9G/Aopa1VnYvKX2cjukamH56XCet/Jeyh3zQxAA==</string>
+    <!--<string name="UMSP_SM2_CERT_CHAIN_ORG">MIIEbgYJKoZIhvcNAQcCoIIEXzCCBFsCAQExADALBgkqhkiG9w0BBwGgggRDMIIBszCCAVegAwIBAgIIaeL+wBcKxnswDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMjA3MTQwMzExNTlaFw00MjA3MDcwMzExNTlaMC4xCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEPMA0GA1UEAwwGUk9PVENBMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEMPCca6pmgcchsTf2UnBeL9rtp4nw+itk1Kzrmbnqo05lUwkwlWK+4OIrtFdAqnRTV7Q9v1htkv42TsIutzd126NdMFswHwYDVR0jBBgwFoAUTDKxl9kzG8SmBcHG5YtiW/CXdlgwDAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAQYwHQYDVR0OBBYEFEwysZfZMxvEpgXBxuWLYlvwl3ZYMAwGCCqBHM9VAYN1BQADSAAwRQIgG1bSLeOXp3oB8H7b53W+CKOPl2PknmWEq/lMhtn25HkCIQDaHDgWxWFtnCrBjH16/W3Ezn7/U/Vjo5xIpDoiVhsLwjCCAogwggIsoAMCAQICEC2hpr0M52xiTmNLfWop0CowDAYIKoEcz1UBg3UFADAuMQswCQYDVQQGEwJDTjEOMAwGA1UECgwFTlJDQUMxDzANBgNVBAMMBlJPT1RDQTAeFw0xMzA5MTMwODEwMjVaFw0zMzA5MDgwODEwMjVaMDQxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDESMBAGA1UEAwwJU0hFQ0EgU00yMFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEfdEfkS0GSlQQ8ISEVSUdvKL7tcd3bsNssWlmmOhN5VCg1iLJgMDDqhO9TFt4EDsZuvECXz8uiU+BL4pddBcMgKOCASIwggEeMB8GA1UdIwQYMBaAFEwysZfZMxvEpgXBxuWLYlvwl3ZYMA8GA1UdEwEB/wQFMAMBAf8wgboGA1UdHwSBsjCBrzBBoD+gPaQ7MDkxCzAJBgNVBAYTAkNOMQ4wDAYDVQQKDAVOUkNBQzEMMAoGA1UECwwDQVJMMQwwCgYDVQQDDANhcmwwKqAooCaGJGh0dHA6Ly93d3cucm9vdGNhLmdvdi5jbi9hcmwvYXJsLmNybDA+oDygOoY4bGRhcDovL2xkYXAucm9vdGNhLmdvdi5jbjozODkvQ049YXJsLE9VPUFSTCxPPU5SQ0FDLEM9Q04wDgYDVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBSJMQSRe0Oqqpq/hB2bhu7wuHCZoDAMBggqgRzPVQGDdQUAA0gAMEUCIQCKe/9772vmcRXjynapM3RqFchrHxh4Yiy0HiqwmUNkOQIgJjDnX9H9G/Aopa1VnYvKX2cjukamH56XCet/Jeyh3zQxAA==</string>-->
 
 
+    <!--<string name="UMSP_Service_GetTaskGUIDWithoutLogin">https://umsp.sheca.com/UMSPService/v2/GetTaskGUIDWithoutLogin</string>-->
+    <!--<string name="UMSP_Service_FaceRecognitionWithoutLogin">https://umsp.sheca.com/UMSPService/v2/FaceRecognitionWithoutLogin</string>-->
+
+    <!--<string name="UMSP_Service_IFAA">http://bizserver.dev.esandinfo.com:80/gateway</string>-->
+    <!--<string name="UMSP_Service_Login1">https://umsp.sheca.com/UMSPService/v2/Login</string>-->
+    <!--<string name="UMSP_Service_IFAAFPApplyInitialize">https://umsp.sheca.com/UMSPService/v2/IFAAFPApplyInitialize</string>-->
+    <!--<string name="UMSP_Service_IFAAFPApply">https://umsp.sheca.com/UMSPService/v2/IFAAFPApply</string>-->
+    <!--<string name="UMSP_Service_IFAAFPVerifyInitialize">https://umsp.sheca.com/UMSPService/v2/IFAAFPVerifyInitialize</string>-->
+    <!--<string name="UMSP_Service_IFAAFPVerify">https://umsp.sheca.com/UMSPService/v2/IFAAFPVerify</string>-->
+    <!--<string name="UMSP_Service_IFAAFPDelete">https://umsp.sheca.com/UMSPService/v2/IFAAFPDelete</string>-->
+    <!--<string name="UMSP_Service_IFAAFPCheck">https://umsp.sheca.com/UMSPService/v2/IFAAFPCheck</string>-->
+    <!--<string name="UMSP_Service_WeChatPayUnifiedorder">https://umsp.sheca.com/UMSPService/v2/WeChatPayUnifiedorder</string>-->
+    <!--<string name="UMSP_Service_WeChatPayOrderquery">https://umsp.sheca.com/UMSPService/v2/WeChatPayQueryOrder</string>-->
+    <!--<string name="UMSP_Service_ApplyCertByFaceRecognitionRealTimeEx">https://umsp.sheca.com/UMSPService/v2/ApplyCertByFaceRecognitionRealTimeEx</string>-->
+    <!--<string name="UMSP_Service_GetVoiceCode">https://umsp.sheca.com/UMSPService/v2/GetVoiceCode</string>-->
+
+
+    <!--V5版-->
+    <string name="UM_Base_Service">/ucm/umspservice/v5</string>
+    <string name="UMSP_Base_Service">http://202.96.220.164:8080/umspservice/v5</string>
+    <string name="UMSP_Service_GetTPALoginRequest">http://202.96.220.164/umsp/umspservice/v5/GetTPALoginRequest</string>
+    <string name="UMSP_Service_LoginFromTPA">http://202.96.220.164/umsp/umspservice/v5/LoginByPWD</string>
+    <string name="UMSP_Service_ApplyCert">http://202.96.220.164/umsp/umspservice/v5/ApplyPersonCert</string>
+    <string name="UMSP_Service_ApplyOrgCert">http://202.96.220.164/umsp/umspservice/v5/ApplyOrgCert</string>
+    <string name="UMSP_Service_FaceRecognition">http://202.96.220.166/umsp/UMAPI/FaceRecognition</string>
+    <string name="UMSP_Service_Logout">http://202.96.220.164/umsp/umspservice/v5/Logout</string>
+    <string name="UMSP_Service_Login">http://202.96.220.164/umsp/umspservice/v5/Login</string>
+    <string name="UMSP_Service_ChangePassword">http://202.96.220.164/umsp/umspservice/v5/ChangePassword</string>
+    <string name="UMSP_Service_GetCertApplyList">http://202.96.220.164/umsp/umspservice/v5/GetCertApplyList</string>
+    <string name="UMSP_Service_GetCertApplyListEx">http://202.96.220.164/umsp/umspservice/v5/GetCertApplyListEx</string>
+    <string name="UMSP_Service_QueryCertApplyStatus">http://202.96.220.164/umsp/umspservice/v5/QueryCertBizStatus</string>
+    <string name="UMSP_Service_UploadPkcs10">http://202.96.220.164/umsp/umspservice/v5/UploadPkcs10</string>
+    <string name="UMSP_Service_DownloadCert">http://202.96.220.164/umsp/umspservice/v5/DownloadCert</string>
+    <string name="UMSP_Service_SetSuccessStatus">http://202.96.220.164/umsp/umspservice/v5/SetCertDelivery</string>
+    <string name="UMSP_Service_GetAppLatestVersion">http://202.96.220.164/umsp/umspservice/v5/GetClientLatestInfo</string>
+    <string name="UMSP_Service_ApplyCertByFaceRecognition">http://202.96.220.166/umsp/UMAPI/ApplyCertByFaceRecognition</string>
+    <string name="UMSP_Service_ApplyCertByFaceRecognitionRealTime">http://202.96.220.166/umsp/UMAPI/ApplyCertByFaceRecognitionRealTime</string>
+    <string name="UMSP_Service_GetTaskGUID">http://202.96.220.164/umsp/umspservice/v5/GetTaskGUID</string>
+    <string name="UMSP_Service_RegisterPersonalAccount">http://202.96.220.164/umsp/umspservice/v5/RegisterPersonalAccount</string>
+    <string name="UMSP_Service_GetValidationCode">http://202.96.220.164/umsp/umspservice/v5/GetMAC</string>
+    <string name="UMSP_Service_GetAccountInfo">http://202.96.220.164/umsp/umspservice/v5/GetAccountInfo</string>
+    <string name="UMSP_Service_GetPersonalInfo">http://202.96.220.164/umsp/umspservice/v5/GetPersonalInfo</string>
+    <string name="UMSP_Service_GetOrgInfo">http://202.96.220.164/umsp/umspservice/v5/GetOrgInfo</string>
+    <string name="UMSP_Service_IsAccountExisted">http://202.96.220.164/umsp/umspservice/v5/IsAccountExisted</string>
+    <string name="UMSP_Service_VerifyMobile">http://202.96.220.164/umsp/umspservice/v5/VerifyMobile</string>
+    <string name="UMSP_Service_VerifyCertSignature">http://202.96.220.164/umsp/umspservice/v5/VerifyCertSignature</string>
+    <string name="UMSP_Service_SetAccountPassword">http://202.96.220.164/umsp/umspservice/v5/SetAccountPassword</string>
+    <string name="UMSP_Service_IsAccountReal">http://202.96.220.164/umsp/umspservice/v5/IsAccountReal</string>
+    <string name="UMSP_Service_SubmitManualCheckRequest">http://202.96.220.164/umsp/umspservice/v5/SubmitManualCheckRequest</string>
+    <string name="UMSP_Service_GetManualCheckFailedReason">http://202.96.220.164/umsp/umspservice/v5/GetManualCheckFailedReason</string>
+    <string name="UMSP_Service_DeleteCertApply">http://202.96.220.164/umsp/umspservice/v5/DeleteCertApply</string>
+    <string name="UMSP_Service_UploadCertRecord">http://202.96.220.164/umsp/umspservice/v5/UploadRecord</string>
+    <string name="UMSP_Service_GetAppInfo">http://202.96.220.164/umsp/umspservice/v5/GetAppInfo</string>
+    <string name="UMSP_Service_GetAllAppInfos">http://202.96.220.164/umsp/umspservice/v5/GetAccountAppList</string>
+    <string name="UMSP_Service_GetAppLicence">http://202.96.220.164/umsp/umspservice/v5/GetAppLicence</string>
+    <string name="UMSP_Service_LoginByDynamicCode">http://202.96.220.164/umsp/umspservice/v5/LoginByMAC</string>
+    <string name="UMSP_Service_RegisterPersonalAccountFromTPA">http://202.96.220.164/umsp/umspservice/v5/RegisterAccount</string>
+    <string name="UMSP_Service_MakeSeal">http://202.96.220.164/umsp/umspservice/v5/MakeSeal</string>
+    <string name="UMSP_Service_ApplySeal">http://202.96.220.164/umsp/umspservice/v5/ApplySeal</string>
+    <string name="UMSP_Service_QuerySeal">http://202.96.220.164/umsp/umspservice/v5/QuerySealStatus</string>
+    <string name="UMSP_Service_VerifySeal">http://202.96.220.164/umsp/umspservice/v5/GetSeal</string>
+    <string name="UMSP_Service_SetSealStatus">http://202.96.220.164/umsp/umspservice/v5/SetSealStatus</string>
+    <string name="UMSP_Service_VerifySealEx">http://202.96.220.164/umsp/umspservice/v5/VerifySeal</string>
+    <string name="UMSP_Service_RenewCert">http://202.96.220.164/umsp/umspservice/v5/RenewCert</string>
+    <string name="UMSP_Service_RevokeCert">http://202.96.220.164/umsp/umspservice/v5/RevokeCert</string>
+    <string name="UMSP_Service_ReissueCert">http://202.96.220.164/umsp/umspservice/v5/ReissueCert</string>
+    <string name="UMSP_Service_ModifyCert">http://202.96.220.164/umsp/umspservice/v5/ModifyCert</string>
+    <string name="UMSP_Service_PreLogin">http://202.96.220.164/umsp/umspservice/v5/PreLogin</string>
+    <string name="UMSP_Service_SetAccountVerification">http://202.96.220.164/umsp/umspservice/v5/SetAccountCertification</string>
+    <string name="UMSP_Service_GetAccountCertification">http://202.96.220.164/umsp/umspservice/v5/GetAccountCertification</string>
+    <string name="UMSP_Service_GetCertBizs">http://202.96.220.164/umsp/umspservice/v5/GetCertBizs</string>
+    <string name="UMSP_Service_GetDeviceInfo">http://202.96.220.164/umsp/umspservice/v5/GetDeviceInfo</string>
+    <string name="UMSP_Service_SetMobile">http://202.96.220.164/umsp/umspservice/v5/SetMobile</string>
+    <string name="UMSP_Service_IFAAProxy">http://202.96.220.164/umsp/umspservice/v5/IFAAProxy</string>
+    <string name="UMSP_Service_QueryAllCertApp">http://202.96.220.164/umsp/umspservice/v5/QueryAllCertApp</string>
+    <string name="UMSP_Service_QueryCertApp">http://202.96.220.164/umsp/umspservice/v5/QueryCertApp</string>
+    <string name="UMSP_Service_ApplyCertApp">http://202.96.220.164/umsp/umspservice/v5/ApplyCertApp</string>
+    <string name="UMSP_Service_RenewCertApp">http://202.96.220.164/umsp/umspservice/v5/RenewCertApp</string>
+    <string name="UMSP_Service_RevokeCertApp">http://202.96.220.164/umsp/umspservice/v5/RevokeCertApp</string>
+    <string name="UMSP_Service_AuthOrg">http://202.96.220.164/umsp/umspservice/v5/AuthOrg</string>
+    <string name="UMSP_Service_VerifyOrg">http://202.96.220.164/umsp/umspservice/v5/VerifyOrg</string>
+    <string name="UMSP_Service_ApplyOrgPay">http://202.96.220.164/umsp/umspservice/v5/ApplyOrgPay</string>
+    <string name="UMSP_Service_AuthOrgPay">http://202.96.220.164/umsp/umspservice/v5/AuthOrgPay</string>
+    <string name="UMSP_Service_GetBankList">http://202.96.220.164/umsp/umspservice/v5/GetBankList</string>
+    <string name="UMSP_Service_QueryOrgPay">http://202.96.220.164/umsp/umspservice/v5/QueryOrgPay</string>
+    <string name="UMSP_Service_ApplyPersonCertLite">http://202.96.220.164/umsp/umspservice/v5/ApplyPersonCertLite</string>
+    <string name="UMSP_Service_ApplyOrgCertLite">http://202.96.220.164/umsp/umspservice/v5/ApplyOrgCertLite</string>
+    <string name="UMSP_Service_AliPay">http://202.96.220.164/umsp/umspservice/v5/AliPay</string>
+    <string name="UMSP_Service_WXPay">http://202.96.220.164/umsp/umspservice/v5/WXPay</string>
+    <string name="UMSP_Service_QueryPay">http://202.96.220.164/umsp/umspservice/v5/QueryPay</string>
+    <string name="UMSP_Service_GetNonce">http://202.96.220.164/umsp/umspservice/v5/GetNonce</string>
+    <string name="UMSP_Service_AuthLRByMAC">http://202.96.220.164/umsp/umspservice/v5/AuthLRByMAC</string>
+    <string name="UMSP_Service_IsOrgCertFree">http://202.96.220.164/umsp/umspservice/v5/IsLRCertFreeApply</string>
+    <string name="UMSP_Service_IsOrgCertFreeUpdate">http://202.96.220.164/umsp/umspservice/v5/IsLRCertFreeUpdate</string>
+    <string name="UMSP_Service_SendSMSNotify">http://202.96.220.164/umsp/umspservice/v5/SendSMSNotify</string>
+    <string name="UMSP_Service_RenewCertApply">http://202.96.220.164/umsp/umspservice/v5/RenewCertApply</string>
+    <string name="UMSP_Service_RenewCertDownload">http://202.96.220.164/umsp/umspservice/v5/RenewCertDownload</string>
+    <string name="UMSP_Service_AuthorizeCertApplication">http://202.96.220.164/umsp/umspservice/v5/AuthorizeCertApplication</string>
+    <string name="UMSP_Service_GetAuthorizations">http://202.96.220.164/umsp/umspservice/v5/GetAuthorizations</string>
+    <string name="UMSP_Service_IsPwdSet">http://202.96.220.164/umsp/umspservice/v5/IsPwdSet</string>
+    <string name="UMSP_Service_IsValidApplication">http://202.96.220.164/umsp/umspservice/v5/IsValidApplication</string>
+    <string name="UMSP_Service_UploadRecord">http://202.96.220.164/umsp/umspservice/v5/UploadRecord</string>
+    <string name="UMSP_Service_GetSealPics">http://202.96.220.164/umsp/umspservice/v5/GetSealPics</string>
+    <string name="UMSP_Service_ResetV2AccountPwd">http://202.96.220.164/umsp/umspservice/v5/ResetV2AccountPwd</string>
+    <string name="UMSP_Service_GetCertChain">http://202.96.220.164/umsp/umspservice/v5/GetCertChain</string>
+    <string name="UMSP_Service_GetQRCodeInfo">http://202.96.220.164/umsp/umspservice/v5/GetQRCodeInfo</string>
+    <string name="UMSP_Service_GetOrgInfos">http://202.96.220.164/umsp/umspservice/v5/GetOrgInfos</string>
+    <string name="UMSP_Service_GetSignBizData">http://202.96.220.164/umsp/umspservice/v5/GetSignBizData</string>
+    <string name="UMSP_Service_UploadSignValue">http://202.96.220.164/umsp/umspservice/v5/UploadSignValue</string>
+    <string name="UMSP_Service_VerifyMAC">http://202.96.220.164/umsp/umspservice/v5/VerifyMAC</string>
+    <string name="UMSP_Service_GetPriKey">http://202.96.220.164/umsp/umspservice/v5/GetPriKey</string>
+    <string name="UMSP_Service_GenSM2Sign">http://202.96.220.164/umspservice/v4/GenSM2Sign</string>
+
+    <string name="UMSP_Service_SetNotLoginAccountPassword">http://202.96.220.164/umsp/umspservice/v5/ResetAccountPassword</string>
+
+
+    <string name="UMSP_RSA_CERT_CHAIN">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</string>
+
+    <string name="UMSP_SM2_CERT_CHAIN">MIIFCwYJKoZIhvcNAQcCoIIE/DCCBPgCAQExADALBgkqhkiG9w0BBwGgggTgMIICKTCCAc2gAwIBAgIQRrEGsdL91GIFwtWMqXwfxjAMBggqgRzPVQGDdQUAMDwxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEaMBgGA1UEAwwRVUNBIFNNMiBUZXN0IFJvb3QwHhcNMTMwMTAxMDAwMDAwWhcNNDkxMjMxMDAwMDAwWjA8MQswCQYDVQQGEwJDTjERMA8GA1UECgwIVW5pVHJ1c3QxGjAYBgNVBAMMEVVDQSBTTTIgVGVzdCBSb290MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEkedyH9SjOChr+JFPhBghoItFW/Zn4TSTwxry+0HD4Glf3nLO9f9ioqDMNOQkjDH6KnPOHGKlWBdeW88CTw2spqOBrjCBqzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zBmBgNVHSUBAQAEXDBaBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBwMJMCAGA1UdDgEBAAQWBBTqAewgJKTPvU2/prCfWHFDsN6dlzAMBggqgRzPVQGDdQUAA0gAMEUCIC0HjkHrHSE71uslFWmr1ccjPt10BC8EPWveskz1G02YAiEAkZKGBSz8ohxf0D4Kau/h3M3OLZjlTDyjB0cFiuOMD4IwggKvMIICU6ADAgECAhBb3Kg/62uZAMUW9HQnCqZ+MAwGCCqBHM9VAYN1BQAwPDELMAkGA1UEBhMCQ04xETAPBgNVBAoMCFVuaVRydXN0MRowGAYDVQQDDBFVQ0EgU00yIFRlc3QgUm9vdDAeFw0xMzAxMDEwMDAwMDBaFw0zNzEyMzEwMDAwMDBaMDkxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEXMBUGA1UEAwwOU0hFQ0EgU00yIFRlc3QwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAR6F/desbL7RuE9SnYS5L6rvk8DQxtKLGHtAPU+6D1o7xGYRNcNeheYC7O2ITORieJaDWxlH+qqrAKsOioO4gaKo4IBNjCCATIwRQYDVR0gAQEABDswOTA3BgkqgRwBhu86gRUwKjAoBggrBgEFBQcCARYcaHR0cDovL3d3dy5zaGVjYS5jb20vcG9saWN5LzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zA6BgNVHR8BAQAEMDAuMCygKqAohiZodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhc3ViLmNybDAiBgNVHSMBAQAEGDAWgBTqAewgJKTPvU2/prCfWHFDsN6dlzAgBgNVHQ4BAQAEFgQUnuoEUuFRuK5Nt4WTZhUpJTplntIwRgYIKwYBBQUHAQEBAQAENzA1MDMGCCsGAQUFBzAChidodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhcm9vdC5kZXIwDAYIKoEcz1UBg3UFAANIADBFAiBB0t8gh9JJ1NZabZ+FDLY2dadrdR2ooBTA3MyI0lvRZwIhAKafrS9+dzA5PHtDr4lzUKN1xM+oDW0v6oKFxf54n2OrMQA=</string>
+
+    <string name="UMSP_RSA_CERT_CHAIN_ORG">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</string>
+
+    <string name="UMSP_SM2_CERT_CHAIN_ORG">MIIFCwYJKoZIhvcNAQcCoIIE/DCCBPgCAQExADALBgkqhkiG9w0BBwGgggTgMIICKTCCAc2gAwIBAgIQRrEGsdL91GIFwtWMqXwfxjAMBggqgRzPVQGDdQUAMDwxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEaMBgGA1UEAwwRVUNBIFNNMiBUZXN0IFJvb3QwHhcNMTMwMTAxMDAwMDAwWhcNNDkxMjMxMDAwMDAwWjA8MQswCQYDVQQGEwJDTjERMA8GA1UECgwIVW5pVHJ1c3QxGjAYBgNVBAMMEVVDQSBTTTIgVGVzdCBSb290MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEkedyH9SjOChr+JFPhBghoItFW/Zn4TSTwxry+0HD4Glf3nLO9f9ioqDMNOQkjDH6KnPOHGKlWBdeW88CTw2spqOBrjCBqzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zBmBgNVHSUBAQAEXDBaBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBwMJMCAGA1UdDgEBAAQWBBTqAewgJKTPvU2/prCfWHFDsN6dlzAMBggqgRzPVQGDdQUAA0gAMEUCIC0HjkHrHSE71uslFWmr1ccjPt10BC8EPWveskz1G02YAiEAkZKGBSz8ohxf0D4Kau/h3M3OLZjlTDyjB0cFiuOMD4IwggKvMIICU6ADAgECAhBb3Kg/62uZAMUW9HQnCqZ+MAwGCCqBHM9VAYN1BQAwPDELMAkGA1UEBhMCQ04xETAPBgNVBAoMCFVuaVRydXN0MRowGAYDVQQDDBFVQ0EgU00yIFRlc3QgUm9vdDAeFw0xMzAxMDEwMDAwMDBaFw0zNzEyMzEwMDAwMDBaMDkxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEXMBUGA1UEAwwOU0hFQ0EgU00yIFRlc3QwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAR6F/desbL7RuE9SnYS5L6rvk8DQxtKLGHtAPU+6D1o7xGYRNcNeheYC7O2ITORieJaDWxlH+qqrAKsOioO4gaKo4IBNjCCATIwRQYDVR0gAQEABDswOTA3BgkqgRwBhu86gRUwKjAoBggrBgEFBQcCARYcaHR0cDovL3d3dy5zaGVjYS5jb20vcG9saWN5LzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zA6BgNVHR8BAQAEMDAuMCygKqAohiZodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhc3ViLmNybDAiBgNVHSMBAQAEGDAWgBTqAewgJKTPvU2/prCfWHFDsN6dlzAgBgNVHQ4BAQAEFgQUnuoEUuFRuK5Nt4WTZhUpJTplntIwRgYIKwYBBQUHAQEBAQAENzA1MDMGCCsGAQUFBzAChidodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhcm9vdC5kZXIwDAYIKoEcz1UBg3UFAANIADBFAiBB0t8gh9JJ1NZabZ+FDLY2dadrdR2ooBTA3MyI0lvRZwIhAKafrS9+dzA5PHtDr4lzUKN1xM+oDW0v6oKFxf54n2OrMQA=</string>
     <string name="UMSP_Service_GetTaskGUIDWithoutLogin">https://umsp.sheca.com/UMSPService/v2/GetTaskGUIDWithoutLogin</string>
     <string name="UMSP_Service_FaceRecognitionWithoutLogin">https://umsp.sheca.com/UMSPService/v2/FaceRecognitionWithoutLogin</string>
 
@@ -435,6 +251,5 @@
     <string name="UMSP_Service_WeChatPayOrderquery">https://umsp.sheca.com/UMSPService/v2/WeChatPayQueryOrder</string>
     <string name="UMSP_Service_ApplyCertByFaceRecognitionRealTimeEx">https://umsp.sheca.com/UMSPService/v2/ApplyCertByFaceRecognitionRealTimeEx</string>
     <string name="UMSP_Service_GetVoiceCode">https://umsp.sheca.com/UMSPService/v2/GetVoiceCode</string>
-
 
 </resources>

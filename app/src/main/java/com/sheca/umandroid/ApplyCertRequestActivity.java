@@ -49,6 +49,8 @@ import com.sheca.jshcaucmstd.JShcaUcmStd;
 import com.sheca.jshcaucmstd.JShcaUcmStdRes;
 import com.sheca.jshcaucmstd.myWebClientUtil;
 import com.sheca.shcaesdeviceinfo.shcaEsDeviceInfo;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.CertDao;
 import com.sheca.umandroid.dao.LogDao;
@@ -58,6 +60,7 @@ import com.sheca.umandroid.model.DownloadCertResponse;
 import com.sheca.umandroid.model.GetPersonalInfo;
 import com.sheca.umandroid.model.OperationLog;
 import com.sheca.umandroid.model.ShcaCciStd;
+import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.PKIUtil;
 import com.sheca.umandroid.util.WebClientUtil;
@@ -2706,11 +2709,22 @@ public class ApplyCertRequestActivity extends com.facefr.activity.BaseActivity i
 					curAct.setStatus(-1);   //重置登录状态为未登录状态
 					mAccountDao.update(curAct);
 					
-					Intent intent = new Intent(ApplyCertRequestActivity.this, LoginActivity.class);
-					intent.putExtra("AccName", curAct.getName());
-					if(mIsDao)
-						 intent.putExtra("message", "dao");
-					startActivity(intent);
+//					Intent intent = new Intent(ApplyCertRequestActivity.this, LoginActivity.class);
+//					intent.putExtra("AccName", curAct.getName());
+//					if(mIsDao)
+//						 intent.putExtra("message", "dao");
+//					startActivity(intent);
+
+					if (!AccountHelper.hasLogin(ApplyCertRequestActivity.this)) {
+						if (AccountHelper.isFirstLogin(ApplyCertRequestActivity.this)) {
+							Intent intentLoignV33 = new Intent(ApplyCertRequestActivity.this, LoginActivityV33.class);
+							startActivity(intentLoignV33);
+						} else {
+							Intent intentLoignV33 = new Intent(ApplyCertRequestActivity.this, ReLoginActivityV33.class);
+							startActivity(intentLoignV33);
+						}
+					}
+
 					ApplyCertRequestActivity.this.finish();
 				}
 				else {

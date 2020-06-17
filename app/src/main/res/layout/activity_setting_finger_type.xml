@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"  
             android:layout_marginLeft="5dp"
             android:checked="true"  
-            android:text="开启" 
+            android:text="注册"
             android:textColor="#000000"
             android:textSize="20sp"
             style="@style/tab_center" />  
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"  
             android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
-            android:text="关闭" 
+            android:text="注销"
             android:textColor="#000000"
             android:textSize="20sp"
             style="@style/tab_center"/>  

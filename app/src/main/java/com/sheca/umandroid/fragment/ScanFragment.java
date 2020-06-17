@@ -58,6 +58,8 @@ import com.sheca.umandroid.ScanBlueToothActivity;
 import com.sheca.umandroid.ScanBlueToothSimActivity;
 import com.sheca.umandroid.SealListActivity;
 import com.sheca.umandroid.SealSignActivity;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.adapter.CertAdapter;
 //import com.sheca.umandroid.adapter.ImageCycleEdgeView;
 import com.sheca.umandroid.dao.AccountDao;
@@ -239,9 +241,17 @@ public class ScanFragment extends Fragment {
         public void onClick(View v) {
 
             if (accountDao.count() == 0) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                //activity.finish();
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+                if (!AccountHelper.hasLogin(getActivity())) {
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+                }
             } else {
                 //跳转到证书申请页面；
                 Intent i = new Intent(context, ApplicationActivity.class);
@@ -256,9 +266,17 @@ public class ScanFragment extends Fragment {
         public void onClick(View v) {
 
             if (accountDao.count() == 0) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                //activity.finish();
+//                Intent intent = new Intent(context, LoginActivity.class);
+//                startActivity(intent);
+                if (!AccountHelper.hasLogin(getActivity())) {
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+                }
             } else {
                 try {
                     final Handler handler = new Handler(context.getMainLooper());
@@ -346,8 +364,17 @@ public class ScanFragment extends Fragment {
         ib_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, LoginActivity.class);
-                startActivity(i);
+                if (!AccountHelper.hasLogin(getActivity())) {
+                    if (AccountHelper.isFirstLogin(getActivity())) {
+                        Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    } else {
+                        Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                        startActivity(intentLoignV33);
+                    }
+                }
+//                Intent i = new Intent(context, LoginActivity.class);
+//                startActivity(i);
             }
         });
         TextView tv_title = (TextView) activity.findViewById(R.id.tv_title);
@@ -391,8 +418,17 @@ public class ScanFragment extends Fragment {
 //		mAdView.setSlide(false);
 
         if (accountDao.count() == 0) {
-            Intent intent = new Intent(context, LoginActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(context, LoginActivity.class);
+//            startActivity(intent);
+            if (!AccountHelper.hasLogin(getActivity())) {
+                if (AccountHelper.isFirstLogin(getActivity())) {
+                    Intent intentLoignV33 = new Intent(getActivity(), LoginActivityV33.class);
+                    startActivity(intentLoignV33);
+                } else {
+                    Intent intentLoignV33 = new Intent(getActivity(), ReLoginActivityV33.class);
+                    startActivity(intentLoignV33);
+                }
+            }
         }
 
         Button buttonScan = (Button) view.findViewById(R.id.button_scan);
@@ -3143,7 +3179,10 @@ public class ScanFragment extends Fragment {
         for (Cert cert : certList) {
             if (null == cert.getCertificate() || "".equals(cert.getCertificate()))
                 continue;
-
+            if (getCertType(cert) == false&&!com.sheca.umplus.util.PKIUtil.isAccountCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
+            if (getCertType(cert) == true&&! com.sheca.umplus.util.PKIUtil.isOrgCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
             if (verifyCert(cert, false)) {
                 if (verifyDevice(cert, false)) {
                     if (cert.getStatus() == Cert.STATUS_DOWNLOAD_CERT) {
@@ -4449,5 +4488,10 @@ public class ScanFragment extends Fragment {
                 });
 
         builder.show();
+    }
+    private boolean getCertType(Cert cert) {  //true 单位证书 false个人证书
+        Log.e("类型", cert.getCerttype());
+        return !cert.getCerttype().contains("个人");
+
     }
 }

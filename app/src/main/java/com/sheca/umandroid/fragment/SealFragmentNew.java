@@ -64,6 +64,7 @@ import com.sheca.umandroid.util.MyAsycnTaks;
 import com.sheca.umandroid.util.ParamGen;
 import com.sheca.umandroid.util.WebClientUtil;
 import com.sheca.umplus.dao.UniTrust;
+import com.sheca.umplus.util.PKIUtil;
 
 import net.sf.json.JSONObject;
 
@@ -338,7 +339,10 @@ public class SealFragmentNew extends Fragment {
 
                 continue;
             }
-
+            if (getCertType(cert) == false&&!PKIUtil.isAccountCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
+            if (getCertType(cert) == true&&! PKIUtil.isOrgCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+                continue;
             boolean hasSameCert = false;
             for (int i = 0; i < certSn.size(); i++) {//去掉被否决的印章
                 if (certSn.get(i).equals(sealInfo.getCertsn())) {

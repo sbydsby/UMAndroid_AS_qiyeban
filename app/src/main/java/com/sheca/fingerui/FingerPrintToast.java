@@ -8,7 +8,6 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.ifaa.sdk.auth.message.AuthenticatorResponse;
 import com.sheca.umandroid.LaunchActivity;
 import com.sheca.umandroid.R;
 
@@ -61,34 +60,34 @@ public class FingerPrintToast {
         } else {
             switch (mResultCode) {
                 //根据UE需求 去掉
-                case AuthenticatorResponse.RESULT_SUCCESS:
+                case 0:
                 	LaunchActivity.isIFAAFingerOK = true;
                 	LaunchActivity.failCount = 0;
                     mToast = Toast.makeText(context, R.string.verify_success, Toast.LENGTH_SHORT);
                     mToast.setGravity(Gravity.CENTER, 0, 0);
                     mToast.show();
                     break;
-                case AuthenticatorResponse.RESULT_NO_MATCH:
-                	LaunchActivity.isIFAAFingerOK = false;
-                	LaunchActivity.failCount++;
-                    mToast = Toast.makeText(context, R.string.verify_not_match, Toast.LENGTH_SHORT);
-                    mToast.setGravity(Gravity.CENTER, 0, 0);
-                    mToast.show();
-                    break;
-                case AuthenticatorResponse.RESULT_TIMEOUT:
-                	LaunchActivity.isIFAAFingerOK = false;
-                	LaunchActivity.failCount++;
-                    mToast = Toast.makeText(context, R.string.verify_timeout, Toast.LENGTH_SHORT);
-                    mToast.setGravity(Gravity.CENTER, 0, 0);
-                    mToast.show();
-                    break;
-                case AuthenticatorResponse.RESULT_CANCELED:
-                	LaunchActivity.isIFAAFingerOK = false;
-                	LaunchActivity.failCount++;
-                    mToast = Toast.makeText(context, R.string.verify_cancel, Toast.LENGTH_SHORT);
-                    mToast.setGravity(Gravity.CENTER, 0, 0);
-                    mToast.show();
-                    break;
+//                case AuthenticatorResponse.RESULT_NO_MATCH:
+//                	LaunchActivity.isIFAAFingerOK = false;
+//                	LaunchActivity.failCount++;
+//                    mToast = Toast.makeText(context, R.string.verify_not_match, Toast.LENGTH_SHORT);
+//                    mToast.setGravity(Gravity.CENTER, 0, 0);
+//                    mToast.show();
+//                    break;
+//                case AuthenticatorResponse.RESULT_TIMEOUT:
+//                	LaunchActivity.isIFAAFingerOK = false;
+//                	LaunchActivity.failCount++;
+//                    mToast = Toast.makeText(context, R.string.verify_timeout, Toast.LENGTH_SHORT);
+//                    mToast.setGravity(Gravity.CENTER, 0, 0);
+//                    mToast.show();
+//                    break;
+//                case AuthenticatorResponse.RESULT_CANCELED:
+//                	LaunchActivity.isIFAAFingerOK = false;
+//                	LaunchActivity.failCount++;
+//                    mToast = Toast.makeText(context, R.string.verify_cancel, Toast.LENGTH_SHORT);
+//                    mToast.setGravity(Gravity.CENTER, 0, 0);
+//                    mToast.show();
+//                    break;
                 case ST_AUTHSUCCESS:
                 	LaunchActivity.isIFAAFingerOK = true;
                 	LaunchActivity.failCount = 0;

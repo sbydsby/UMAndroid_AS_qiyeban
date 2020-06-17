@@ -2,7 +2,6 @@ package com.sheca.umandroid;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -14,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -25,14 +23,6 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
-
-
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -43,17 +33,16 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.esandinfo.ifaa.EDISAuthManager;
+import com.esandinfo.ifaa.IFAAAuthTypeEnum;
 import com.facefr.util.CheckPermServer;
-import com.ifaa.sdk.api.AuthenticatorManager;
-import com.ifaa.sdk.auth.Constants;
-import com.ifaa.sdk.auth.IAuthenticator;
 import com.sheca.javasafeengine;
-import com.sheca.jshcaesstd.JShcaEsStd;
 import com.sheca.jshcaucmstd.JShcaUcmStd;
 import com.sheca.jshcaucmstd.JShcaUcmStdRes;
 import com.sheca.jshcaucmstd.myWebClientUtil;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.AppInfoDao;
 import com.sheca.umandroid.dao.CertDao;
@@ -64,9 +53,7 @@ import com.sheca.umandroid.model.AppInfo;
 import com.sheca.umandroid.model.AppInfoEx;
 import com.sheca.umandroid.model.ShcaCciStd;
 import com.sheca.umandroid.presenter.LoginController;
-import com.sheca.umandroid.test.MainActivityNew;
 import com.sheca.umandroid.util.AccountHelper;
-import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.LogUtil;
 import com.sheca.umandroid.util.MyAsycnTaks;
@@ -106,7 +93,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
     public static boolean isBlueToothUsed = false;      //使用蓝牙模块标志
     public static boolean isIFAAFingerUsed = false;     //使用ifaa指纹模块
     public static boolean isIFAAFingerOpend = false;    //ifaa指纹模块开关
-    public static IAuthenticator authenticator;
+//    public static IAuthenticator authenticator;
     public static boolean isIFAAFingerOK = false;       //ifaa指纹识别是否通过标志
     public static int failCount = 0;                //ifaa指纹识别验证失败计数器
 
@@ -205,7 +192,7 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
         mCerDao = new CertDao(LaunchActivity.this);
         mSealInfoDao = new SealInfoDao(LaunchActivity.this);
 
-        authenticator = AuthenticatorManager.create(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT);
+//        authenticator = AuthenticatorManager.create(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT);
         //if(null == authenticator)
         //authenticator = AuthenticatorManager.create(this, Constants.TYPE_FACE);
         bLogined = false;
@@ -243,9 +230,17 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
         ht = new HandlerThread("ccit_working_thread1");
         ht.start();
         workHandler = new Handler(ht.getLooper());
-        if (!mCheckPermServer.permissionSet(LaunchActivity.this, CheckPermServer.PERMISSION_LAUNCH))
-//        if (!mCheckPermServer.permissionSet(LaunchActivity.this, PERMISSION_LAUNCH_TEST))
-            showPermissionLaunch();
+
+
+
+        if (!AccountHelper.isAgreeUserRules(LaunchActivity.this)) {
+            showUserRules();
+        } else {
+            //判断该版本是否更新接口
+            checkVersion();
+        }
+
+
         //getHttpsCert();
         //pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         //mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
@@ -458,6 +453,10 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
 
                                 }
 
+                                if (!mCheckPermServer.permissionSet(LaunchActivity.this, CheckPermServer.PERMISSION_LAUNCH))
+//        if (!mCheckPermServer.permissionSet(LaunchActivity.this, PERMISSION_LAUNCH_TEST))
+                                    showPermissionLaunch();
+
                             }
                         });
 
@@ -560,8 +559,17 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
                 } catch (Exception e) {
                     setAccountLogoutStatus();
                     AccountHelper.clearAllUserData(getApplicationContext());
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                    startActivity(intent);
+                    if (!AccountHelper.hasLogin(LaunchActivity.this)) {
+                        if (AccountHelper.isFirstLogin(LaunchActivity.this)) {
+                            Intent intentLoignV33 = new Intent(LaunchActivity.this, LoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        } else {
+                            Intent intentLoignV33 = new Intent(LaunchActivity.this, ReLoginActivityV33.class);
+                            startActivity(intentLoignV33);
+                        }
+                    }
                     finish();
                 }
 
@@ -681,17 +689,42 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
     }
 
     private void checkIFAAFingerUsed() {
-        if (AuthenticatorManager.isSupportIFAA(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT)) {
+        List<IFAAAuthTypeEnum> supportBIOTypes = EDISAuthManager.getSupportBIOTypes(this);
+        isIFAAFingerOpend = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_OPENED, false);
+
+        if (supportBIOTypes.isEmpty()) {
+            isIFAAFingerUsed = false;
+
+
+//            if (null != authenticator) {
+//                String deviceId = authenticator.getDeviceId();
+//                int userStatus = authenticator.checkUserStatus("");
+//                //Toast.makeText(LaunchActivity.this,"deviceId="+deviceId+"\n"+"userStatus="+userStatus,Toast.LENGTH_LONG).show();
+//            }
+        }
+
+        if (supportBIOTypes.contains(IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT)) {
             isIFAAFingerUsed = true;
 
-            isIFAAFingerOpend = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_OPENED, false);
-
-            if (null != authenticator) {
-                String deviceId = authenticator.getDeviceId();
-                int userStatus = authenticator.checkUserStatus("");
-                //Toast.makeText(LaunchActivity.this,"deviceId="+deviceId+"\n"+"userStatus="+userStatus,Toast.LENGTH_LONG).show();
-            }
         }
+
+        if (supportBIOTypes.contains(IFAAAuthTypeEnum.AUTHTYPE_FACE)) {
+            isIFAAFingerUsed = true;
+
+        }
+
+
+//        if (AuthenticatorManager.isSupportIFAA(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT)) {
+//            isIFAAFingerUsed = true;
+//
+//            isIFAAFingerOpend = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_OPENED, false);
+//
+//            if (null != authenticator) {
+//                String deviceId = authenticator.getDeviceId();
+//                int userStatus = authenticator.checkUserStatus("");
+//                //Toast.makeText(LaunchActivity.this,"deviceId="+deviceId+"\n"+"userStatus="+userStatus,Toast.LENGTH_LONG).show();
+//            }
+//        }
     }
 
 
@@ -704,17 +737,17 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
         if (savedVersionCode == -1) {
 //            // 首次运行程序，跳转引导页
 //
-            if (!AccountHelper.isAgreeUserRules(LaunchActivity.this)) {
-
-                        showUserRules();//用户协议
-
-
-            } else {
+//            if (!AccountHelper.isAgreeUserRules(LaunchActivity.this)) {
+//
+//                        showUserRules();//用户协议
+//
+//
+//            } else {
                 Intent i = new Intent(LaunchActivity.this, GuideActivity.class);
                 startActivity(i);
                 //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 this.finish();
-            }
+//            }
         } else {
             // 已经运行过程序
             try {
@@ -848,10 +881,13 @@ public class LaunchActivity extends Activity implements OnRequestPermissionsResu
         txt_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LaunchActivity.this, GuideActivity.class);
-                startActivity(i);
-                //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
-              finish();
+                dia.dismiss();
+                AccountHelper.setAgreeUserRules(LaunchActivity.this,true);
+                checkVersion();
+//                Intent i = new Intent(LaunchActivity.this, GuideActivity.class);
+//                startActivity(i);
+//                //overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+//              finish();
             }
         });
 

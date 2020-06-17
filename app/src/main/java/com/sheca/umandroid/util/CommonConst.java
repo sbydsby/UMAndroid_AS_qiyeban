@@ -179,36 +179,33 @@ public class CommonConst {
     public static final int RETURN_CODE_OK = 0;
 
 
-    public static final String UM_APPID = "fb9cd5a6-95a3-4821-8916-c9048b5b245e";//"49beb9e1-0a98-4f8d-bba3-832095b656f1";  //内网配置
-    public static final String UM_APPID_CONFIG = "fb9cd5a695a348218916c9048b5b245e-a1d92bd59b244cd595865f1e8ae35fc9-61a10ef17d744e9d96f05e69edc0e1f7-539b8df72333404ba660dbe5a41c7f45-e2f180560d274af3b7440883f14836e3-ae83058d82c84faabe3e25dafc61c9cd-8fd575995b2648a8a3f0e4d05f36639b-730181c23ea64608ba66fbc0dfe94f57-74b74f77771d4c1399fc3b81ca0003fc-be15791b96a14c3b832038364fff63da-0edd6bbc6d7e48ae8c4476e4b2555180-6c0e28275863490a8a3d60da5cd05183-f02882dbf5cd494ebc3ef681198341cb-cf147f5fdf0444ffb2540e45ff2efbb0-ed35cffd0fcc4a629acc4b59bcae3c8e-b73675321f53457dbf12a6f8d858e709-2a5e89e6a50e43b289cd6810abc65e3d";  //内网配置列表
-    public static final String UM_APP_LICENSE = "zZWoAfYn+e6O2iccl64kLRx1pHQ1ljCrL9Q6W+4CpYw=";  //移证通内网应用license
-    public static final String UM_APP_PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDegM3R/l9gAyHOo6Fw+IUDcRUOoQesP6MHu0huStdxk6MxcQ1PrTufgDPvWZX/V7AjezNxPrFzJvYgYZSIq9MjdVlopgqrLjKMAbdFdvyXlHkLUnItwfWpNjFbFrDAMKjYf7EippuQVFRxTubsd1B4YGzc36kjED+P/xEP2f8Blmf93TE9An2Ofrm+EceLE6wg3Ou90vBR39z0la7is/ZomluphV33SUy6VUqsP28F/OFDMWSdhz7nQG/K5RGAahH1bBetKSwalLign9sfJIbfLO2xndou81m1YiwXqDEZfYwNdSLYxaGVmJGI4beB7hd5Fzg3FfVLQO9RaXv9KbRZAgMBAAECggEAUqjxTbE9h3LCbX0Wrdx1tdid5QhnzFL74xRtjSPatAQQHX8NXetSeifro2DZu7m84wGTE+AhllEEIPV/c+K5lrOy2pDM59lKx/6fMnxIzJtI+K7RYjRrakiKv3dHhK7PG1cc3G2e31ik4k9YtMKCr6XK66dfs3oG0x0EHqpy9QhU4cB+bBDfxPdgkB3bcp045UbF6SyQogIoWcupMVI3Ql0g/7snkx64WkpvEpWeGxW4KidM8K0OmtA9qVjdA5V9MQDFCSyEK+jgnEd+f79ZE99jlG2+o21LGNXD1aHL7duSuBeRRWhRRwAk18UkmBX5yqCcfv7eTXWDfec3+14qTQKBgQD6iGIr0KHzVnxi55tV6dSfLi7JrMvUansJ5+y40QJBjr3mFojYIEHsY/c6UF827r7D6aqQoWaAL2t79qHuP8xxvc2ucTB/aS4FgjV7xtnNsTRzeO0NfZ4wW9xkOB8HYkEg9Pg8gVYJi8Xw+PIARV/5rf6OVGbhZL4N0yXYqimKGwKBgQDjW9TV3sioWv1kSpJKjXCvUgJqnjwCnDIA3LvwtPNipDYdIxEjiSIcLmyvmltsJDLRvYFpe3iErbqZB252+c4JocO3dApIcR/o3jZGU/jTnx/RhsTZrS4ayRr8rG2RDquljNGiKjTMoRetsillMDnac4QBnP/hL1O700yWT7qimwKBgQDBz336nUSb5b0GGlv9w427stN5KtboNZOHX0au1uni41UeyTIF2DaHc/IOx5xQ97LWBk7v4hxUb9q7pFky4WH8X7PdDi1Rc4Gpu0g6v+NAj6Se696ewB3/FSFS2mOOp8DwiPH8hKWVbu6q8zrrYL/VfHffjYWlOfUY5s5xZXoLHwKBgBkWySXQr9PkNpIaqIoRkZ3HLv0U+QpQsjPmJ9coILOB63bLp9iECX+Sn+vA3NXSKMl8YAuD1IjPowfACjCW4GWvtClKZNgZo6vO2a5pFcxEgv5cINzkf3H1P0UiwfR/6fEa2QdMIQdzv2krf+XqrHeux6Jl8NaoolTXvFvZ8H6BAoGBAOD0GyPN57G+mIShl/xSFWJTaVvNIAvlFXWnmCO3XzyQbATSdJF6B/tam57T3MpkidkyKtt4IKYPJUpWRglbDjQ5MjBilRhtadqofya8wwt0PInI7mmTW3p3XHa1xcxt/ji1Auwd0uciw5k7W2VISXD6q5Bod7kTUjBw47Yft0mw";  //移证通内网应用签名私钥
-    public static final String UM_APP_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3oDN0f5fYAMhzqOhcPiFA3EVDqEHrD+jB7tIbkrXcZOjMXENT607n4Az71mV/1ewI3szcT6xcyb2IGGUiKvTI3VZaKYKqy4yjAG3RXb8l5R5C1JyLcH1qTYxWxawwDCo2H+xIqabkFRUcU7m7HdQeGBs3N+pIxA/j/8RD9n/AZZn/d0xPQJ9jn65vhHHixOsINzrvdLwUd/c9JWu4rP2aJpbqYVd90lMulVKrD9vBfzhQzFknYc+50BvyuURgGoR9WwXrSksGpS4oJ/bHySG3yztsZ3aLvNZtWIsF6gxGX2MDXUi2MWhlZiRiOG3ge4XeRc4NxX1S0DvUWl7/Sm0WQIDAQAB";
-    public static final String UM_APP_AUTH_KEY = "010E88BAA09C4B61A91827DD72CEFAA9";     //移证通外网应用authkeyID
-    public static final String UM_APP_UMSP_SERVER = "https://umapi.sheca.com/umsp/umspservice/v4";//正式地址
-    public static final String UM_APP_UCM_SERVER = "https://umapi.sheca.com/ucm/umspservice/v4";//正式地址
-    public static final String UM_SERVER = "https://umapi.sheca.com";//正式地址
-    public static final String RULES_SERVER = "https://umapi.sheca.com/biz/yztPrivacyPolicy.html";//隐私协议
+//    public static final String UM_APPID = "fb9cd5a6-95a3-4821-8916-c9048b5b245e";//"49beb9e1-0a98-4f8d-bba3-832095b656f1";  //内网配置
+//    public static final String UM_APPID_CONFIG = "fb9cd5a695a348218916c9048b5b245e-a1d92bd59b244cd595865f1e8ae35fc9-61a10ef17d744e9d96f05e69edc0e1f7-539b8df72333404ba660dbe5a41c7f45-e2f180560d274af3b7440883f14836e3-ae83058d82c84faabe3e25dafc61c9cd-8fd575995b2648a8a3f0e4d05f36639b-730181c23ea64608ba66fbc0dfe94f57-74b74f77771d4c1399fc3b81ca0003fc-be15791b96a14c3b832038364fff63da-0edd6bbc6d7e48ae8c4476e4b2555180-6c0e28275863490a8a3d60da5cd05183-f02882dbf5cd494ebc3ef681198341cb-cf147f5fdf0444ffb2540e45ff2efbb0-ed35cffd0fcc4a629acc4b59bcae3c8e-b73675321f53457dbf12a6f8d858e709-2a5e89e6a50e43b289cd6810abc65e3d";  //内网配置列表
+//    public static final String UM_APP_LICENSE = "zZWoAfYn+e6O2iccl64kLRx1pHQ1ljCrL9Q6W+4CpYw=";  //移证通内网应用license
+//    public static final String UM_APP_PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDegM3R/l9gAyHOo6Fw+IUDcRUOoQesP6MHu0huStdxk6MxcQ1PrTufgDPvWZX/V7AjezNxPrFzJvYgYZSIq9MjdVlopgqrLjKMAbdFdvyXlHkLUnItwfWpNjFbFrDAMKjYf7EippuQVFRxTubsd1B4YGzc36kjED+P/xEP2f8Blmf93TE9An2Ofrm+EceLE6wg3Ou90vBR39z0la7is/ZomluphV33SUy6VUqsP28F/OFDMWSdhz7nQG/K5RGAahH1bBetKSwalLign9sfJIbfLO2xndou81m1YiwXqDEZfYwNdSLYxaGVmJGI4beB7hd5Fzg3FfVLQO9RaXv9KbRZAgMBAAECggEAUqjxTbE9h3LCbX0Wrdx1tdid5QhnzFL74xRtjSPatAQQHX8NXetSeifro2DZu7m84wGTE+AhllEEIPV/c+K5lrOy2pDM59lKx/6fMnxIzJtI+K7RYjRrakiKv3dHhK7PG1cc3G2e31ik4k9YtMKCr6XK66dfs3oG0x0EHqpy9QhU4cB+bBDfxPdgkB3bcp045UbF6SyQogIoWcupMVI3Ql0g/7snkx64WkpvEpWeGxW4KidM8K0OmtA9qVjdA5V9MQDFCSyEK+jgnEd+f79ZE99jlG2+o21LGNXD1aHL7duSuBeRRWhRRwAk18UkmBX5yqCcfv7eTXWDfec3+14qTQKBgQD6iGIr0KHzVnxi55tV6dSfLi7JrMvUansJ5+y40QJBjr3mFojYIEHsY/c6UF827r7D6aqQoWaAL2t79qHuP8xxvc2ucTB/aS4FgjV7xtnNsTRzeO0NfZ4wW9xkOB8HYkEg9Pg8gVYJi8Xw+PIARV/5rf6OVGbhZL4N0yXYqimKGwKBgQDjW9TV3sioWv1kSpJKjXCvUgJqnjwCnDIA3LvwtPNipDYdIxEjiSIcLmyvmltsJDLRvYFpe3iErbqZB252+c4JocO3dApIcR/o3jZGU/jTnx/RhsTZrS4ayRr8rG2RDquljNGiKjTMoRetsillMDnac4QBnP/hL1O700yWT7qimwKBgQDBz336nUSb5b0GGlv9w427stN5KtboNZOHX0au1uni41UeyTIF2DaHc/IOx5xQ97LWBk7v4hxUb9q7pFky4WH8X7PdDi1Rc4Gpu0g6v+NAj6Se696ewB3/FSFS2mOOp8DwiPH8hKWVbu6q8zrrYL/VfHffjYWlOfUY5s5xZXoLHwKBgBkWySXQr9PkNpIaqIoRkZ3HLv0U+QpQsjPmJ9coILOB63bLp9iECX+Sn+vA3NXSKMl8YAuD1IjPowfACjCW4GWvtClKZNgZo6vO2a5pFcxEgv5cINzkf3H1P0UiwfR/6fEa2QdMIQdzv2krf+XqrHeux6Jl8NaoolTXvFvZ8H6BAoGBAOD0GyPN57G+mIShl/xSFWJTaVvNIAvlFXWnmCO3XzyQbATSdJF6B/tam57T3MpkidkyKtt4IKYPJUpWRglbDjQ5MjBilRhtadqofya8wwt0PInI7mmTW3p3XHa1xcxt/ji1Auwd0uciw5k7W2VISXD6q5Bod7kTUjBw47Yft0mw";  //移证通内网应用签名私钥
+//    public static final String UM_APP_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3oDN0f5fYAMhzqOhcPiFA3EVDqEHrD+jB7tIbkrXcZOjMXENT607n4Az71mV/1ewI3szcT6xcyb2IGGUiKvTI3VZaKYKqy4yjAG3RXb8l5R5C1JyLcH1qTYxWxawwDCo2H+xIqabkFRUcU7m7HdQeGBs3N+pIxA/j/8RD9n/AZZn/d0xPQJ9jn65vhHHixOsINzrvdLwUd/c9JWu4rP2aJpbqYVd90lMulVKrD9vBfzhQzFknYc+50BvyuURgGoR9WwXrSksGpS4oJ/bHySG3yztsZ3aLvNZtWIsF6gxGX2MDXUi2MWhlZiRiOG3ge4XeRc4NxX1S0DvUWl7/Sm0WQIDAQAB";
+//    public static final String UM_APP_AUTH_KEY = "010E88BAA09C4B61A91827DD72CEFAA9";     //移证通外网应用authkeyID
+//    public static final String UM_APP_UMSP_SERVER = "https://umapi.sheca.com/umsp/umspservice/v4";//正式地址
+//    public static final String UM_APP_UCM_SERVER = "https://umapi.sheca.com/ucm/umspservice/v4";//正式地址
+//    public static final String UM_SERVER = "https://umapi.sheca.com";//正式地址
+//    public static final String RULES_SERVER = "https://umapi.sheca.com/biz/yztPrivacyPolicy.html";//隐私协议
+//    public static final String SERVICE_URL="https://umapi.sheca.com";
 
-//	public static final String  WEB_DOMAIN_CONFIG =  "202.96.220.166";//"192.168.15.41";   //"192.168.15.156" ;     //内网配置    "192.168.2.133";
-//
-//    public static final String  RSA_CERT_CHAIN = "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";
-//
-//	public static final String  SM2_CERT_CHAIN = "MIIFCwYJKoZIhvcNAQcCoIIE/DCCBPgCAQExADALBgkqhkiG9w0BBwGgggTgMIICKTCCAc2gAwIBAgIQRrEGsdL91GIFwtWMqXwfxjAMBggqgRzPVQGDdQUAMDwxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEaMBgGA1UEAwwRVUNBIFNNMiBUZXN0IFJvb3QwHhcNMTMwMTAxMDAwMDAwWhcNNDkxMjMxMDAwMDAwWjA8MQswCQYDVQQGEwJDTjERMA8GA1UECgwIVW5pVHJ1c3QxGjAYBgNVBAMMEVVDQSBTTTIgVGVzdCBSb290MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEkedyH9SjOChr+JFPhBghoItFW/Zn4TSTwxry+0HD4Glf3nLO9f9ioqDMNOQkjDH6KnPOHGKlWBdeW88CTw2spqOBrjCBqzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zBmBgNVHSUBAQAEXDBaBggrBgEFBQcDAQYIKwYBBQUHAwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwUGCCsGAQUFBwMGBggrBgEFBQcDBwYIKwYBBQUHAwgGCCsGAQUFBwMJMCAGA1UdDgEBAAQWBBTqAewgJKTPvU2/prCfWHFDsN6dlzAMBggqgRzPVQGDdQUAA0gAMEUCIC0HjkHrHSE71uslFWmr1ccjPt10BC8EPWveskz1G02YAiEAkZKGBSz8ohxf0D4Kau/h3M3OLZjlTDyjB0cFiuOMD4IwggKvMIICU6ADAgECAhBb3Kg/62uZAMUW9HQnCqZ+MAwGCCqBHM9VAYN1BQAwPDELMAkGA1UEBhMCQ04xETAPBgNVBAoMCFVuaVRydXN0MRowGAYDVQQDDBFVQ0EgU00yIFRlc3QgUm9vdDAeFw0xMzAxMDEwMDAwMDBaFw0zNzEyMzEwMDAwMDBaMDkxCzAJBgNVBAYTAkNOMREwDwYDVQQKDAhVbmlUcnVzdDEXMBUGA1UEAwwOU0hFQ0EgU00yIFRlc3QwWTATBgcqhkjOPQIBBggqgRzPVQGCLQNCAAR6F/desbL7RuE9SnYS5L6rvk8DQxtKLGHtAPU+6D1o7xGYRNcNeheYC7O2ITORieJaDWxlH+qqrAKsOioO4gaKo4IBNjCCATIwRQYDVR0gAQEABDswOTA3BgkqgRwBhu86gRUwKjAoBggrBgEFBQcCARYcaHR0cDovL3d3dy5zaGVjYS5jb20vcG9saWN5LzAOBgNVHQ8BAQAEBAMCAQYwDwYDVR0TAQEABAUwAwEB/zA6BgNVHR8BAQAEMDAuMCygKqAohiZodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhc3ViLmNybDAiBgNVHSMBAQAEGDAWgBTqAewgJKTPvU2/prCfWHFDsN6dlzAgBgNVHQ4BAQAEFgQUnuoEUuFRuK5Nt4WTZhUpJTplntIwRgYIKwYBBQUHAQEBAQAENzA1MDMGCCsGAQUFBzAChidodHRwOi8vbGRhcDIuc2hlY2EuY29tL3Jvb3QvdWNhcm9vdC5kZXIwDAYIKoEcz1UBg3UFAANIADBFAiBB0t8gh9JJ1NZabZ+FDLY2dadrdR2ooBTA3MyI0lvRZwIhAKafrS9+dzA5PHtDr4lzUKN1xM+oDW0v6oKFxf54n2OrMQA=";
-//
+
 
     public static final String OCR_KEY = "a58d19dac985608bebc611b80f0-funatunvpn";    //OCR KEY
     //
-//    public static final String UM_APPID = "fb9cd5a6-95a3-4821-8916-c9048b5b245e";    //外网配置
-//    public static final String UM_APPID_CONFIG = "fb9cd5a695a348218916c9048b5b245e-a1d92bd59b244cd595865f1e8ae35fc9-61a10ef17d744e9d96f05e69edc0e1f7-539b8df72333404ba660dbe5a41c7f45-e2f180560d274af3b7440883f14836e3-ae83058d82c84faabe3e25dafc61c9cd-8fd575995b2648a8a3f0e4d05f36639b-730181c23ea64608ba66fbc0dfe94f57-4cde28128175414d92b9441d2b4c8a50-85831191344345e58d4a52143e2ca18f";  //外网配置列表
-//    public static final String UM_APP_LICENSE = "seKqFWz84oFShtkDwzbY5hRWWk83JI8oVGM7r/TTZIg=";//"qh0LFFoF0bYjVjbHPuprznOxbh0=";  //移证通外网应用license
-//    public static final String UM_APP_PRIVATE_KEY = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANq7o94U/CJmTfRFdc8O/2KGfxLd50g9+y9PDVLKJB30vcgTDZhBigZXuUSjW5G9sRkvTykVBfzelx3c2bRHTxZIb1RkOw/wLJn2hrynlDKdmR2yM01jIJi2brlCQxuxvFD9hhI/BE7w6aoDqbra6C1A01HkoQi1yCQ6f479YcozAgMBAAECgYB0lzI4rWzcFTYWL3QlY3Qjm1dewiOG8WrTg8qxR4hK42rJm8ZSUxT0XowllwG3RKqCpyIF3uvrJubcBx2QJ7ZySMROLiC8viywmkUmwM5CQFy/f82UjSDDfAWnskwx5ijOl4mICMb3WSCQWts0hR5WRqQFUujN005LudhlHtyRwQJBAPXT4qXZ82QRpwm4l+IGDXPOfs9UmqzRCeYiE38AY1oV0FQXkWYTkiC12CfSVpW9cS2eJyg7F5E5CJfNkNCskRMCQQDjyLvSikaNx8CQrOyZuXohaGwY0gR7znjykqoOtrfxrdcNhVdrD0QyJV9DSKQEThklEIpP8+/0bt7Wu5X8ciZhAkEA6hdDlTvfEkPdFNy7hXjOBqF1EGo4gKjvDD8W4bG06mwrXmizBMlONef0VrdtzFoCFLauAxmCb8An9qbCaHRsEQJBAMGbpMlXbpCj8DEISjJ/TCeJMhgGqnjxDixgLNtEwyRQtjFv3NXKrBRTX5046PAf0Y+Hd4htts70TcQGvX1NKQECQDE/XZXIoinZmjYiPJDl55G4mgXck6CiB4Ik+uUiHZwFZtJL72zW50Z6zqdgHu9H1PefS1LbCz9yJ4w8fjjAFi0=";
-//    public static final String UM_APP_PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDau6PeFPwiZk30RXXPDv9ihn8S3edIPfsvTw1SyiQd9L3IEw2YQYoGV7lEo1uRvbEZL08pFQX83pcd3Nm0R08WSG9UZDsP8CyZ9oa8p5QynZkdsjNNYyCYtm65QkMbsbxQ/YYSPwRO8OmqA6m62ugtQNNR5KEItcgkOn+O/WHKMwIDAQAB";
-//    public static final String UM_APP_UMSP_SERVER = "http://202.96.220.164:8081/umspservice/v4";//測試地址
-//    public static final String UM_APP_UCM_SERVER = "http://202.96.220.164:8080/umspservice/v4";//測試地址
-//    public static final String UM_APP_AUTH_KEY = "470BAEE9D98E07F855016CA4A683060E";//"0846466DDE82AC4DA09571AB27DA845E";     //移证通外网应用authkeyID
-//    public static final String UM_SERVER = "http://202.96.220.164";//測試地址
-//    public static final String RULES_SERVER = "http://192.168.2.103:8003/yztPrivacyPolicy.html";//隐私协议
+    public static final String UM_APPID = "fb9cd5a6-95a3-4821-8916-c9048b5b245e";
+    public static final String UM_APPID_CONFIG = "fb9cd5a695a348218916c9048b5b245e-a1d92bd59b244cd595865f1e8ae35fc9-61a10ef17d744e9d96f05e69edc0e1f7-539b8df72333404ba660dbe5a41c7f45-e2f180560d274af3b7440883f14836e3-ae83058d82c84faabe3e25dafc61c9cd-8fd575995b2648a8a3f0e4d05f36639b-730181c23ea64608ba66fbc0dfe94f57-4cde28128175414d92b9441d2b4c8a50-85831191344345e58d4a52143e2ca18f";  //外网配置列表
+    public static final String UM_APP_LICENSE = "seKqFWz84oFShtkDwzbY5hRWWk83JI8oVGM7r/TTZIg=";//"qh0LFFoF0bYjVjbHPuprznOxbh0=";  //移证通外网应用license
+    public static final String UM_APP_PRIVATE_KEY = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANq7o94U/CJmTfRFdc8O/2KGfxLd50g9+y9PDVLKJB30vcgTDZhBigZXuUSjW5G9sRkvTykVBfzelx3c2bRHTxZIb1RkOw/wLJn2hrynlDKdmR2yM01jIJi2brlCQxuxvFD9hhI/BE7w6aoDqbra6C1A01HkoQi1yCQ6f479YcozAgMBAAECgYB0lzI4rWzcFTYWL3QlY3Qjm1dewiOG8WrTg8qxR4hK42rJm8ZSUxT0XowllwG3RKqCpyIF3uvrJubcBx2QJ7ZySMROLiC8viywmkUmwM5CQFy/f82UjSDDfAWnskwx5ijOl4mICMb3WSCQWts0hR5WRqQFUujN005LudhlHtyRwQJBAPXT4qXZ82QRpwm4l+IGDXPOfs9UmqzRCeYiE38AY1oV0FQXkWYTkiC12CfSVpW9cS2eJyg7F5E5CJfNkNCskRMCQQDjyLvSikaNx8CQrOyZuXohaGwY0gR7znjykqoOtrfxrdcNhVdrD0QyJV9DSKQEThklEIpP8+/0bt7Wu5X8ciZhAkEA6hdDlTvfEkPdFNy7hXjOBqF1EGo4gKjvDD8W4bG06mwrXmizBMlONef0VrdtzFoCFLauAxmCb8An9qbCaHRsEQJBAMGbpMlXbpCj8DEISjJ/TCeJMhgGqnjxDixgLNtEwyRQtjFv3NXKrBRTX5046PAf0Y+Hd4htts70TcQGvX1NKQECQDE/XZXIoinZmjYiPJDl55G4mgXck6CiB4Ik+uUiHZwFZtJL72zW50Z6zqdgHu9H1PefS1LbCz9yJ4w8fjjAFi0=";
+    public static final String UM_APP_PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDau6PeFPwiZk30RXXPDv9ihn8S3edIPfsvTw1SyiQd9L3IEw2YQYoGV7lEo1uRvbEZL08pFQX83pcd3Nm0R08WSG9UZDsP8CyZ9oa8p5QynZkdsjNNYyCYtm65QkMbsbxQ/YYSPwRO8OmqA6m62ugtQNNR5KEItcgkOn+O/WHKMwIDAQAB";
+    public static final String UM_APP_UMSP_SERVER = "http://202.96.220.164:8081/umspservice/v4";//測試地址
+    public static final String UM_APP_UCM_SERVER = "http://202.96.220.164:8080/umspservice/v4";//測試地址
+    public static final String UM_APP_AUTH_KEY = "470BAEE9D98E07F855016CA4A683060E";//"0846466DDE82AC4DA09571AB27DA845E";     //移证通外网应用authkeyID
+    public static final String UM_SERVER = "http://202.96.220.164";//測試地址
+    public static final String RULES_SERVER = "http://192.168.2.103:8003/yztPrivacyPolicy.html";//隐私协议
+    public static final String SERVICE_URL="http://202.96.220.164";
 
     //"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALfh6LpX68vQ33tRQq2TVo/DbHM6HBVk5QlNvSspk4IsyJPdQxh/4XULHz/FJ32v3XyFupOrZRTqGVS5JH+Vlp329/6zfp8NrrAu3BcfrDrJlBLWW3mMbLh2iAKrF+jbAPTMM93DzOC2BjtgLsJ5SVHdB4q2Q8oPxDoxX7k3uCLxAgMBAAECgYAZK7Bayaw6UxY0YDQ7ZF7GAR84Sq0LdKsxcdXCMcfCWvT94JzNnruy9NnLNeao+sjbwcZ/bkfA7CaZhVpsqIJcU0GD9bIYGjt/hXd6WRorug4IxF7R6zHUiOKcMvP+m7oUtynA4zc2Zppv+ybHFO3VuL6Gs2yJK+FfRvd/0i76UQJBAPgqinv1rzVviBAAhf9rxBWkCjrAHbCEaRXWc1SxQJEfgPuPms+cUWbYP927BrF2VSStDgEFIUFOoNEQ7+h3iGUCQQC9r+JVNhKtpzxpMexeavWRurRFcFFUI3H40SW1TrpU4EUQv+IheV35odLUErP/nX3NYLID8P6wbG834MjcrzmdAkADiG+CRkQhSZ4xRCCkOz+GY1h176g8jBYG5o+rw/48Uqt+aVP14q7R/QAjwvbcbefWZtRNNWp8yIbHkysnLxR1AkBIWZ7Fi6NiMuh64zzZ4ogZ9pGt7qJGqmJdWkC8v/OYThZpxhaVV/p9LbkBhMS9GbATNu+PS0uJtUJSmN1kNz2NAkAj5yC8+ZYMQysW9OkoLPhSWmFqlRP/gvZqQIeua/NW19m+CWg3qH8lu1jRrjxOWaa4eHFMYrhxk9/6swPu3Pht";  //移证通外网应用签名私钥
 
@@ -582,11 +579,23 @@ public class CommonConst {
 
     public static final String USER_RULES = "rules";//隐私政策
 
+    //证件类型(1：身份证；2：护照；3：社会保障卡；101：其他);
+    public static final int PAPER_TYPE=1;
+    //mac type 1：注册账户；2：登录账户；3：重置账户口令；4：法人短信认证；5：重置证书口令
+    public static final int MAC_TYPE_CERT_PWD=5;
+    //姓名
+    public static final String ACCOUNT_NAME="ACCOUNT_NAME";
+    //身份证号
+    public static final String ACCOUNT_IDNO="ACCOUNT_IDNO";
+    //手机号
+    public static final String ACCOUNT_MOBILE="ACCOUNTID_MOBILE";
+
 
     //正式环境人脸
-    public static final String appID = "21e610b1-8d02-4389-9c17-2d6b85ca595f";            // 需向多源平台申请
-    public static final String priKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDC+TfSJXbTcB+QDQUVkCOxA/zgeIz3Zn2isPQoO9JTtZN+nZGYb5mFD5JoCSTc3QXeSFRBFTSLHmcCdWYcMLqr36TisKqH0+/DT3AZeWtFdDOss3UaWib4iATvgG/aaMd2MX0cv4v9NUKFxll6mxN2jU5BJTEo5jd3YwzhiZVyqous6DFalMt/s1O2g+Ck5D5glO2aGKb2FI5pXQXcoYojPIEbCKzMRAnqmXyWlWhFePl9bwZG8RwYZNm0Zl8P7ACnR5CVLTh1TfCDdRssWUeQ5u1ZwMjENjqrA4WK6jmZ4P6QJ1dxvl4ipsK/uicWS4CDCMskhMW6C7wV0w+McXPbAgMBAAECggEAdjD9VbbAQYxGldxOqLOn7zarpKdvTMokfusmFv2sknIP50E9cVq1haPa7JYecoTJeeX+rTVdlLfpWeQw8gXYIzh/i6vstEoVniAZpFemX4QBjz96TW85EI/j7gu9wnih8VQus66p/eS7XrzOoTRAqC0gsv0Iv/JOzWCN/mqY3djV0IfK5XO9HnGDiXeo9DMPNVzBHJg+hwWeMBWgVf+JQj4Z1M0kKysKwItUgg0GtL6zfKinv/WsIHfvZxp4r3EGH/0jJrLldC+4/6ngc9kqYTRDBVCtLuOA9PDhLdfxs4JPUqzvvOPJhaaZrpOTvcUUFpLpfaoibHJn0qbcqDPtAQKBgQDiDyGrkqor4X0Mh4YTkdLNSWZkMnTIm6dvC44RVFWh03xja0NQb4v/+OtGVRnP9XiSQXIsoRrmcK5R6FZmW88tUlip4o50DtLjYh2CXmEhdjDeSWw0FJy4WpPXwipLaIBcZymz3gWGdy6/1ofzSosFR7hMkPBP/4EcRQK+YNhNuQKBgQDczBVSP4XGKew9HKudKL67lBAu7MlTYLBPlLyZuoHv7faUIYyzU3HkVzImFfbY8gqpCu+6Wke/xWFERah1mSQBuIIBlRgkV39mUQ84HEOhWK8FT4Ht3wWPWoc/4vtR0V1Q4mQAt5QY3zmJUkYV/bL2kZCfdkaeNHqduJfs2+W4MwKBgQCiO4vFbw8zSLMOn+AoAToQ28Fg3RkUsyh5OAiwBR8jcPxO+Tao7jTB8ikfI4nPxfHOvKssvj3o7SsdWylOckr/0p4Q5aeoQM82Ij7dRdBdTE4L6RN/WN+UKmT5rb3eulOMfPjfvdGnS7dAM70DbBbTJkJsqIPeVZaZ7Cjo6eWx+QKBgDlg072fAl2f8WNkOvjJaN+IN7hqEluXidn0dhqhDDlUprqSCWVkrvk+66pYFOEF7V1GmUvdQD4GxiMe0wtUc7X6w9Yzb6WqE1J8iC71sWGRkVIY+lPdnC1HwlQI4XS+qrhlTMWe716TS/lypwH5/vLymxnFe86LJr4sBVcpQgZfAoGBAN47LZTCOb8U/EJuX7J0Sfr6j1MVb/oz4sBiAWxWIh4VEGgWmayXVElj8sWY036alTkXBz0UYdH1lvBzarj343VgAaAhXl90dXpS8XPoWrc+T0wd9AQqEUTtCVPDU5wD7MtcNq+S3QYA1NNrZeWOd4LUrYcdrvt17la9orV3QNdS";           // 需向多源平台申请
-
+//    public static final String appID = "21e610b1-8d02-4389-9c17-2d6b85ca595f";            // 需向多源平台申请
+//    public static final String priKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDC+TfSJXbTcB+QDQUVkCOxA/zgeIz3Zn2isPQoO9JTtZN+nZGYb5mFD5JoCSTc3QXeSFRBFTSLHmcCdWYcMLqr36TisKqH0+/DT3AZeWtFdDOss3UaWib4iATvgG/aaMd2MX0cv4v9NUKFxll6mxN2jU5BJTEo5jd3YwzhiZVyqous6DFalMt/s1O2g+Ck5D5glO2aGKb2FI5pXQXcoYojPIEbCKzMRAnqmXyWlWhFePl9bwZG8RwYZNm0Zl8P7ACnR5CVLTh1TfCDdRssWUeQ5u1ZwMjENjqrA4WK6jmZ4P6QJ1dxvl4ipsK/uicWS4CDCMskhMW6C7wV0w+McXPbAgMBAAECggEAdjD9VbbAQYxGldxOqLOn7zarpKdvTMokfusmFv2sknIP50E9cVq1haPa7JYecoTJeeX+rTVdlLfpWeQw8gXYIzh/i6vstEoVniAZpFemX4QBjz96TW85EI/j7gu9wnih8VQus66p/eS7XrzOoTRAqC0gsv0Iv/JOzWCN/mqY3djV0IfK5XO9HnGDiXeo9DMPNVzBHJg+hwWeMBWgVf+JQj4Z1M0kKysKwItUgg0GtL6zfKinv/WsIHfvZxp4r3EGH/0jJrLldC+4/6ngc9kqYTRDBVCtLuOA9PDhLdfxs4JPUqzvvOPJhaaZrpOTvcUUFpLpfaoibHJn0qbcqDPtAQKBgQDiDyGrkqor4X0Mh4YTkdLNSWZkMnTIm6dvC44RVFWh03xja0NQb4v/+OtGVRnP9XiSQXIsoRrmcK5R6FZmW88tUlip4o50DtLjYh2CXmEhdjDeSWw0FJy4WpPXwipLaIBcZymz3gWGdy6/1ofzSosFR7hMkPBP/4EcRQK+YNhNuQKBgQDczBVSP4XGKew9HKudKL67lBAu7MlTYLBPlLyZuoHv7faUIYyzU3HkVzImFfbY8gqpCu+6Wke/xWFERah1mSQBuIIBlRgkV39mUQ84HEOhWK8FT4Ht3wWPWoc/4vtR0V1Q4mQAt5QY3zmJUkYV/bL2kZCfdkaeNHqduJfs2+W4MwKBgQCiO4vFbw8zSLMOn+AoAToQ28Fg3RkUsyh5OAiwBR8jcPxO+Tao7jTB8ikfI4nPxfHOvKssvj3o7SsdWylOckr/0p4Q5aeoQM82Ij7dRdBdTE4L6RN/WN+UKmT5rb3eulOMfPjfvdGnS7dAM70DbBbTJkJsqIPeVZaZ7Cjo6eWx+QKBgDlg072fAl2f8WNkOvjJaN+IN7hqEluXidn0dhqhDDlUprqSCWVkrvk+66pYFOEF7V1GmUvdQD4GxiMe0wtUc7X6w9Yzb6WqE1J8iC71sWGRkVIY+lPdnC1HwlQI4XS+qrhlTMWe716TS/lypwH5/vLymxnFe86LJr4sBVcpQgZfAoGBAN47LZTCOb8U/EJuX7J0Sfr6j1MVb/oz4sBiAWxWIh4VEGgWmayXVElj8sWY036alTkXBz0UYdH1lvBzarj343VgAaAhXl90dXpS8XPoWrc+T0wd9AQqEUTtCVPDU5wD7MtcNq+S3QYA1NNrZeWOd4LUrYcdrvt17la9orV3QNdS";           // 需向多源平台申请
+    public static final String appID = "623a9e95-e15b-4f60-8a95-cf038e5a64af";            // 需向多源平台申请
+    public static final String priKey = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQRuFvohUB+E/rR82kVc73msHxzzaVPc2vL4VWgtPY3kKQ6y/dFwEhZAj3AeLForWg7iLKxhHQFzsn+BJ1wLPg/XAQwRSkovB31CEPHOTq8x14kyVsBCJGeWnvta8c2kyY7LiDErlzs3db7yzxxCgjVX2WH1nANWrX8n9lJwrZThCFvRS4i52eY5RWiXkLFIFzzBFTHdXS5uM7G9pD6ebrgZJQkJ9SH1aVRAwXA8TcwA+fQ+zARGV2dtlICciBBsZ/ETeO4kmvEE8mMvRvtKwtSEX0aiPJeECqFfLDKkZOSBDxG3rVoJG8lRzHtDWV86d7Hk+vKshXAjR9XQ+H949BAgMBAAECggEAEMygDU6TIaKXM68tq7fuHHihopVdJq2GmKJw5Szgm/ztRVCNRzIZiJjMTm6iyB51BaMU3AWKJ2+9DJ9fDuT8TPNVrC2/SJhMZbeGjerwYMckJFkF33jvwML8adP+6t4kUx4lMeXpQCaifEryMciEX/DhaayG19GgejqbSNzt73Vxkf7JEaCA8SZXTWAl0lPl1P75ZS+DQoksnRQZTnYDkG6cnt8ufXcb3i7cX5JPx1eiaN7lg7Rt90I/w2lvCxb9V2zkUd7ry/zVaxmLSbAFCDigHGPI3zf9+badi7OdBtkHTH67nXDNKejJcjH/lh2cNUGcB2sIqYjMKIc8mo8QfQKBgQDTsIgjwo5jR42h0gN9IjahwQtPkElePjdfGopsWHE4tnapwrcfaL16nMrDKCN67xqfCzPuaSEe4B75biOiwIKaW5uRlEv1o6IQYmD40Q+QmwVgfS0ECwMZxecTCoek10dA3yrs2su9ZJU2bkErxoxkmApwlnvcIYyRvFZPq6Rx9wKBgQCuegNbKHVxTSoi1dxUDmHPbmxn2Ua26qcoZnT34aGbgaAXgRMfNNgAfnAB1OvIpfmm6H2uNYZz65R10b2KNXYaAk6S/77UxNv/oYk9OwhREkGLFrFj8hdylYc6n7zftpttfYZoMxwhgy0+cgZRkG2ocHxlQF4jTt9872i8pZ66hwKBgQCSIcYJMZBLlqR99dU0t76Q8QtW1FrhdP+SZmbyHieip8rIq8LwKsTKdJxAFmBPx+lPq1MhHG+hucOIGnD9M/m0htKgr4e0PU5uEwuwF9mv0GPo1OCTbuqoCwbWDSnQMFBexvAB65RD3MBof7n7dyeJda+XQzqjnoFERYgrnWh6xwKBgAh3+aO6EgE+2pW4Rap6zDqSRIbB4BHOz/BBENpbREnU/91EMZZpLTbQ7ETafdtOWxDD5h3HkVAdFial2IpVz/axN/kgmrWfHIKK56tmKyAsP6wtnMyaGpNAOMEascM2DNNCrXxvRqVFxbNrO21IElqDozYS6r7R/D0HLdFCRLMPAoGAP7hc705norLps8CmZNU63s99IDrno7gKwC7kwyLy9Abn3WEH/LLJSpkBhvnOHmOYa1bfg+n50M6ozbFPVBc6X02NJ1NHnmmdrwW3VxLF3sbDSBq77f4YaTlNHaHCqDxBniB/cusdbkqFh7tkQ4IIee/SKOXYs0Jl/Y6eiebBzcU=";           // 需向多源平台申请
 
     public static final String CERT_TYPE_SM2_QY = "一证通企业身份移动证书_SM2";//91
     public static final String CERT_TYPE_RSA_QY = "一证通企业身份移动证书";
@@ -597,38 +606,24 @@ public class CommonConst {
     public static final String CERT_TYPE_SM2_JG = "一证通机关法人身份移动证书_SM2";//11
     public static final String CERT_TYPE_RSA_JG = "一证通机关法人身份移动证书";
 
-    public static String getOrgStr(int orgType, boolean isRSA) {
-        switch (orgType) {
-            case 1:
-                if (isRSA) {
-                    return CommonConst.CERT_TYPE_RSA_QY;
-                } else {
-                    return CommonConst.CERT_TYPE_SM2_QY;
-                }
-            case 2:
-                if (isRSA) {
-                    return CommonConst.CERT_TYPE_RSA_SY;
-                } else {
-                    return CommonConst.CERT_TYPE_SM2_SY;
-                }
-            case 3:
-                if (isRSA) {
-                    return CommonConst.CERT_TYPE_RSA_ST;
-                } else {
-                    return CommonConst.CERT_TYPE_SM2_ST;
-                }
-            case 4:
-                if (isRSA) {
-                    return CommonConst.CERT_TYPE_RSA_JG;
-                } else {
-                    return CommonConst.CERT_TYPE_SM2_JG;
-                }
-            default:
-                if (isRSA) {
-                    return CommonConst.CERT_TYPE_RSA_QY;
-                } else {
-                    return CommonConst.CERT_TYPE_SM2_QY;
-                }
-        }
-    }
+
+
+
+    public static final String SERVER_PHONE="12345678";
+    public static final String ESANDCLOUD_DEV_SERVER_URL = "http://101.132.44.164:8078/simServer";
+
+    //    flase 表示已经存在不需要注册，true表示不存在需要注册
+    public static final String IS_REGISTER="IS_REGISTER";
+
+    //证书集合
+    public static final String CERT_LIST="CERT_LIST";
+    //印章集合
+    public static final String SEAL_LIST="SEAL_LIST";
+
+    //实名信息是来自登录页面
+    public static final String FACE_FROM_LOGIN="FACE_FROM_LOGIN";
+    //密码
+    public static final String ACCOUNT_PWD="ACCOUNT_PWD";
+
+    public static final String LOAD_LICENCE = "loadLicence";
 }

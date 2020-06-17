@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.junyufr.szt.activity.ResultActivity;
 import com.sheca.javasafeengine;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.CertDao;
 import com.sheca.umandroid.dao.LogDao;
@@ -28,6 +30,7 @@ import com.sheca.umandroid.model.Account;
 import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.CertApplyInfoLite;
 import com.sheca.umandroid.model.OperationLog;
+import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.LogUtil;
 import com.sheca.umandroid.util.WebClientUtil;
@@ -267,14 +270,23 @@ public class DaoScanActivity extends Activity {
 	
 
     private void ShowLogin(){
-		Intent i = new Intent(DaoScanActivity.this, LoginActivity.class);
-		i.putExtra("scan", "dao");
-		if(!"".equals(strAccountName)){
-			i.putExtra("AccName", strAccountName);
-			i.putExtra("AccPwd", strAccountPwd);
+		if (!AccountHelper.hasLogin(DaoScanActivity.this)) {
+			if (AccountHelper.isFirstLogin(DaoScanActivity.this)) {
+				Intent intentLoignV33 = new Intent(DaoScanActivity.this, LoginActivityV33.class);
+				startActivity(intentLoignV33);
+			} else {
+				Intent intentLoignV33 = new Intent(DaoScanActivity.this, ReLoginActivityV33.class);
+				startActivity(intentLoignV33);
+			}
 		}
-		
-		startActivity(i);
+//		Intent i = new Intent(DaoScanActivity.this, LoginActivity.class);
+//		i.putExtra("scan", "dao");
+//		if(!"".equals(strAccountName)){
+//			i.putExtra("AccName", strAccountName);
+//			i.putExtra("AccPwd", strAccountPwd);
+//		}
+//
+//		startActivity(i);
 		//DaoActivity.this.finish();
     }
     

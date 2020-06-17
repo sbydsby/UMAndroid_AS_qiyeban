@@ -709,7 +709,7 @@
    <!-- IFAA -->
     <string name="IFAA">IFAA</string>
     <string name="deviceID">DeviceID</string>
-    <string name="register">REG</string>
+    <string name="register">注册</string>
     <string name="deregister">DEREG</string>
     <string name="authenticator">AUTH</string>
     <string name="status">STATUS</string>
@@ -849,4 +849,36 @@
     <string name="lib_xrv_list_loading_complete">完成</string>
     <string name="lib_xrv_list_load_more_error">点击再次刷新</string>
     <string name="take_photo_tip">请将印章置于圆框内，并保持清晰</string>
+
+
+    <!--v3.3-->
+    <string name="sms_hint">请输入验证码</string>
+
+
+
+    <string name="v33_login_mobile">请输入手机号码</string>
+    <string name="v33_login_tip1">没有帐户?</string>
+    <string name="v33_login_tip2">创建一个</string>
+    <string name="v33_login_tip3">请输入密码</string>
+    <string name="v33_login_tip4">密码至少8位，支持字母、数字及下划线</string>
+    <string name="v33_login_tip5">请输入姓名</string>
+    <string name="v33_login_tip6">请输入身份证号码</string>
+    <string name="v33_validate">实名认证</string>
+    <string name="v33_login_title_pwd">请输入密码</string>
+    <string name="v33_login_pwd_tip">登录密码</string>
+    <string name="v33_relogin_title">账号：</string>
+    <string name="v33_relogin_more">更多选项</string>
+    <string name="v33_login_tip5_name">姓名中不能包含空格</string>
+    <string name="v33_forget_pwd">我们需要验证你的身份</string>
+    <string name="download_certtitle">下载证书</string>
+
+    <string name="goto_register">前往注册界面</string>
+    <string name="goto_login">更换账号</string>
+    <string name="name_validate_tip">移证通基于可信身份提供服务,\n在本设备首次使用APP时,请先进行实名认证</string>
+
+    <string name="prompt_personinfo_name">姓名不能为空</string>
+    <string name="prompt_personinfo_id">身份证不能为空</string>
+    <string name="prompt_personinfo_id_erro">身份证格式错误</string>
+
+    <string name="error_pwd">密码格式不正确</string>
 </resources>

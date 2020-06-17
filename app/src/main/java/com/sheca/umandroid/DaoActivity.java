@@ -34,26 +34,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.esandinfo.etas.ETASManager;
-import com.esandinfo.etas.EtasResult;
-import com.esandinfo.etas.IfaaBaseInfo;
-import com.esandinfo.etas.IfaaCommon;
-import com.esandinfo.etas.biz.EtasAuthentication;
-import com.esandinfo.etas.biz.EtasAuthenticatorCallback;
-import com.esandinfo.etas.biz.EtasStatus;
-import com.esandinfo.utils.EtasExcecuteObservable;
-import com.esandinfo.utils.MyLog;
-import com.esandinfo.utils.Utils;
+
+import com.esandinfo.core.utils.MyLog;
+import com.esandinfo.ifaa.AuthStatusCode;
+import com.esandinfo.ifaa.EDISAuthManager;
+import com.esandinfo.ifaa.IFAAAuthTypeEnum;
+import com.esandinfo.ifaa.IFAABaseInfo;
+
+import com.esandinfo.ifaa.IFAACommon;
+import com.esandinfo.ifaa.bean.IFAAResponse;
+import com.esandinfo.ifaa.bean.IFAAResult;
+import com.esandinfo.ifaa.biz.IFAACallback;
 import com.excelsecu.slotapi.EsIBankDevice;
-import com.ifaa.sdk.api.AuthenticatorManager;
-import com.ifaa.sdk.auth.AuthenticatorCallback;
-import com.ifaa.sdk.auth.message.AuthenticatorMessage;
-import com.ifaa.sdk.auth.message.AuthenticatorResponse;
-import com.junyufr.szt.activity.ResultActivity;
-import com.sheca.fingerui.FingerPrintAuthDaoActivity;
+
 import com.sheca.fingerui.FingerPrintToast;
 import com.sheca.fingerui.IFAAFingerprintOpenAPI;
-import com.sheca.fingerui.MainActivity.Process;
 import com.sheca.javasafeengine;
 import com.sheca.jshcaesstd.JShcaEsStd;
 import com.sheca.jshcaucmstd.JShcaUcmStd;
@@ -61,27 +56,28 @@ import com.sheca.jshcaucmstd.JShcaUcmStdRes;
 import com.sheca.jshcaucmstd.myWebClientUtil;
 import com.sheca.shcaesdeviceinfo.shcaEsDeviceInfo;
 import com.sheca.thirdparty.lockpattern.util.LockPatternUtil;
+import com.sheca.umandroid.account.LoginActivityV33;
+import com.sheca.umandroid.account.ReLoginActivityV33;
 import com.sheca.umandroid.adapter.CertAdapter;
 import com.sheca.umandroid.dao.AccountDao;
 import com.sheca.umandroid.dao.AppInfoDao;
 import com.sheca.umandroid.dao.CertDao;
 import com.sheca.umandroid.dao.LogDao;
-import com.sheca.umandroid.model.APPResponse;
 import com.sheca.umandroid.model.Account;
 import com.sheca.umandroid.model.AppInfo;
 import com.sheca.umandroid.model.AppInfoEx;
 import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.OperationLog;
 import com.sheca.umandroid.model.ShcaCciStd;
+import com.sheca.umandroid.presenter.ExcecuteObservable;
+import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
+import com.sheca.umandroid.util.IFAAConstant;
 import com.sheca.umandroid.util.LogUtil;
-import com.sheca.umandroid.util.MyAsycnTaks;
 import com.sheca.umandroid.util.PKIUtil;
 import com.sheca.umandroid.util.SealSignUtil;
-import com.sheca.umandroid.util.SharePreferenceUtil;
 import com.sheca.umandroid.util.WebClientUtil;
-import com.sheca.umplus.dao.UniTrust;
 
 import net.sf.json.JSONObject;
 
@@ -114,10 +110,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
 
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 
@@ -182,17 +176,17 @@ public class DaoActivity extends Activity {
     private boolean bCheckPremissoned = false;       //是否检测应用权限
     private boolean isNotificationGesture = false;
 
-    private Process curProcess = Process.REG_GETREQ;
+//    private Process curProcess = Process.REG_GETREQ;
     private String userid = "test";
     private String secData = "";
     private boolean useGesture = false;
     private final int VALIDATE_GESTURE_CODE = 1;
 
     // 认证类型
-    private IfaaBaseInfo.IFAAAuthTypeEnum ifaaAuthType = IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT;
+    private IFAAAuthTypeEnum ifaaAuthType = IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT;
     // 用户需要提供给IFAA的基本信息类
-    private IfaaBaseInfo ifaaBaseInfo = null;
-    private List<IfaaBaseInfo.IFAAAuthTypeEnum> supportBIOTypes = null;
+    private IFAABaseInfo ifaaBaseInfo = null;
+    private List<IFAAAuthTypeEnum> supportBIOTypes = null;
     private Handler ifaaHandler;
     private final int MSG_AUTHENABLE = 1;
 
@@ -207,127 +201,127 @@ public class DaoActivity extends Activity {
         Security.insertProviderAt(new BouncyCastleProvider(), 1);
     }
 
-    private IFAAFingerprintOpenAPI.Callback callback = new IFAAFingerprintOpenAPI.Callback() {
-        @Override
-        public void onCompeleted(int status, final String info) {
-            switch (curProcess) {
-                case AUTH_GETREQ:
-                    DaoActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            startFPActivity(false);
-                            AuthenticatorMessage requestMessage = new AuthenticatorMessage(AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST, 2);
-                            requestMessage.setData(info);
-                            LaunchActivity.authenticator.process(requestMessage, authCallback);
+//    private IFAAFingerprintOpenAPI.Callback callback = new IFAAFingerprintOpenAPI.Callback() {
+//        @Override
+//        public void onCompeleted(int status, final String info) {
+//            switch (curProcess) {
+////                case AUTH_GETREQ:
+////                    DaoActivity.this.runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////                            startFPActivity(false);
+////                            AuthenticatorMessage requestMessage = new AuthenticatorMessage(AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST, 2);
+////                            requestMessage.setData(info);
+////                            LaunchActivity.authenticator.process(requestMessage, authCallback);
+////
+////                        }
+////                    });
+////                    break;
+//                case AUTH_SENDRESP:
+//                    DaoActivity.this.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (info.equals("OK")) {
+//                                new FingerPrintToast(DaoActivity.this, FingerPrintToast.ST_AUTHSUCCESS).show("");
+//
+//                                if (LaunchActivity.isIFAAFingerOK) {
+//                                    if (operateState == LOG_TYPE_LOGIN)
+//                                        doFingerLogin();
+//                                    else if (operateState == LOG_TYPE_SIGN)
+//                                        doFingerSign();
+//                                    else if (operateState == LOG_TYPE_SIGNEX)
+//                                        doFingerSign();
+//                                    else if (operateState == LOG_TYPE_ENVELOP_DECRYPT)
+//                                        doFingerSign();
+//                                    else if (operateState == LOG_TYPE_SEAL)
+//                                        doFingerSign();
+//                                } else {
+//                                    if (operateState == LOG_TYPE_LOGIN) {
+//                                        if (LaunchActivity.failCount >= 3) {
+//                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.btn_loign_ok).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
+//                                        }
+//                                    } else if (operateState == LOG_TYPE_SIGN) {
+//                                        if (LaunchActivity.failCount >= 3) {
+//                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
+//                                        }
+//                                    } else if (operateState == LOG_TYPE_SIGNEX) {
+//                                        if (LaunchActivity.failCount >= 3) {
+//                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
+//                                        }
+//                                    } else if (operateState == LOG_TYPE_ENVELOP_DECRYPT) {
+//                                        if (LaunchActivity.failCount >= 3) {
+//                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
+//                                        }
+//                                    } else if (operateState == LOG_TYPE_SEAL) {
+//                                        if (LaunchActivity.failCount >= 3) {
+//                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
+//                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
+//                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
+//                                        }
+//                                    }
+//
+//                                }
+//                            } else {
+//                                new FingerPrintToast(DaoActivity.this, FingerPrintToast.ST_AUTHFAIL).show("验证指纹失败");
+//                            }
+//                            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(DaoActivity.this, 0);
+//                        }
+//                    });
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    };
 
-                        }
-                    });
-                    break;
-                case AUTH_SENDRESP:
-                    DaoActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (info.equals("OK")) {
-                                new FingerPrintToast(DaoActivity.this, FingerPrintToast.ST_AUTHSUCCESS).show("");
-
-                                if (LaunchActivity.isIFAAFingerOK) {
-                                    if (operateState == LOG_TYPE_LOGIN)
-                                        doFingerLogin();
-                                    else if (operateState == LOG_TYPE_SIGN)
-                                        doFingerSign();
-                                    else if (operateState == LOG_TYPE_SIGNEX)
-                                        doFingerSign();
-                                    else if (operateState == LOG_TYPE_ENVELOP_DECRYPT)
-                                        doFingerSign();
-                                    else if (operateState == LOG_TYPE_SEAL)
-                                        doFingerSign();
-                                } else {
-                                    if (operateState == LOG_TYPE_LOGIN) {
-                                        if (LaunchActivity.failCount >= 3) {
-                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.btn_loign_ok).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
-                                        }
-                                    } else if (operateState == LOG_TYPE_SIGN) {
-                                        if (LaunchActivity.failCount >= 3) {
-                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
-                                        }
-                                    } else if (operateState == LOG_TYPE_SIGNEX) {
-                                        if (LaunchActivity.failCount >= 3) {
-                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
-                                        }
-                                    } else if (operateState == LOG_TYPE_ENVELOP_DECRYPT) {
-                                        if (LaunchActivity.failCount >= 3) {
-                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
-                                        }
-                                    } else if (operateState == LOG_TYPE_SEAL) {
-                                        if (LaunchActivity.failCount >= 3) {
-                                            findViewById(R.id.textPwd).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.btn_ok).setVisibility(RelativeLayout.VISIBLE);
-                                            findViewById(R.id.finger_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.gesture_image).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.finger_txt).setVisibility(RelativeLayout.GONE);
-                                            findViewById(R.id.pwdkeyboard).setVisibility(RelativeLayout.GONE);
-                                        }
-                                    }
-
-                                }
-                            } else {
-                                new FingerPrintToast(DaoActivity.this, FingerPrintToast.ST_AUTHFAIL).show("验证指纹失败");
-                            }
-                            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(DaoActivity.this, 0);
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    private AuthenticatorCallback authCallback = new AuthenticatorCallback() {
-        @Override
-        public void onStatus(int status) {
-            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(DaoActivity.this, status);
-        }
-
-        @Override
-        public void onResult(final AuthenticatorResponse response) {
-            String data = response.getData();
-            curProcess = Process.AUTH_SENDRESP;
-
-            if (response.getResult() == AuthenticatorResponse.RESULT_SUCCESS) {
-                IFAAFingerprintOpenAPI.getInstance().sendIFAAAuthResponeAsyn(DaoActivity.this, data, secData, callback);
-            } else {
-                DaoActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        new FingerPrintToast(DaoActivity.this, FingerPrintToast.ST_AUTHTEEFAIL).show("验证指纹失败");
-                        FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(DaoActivity.this, 0);
-                    }
-                });
-            }
-
-        }
-    };
+//    private IFAAFaceManager.AuthenticatorCallback authCallback = new IFAAFaceManager.AuthenticatorCallback() {
+//        @Override
+//        public void onStatus(int status) {
+//            FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(DaoActivity.this, status);
+//        }
+//
+//        @Override
+//        public void onResult(final AuthenticatorResponse response) {
+//            String data = response.getData();
+//            curProcess = Process.AUTH_SENDRESP;
+//
+//            if (response.getResult() == AuthenticatorResponse.RESULT_SUCCESS) {
+//                IFAAFingerprintOpenAPI.getInstance().sendIFAAAuthResponeAsyn(DaoActivity.this, data, secData, callback);
+//            } else {
+//                DaoActivity.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        new FingerPrintToast(DaoActivity.this, FingerPrintToast.ST_AUTHTEEFAIL).show("验证指纹失败");
+//                        FingerprintBroadcastUtil.sendIdentifyStatusChangeMessage(DaoActivity.this, 0);
+//                    }
+//                });
+//            }
+//
+//        }
+//    };
 
 
     /**
@@ -354,11 +348,11 @@ public class DaoActivity extends Activity {
         isNotificationGesture = sharedPrefs.getBoolean(CommonConst.SETTINGS_GESTURE_OPENED + LockPatternUtil.getActName(), false);
         LaunchActivity.isIFAAFingerOpend = sharedPrefs.getBoolean(CommonConst.SETTINGS_FINGER_OPENED, false);
         LaunchActivity.isIFAAFingerOK = false;
-        if (LaunchActivity.isIFAAFingerOpend) {
-            if (null == LaunchActivity.authenticator)
-                LaunchActivity.authenticator = AuthenticatorManager.create(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT);
-        }
-        supportBIOTypes = ETASManager.getSupportBIOTypes(getApplicationContext());
+//        if (LaunchActivity.isIFAAFingerOpend) {
+//            if (null == LaunchActivity.authenticator)
+//                LaunchActivity.authenticator = AuthenticatorManager.create(this, com.ifaa.sdk.auth.Constants.TYPE_FINGERPRINT);
+//        }
+       // supportBIOTypes = ETASManager.getSupportBIOTypes(getApplicationContext());
 
 		/*
 		try {
@@ -551,35 +545,35 @@ public class DaoActivity extends Activity {
             if (operateState == LOG_TYPE_SIGN) {
                 setContentView(R.layout.activity_dao_sign_local);
                 ShowSignDlg();
-                if (ifaaAuthType == IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE) {
+                if (ifaaAuthType == IFAAAuthTypeEnum.AUTHTYPE_FACE) {
                     findViewById(R.id.finger_image).setBackgroundResource(R.drawable.face_auth_img);
                     ((TextView) findViewById(R.id.finger_txt)).setText("点击图片使用人脸识别或手势密码登录");
                 }
             } else if (operateState == LOG_TYPE_LOGIN) {
                 setContentView(R.layout.activity_dao_login_local);
                 ShowInitDlg();
-                if (ifaaAuthType == IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE) {
+                if (ifaaAuthType == IFAAAuthTypeEnum.AUTHTYPE_FACE) {
                     findViewById(R.id.finger_image).setBackgroundResource(R.drawable.face_auth_img);
                     ((TextView) findViewById(R.id.finger_txt)).setText("点击图片使用人脸识别或手势密码登录");
                 }
             } else if (operateState == LOG_TYPE_SIGNEX) {
                 setContentView(R.layout.activity_dao_sign_local);
                 ShowSignDlg();
-                if (ifaaAuthType == IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE) {
+                if (ifaaAuthType == IFAAAuthTypeEnum.AUTHTYPE_FACE) {
                     findViewById(R.id.finger_image).setBackgroundResource(R.drawable.face_auth_img);
                     ((TextView) findViewById(R.id.finger_txt)).setText("点击图片使用人脸识别或手势密码登录");
                 }
             } else if (operateState == LOG_TYPE_ENVELOP_DECRYPT) {
                 setContentView(R.layout.activity_dao_decrypt_local);
                 ShowSignDlg();
-                if (ifaaAuthType == IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE) {
+                if (ifaaAuthType == IFAAAuthTypeEnum.AUTHTYPE_FACE) {
                     findViewById(R.id.finger_image).setBackgroundResource(R.drawable.face_auth_img);
                     ((TextView) findViewById(R.id.finger_txt)).setText("点击图片使用人脸识别或手势密码登录");
                 }
             } else if (operateState == LOG_TYPE_SEAL) {
                 setContentView(R.layout.activity_dao_sign_local);
                 ShowSignDlg();
-                if (ifaaAuthType == IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE) {
+                if (ifaaAuthType == IFAAAuthTypeEnum.AUTHTYPE_FACE) {
                     findViewById(R.id.finger_image).setBackgroundResource(R.drawable.face_auth_img);
                     ((TextView) findViewById(R.id.finger_txt)).setText("点击图片使用人脸识别或手势密码登录");
                 }
@@ -724,10 +718,10 @@ public class DaoActivity extends Activity {
     private void initData() {
         boolean bIfaaFace = sharedPrefs.getBoolean(CommonConst.SETTINGS_IFAA_FACE_ENABLED, false);
         if (bIfaaFace)
-            ifaaAuthType = IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE;
+            ifaaAuthType = IFAAAuthTypeEnum.AUTHTYPE_FACE;
 
         // app 需要提供给ifaa 一些基本信息
-        ifaaBaseInfo = new IfaaBaseInfo(this);
+        ifaaBaseInfo = new IFAABaseInfo(this);
         // 认证类型，默认为指纹 AUTHTYPE_FINGERPRINT
         ifaaBaseInfo.setAuthType(ifaaAuthType);
         // 业务 ID, 请保持唯一，记录在ifaa log 中，当出问题时候，查问题用。
@@ -736,15 +730,15 @@ public class DaoActivity extends Activity {
         ifaaBaseInfo.setTransactionPayload("transPayload");
         ifaaBaseInfo.setTransactionType("Login");
         // TODO 用户id, 此值参与ifaa 业务以及 token 的生成，务必保证其唯一，可以传入用户名的hash值来脱敏。
-        ifaaBaseInfo.setUserID(/* "user1"*/mAccountDao.getLoginAccount().getName());
+        ifaaBaseInfo.setUserID(/* "user1"*/CommUtil.getPWDHash(mAccountDao.getLoginAccount().getName()));
         // 设置使用SDK提供的指纹弹框页面
-        ifaaBaseInfo.usingDefaultAuthUI("移证通认证口令", "取消");
+        ifaaBaseInfo.usingDefaultAuthUI("移证通认证口令", "");
         // 设置 IFAA 服务器的url 地址，默认为一砂测试服务器。
-        final String ifaaURL = DaoActivity.this.getString(R.string.UMSP_Service_IFAA);
-        ifaaBaseInfo.setUrl(ifaaURL);
+//        final String ifaaURL = DaoActivity.this.getString(R.string.UMSP_Service_IFAA);
+//        ifaaBaseInfo.setUrl(ifaaURL);
 
         //设置指纹框认证次数，类方法
-        ETASManager.setAuthNumber(3);
+//        ETASManager.setAuthNumber(3);
     }
 
     @Override
@@ -1150,9 +1144,18 @@ public class DaoActivity extends Activity {
     }
 
     private void ShowLogin() {
-        Intent i = new Intent(DaoActivity.this, LoginActivity.class);
-        i.putExtra("message", "dao");
-        startActivity(i);
+        if (!AccountHelper.hasLogin(DaoActivity.this)) {
+            if (AccountHelper.isFirstLogin(DaoActivity.this)) {
+                Intent intentLoignV33 = new Intent(DaoActivity.this, LoginActivityV33.class);
+                startActivity(intentLoignV33);
+            } else {
+                Intent intentLoignV33 = new Intent(DaoActivity.this, ReLoginActivityV33.class);
+                startActivity(intentLoignV33);
+            }
+        }
+//        Intent i = new Intent(DaoActivity.this, LoginActivity.class);
+//        i.putExtra("message", "dao");
+//        startActivity(i);
         //DaoActivity.this.finish();
     }
 
@@ -4487,23 +4490,24 @@ public class DaoActivity extends Activity {
         */
 
         // 执行 IFAA 认证操作
-        authIFAA(ifaaBaseInfo);
+        sdkAuth(ifaaBaseInfo);
+        //authIFAA(ifaaBaseInfo);
         //auth(ifaaBaseInfo);
     }
 
-    private void startFPActivity(boolean isAuthenticate) {
-        Intent intent = new Intent();
-//	        if (isAuthenticate) {
-//	            intent.putExtra(AuthenticatorMessage.KEY_OPERATIONT_TYPE,
-//	                    AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST);
-//	        }
-        intent.setClass(this, FingerPrintAuthDaoActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(intent);
-
-        // this.startActivityForResult(intent, FINGER_CODE);
-
-    }
+//    private void startFPActivity(boolean isAuthenticate) {
+//        Intent intent = new Intent();
+////	        if (isAuthenticate) {
+////	            intent.putExtra(AuthenticatorMessage.KEY_OPERATIONT_TYPE,
+////	                    AuthenticatorMessage.MSG_AUTHENTICATOR_REQUEST);
+////	        }
+//        intent.setClass(this, FingerPrintAuthDaoActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        this.startActivity(intent);
+//
+//        // this.startActivityForResult(intent, FINGER_CODE);
+//
+//    }
 
     boolean signByfinger=false;
 
@@ -4521,210 +4525,324 @@ public class DaoActivity extends Activity {
         doSign();
     }
 
-    private void authIFAA(final IfaaBaseInfo ifaaBaseInfo) {
-        final EtasAuthentication etasAuthentication = new EtasAuthentication(ifaaBaseInfo);
+//    private void authIFAA(final IFAABaseInfo ifaaBaseInfo) {
+//        final EtasAuthentication etasAuthentication = new EtasAuthentication(ifaaBaseInfo);
+//
+//        // 认证初始化
+//        final EtasResult etasResult = etasAuthentication.authInit();
+//        if (etasResult.getCode() != IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
+//
+//            //tvShowInfos.append("认证失败 ： " + etasResult.getMsg() + "\n");
+//
+//            if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.STATUS_NOT_ENROLLED) {
+//
+//                // TODO 此时可引导用户录入指纹/人脸后在做认证操作
+//                Toast.makeText(DaoActivity.this, "该手机未录入指纹", Toast.LENGTH_SHORT).show();
+//            }
+//            return;
+//        }
+//
+//        new MyAsycnTaks() {
+//            @Override
+//            public void preTask() {
+//                String mTokenId = SharePreferenceUtil.getInstance(getApplicationContext()).getString(CommonConst.PARAM_TOKEN);
+//                strInfo = String.format("%s=%s&%s=%s",
+//                        URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
+//                        URLEncoder.encode(mTokenId),
+//                        URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_IFAA_REQUEST),
+//                        URLEncoder.encode(etasResult.getMsg()));
+//            }
+//
+//            @Override
+//            public void doinBack() {
+//                UniTrust mUnitTrust = new UniTrust(DaoActivity.this, false);
+//                responResult = mUnitTrust.IFAAAuth(strInfo);
+//            }
+//
+//            @Override
+//            public void postTask() {
+//                final APPResponse response = new APPResponse(responResult);
+//                int resultStr = response.getReturnCode();
+//                final String retMsg = response.getReturnMsg();
+//                if (0 == resultStr) {
+//                    showProgDlg("IFAA认证初始化中...");
+//                    auth(ifaaBaseInfo);
+//                } else {
+//                    showProgDlg("IFAA认证初始化中...");
+//                    //Toast.makeText(DaoActivity.this, "认证初始化失败:"+resultStr+","+retMsg,Toast.LENGTH_SHORT).show();
+//                    auth(ifaaBaseInfo);
+//                }
+//            }
+//        }.execute();
+//
+//    }
 
-        // 认证初始化
-        final EtasResult etasResult = etasAuthentication.authInit();
-        if (etasResult.getCode() != IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
 
-            //tvShowInfos.append("认证失败 ： " + etasResult.getMsg() + "\n");
+    private void sdkAuth(final IFAABaseInfo ifaaBaseInfo) {
 
-            if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.STATUS_NOT_ENROLLED) {
+        final EDISAuthManager manager = new EDISAuthManager(ifaaBaseInfo);
 
-                // TODO 此时可引导用户录入指纹/人脸后在做认证操作
-                Toast.makeText(DaoActivity.this, "该手机未录入指纹", Toast.LENGTH_SHORT).show();
-            }
-            return;
-        }
+        // 发送请求到APPServer获取初始化数据
+        // POST 请求
+        ExcecuteObservable excecuteObservable = new ExcecuteObservable(CommonConst.ESANDCLOUD_DEV_SERVER_URL+ "/init");
+        excecuteObservable.excecute("")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
 
-        new MyAsycnTaks() {
-            @Override
-            public void preTask() {
-                String mTokenId = SharePreferenceUtil.getInstance(getApplicationContext()).getString(CommonConst.PARAM_TOKEN);
-                strInfo = String.format("%s=%s&%s=%s",
-                        URLEncoder.encode(com.sheca.umplus.util.CommonConst.RESULT_PARAM_TOKENID),
-                        URLEncoder.encode(mTokenId),
-                        URLEncoder.encode(com.sheca.umplus.util.CommonConst.PARAM_IFAA_REQUEST),
-                        URLEncoder.encode(etasResult.getMsg()));
-            }
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void doinBack() {
-                UniTrust mUnitTrust = new UniTrust(DaoActivity.this, false);
-                responResult = mUnitTrust.IFAAAuth(strInfo);
-            }
+                    }
 
-            @Override
-            public void postTask() {
-                final APPResponse response = new APPResponse(responResult);
-                int resultStr = response.getReturnCode();
-                final String retMsg = response.getReturnMsg();
-                if (0 == resultStr) {
-                    showProgDlg("IFAA认证初始化中...");
-                    auth(ifaaBaseInfo);
-                } else {
-                    showProgDlg("IFAA认证初始化中...");
-                    //Toast.makeText(DaoActivity.this, "认证初始化失败:"+resultStr+","+retMsg,Toast.LENGTH_SHORT).show();
-                    auth(ifaaBaseInfo);
-                }
-            }
-        }.execute();
+                    @Override
+                    public void onError(Throwable e) {
 
-    }
+                        MyLog.error("onError: " + e.getMessage());
+                    }
 
-    /**
-     * ifaa 认证
-     */
-    private void auth(final IfaaBaseInfo ifaaBaseInfo) {
+                    @Override
+                    public void onNext(String msg) {
 
-        do {
+                        MyLog.debug("msg: " + msg);
 
-            final EtasAuthentication etasAuthentication = new EtasAuthentication(ifaaBaseInfo);
+                        manager.auth(msg, new IFAACallback() {
+                            @Override
+                            public void onStatus(AuthStatusCode authStatusCode) {
 
-            // 认证初始化
-            EtasResult etasResult = etasAuthentication.authInit();
-            if (etasResult.getCode() != IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
-                closeProgDlg();
-                //tvShowInfos.append("认证失败 ： " + etasResult.getMsg() + "\n");
+                            }
 
-                if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.STATUS_NOT_ENROLLED) {
+                            @Override
+                            public void onResult(IFAAResult IFAAResult) {
 
-                    // TODO 此时可引导用户录入指纹/人脸后在做认证操作
+                                MyLog.debug("认证: " + IFAAResult.getCode());
+                                MyLog.debug("认证: " + IFAAResult.getMsg());
 
-                }
-                break;
-            }
-            EtasExcecuteObservable etasExcecuteObservable = new EtasExcecuteObservable(ifaaBaseInfo.getUrl());
-            etasExcecuteObservable.excecute(etasResult.getMsg())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .flatMap(new Func1<String, Observable<String>>() {
+                                if (IFAACommon.IFAA_SUCCESS.equals(IFAAResult.getCode())) {
 
-                        @Override
-                        public Observable<String> call(final String msg) { // 发起认证请求
+                                    //updateTextView("认证成功");
 
-                            final Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+                                    //再发一次数据到服务端，进行最后认证结果确认
 
-                                @Override
-                                public void call(final Subscriber<? super String> subscriber) {
+                                    ExcecuteObservable excecuteObservable = new ExcecuteObservable(CommonConst.ESANDCLOUD_DEV_SERVER_URL + "/ifaa/auth/verify");
+                                    excecuteObservable.excecute(IFAAResult.getMsg())
+                                            .subscribeOn(Schedulers.io())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(new Subscriber<String>() {
 
-                                    // 服务器数据已经返回，执行本地注册操作
-                                    etasAuthentication.auth(msg, new EtasAuthenticatorCallback() {
-                                        @Override
-                                        public void onStatus(IfaaCommon.AuthStatusCode authStatusCode) {
+                                                @Override
+                                                public void onCompleted() {
 
-                                            // 不是运行在ui 线程，所以不能在此更新界面
-//                                            updateTextView("指纹认证返回状态 ： " + authStatusCode);
-                                        }
+                                                }
 
-                                        @Override
-                                        public void onResult(EtasResult etasResult) {
-                                            if (etasResult != null) {
-                                                //updateTextView("认证 onResult：" + etasResult.getCode() + "\n");
-                                                MyLog.error("认证 onResult：" + etasResult.getCode());
-                                                closeProgDlg();
-                                                if (etasResult.getCode() != IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
+                                                @Override
+                                                public void onError(Throwable e) {
 
-                                                    // 不支持多指位，请用注册手指进行操作
-                                                    if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.CLIENT_ERROR_MULTI_FP_NOT_SUPPORT) {
+                                                    MyLog.error("onError: " + e.getMessage());
 
-                                                        String msg;
-                                                        // 判断注册的那个指位是否被删除了
-                                                        EtasStatus etasStatus = new EtasStatus(ifaaBaseInfo);
-                                                        // 这里返回的 etasResult.getMsg() 是注册 token
-                                                        EtasResult result = etasStatus.checkLocalStatus(etasResult.getMsg());
-                                                        if (result.getCode() == IfaaCommon.IFAAErrorCodeEnum.STATUS_DELETED) {
+                                                }
 
-                                                            // 引导用户注销了吧
-                                                            msg = "此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用";
+                                                @Override
+                                                public void onNext(String msg) {
+                                                    MyLog.debug(msg);
+
+                                                    IFAAResponse ifaaResponse = IFAAResponse.fromJson(msg);
+                                                    if (IFAAConstant.SERVER_SUCCESS.equals(ifaaResponse.getCode())) {
+
+
+                                                        if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
+                                                            ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
                                                         } else {
-
-                                                            msg = "此手机不支持多指位，请用注册的那根手指进行操作";
+                                                            ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
                                                         }
 
-                                                        // 不是运行在ui 线程，所以不能在此更新界面;
-                                                        //updateTextView(msg);
-
                                                     } else {
-
-                                                        // 不是运行在ui 线程，所以不能在此更新界面;
-                                                        //updateTextView("认证失败 ： " + etasResult.getMsg());
+                                                        //mTvInfo.append("认证失败: code: " + ifaaResponse.getCode() + ", message: " + ifaaResponse.getMsg() + "\n");
                                                     }
 
-                                                } else {
-
-                                                    subscriber.onNext(etasResult.getMsg());
-//                                                updateTextView("本地认证成功 ：)");
                                                 }
-                                            }
+                                            });
 
-                                        }
-                                    });
-                                }
-                            });
+                                } else if (IFAACommon.IFAA_WRONG_AUTHDATAINDEX.equals(IFAAResult.getCode())) {
 
-                            return observable;
-                        }
-                    })
-                    .flatMap(new Func1<String, Observable<String>>() {
+                                    if (IFAAAuthTypeEnum.AUTHTYPE_FACE == ifaaBaseInfo.getAuthType()) {
+                                        ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
+                                    } else {
+                                        ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
+                                    }
 
-                        @Override
-                        public Observable<String> call(String msg) {
+                                    //更新指位
+                                    //onTemplateMismatch(manager, IFAAResult.getMsg());
 
-                            // 把认证信息同步到服务器
-                            EtasExcecuteObservable etasExcecuteObservable = new EtasExcecuteObservable(ifaaBaseInfo.getUrl());
-                            Observable observable = etasExcecuteObservable.excecute(msg);
-                            return observable;
-                        }
-                    })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<String>() {
-
-                        @Override
-                        public void onCompleted() {
-
-//                            updateTextView("认证请求流程结束\n");
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            closeProgDlg();
-                            etasAuthentication.sendAuthStatusCodeComplete();
-                            //updateTextView("认证请求失败 ： " + e.getMessage() + "\n");
-                        }
-
-                        @Override
-                        public void onNext(String msg) {
-
-                            // 告知 sdk, 注册流程已经结束
-                            EtasResult etasResult = etasAuthentication.authFinish(msg);
-                            if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
-                                ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
-                                //updateTextView("认证成功 ：）\n");
-                                //ifaaSwitch.setChecked(true);
-
-                            } else if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.WRONG_AUTHDATAINDEX) { // 指位不匹配，此处可以选择是否更新指位
-
-                                if (IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE == ifaaBaseInfo.getAuthType()) {
-                                    //updateTextView("即将更新人脸 ：)\n");
-                                    ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
                                 } else {
-                                    //updateTextView("即将更新指位 ：)\n");
-                                    ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
+
+                                    //updateTextView("认证失败: code: " + IFAAResult.getCode() + ", message: " + IFAAResult.getMsg() + "\n");
                                 }
 
-                                //onTemplateMismatch(ifaaBaseInfo, etasResult.getMsg());
-                            } else {
 
-                                //tvShowInfos.append("认证失败 :(\n" + etasResult.getMsg());
-                                //ifaaSwitch.setChecked(false);
                             }
-                        }
-                    });
-        } while (false);
+                        });
+
+                    }
+                });
+
+
     }
+
+
+
+//    /**
+//     * ifaa 认证
+//     */
+//    private void auth(final IFAABaseInfo ifaaBaseInfo) {
+//
+//        do {
+//
+//            final EtasAuthentication etasAuthentication = new EtasAuthentication(ifaaBaseInfo);
+//
+//            // 认证初始化
+//            EtasResult etasResult = etasAuthentication.authInit();
+//            if (etasResult.getCode() != IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
+//                closeProgDlg();
+//                //tvShowInfos.append("认证失败 ： " + etasResult.getMsg() + "\n");
+//
+//                if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.STATUS_NOT_ENROLLED) {
+//
+//                    // TODO 此时可引导用户录入指纹/人脸后在做认证操作
+//
+//                }
+//                break;
+//            }
+//            EtasExcecuteObservable etasExcecuteObservable = new EtasExcecuteObservable(ifaaBaseInfo.getUrl());
+//            etasExcecuteObservable.excecute(etasResult.getMsg())
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .flatMap(new Func1<String, Observable<String>>() {
+//
+//                        @Override
+//                        public Observable<String> call(final String msg) { // 发起认证请求
+//
+//                            final Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+//
+//                                @Override
+//                                public void call(final Subscriber<? super String> subscriber) {
+//
+//                                    // 服务器数据已经返回，执行本地注册操作
+//                                    etasAuthentication.auth(msg, new EtasAuthenticatorCallback() {
+//                                        @Override
+//                                        public void onStatus(IfaaCommon.AuthStatusCode authStatusCode) {
+//
+//                                            // 不是运行在ui 线程，所以不能在此更新界面
+////                                            updateTextView("指纹认证返回状态 ： " + authStatusCode);
+//                                        }
+//
+//                                        @Override
+//                                        public void onResult(EtasResult etasResult) {
+//                                            if (etasResult != null) {
+//                                                //updateTextView("认证 onResult：" + etasResult.getCode() + "\n");
+//                                                MyLog.error("认证 onResult：" + etasResult.getCode());
+//                                                closeProgDlg();
+//                                                if (etasResult.getCode() != IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
+//
+//                                                    // 不支持多指位，请用注册手指进行操作
+//                                                    if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.CLIENT_ERROR_MULTI_FP_NOT_SUPPORT) {
+//
+//                                                        String msg;
+//                                                        // 判断注册的那个指位是否被删除了
+//                                                        EtasStatus etasStatus = new EtasStatus(ifaaBaseInfo);
+//                                                        // 这里返回的 etasResult.getMsg() 是注册 token
+//                                                        EtasResult result = etasStatus.checkLocalStatus(etasResult.getMsg());
+//                                                        if (result.getCode() == IfaaCommon.IFAAErrorCodeEnum.STATUS_DELETED) {
+//
+//                                                            // 引导用户注销了吧
+//                                                            msg = "此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用";
+//                                                        } else {
+//
+//                                                            msg = "此手机不支持多指位，请用注册的那根手指进行操作";
+//                                                        }
+//
+//                                                        // 不是运行在ui 线程，所以不能在此更新界面;
+//                                                        //updateTextView(msg);
+//
+//                                                    } else {
+//
+//                                                        // 不是运行在ui 线程，所以不能在此更新界面;
+//                                                        //updateTextView("认证失败 ： " + etasResult.getMsg());
+//                                                    }
+//
+//                                                } else {
+//
+//                                                    subscriber.onNext(etasResult.getMsg());
+////                                                updateTextView("本地认证成功 ：)");
+//                                                }
+//                                            }
+//
+//                                        }
+//                                    });
+//                                }
+//                            });
+//
+//                            return observable;
+//                        }
+//                    })
+//                    .flatMap(new Func1<String, Observable<String>>() {
+//
+//                        @Override
+//                        public Observable<String> call(String msg) {
+//
+//                            // 把认证信息同步到服务器
+//                            EtasExcecuteObservable etasExcecuteObservable = new EtasExcecuteObservable(ifaaBaseInfo.getUrl());
+//                            Observable observable = etasExcecuteObservable.excecute(msg);
+//                            return observable;
+//                        }
+//                    })
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Subscriber<String>() {
+//
+//                        @Override
+//                        public void onCompleted() {
+//
+////                            updateTextView("认证请求流程结束\n");
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            closeProgDlg();
+//                            etasAuthentication.sendAuthStatusCodeComplete();
+//                            //updateTextView("认证请求失败 ： " + e.getMessage() + "\n");
+//                        }
+//
+//                        @Override
+//                        public void onNext(String msg) {
+//
+//                            // 告知 sdk, 注册流程已经结束
+//                            EtasResult etasResult = etasAuthentication.authFinish(msg);
+//                            if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.SUCCESS) {
+//                                ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
+//                                //updateTextView("认证成功 ：）\n");
+//                                //ifaaSwitch.setChecked(true);
+//
+//                            } else if (etasResult.getCode() == IfaaCommon.IFAAErrorCodeEnum.WRONG_AUTHDATAINDEX) { // 指位不匹配，此处可以选择是否更新指位
+//
+//                                if (IfaaBaseInfo.IFAAAuthTypeEnum.AUTHTYPE_FACE == ifaaBaseInfo.getAuthType()) {
+//                                    //updateTextView("即将更新人脸 ：)\n");
+//                                    ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
+//                                } else {
+//                                    //updateTextView("即将更新指位 ：)\n");
+//                                    ifaaHandler.sendEmptyMessage(MSG_AUTHENABLE);
+//                                }
+//
+//                                //onTemplateMismatch(ifaaBaseInfo, etasResult.getMsg());
+//                            } else {
+//
+//                                //tvShowInfos.append("认证失败 :(\n" + etasResult.getMsg());
+//                                //ifaaSwitch.setChecked(false);
+//                            }
+//                        }
+//                    });
+//        } while (false);
+//    }
 
     private void ifaaAuth() {
         closeProgDlg();

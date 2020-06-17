@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.intsig.idcardscan.sdk.CommonUtil;
 import com.sheca.umandroid.MainActivity;
 import com.sheca.umandroid.R;
 import com.sheca.umandroid.dao.CertDao;
@@ -24,6 +25,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.sheca.umandroid.util.CommUtil.getOrgStr;
 
 /**
  * @author xuchangqing
@@ -70,8 +73,8 @@ public class CertSetPwdActivity extends BaseActivity {
         orgType = getIntent().getIntExtra("orgType", 1);
 
 
-        RSA_TYPE = CommonConst.getOrgStr(orgType, true);
-        SM2_TYPE = CommonConst.getOrgStr(orgType, false);
+        RSA_TYPE = getOrgStr(orgType, true);
+        SM2_TYPE = getOrgStr(orgType, false);
 
         mTvTitle.setText("设置证书口令");
 

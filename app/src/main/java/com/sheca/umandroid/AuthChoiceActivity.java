@@ -451,18 +451,18 @@ public class AuthChoiceActivity extends BaseActivity2 implements DYRZResult, Act
     }
 
     private void showProgDlg(final Context context) {
-        progDialog = new ProgressDialog(context);
-//        progDialog.setMessage(strMsg);
-        progDialog.setCancelable(false);
-        progDialog.show();
+//        progDialog = new ProgressDialog(context);
+////        progDialog.setMessage(strMsg);
+//        progDialog.setCancelable(true);
+//        progDialog.show();
     }
 
 
     private void closeProgDlg() {
-        if (null != progDialog && progDialog.isShowing()) {
-            progDialog.dismiss();
-            progDialog = null;
-        }
+//        if (null != progDialog && progDialog.isShowing()) {
+//            progDialog.dismiss();
+//            progDialog = null;
+//        }
     }
 
     private ProgressDialog progDialog = null;
@@ -564,7 +564,7 @@ public class AuthChoiceActivity extends BaseActivity2 implements DYRZResult, Act
         } else {
             closeProgDlg();
 
-            Toast.makeText(getApplicationContext(), "人脸验证失败", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "人脸验证失败"+bean.getCode()+bean.getMsg(), Toast.LENGTH_LONG).show();
             finish();
 
 

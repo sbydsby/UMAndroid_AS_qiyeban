@@ -50,8 +50,10 @@ import com.sheca.umandroid.model.Cert;
 import com.sheca.umandroid.model.DownloadCertResponse;
 import com.sheca.umandroid.model.OperationLog;
 import com.sheca.umandroid.model.ShcaCciStd;
+import com.sheca.umandroid.util.AccountHelper;
 import com.sheca.umandroid.util.CommonConst;
 import com.sheca.umandroid.util.WebClientUtil;
+import com.sheca.umplus.util.PKIUtil;
 
 import net.sf.json.JSONObject;
 
@@ -239,7 +241,10 @@ public class SealFragment extends Fragment {
 
 			if(null == cert.getCertificate() ||"".equals(cert.getCertificate()))
 				continue;
-
+			if (getCertType(cert) == false&&!PKIUtil.isAccountCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+				continue;
+			if (getCertType(cert) == true&&! PKIUtil.isOrgCert(cert.getCertificate(), AccountHelper.getIDNumber(getActivity())))
+				continue;
 			if (cert.getStatus() == Cert.STATUS_DOWNLOAD_CERT || cert.getStatus() == Cert.STATUS_RENEW_CERT) {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("id", String.valueOf(cert.getId()));
@@ -2047,7 +2052,11 @@ public class SealFragment extends Fragment {
 				progDialogCert = null;
 			}
 	}
-    
 
+	private boolean getCertType(Cert cert) {  //true 单位证书 false个人证书
+		Log.e("类型", cert.getCerttype());
+		return !cert.getCerttype().contains("个人");
+
+	}
 	
 }
