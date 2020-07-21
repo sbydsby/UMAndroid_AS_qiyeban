@@ -132,7 +132,7 @@
 
     <!--V5版-->
     <string name="UM_Base_Service">/ucm/umspservice/v5</string>
-    <string name="UMSP_Base_Service">http://202.96.220.164:8080/umspservice/v5</string>
+    <string name="UMSP_Base_Service">http://202.96.220.164:8080/umspservice/v4</string>
     <string name="UMSP_Service_GetTPALoginRequest">http://202.96.220.164/umsp/umspservice/v5/GetTPALoginRequest</string>
     <string name="UMSP_Service_LoginFromTPA">http://202.96.220.164/umsp/umspservice/v5/LoginByPWD</string>
     <string name="UMSP_Service_ApplyCert">http://202.96.220.164/umsp/umspservice/v5/ApplyPersonCert</string>

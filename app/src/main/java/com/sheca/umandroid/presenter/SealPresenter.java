@@ -322,6 +322,12 @@ public class SealPresenter extends BasePresenter {
             if (null == cert.getCertificate() || "".equals(cert.getCertificate()))
                 continue;
 
+            if (getCertType(cert) == false&&!com.sheca.umplus.util.PKIUtil.isAccountCert(cert.getCertificate(), AccountHelper.getIDNumber(context)))
+                continue;
+            if (getCertType(cert) == true&&! com.sheca.umplus.util.PKIUtil.isOrgCert(cert.getCertificate(), AccountHelper.getIDNumber(context)))
+                continue;
+
+
             if (verifyCert(cert, false)) {
                 if (verifyDevice(cert, false)) {
                     javasafeengine jse = new javasafeengine();
@@ -485,5 +491,9 @@ public class SealPresenter extends BasePresenter {
         }
     }
 
+    private boolean getCertType(Cert cert) {  //true 单位证书 false个人证书
+        Log.e("类型", cert.getCerttype());
+        return !cert.getCerttype().contains("个人");
 
+    }
 }

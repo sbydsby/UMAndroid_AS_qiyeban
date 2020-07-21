@@ -38,12 +38,17 @@ import com.esandinfo.ifaa.bean.IFAAResult;
 import com.esandinfo.ifaa.biz.IFAACallback;
 import com.sheca.fingerui.FingerPrintToast;
 import com.sheca.umandroid.dao.AccountDao;
+import com.sheca.umandroid.model.APPResponse;
 import com.sheca.umandroid.presenter.ExcecuteObservable;
 import com.sheca.umandroid.util.CommUtil;
 import com.sheca.umandroid.util.CommonConst;
+import com.sheca.umandroid.util.IFAACommonUtil;
+import com.sheca.umandroid.util.IFAAConstant;
+import com.sheca.umplus.dao.UniTrust;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -210,6 +215,8 @@ public class SettingIFAAFaceTypeActivity extends Activity {
 //        }
 //    };
 
+    String priKey = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -301,7 +308,14 @@ public class SettingIFAAFaceTypeActivity extends Activity {
 
         isInited = true;
         //regIFAARegRequest(false);
-        initData();
+        showProgDlg("加载中");
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                getPriKey();
+            }
+        });
+
 
         handler = new Handler() {
             @Override
@@ -320,6 +334,35 @@ public class SettingIFAAFaceTypeActivity extends Activity {
                 }
             }
         };
+    }
+
+    private void getPriKey() {
+        UniTrust uniTrust = new UniTrust(this, false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = uniTrust.getIFAAPriKey();
+                APPResponse response = new APPResponse(result);
+                final int retCode = response.getReturnCode();
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        closeProgDlg();
+                        if (retCode == CommonConst.RETURN_CODE_OK) {
+                            priKey = response.getResultStr();
+                            initData();
+                        } else {
+                            Toast.makeText(SettingIFAAFaceTypeActivity.this, "初始化失败", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                    }
+                });
+            }
+        }).start();
+
     }
 
     /**
@@ -361,99 +404,71 @@ public class SettingIFAAFaceTypeActivity extends Activity {
     private void sdkCheckIfaaStatus(final IFAABaseInfo ifaaBaseInfo) {
 
         final EDISAuthManager manager = new EDISAuthManager(ifaaBaseInfo);
-        // 发送请求到APPServer获取初始化数据
-        // POST 请求
-        ExcecuteObservable excecuteObservable = new ExcecuteObservable(CommonConst.ESANDCLOUD_DEV_SERVER_URL + "/init");
-        excecuteObservable.excecute("")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
+        // TODO: 构建初始化带签名的报文
+        // 业务流水号
+        String transId = IFAACommonUtil.getTransId(IFAAConstant.APP_ID);
+        // 构建初始化带签名的报文
+        String initInfo = IFAACommonUtil.getInitInfo(IFAAConstant.APP_ID, transId, "检查ifaa指纹状态:" + UUID.randomUUID().toString(), priKey);
 
-                    @Override
-                    public void onCompleted() {
+        manager.checkStatus(initInfo, new IFAACallback() {
+            @Override
+            public void onStatus(AuthStatusCode authStatusCode) {
 
+            }
+
+            @Override
+            public void onResult(IFAAResult IFAAResult) {
+
+                MyLog.debug("检查注册状态: " + IFAAResult.getCode());
+                MyLog.debug("检查注册状态: " + IFAAResult.getMsg());
+
+                if (IFAACommon.IFAA_STATUS_REGISTERED.equals(IFAAResult.getCode())) {
+
+
+                    if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
+                        setIFAADisable(true);
+                    } else {
+                        setIFAADisable(true);
                     }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "查询注册状态错误 ： " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
+                } else if (IFAACommon.IFAA_STATUS_DELETED.equals(IFAAResult.getCode())) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
+                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用\n", Toast.LENGTH_SHORT).show();
+                                //updateTextView("此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用\n");
+                            } else {
+                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "此手机不支持多人脸\n", Toast.LENGTH_SHORT).show();
+                                //updateTextView("此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用\n");
                             }
-                        });
-
-                        MyLog.error("onError: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(String msg) {
-
-                        MyLog.debug("msg: " + msg);
-
-                        manager.checkStatus(msg, new IFAACallback() {
-                            @Override
-                            public void onStatus(AuthStatusCode authStatusCode) {
-
-                            }
-
-                            @Override
-                            public void onResult(IFAAResult IFAAResult) {
-
-                                MyLog.debug("检查注册状态: " + IFAAResult.getCode());
-                                MyLog.debug("检查注册状态: " + IFAAResult.getMsg());
-
-                                if (IFAACommon.IFAA_STATUS_REGISTERED.equals(IFAAResult.getCode())) {
+                        }
+                    });
 
 
-                                    if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
-                                        setIFAADisable(true);
-                                    } else {
-                                        setIFAADisable(true);
-                                    }
+                } else {
 
-
-                                } else if (IFAACommon.IFAA_STATUS_DELETED.equals(IFAAResult.getCode())) {
-
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
-                                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用\n", Toast.LENGTH_SHORT).show();
-                                                //updateTextView("此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用\n");
-                                            } else {
-                                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "此手机不支持多人脸\n", Toast.LENGTH_SHORT).show();
-                                                //updateTextView("此手机不支持多指位，并且注册的那个指位已经被删除，需要注销后在注册方能使用\n");
-                                            }
-                                        }
-                                    });
-
-
-                                } else {
-
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (IFAAAuthTypeEnum.AUTHTYPE_FINGERPRINT == ifaaBaseInfo.getAuthType()) {
 //										setIFAADisable(false);
-                                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "IFAA指纹未注册", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "IFAA指纹未注册", Toast.LENGTH_SHORT).show();
 
-                                            } else {
+                            } else {
 //										setIFAADisable(false);
-                                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "IFAA人脸未注册", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SettingIFAAFaceTypeActivity.this, "IFAA人脸未注册", Toast.LENGTH_SHORT).show();
 
-                                            }
-                                        }
-                                    });
-
-
-                                }
                             }
-                        });
+                        }
+                    });
 
-                    }
-                });
+
+                }
+            }
+        });
 
 
     }

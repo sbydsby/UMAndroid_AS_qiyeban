@@ -36,12 +36,17 @@ import com.esandinfo.ifaa.biz.IFAACallback;
 import com.sheca.fingerui.FingerPrintToast;
 
 import com.sheca.umandroid.dao.AccountDao;
+import com.sheca.umandroid.model.APPResponse;
 import com.sheca.umandroid.presenter.ExcecuteObservable;
 import com.sheca.umandroid.util.CommonConst;
+import com.sheca.umandroid.util.IFAACommonUtil;
+import com.sheca.umandroid.util.IFAAConstant;
+import com.sheca.umplus.dao.UniTrust;
 
 import org.ifaa.android.manager.face.IFAAFaceManager;
 
 import java.util.List;
+import java.util.UUID;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -87,6 +92,8 @@ public class SettingFingerTypeActivity extends Activity {
 
     private String strInfo = "";
     private String responResult;
+
+    String priKey="";
 
     private IFAAFaceManager.AuthenticatorCallback regCallback = new IFAAFaceManager.AuthenticatorCallback() {
 //        @Override
@@ -293,7 +300,13 @@ public class SettingFingerTypeActivity extends Activity {
 
         isInited = true;
         //regIFAARegRequest(false);
-        initData();
+        showProgDlg("加载中");
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                getPriKey();
+            }
+        });
 
         handler = new Handler() {
             @Override
@@ -340,6 +353,34 @@ public class SettingFingerTypeActivity extends Activity {
         sdkCheckIfaaStatus(ifaaBaseInfo);
         //checkIfaaStatusIFAA(ifaaBaseInfo);
         //checkIfaaStatus(ifaaBaseInfo);
+    }
+
+    private void getPriKey() {
+        UniTrust uniTrust = new UniTrust(this, false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = uniTrust.getIFAAPriKey();
+                APPResponse response = new APPResponse(result);
+                final int retCode = response.getReturnCode();
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (retCode == CommonConst.RETURN_CODE_OK) {
+                            priKey = response.getResultStr();
+                            initData();
+                        } else {
+                            Toast.makeText(SettingFingerTypeActivity.this, "初始化失败", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        closeProgDlg();
+                    }
+                });
+            }
+        }).start();
+
     }
 
 //    private void checkIfaaStatusIFAA(final IFAABaseInfo ifaaBaseInfo) {
@@ -397,38 +438,15 @@ public class SettingFingerTypeActivity extends Activity {
     private void sdkCheckIfaaStatus(final IFAABaseInfo ifaaBaseInfo) {
 
         final EDISAuthManager manager = new EDISAuthManager(ifaaBaseInfo);
-        // 发送请求到APPServer获取初始化数据
-        // POST 请求
-        ExcecuteObservable excecuteObservable = new ExcecuteObservable(CommonConst.ESANDCLOUD_DEV_SERVER_URL + "/init");
-        excecuteObservable.excecute("")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
-
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SettingFingerTypeActivity.this, "查询注册状态错误 ： " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+        // TODO: 构建初始化带签名的报文
+        // 业务流水号
+        String transId = IFAACommonUtil.getTransId(IFAAConstant.APP_ID);
+        // 构建初始化带签名的报文
+        String initInfo = IFAACommonUtil.getInitInfo(IFAAConstant.APP_ID, transId, "检查ifaa指纹状态:" + UUID.randomUUID().toString(), priKey);
 
 
-                        MyLog.error("onError: " + e.getMessage());
-                    }
 
-                    @Override
-                    public void onNext(String msg) {
-
-                        MyLog.debug("msg: " + msg);
-
-                        manager.checkStatus(msg, new IFAACallback() {
+                        manager.checkStatus(initInfo, new IFAACallback() {
                             @Override
                             public void onStatus(AuthStatusCode authStatusCode) {
 
@@ -486,8 +504,8 @@ public class SettingFingerTypeActivity extends Activity {
                             }
                         });
 
-                    }
-                });
+
+
 
 
     }

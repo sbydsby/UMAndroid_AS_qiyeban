@@ -612,6 +612,9 @@ public class CommonConst {
     public static final String SERVER_PHONE="12345678";
     public static final String ESANDCLOUD_DEV_SERVER_URL = "http://101.132.44.164:8078/simServer";
 
+
+
+
     //    flase 表示已经存在不需要注册，true表示不存在需要注册
     public static final String IS_REGISTER="IS_REGISTER";
 
