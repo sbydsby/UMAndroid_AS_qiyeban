@@ -17,7 +17,11 @@
     <color name="lightransparent">#a0000000</color>
     <color name="transparent">#00000000</color>
     <color name="navpage">#FFE1E8EB</color>
-    <color name="bg_yellow">#F7D05B</color>  <!--原来黄色是 #F7D05B，新春主题暂时改为红色 -->
+    <color name="bg_theme_deep">#3477B9</color><!--主题色 -->
+    <color name="bg_theme_light">#F0F4F9</color>  <!--背景色 -->
+
+
+
     <color name="bg_red">#d60002</color> <!--#d60002-->
 
     <color name="cert_text">#f9efaf</color>
@@ -26,7 +30,7 @@
     <color name="cert_color">#5C99FF</color>
     <color name="yellow">#fcb72c</color>
     <!--  color name="yellow">#fcb72c</color-->
-    <color name="unitrust_listtab_off">#9d9d9d</color>
+    <color name="unitrust_listtab_off">#787F95</color>
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="viewfinder_mask">#60000000</color>
@@ -92,7 +96,7 @@
     <color name="bottom_line_selected_color">#253156</color>
     <color name="cursor_color">#76C8FD</color>
 
-    <color name="bg_blue_new">#3477B9</color>
+
 
 
 

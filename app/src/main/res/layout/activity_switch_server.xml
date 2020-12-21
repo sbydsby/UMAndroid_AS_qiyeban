@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_theme_light"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+   >
 
 
     <LinearLayout
@@ -13,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/txt_address"
@@ -29,33 +29,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/icon_switch" />
+            android:src="@drawable/cb_checked_yellow" />
 
     </LinearLayout>
-<View
-    android:layout_width="match_parent"
-    android:background="@color/black_light2"
-    android:layout_height="1dp"/>
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/black_light2"-->
+    <!--android:layout_height="1dp"/>-->
     <LinearLayout
+        android:background="@color/white"
         android:id="@+id/ll_diy"
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
         android:orientation="horizontal">
-<TextView
-    android:layout_width="wrap_content"
-    android:text="其他: "
-    android:textColor="@color/black"
-    android:layout_gravity="center_vertical"
-    android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="其他: "
+            android:textColor="@color/black"
+            android:visibility="gone" />
+
         <EditText
             android:id="@+id/umsp_address"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="服务器地址"
+            android:hint="请输入服务器地址"
             android:textSize="13sp" />
 
         <ImageView
@@ -63,13 +69,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/icon_switch"
+            android:src="@drawable/cb_checked_yellow"
             android:visibility="invisible" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:background="@color/black_light2"
-        android:layout_height="1dp"/>
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/black_light2"-->
+    <!--android:layout_height="1dp"/>-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,13 +95,14 @@
         android:id="@+id/btn_loign_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/btn_login_yellow"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="@string/app_ok"
-        android:visibility="gone" />
+        android:text="确定"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/default_address"
@@ -105,7 +112,15 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:text="恢复默认地址"
-        android:textColor="@color/bg_yellow"
+        android:textColor="@color/bg_theme_deep"
         android:textSize="16sp"
         android:visibility="gone" />
+
+
+
+    <Button
+        android:id="@+id/txt_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速设置" />
 </LinearLayout>

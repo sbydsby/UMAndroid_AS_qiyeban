@@ -8,17 +8,17 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/bg_yellow"
+        android:background="@color/bg_theme_deep"
         ></View>
 
-    <com.sheca.umandroid.adapter.CycleViewEdgePager
+    <com.sheca.umee.adapter.CycleViewEdgePager
         android:id="@+id/pager_banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         >
-    </com.sheca.umandroid.adapter.CycleViewEdgePager>
+    </com.sheca.umee.adapter.CycleViewEdgePager>
 
     <LinearLayout
         android:id="@+id/viewGroup"

@@ -13,7 +13,7 @@
             android:id="@+id/view_toolbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/bg_yellow"
+            android:background="@color/bg_theme_deep"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/view_toolbar"
             app:layout_constraintLeft_toLeftOf="@id/view_toolbar"
             app:layout_constraintRight_toRightOf="@id/view_toolbar"
@@ -75,7 +75,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:text="*为了保障您的用证安全，请设置证书保护口令"
-            android:textColor="@color/red"
+            android:textColor="@color/bg_theme_deep"
             android:textSize="15sp"
 
             app:layout_constraintLeft_toLeftOf="parent"

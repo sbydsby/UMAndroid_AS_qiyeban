@@ -209,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/txtUserProl1"
-                        android:text=" [移证通服务协议]"
+                        android:text=" [中煤易投服务协议]"
                         android:textColor="#7ac7f3"
                         android:textSize="15sp" />
                 </RelativeLayout>

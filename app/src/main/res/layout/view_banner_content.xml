@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.sheca.umandroid.adapter.CycleViewPager
+    <com.sheca.umee.adapter.CycleViewPager
         android:id="@+id/pager_banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </com.sheca.umandroid.adapter.CycleViewPager>
+    </com.sheca.umee.adapter.CycleViewPager>
 
     <LinearLayout
         android:id="@+id/viewGroup"

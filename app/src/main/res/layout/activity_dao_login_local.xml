@@ -1,94 +1,124 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/scan_bg"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_theme_light"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}">
-
-
+    android:background="@color/bg_theme_light"
+    >
     <RelativeLayout
-        android:id="@+id/form_exit"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@color/white"
+             android:id="@+id/form_exit"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+        >
+       <ImageView
+           android:visibility="gone"
+           android:id="@+id/btn_loign_back"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="30px"
+           android:layout_marginLeft="30px"
+           android:adjustViewBounds="true"
+           android:src="@drawable/loginexit" /> 
+           
+       <ImageView
+           android:id="@+id/btn_title"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="30dp"
+           android:layout_marginTop="30dp"
+           android:layout_below="@id/btn_loign_back"
+           android:layout_centerHorizontal="true"
+           android:src="@drawable/scan_logo_login"
+           />
+   </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/btn_loign_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30px"
-            android:layout_marginTop="30px"
-            android:adjustViewBounds="true"
-            android:src="@drawable/loginexit" />
-
-        <ImageView
-            android:id="@+id/btn_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_loign_back"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/scan_logo_login" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginRight="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textAppLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="登录应用:"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textAppView"
-            android:layout_width="260dp"
-            android:layout_height="34dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@id/textAppLabel"
-            android:ellipsize="end"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
 
     <LinearLayout
+        android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="40dp"
+    >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1dp"
+        android:background="@color/result_minor_text"
+        />
+   <RelativeLayout
+
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="16dp"
+       android:layout_marginRight="5dp"
+       >
+      <TextView
+         android:id="@+id/textAppLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="15dp"
+         android:text="登录应用:"
+         android:textColor="#000000"
+         android:textSize="14sp"/>
+     
+      <TextView
+         android:id="@+id/textAppView"
+         android:layout_width="260dp"
+         android:layout_height="34dp"
+         android:layout_marginLeft="8dp"
+         android:layout_marginTop="15dp"
+         android:layout_toRightOf="@id/textAppLabel"
+         android:textColor="#000000"
+         android:textSize="14sp"
+         android:ellipsize="end" />
+    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/result_minor_text"
+            />
+</LinearLayout>
+
+
+    <LinearLayout
+        android:background="@color/white"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/transparent"
+        android:layout_marginTop="22dp"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingTop="2dp"
+
+        android:paddingBottom="2dp">
 
         <TextView
+            android:gravity="center_vertical"
+
             android:id="@+id/textCertView"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:layout_marginLeft="2dp"
             android:layout_weight="1"
             android:background="#ffffff"
             android:ellipsize="end"
+            android:paddingLeft="20dp"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/btnCertView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+
             android:src="@drawable/logindown" />
 
     </LinearLayout>
@@ -97,157 +127,180 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/transparent"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp">
 
         <EditText
+
             android:id="@+id/textPwd"
             android:layout_width="fill_parent"
             android:layout_height="38dp"
+
+            android:background="@null"
             android:hint="@string/prompt_dao_password"
             android:inputType="textPassword"
+            android:paddingLeft="20dp"
             android:textColor="#000000"
-            android:textColorHint="#d3d3d3"></EditText>
+            android:textColorHint="#d3d3d3"
+            android:textSize="14sp" />
 
     </RelativeLayout>
-
+    
     <RelativeLayout
-        android:id="@+id/relativelayoutPwdLabel2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="您的默认证书密码为身份证号后8位"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+         android:id="@+id/relativelayoutPwdLabel2"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal" 
+         android:gravity="center" >
+       <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+         android:text="您的默认证书密码为身份证号后8位"
+         android:textColor="#000000"
+         android:textSize="14sp"/>
     </RelativeLayout>
+    
+    <RelativeLayout
+          android:id="@+id/relativelayoutFinger"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+        >
+
 
     <RelativeLayout
-        android:id="@+id/relativelayoutFinger"
-        android:layout_width="fill_parent"
+        android:id="@+id/rl_mianmi"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/rl_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/finger_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/fingerprint"
-                android:contentDescription="@string/title"
-                android:gravity="center"
-                android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/gesture_image"
-                android:layout_width="70dp"
-                android:layout_height="80dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/pwdgesture"
-                android:contentDescription="@string/title"
-                android:gravity="center" />
-        </RelativeLayout>
-
-        <TextView
-
-            android:id="@+id/finger_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_img"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:text="点击图片使用指纹或手势密码登录"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/gesture_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_img"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:text="点击手势密码图片使用手势密码登录"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:visibility="gone" />
+        android:layout_centerHorizontal="true"
+        >
 
         <ImageView
-            android:id="@+id/pwdkeyboard"
+            android:id="@+id/finger_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_img"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_toRightOf="@id/finger_txt"
-            android:background="@drawable/pwdkeyboard"
-            android:gravity="center" />
+            android:background="@drawable/fingerprint"
+            android:contentDescription="@string/title"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"/>
 
+        <ImageView
+            android:id="@+id/gesture_image"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:background="@drawable/pwdgesture"
+            android:contentDescription="@string/title"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativelayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@id/rl_mianmi"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/finger_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="点击图片使用指纹或手势密码登录"
+                android:textColor="#d3d3d3"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/pwdkeyboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/finger_txt"
+                android:background="@drawable/pwdkeyboard"
+                android:gravity="center" />
+        </LinearLayout>
+
+
+      <!--  <TextView
+              android:id="@+id/finger_txt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_centerHorizontal="true"
+              android:layout_below="@+id/finger_image"
+              android:layout_marginTop="8dp"
+              android:text="点击图片使用指纹或手势密码登录"
+              android:textColor="#d3d3d3"
+              android:textSize="14sp"
+              android:ellipsize="end"  />
+
+         <ImageView
+              android:id="@+id/pwdkeyboard"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_centerHorizontal="true"
+              android:layout_below="@+id/finger_image"
+              android:layout_toRightOf="@id/finger_txt"
+              android:layout_marginTop="8dp"
+              android:layout_marginLeft="8dp"
+              android:background="@drawable/pwdkeyboard" />-->
+            
+    </RelativeLayout>
+   
+    <RelativeLayout
+             android:id="@+id/relativelayout2"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:paddingLeft="10dp"
+             android:paddingRight="10dp"
+             android:layout_marginTop="10dp"
+             android:gravity="center" >
 
         <Button
+            android:textColor="@color/white"
             android:id="@+id/btn_loign_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="@drawable/btn_login_yellow"
-            android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="@string/app_ok" />
+            android:paddingTop="10dp"
+            android:text="@string/app_ok"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:background="@drawable/btn_login_yellow" />
 
-    </RelativeLayout>
-
+   </RelativeLayout>
+   
     <RelativeLayout
-        android:id="@+id/relativelayoutGesture"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
+             android:id="@+id/relativelayoutGesture"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal" 
+             android:gravity="center"
+             android:padding="@dimen/_10dp"
+             android:layout_marginBottom="@dimen/_20dp"
+             android:visibility="gone" >
+                
+         <TextView
+              android:id="@+id/Gesture_txt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:layout_centerHorizontal="true"
+              android:text="切换验证方式"
+              android:textColor="#000000"
+              android:textSize="14sp"
+              android:ellipsize="end" />
 
-        <TextView
-            android:id="@+id/Gesture_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:text="切换手势密码"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-    </RelativeLayout>
+   </RelativeLayout>
 </LinearLayout>
+</ScrollView>

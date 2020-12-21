@@ -4,7 +4,7 @@
     tools:ignore="MissingTranslation"
     >
 
-    <string name="app_name" >移证通</string>
+    <string name="app_name" >中煤易投</string>
     <string name="title_activity_guide">GuideActivity</string>
     <string name="title_activity_face_guide">FaceGuideActivity</string>
     <string name="title_activity_main">MainActivity</string>
@@ -119,7 +119,7 @@
     <string name="prompt_prikey_password2">再次输入证书密码（8至16位）</string>
     <string name="title_activity_dao">sheca签名登录</string>
     <string name="title_activity_scan_dao">sheca扫码签名登录</string>
-    <string name="prompt_pwd">输入证书密码</string>
+    <string name="prompt_pwd">请输入证书保护口令（8-16位数字、字母）</string>
     <string name="cert_name">输入证书别名</string>
     <string name="cert_sms_code">填写验证码</string>
     <string name="send_message">发送验证码</string>
@@ -380,7 +380,7 @@
     <string name="title">验证页面</string>
     <string name="waiting">识别中</string>
     <string name="input">请验证指纹</string>
-    <string name="dialog_title">移证通指纹密码</string>
+    <string name="dialog_title">中煤易投指纹密码</string>
     <string name="verify_success">指纹验证成功</string>
     <string name="verify_not_match">指纹不匹配</string>
     <string name="verify_timeout">指纹校验超时</string>
@@ -389,7 +389,7 @@
 
     <string name="menu_selected">精选</string>
     <string name="menu_certificate">证书</string>
-    <string name="menu_scan">扫码</string>
+    <string name="menu_scan">扫一扫</string>
     <string name="menu_seal">印章</string>
     <string name="menu_me">我的</string>
 
@@ -652,7 +652,7 @@
 
     <string name="mine_copyright">上海市数字证书认证有限公司\n版权所有</string>
 
-    <string name="version">版本号 %s</string>
+    <string name="version">version %s</string>
 
     <string name="hint_input_certpwd">请输入证书密码（8-16位）</string>
     <string name="hint_input_certpwd_agin">再次输入证书密码（8-16位）</string>
@@ -668,7 +668,7 @@
     <string name="auth_choice_hint1">请选择身份采集的方式</string>
     <string name="auth_choice_takephoto">拍摄身份证照片</string>
     <string name="auth_choice_input">手动输入身份证信息</string>
-    <string name="cert_revoke">该证书将被撤销，此操作不可回退</string>
+    <string name="cert_revoke">*撤销证书操作不可恢复，请谨慎选择</string>
 
     <string name="module_apply_seal">申请印章</string>
     <string name="no_cert">您目前没有可下载证书</string>
@@ -700,11 +700,11 @@
     <string name="scan_success_sign_batch">扫码批量签名成功</string>
     <string name="scan_success_decypt">扫码解密成功</string>
     <string name="scan_success_seal">扫码签章成功</string>
-
+    <string name="scan_success_encode">扫码加密成功</string>
     <string name="error_psd">密码长度应为8-16位</string>
     <string name="error_psd2">确认密码不一致，请修改</string>
 
-    <string name="version_alert">您的Android系统版本(%1$s)过低，无法使用移证通最新版。请使用移证通低版本或升级您的手机系统。</string>
+    <string name="version_alert">您的Android系统版本(%1$s)过低，无法使用中煤易投最新版。请使用中煤易投低版本或升级您的手机系统。</string>
 
    <!-- IFAA -->
     <string name="IFAA">IFAA</string>
@@ -796,8 +796,8 @@
     <string name="push_transmission_data">收到一条透传测试消息</string>
     <string name="network_invalid">对不起，当前网络不可用!</string>
 
-    <string name="fryzt_rule1">感谢您下载移证通！我们非常重视您的个人信息和隐私保护。为了更好地保障您的个人权益，在使用我们的产品前，请您务审慎阅读、充分理解</string>
-    <string name="fryzt_rule2">《移证通》</string>
+    <string name="fryzt_rule1">感谢您下载中煤易投！我们非常重视您的个人信息和隐私保护。为了更好地保障您的个人权益，在使用我们的产品前，请您务审慎阅读、充分理解</string>
+    <string name="fryzt_rule2">《中煤易投》</string>
     <string name="fryzt_rule3">各条款，我们会按照上述协议及政策收集、使用和共享您的个人信息。</string>
 
 
@@ -860,7 +860,7 @@
     <string name="v33_login_tip1">没有帐户?</string>
     <string name="v33_login_tip2">创建一个</string>
     <string name="v33_login_tip3">请输入密码</string>
-    <string name="v33_login_tip4">密码至少8位，支持字母、数字及下划线</string>
+    <string name="v33_login_tip4">密码为8-16位，支持字母、数字及下划线</string>
     <string name="v33_login_tip5">请输入姓名</string>
     <string name="v33_login_tip6">请输入身份证号码</string>
     <string name="v33_validate">实名认证</string>
@@ -874,7 +874,7 @@
 
     <string name="goto_register">前往注册界面</string>
     <string name="goto_login">更换账号</string>
-    <string name="name_validate_tip">移证通基于可信身份提供服务,\n在本设备首次使用APP时,请先进行实名认证</string>
+    <string name="name_validate_tip">中煤易投基于可信身份提供服务,\n在本设备首次使用APP时,请先进行实名认证</string>
 
     <string name="prompt_personinfo_name">姓名不能为空</string>
     <string name="prompt_personinfo_id">身份证不能为空</string>

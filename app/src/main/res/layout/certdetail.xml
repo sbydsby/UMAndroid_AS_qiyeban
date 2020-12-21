@@ -18,7 +18,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:background="@color/bg_yellow"
+                android:background="@color/bg_theme_deep"
                 android:layout_height="80dp" />
 
             <LinearLayout

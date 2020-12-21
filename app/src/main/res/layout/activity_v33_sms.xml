@@ -20,7 +20,7 @@
         android:textColor="@color/black"
         android:textSize="18sp" />
 
-    <com.sheca.umandroid.widget.vcedittext.VerificationCodeEditText
+    <com.sheca.umee.widget.vcedittext.VerificationCodeEditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"

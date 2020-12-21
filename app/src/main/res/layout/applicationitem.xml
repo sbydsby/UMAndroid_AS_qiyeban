@@ -2,9 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:padding="10dp"
-    android:background="@drawable/bg_round_darkgray"
-    android:orientation="horizontal">
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/thumbnail"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="3dip"
-        android:padding="1dip" >
+        android:padding="1dip">
 
         <ImageView
             android:id="@+id/list_image"
@@ -20,103 +20,119 @@
             android:layout_height="60dp"
             android:src="@drawable/cert_icon" />
     </LinearLayout>
-    
-     <ImageView
-            android:id="@+id/list_image1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/thumbnail"
-            android:src="@drawable/signlable" 
-            android:visibility="gone"/>
-    
-     <TextView
+
+    <ImageView
+        android:id="@+id/list_image1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:src="@drawable/signlable"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/tv_CommonName"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:singleLine="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
         android:layout_toRightOf="@+id/list_image1"
+        android:singleLine="false"
         android:text="令狐冲"
-        android:textColor="#d3c18f"
+        android:textColor="#253156"
         android:textSize="16sp"
-        android:textStyle="bold" 
-        android:paddingTop="2dp"/>
-	
-	<ImageView
-            android:id="@+id/list_image6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_CommonName"
-            android:src="@drawable/certtype" 
-            android:visibility="gone"/>
-    
-     <TextView
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/list_image6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_CommonName"
+        android:src="@drawable/certtype"
+        android:visibility="gone" />
+
+    <TextView
+
         android:id="@+id/certtype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/list_image6"
+        android:paddingTop="10dp"
         android:text="证书"
         android:textColor="#828282"
-        android:paddingTop="10dp"
         android:textSize="15sp"
-        android:visibility="gone"/>
-     
-    
-    <ImageView
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/iv_download"
+        android:layout_width="50dp"
+        android:layout_height="27dp"
         android:layout_alignParentRight="true"
-		android:id="@+id/iv_download"
-		android:layout_width="50dp"
-		android:layout_height="50dp"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="15dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_login_yellow"
+        android:gravity="center"
+        android:text="下载"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
 
-        />
-    
-     <ImageView
-            android:id="@+id/list_image2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:layout_toRightOf="@+id/tv_CommonName"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/cert_rsa" />
-         
+    <!--<ImageView-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:id="@+id/iv_download"-->
+    <!--android:layout_width="50dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="15dp"-->
+
+    <!--/>-->
+
+    <ImageView
+        android:id="@+id/list_image2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:layout_toRightOf="@+id/tv_CommonName"
+        android:src="@drawable/cert_rsa"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/tv_CommonName1"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:singleLine="false"
         android:layout_below="@id/tv_CommonName"
-		android:layout_toRightOf="@+id/list_image2"
-		android:layout_marginTop="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_toRightOf="@+id/list_image2"
+        android:singleLine="false"
         android:text="令狐冲"
         android:textColor="#878787"
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone" />
 
-     <ImageView
-            android:id="@+id/list_image3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_CommonName"
-            android:layout_toRightOf="@+id/tv_CommonName1"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/time"
-            android:visibility="gone" />
-    
+    <ImageView
+        android:id="@+id/list_image3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_CommonName"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/tv_CommonName1"
+        android:src="@drawable/time"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/tv_ApplyTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="false"
         android:layout_below="@id/tv_CommonName"
-		android:layout_toRightOf="@+id/thumbnail"
-        android:text="ApplyTime"
         android:layout_marginTop="12dp"
-
+        android:layout_toRightOf="@+id/thumbnail"
+        android:singleLine="false"
+        android:text="ApplyTime"
         android:textColor="#d3c18f"
+
         android:textSize="10sp"
-        android:textStyle="bold" />
-    
-</RelativeLayout >
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+</RelativeLayout>

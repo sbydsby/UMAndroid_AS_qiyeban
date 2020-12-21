@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/cert_bg"
+        android:orientation="vertical"
+        android:padding="22dp">
+        <!--证书标题-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_cert_roles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+
+                android:padding="4dp"
+                android:text="证书管理员"
+                android:textColor="#4D4C4C"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/iv_cert_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_title" />
+
+
+            <TextView
+android:textColor="@color/white"
+                android:id="@+id/certtypemore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toRightOf="@id/iv_cert_logo"
+                android:text="单位证书"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <!--公司名称-->
+        <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/certnickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="上海数字证书认证中心有限公司"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+
+            android:textStyle="bold"
+
+            />
+
+
+            <!--有效期\印章-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:textColor="@color/white"
+android:id="@+id/tv_cert_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="有效期剩余"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:textColor="@color/white"
+                    android:id="@+id/certafter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="1096"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:textColor="@color/white"
+android:id="@+id/layout_leftday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="天"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+    </LinearLayout>
+    <!--空白间距-->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+</LinearLayout>

@@ -16,7 +16,7 @@
         android:background="@color/white"
         >
 
-        <com.sheca.umandroid.layout.ComplicatedItem
+        <com.sheca.umee.layout.ComplicatedItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:main_text="@string/module_logs"
@@ -35,7 +35,7 @@
         android:layout_height="1dp"
         android:background="@color/gray_devider" />
 
-    <com.sheca.umandroid.layout.ComplicatedItem
+    <com.sheca.umee.layout.ComplicatedItem
         android:id="@+id/logs_see"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

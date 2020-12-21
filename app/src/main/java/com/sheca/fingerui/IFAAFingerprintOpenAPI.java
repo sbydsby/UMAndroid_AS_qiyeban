@@ -13,11 +13,11 @@ import com.alipay.api.AlipayResponse;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePayRequest;
 import com.sheca.javasafeengine;
-import com.sheca.umandroid.R;
-import com.sheca.umandroid.dao.AccountDao;
-import com.sheca.umandroid.model.Cert;
-import com.sheca.umandroid.util.CommonConst;
-import com.sheca.umandroid.util.WebClientUtil;
+import com.sheca.umee.R;
+import com.sheca.umee.dao.AccountDao;
+import com.sheca.umee.model.Cert;
+import com.sheca.umee.util.CommonConst;
+import com.sheca.umee.util.WebClientUtil;
 
 import org.spongycastle.util.encoders.Base64;
 

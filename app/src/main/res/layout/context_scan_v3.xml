@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    android:background="@color/gray_light">
+
+    android:background="#00000000">
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="50dp"
@@ -23,7 +25,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/bg_yellow"></View>
+                android:background="@color/bg_theme_deep"></View>
             <ImageView
                 android:layout_marginTop="50dp"
                 android:scaleType="fitXY"

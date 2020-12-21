@@ -12,15 +12,15 @@
     <!-- 输入信息,提示语,动作指令,次数字体大小 -->
     <dimen name="text_size_big2">18dip</dimen>
     <!-- 认证结果字体大小 -->
-    <dimen name="text_size_big3">25dip</dimen> 
+    <dimen name="text_size_big3">25dip</dimen>
     <dimen name="corner_height">40px</dimen>
-    
-    <dimen name="margin_top_30">30dp</dimen> 
+
+    <dimen name="margin_top_30">30dp</dimen>
     <dimen name="padding_30">30dp</dimen>
     <!--字体大小-->
     <dimen name="text_size_28">28sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
-    
+
     <dimen name="LargeTextSize">16dp</dimen>
     <dimen name="BasicTextSize">15dp</dimen>
     <dimen name="TitleTextSize">18dp</dimen>

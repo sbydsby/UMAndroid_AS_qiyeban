@@ -11,7 +11,7 @@
          android:layout_height="100dp"
          android:layout_marginTop="40dp"
          android:layout_centerHorizontal="true"
-         android:src="@drawable/versioninfo"
+         android:src="@drawable/ic_launcher"
          />
 
      <TextView

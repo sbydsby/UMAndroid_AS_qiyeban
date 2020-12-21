@@ -1,17 +1,9 @@
 <resources>
 
-    <string name="title_activity_login">用户登录</string>
-    <string name="title_activity_register">用户注册</string>
-
     <!-- Strings related to login -->
-    <string name="prompt_account">请输入手机号码</string>
-    <string name="prompt_password">请输入账户密码</string>
     <string name="prompt_dao_password">请输入证书密码</string>
-    <string name="action_sign_in">登录</string>
-    <string name="action_sign_in_short">账户登录</string>
     <string name="error_invalid_account">账号格式错误，请输入正确的手机号。</string>
     <string name="error_invalid_password">密码不能为空，且必须由8至16位英文、数字或符号组成。</string>
-    <string name="error_incorrect_password">密码不正确</string>
     <string name="error_account_required">账号不能为空</string>
     
     <!-- Strings related to register -->
@@ -20,7 +12,6 @@
     <string name="prompt_account_password2">再次输入登录密码</string>
     <string name="prompt_account_phone_msg">输入短信验证码</string>
     <string name="action_message_code">获取验证码</string>
-    <string name="action_reg_account">注册</string>
     <string name="error_incorrect_password2">两次密码不一致</string>
     <string name="error_invalid_code">验证码不能为空</string>
 

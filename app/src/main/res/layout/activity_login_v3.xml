@@ -6,7 +6,7 @@
     android:scrollbars="none">
 
 
-    <com.sheca.umandroid.layout.InputMethodRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.sheca.umee.layout.InputMethodRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/loginpage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -290,7 +290,7 @@
                                 android:layout_gravity="center_horizontal"
 
                                 android:text="切换服务器"
-                                android:textColor="@color/bg_yellow"
+                                android:textColor="@color/bg_theme_deep"
                                 android:textSize="16sp" />
 
 
@@ -322,6 +322,6 @@
 
         </LinearLayout>
 
-    </com.sheca.umandroid.layout.InputMethodRelativeLayout>
+    </com.sheca.umee.layout.InputMethodRelativeLayout>
 
 </ScrollView>

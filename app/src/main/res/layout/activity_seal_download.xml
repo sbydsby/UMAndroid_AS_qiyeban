@@ -1,0 +1,160 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}">
+
+    <RelativeLayout
+        android:id="@+id/Layout_cert"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/Layout_cert1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移动印章"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"
+                android:textColor="#212121"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申领更方便，用章更轻松"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14dp"
+                android:textSize="14sp"
+                android:textColor="#212121"
+                />
+
+            <ImageView
+                android:id="@+id/nocertview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:layout_gravity="center"
+                android:src="@drawable/no_seal" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="后台未提交有效印模图片，请联系管理员"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:textSize="15sp"
+                android:textColor="#FFB85B"
+                />
+
+            <Button
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/btn_apply"
+                android:layout_width="150dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+
+                android:text="返回"
+                style="@style/btn_ok"
+                />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/Layout_cert2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/Layout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="20dp"
+                    android:text="印章列表"
+                    android:textColor="#545454"
+                    android:textSize="19sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Layout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Layout1"
+                android:layout_marginTop="10dp"
+                android:focusable="true">
+
+                <!--  ProgressBar
+                    android:id="@+id/cert_progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone" /-->
+
+                <ListView
+                    android:id="@+id/lv_applications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:dividerHeight="3dp"
+                    android:padding="10dp"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Layout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Layout_cert"
+        android:background="@drawable/dibubg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/applycertbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/renlianshibiebutton" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/applycertbtn"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:text="人脸识别  自助申请"
+            android:textColor="#6089bd"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</RelativeLayout>

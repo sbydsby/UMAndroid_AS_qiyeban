@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/scan_bg"
+    android:background="@color/bg_theme_light"
     android:orientation="vertical">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,12 +13,15 @@
         tools:context="${relativePackage}.${activityClass}">
 
         <RelativeLayout
+            android:paddingBottom="10dp"
+            android:background="@color/white"
             android:id="@+id/form_exit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/textAppLabel"
@@ -53,7 +55,7 @@
                 android:layout_marginTop="5dp"
                 android:text="签名应用:"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textAppView"
@@ -64,61 +66,69 @@
                 android:layout_toRightOf="@id/textAppLabel"
                 android:ellipsize="end"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="16dp"
-            android:orientation="horizontal"
-
-            >
+            android:orientation="horizontal">
 
             <ScrollView
+
                 android:layout_width="fill_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:fillViewport="true">
 
                 <TextView
                     android:id="@+id/textOrgView"
                     android:layout_width="fill_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:background="#ffffff"
                     android:ellipsize="end"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:paddingLeft="@dimen/_10dp"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                 />
             </ScrollView>
 
         </RelativeLayout>
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="22dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+
+            android:paddingBottom="2dp">
 
             <TextView
+                android:gravity="center_vertical"
+
                 android:id="@+id/textCertView"
-                android:layout_width="290dp"
+                android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
                 android:background="#ffffff"
                 android:ellipsize="end"
-                android:layout_weight="1"
+                android:paddingLeft="20dp"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <ImageView
                 android:id="@+id/btnCertView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+
                 android:src="@drawable/logindown" />
 
         </LinearLayout>
@@ -126,94 +136,82 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal">
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp">
 
             <EditText
+
                 android:id="@+id/textPwd"
                 android:layout_width="fill_parent"
                 android:layout_height="38dp"
-                android:layout_marginTop="8dp"
+
+                android:background="@null"
                 android:hint="@string/prompt_dao_password"
                 android:inputType="textPassword"
+                android:paddingLeft="20dp"
                 android:textColor="#000000"
-                android:textColorHint="#d3d3d3"></EditText>
+                android:textColorHint="#d3d3d3"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/relativelayoutFinger"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:id="@+id/rl_img"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/finger_image"
+                android:id="@+id/rl_mianmi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="0dp"
-                android:background="@drawable/fingerprint"
-                android:contentDescription="@string/title"
-                android:gravity="center" />
+                android:layout_centerHorizontal="true">
 
-            <ImageView
-                android:id="@+id/gesture_image"
-                android:layout_width="70dp"
-                android:layout_height="80dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/pwdgesture"
-                android:contentDescription="@string/title"
-                android:gravity="center" />
+                <ImageView
+                    android:id="@+id/finger_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/fingerprint" />
+
+                <ImageView
+                    android:id="@+id/gesture_image"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/pwdgesture" />
             </RelativeLayout>
-            <TextView
-                android:id="@+id/finger_txt"
-                android:layout_width="wrap_content"
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_img"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="3dp"
-                android:ellipsize="end"
+                android:layout_below="@id/rl_mianmi"
+                android:layout_marginTop="14dp"
                 android:gravity="center"
-                android:text="点击图片使用指纹或手势密码登录"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/gesture_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_img"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="3dp"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:text="点击手势密码图片使用手势密码登录"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:visibility="gone" />
+                <TextView
+                    android:id="@+id/finger_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:text="点击图片使用指纹或手势密码登录"
+                    android:textColor="#d3d3d3"
+                    android:textSize="14sp" />
 
-
-            <ImageView
-                android:id="@+id/pwdkeyboard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_img"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="3dp"
-                android:layout_toRightOf="@id/finger_txt"
-                android:background="@drawable/pwdkeyboard"
-                android:gravity="center" />
+                <ImageView
+                    android:id="@+id/pwdkeyboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/finger_txt"
+                    android:background="@drawable/pwdkeyboard"
+                    android:gravity="center" />
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -221,9 +219,10 @@
             android:id="@+id/relativelayout2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="40dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
@@ -235,29 +234,40 @@
                 android:background="@drawable/btn_login_yellow"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="@string/app_ok" />
+                android:text="@string/app_ok"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="密码输入正确后，将自动进入人脸识别认证环节"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/relativelayoutGesture"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:padding="@dimen/_10dp">
 
             <TextView
                 android:id="@+id/Gesture_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
-                android:text="切换手势密码"
+                android:text="切换验证方式"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 

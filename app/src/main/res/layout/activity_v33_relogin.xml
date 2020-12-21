@@ -75,12 +75,14 @@
             android:id="@+id/tv_forget_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/bg_theme_deep"
             android:text="@string/login_forget"
             android:textSize="12sp"
             android:padding="10dp"
             />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_more_relogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

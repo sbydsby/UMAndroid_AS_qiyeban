@@ -7,7 +7,7 @@
     android:paddingTop="20dp"
     android:orientation="vertical">
 
-    <com.sheca.umandroid.layout.ComplicatedItem
+    <com.sheca.umee.layout.ComplicatedItem
         android:id="@+id/cs_hotline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_height="1dp"
         android:background="@color/gray_devider" />
 
-    <com.sheca.umandroid.layout.ComplicatedItem
+    <com.sheca.umee.layout.ComplicatedItem
         android:id="@+id/cs_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_height="1dp"
         android:background="@color/gray_devider" />
 
-    <com.sheca.umandroid.layout.ComplicatedItem
+    <com.sheca.umee.layout.ComplicatedItem
         android:id="@+id/cs_online"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:background="@color/gray_devider"
          />
 
-    <com.sheca.umandroid.layout.ComplicatedItem
+    <com.sheca.umee.layout.ComplicatedItem
         android:id="@+id/cs_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

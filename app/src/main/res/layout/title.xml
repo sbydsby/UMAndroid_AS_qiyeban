@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_gravity="fill_horizontal"
-    android:background="@color/bg_yellow"
+    android:background="@color/bg_theme_deep"
     android:orientation="horizontal">
 
     <ImageButton
@@ -26,8 +26,8 @@
         android:gravity="center"
         android:singleLine="true"
         android:text=""
-        android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:textStyle="bold"/>
 
 </RelativeLayout>

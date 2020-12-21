@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 选中时的图片背景 -->
-    <item android:state_checked="true" android:color="#d4b35c" />
+    <item android:state_checked="true" android:color="@color/bg_theme_deep" />
     <!-- 单击时的背景图片 -->
-    <item android:state_pressed="true" android:color="#d4b35c" />
+    <item android:state_pressed="true" android:color="@color/bg_theme_deep" />
     <!-- 默认时的背景图片 -->
     <item android:color="@color/unitrust_listtab_off" />
 

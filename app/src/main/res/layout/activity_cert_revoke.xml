@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/gray_light"
+    android:background="#F0F4F9"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}">
 
@@ -14,93 +14,113 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+          >
 
             <RelativeLayout
-                android:id="@+id/relativeLayout0"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                ></RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/relativeLayout1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/relativeLayout0"
-
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:id="@+id/rl_top"
                 android:background="@color/white"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/textCertPwd"
-                    android:background="#b5b5b5" />
-
-                <EditText
-                    android:id="@+id/textCertPwd"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@color/transparent"
-                    android:cursorVisible="true"
-                    android:ems="10"
-                    android:hint="@string/prompt_pwd"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="#000000"
-                    android:textColorHint="#d3d3d3"
-                    android:textCursorDrawable="@drawable/edit_cursor_color"></EditText>
-
-                <View
-                    android:id="@+id/passwordview"
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="#b5b5b5" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout5"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/relativeLayout1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp">
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:text="@string/cert_revoke"
-                    android:textColor="@color/red"
-                    android:textSize="17sp" />
+                    android:layout_marginLeft="20dp"
+                    android:text="证书保护口令"
+                    android:textColor="#253156"
+                    android:textSize="14sp" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"></RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/relativeLayout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relativeLayout0"
+
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <!--<View-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_below="@id/textCertPwd"-->
+                    <!--android:background="#b5b5b5" />-->
+
+                    <EditText
+                        android:id="@+id/textCertPwd"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+
+                        android:cursorVisible="true"
+                        android:ems="10"
+                        android:hint="@string/prompt_pwd"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textColorHint="#d3d3d3"
+                        android:textCursorDrawable="@drawable/edit_cursor_color"></EditText>
+
+                    <!--<View-->
+                    <!--android:id="@+id/passwordview"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="#b5b5b5" />-->
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relativeLayout1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="35dp"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:text="@string/cert_revoke"
+                        android:textColor="@color/red"
+                        android:textSize="17sp" />
+                </RelativeLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/relativeLayout5"
+                android:layout_below="@id/rl_top"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp">
 
                 <Button
                     android:id="@+id/btnRevoke"
+                    style="@style/btn_ok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
                     android:text="@string/app_ok"
-                    style="@style/btn_ok"
-                    />
+                    android:textColor="@color/white" />
             </RelativeLayout>
 
         </RelativeLayout>

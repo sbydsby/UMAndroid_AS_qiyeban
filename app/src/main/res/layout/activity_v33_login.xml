@@ -10,6 +10,7 @@
         layout="@layout/view_v33_title" />
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -26,22 +27,21 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="20dp"
-        android:hint="@string/v33_login_mobile"
         android:background="@null"
-        android:maxLines="1"
-        android:maxLength="11"
+        android:hint="@string/v33_login_mobile"
         android:inputType="number"
+        android:maxLength="11"
+        android:maxLines="1"
         android:singleLine="true"
         android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ff253156"
         android:layout_marginLeft="@dimen/_20dp"
-        android:layout_marginRight="@dimen/_20dp"
         android:layout_marginTop="2dp"
-        />
+        android:layout_marginRight="@dimen/_20dp"
+        android:background="#ff253156" />
 
     <LinearLayout
         android:id="@+id/ll_create_account"
@@ -49,7 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,21 +64,52 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/v33_login_tip2"
-            android:textColor="@color/bg_blue_new"
+            android:textColor="@color/bg_theme_deep"
             android:textSize="12sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/login_v33_mobile"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
         android:layout_marginRight="20dp"
- android:enabled="false"
         android:background="@drawable/btn_login_yellow"
+        android:enabled="false"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textColor="@color/white"
-        android:text="@string/btn_next" />
+        android:text="@string/btn_next"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/switch_service"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="13dp"
+            android:layout_height="13dp" />
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:text="设置服务器"
+            android:textColor="@color/bg_theme_deep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:visibility="visible"
+        android:id="@+id/testLoginButton"
+        android:layout_marginLeft="5dp"
+        android:text="测试密码登录"
+        android:textColor="@color/bg_theme_deep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

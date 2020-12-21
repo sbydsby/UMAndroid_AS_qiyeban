@@ -15,41 +15,43 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24.0dp"
-        android:visibility="gone"
+        android:layout_marginBottom="48dp"
+        android:visibility="visible"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_gravity="center_vertical"
             android:clickable="true"
-            android:padding="15.0dip"
+
             android:src="@drawable/dot" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_gravity="center_vertical"
             android:clickable="true"
-            android:padding="15.0dip"
+
             android:src="@drawable/dot" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:clickable="true"
-            android:padding="15.0dip"
-            android:src="@drawable/dot" />
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:clickable="true"-->
+            <!--android:padding="15.0dip"-->
+            <!--android:src="@drawable/dot" />-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:clickable="true"
-            android:padding="15.0dip"
-            android:src="@drawable/dot" />
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:clickable="true"-->
+            <!--android:padding="15.0dip"-->
+            <!--android:src="@drawable/dot" />-->
     </LinearLayout>
 
 </RelativeLayout>

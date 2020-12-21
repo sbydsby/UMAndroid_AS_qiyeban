@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+  android:background="#F0F4F9"
+
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="7dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/cert_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="24dp"
+            android:textColor="#253156"
+            android:textSize="14sp"
+            android:text="证书下载成功"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn"
+        style="@style/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/app_ok"
+        android:textColor="@color/white" />
+</LinearLayout>

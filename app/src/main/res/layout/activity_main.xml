@@ -5,7 +5,8 @@
     android:background="@color/white"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/maintop" />
+    <!--<include layout="@layout/maintop" />-->
+    <include layout="@layout/view_fragment_title"/>
 
     <FrameLayout
         android:id="@+id/content"
@@ -18,16 +19,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/grey_dark"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/rb_home"
-            style="@style/um_menu"
-            android:drawableTop="@drawable/selector_home"
-            android:text="@string/menu_selected"
-            />
+        <!--<RadioButton-->
+            <!--android:id="@+id/rb_home"-->
+            <!--style="@style/um_menu"-->
+            <!--android:drawableTop="@drawable/selector_home"-->
+            <!--android:text="@string/menu_selected"-->
+            <!--/>-->
 
 		<RadioButton
             android:id="@+id/rb_cert"
@@ -37,9 +38,17 @@
               />
 
         <RadioButton
+            android:visibility="gone"
             android:id="@+id/rb_service"
             style="@style/um_menu"
             android:drawableTop="@drawable/selector_scan"
+            android:text="@string/menu_scan"
+            />
+
+        <Button
+            android:id="@+id/rb_scan"
+            style="@style/um_menu_disable"
+            android:drawableTop="@drawable/menu_scan_normal"
             android:text="@string/menu_scan"
            />
 
@@ -50,12 +59,12 @@
             android:text="@string/menu_seal"
             />
 
-        <RadioButton
-            android:id="@+id/rb_settings"
-            style="@style/um_menu"
-            android:drawableTop="@drawable/selector_settings"
-            android:text="@string/menu_me"
-             />
+        <!--<RadioButton-->
+            <!--android:id="@+id/rb_settings"-->
+            <!--style="@style/um_menu"-->
+            <!--android:drawableTop="@drawable/selector_settings"-->
+            <!--android:text="@string/menu_me"-->
+             <!--/>-->
     </RadioGroup>
 
 </LinearLayout>

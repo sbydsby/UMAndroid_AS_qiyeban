@@ -117,7 +117,7 @@
             android:layout_gravity="center"
 
             android:text="切换服务器"
-            android:textColor="@color/bg_yellow"
+            android:textColor="@color/bg_theme_deep"
             android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.sheca.umandroid;
+package com.sheca.umee;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sheca.umandroid"
+    package="com.sheca.umee"
     android:versionCode="29"
     android:versionName="4.2.2">
 
@@ -62,7 +62,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name="com.sheca.umandroid.MyApplication"
+        android:name="com.sheca.umee.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -72,7 +72,7 @@
 
 
         <activity
-            android:name="com.sheca.umandroid.LaunchActivity"
+            android:name="com.sheca.umee.LaunchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -84,19 +84,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sheca.umandroid.GuideActivity"
+            android:name="com.sheca.umee.GuideActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.sheca.umandroid.FaceGuideActivity"
+            android:name="com.sheca.umee.FaceGuideActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.MainActivity"
+            android:name="com.sheca.umee.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
@@ -104,107 +104,107 @@
             android:theme="@style/AppThemeNoBack" />
 
         <activity
-            android:name="com.sheca.umandroid.LogsActivity"
+            android:name="com.sheca.umee.LogsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.LogActivity"
+            android:name="com.sheca.umee.LogActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.LoginActivity"
+            android:name="com.sheca.umee.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.sheca.umandroid.PasswordActivity"
+            android:name="com.sheca.umee.PasswordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme"
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity
-            android:name="com.sheca.umandroid.AccountActivity"
+            android:name="com.sheca.umee.AccountActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.ApplicationActivity"
+            android:name="com.sheca.umee.CertDownloadActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.HotlineActivity"
+            android:name="com.sheca.umee.HotlineActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.FAQsActivity"
+            android:name="com.sheca.umee.FAQsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.FAQActivity"
+            android:name="com.sheca.umee.FAQActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.MeChatActivity"
+            android:name="com.sheca.umee.MeChatActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.AboutActivity"
+            android:name="com.sheca.umee.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.GetRandomNumberActivity"
+            android:name="com.sheca.umee.GetRandomNumberActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingGuideActivity"
+            android:name="com.sheca.umee.SettingGuideActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingLaunchActivity"
+            android:name="com.sheca.umee.SettingLaunchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingVersionActivity"
+            android:name="com.sheca.umee.SettingVersionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.DaoActivity"
+            android:name="com.sheca.umee.DaoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:theme="@style/UniTrustTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.sheca.umandroid.DaoScanActivity"
+            android:name="com.sheca.umee.DaoScanActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -212,192 +212,181 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity
-            android:name="com.sheca.umandroid.RegAccountActivity"
+            android:name="com.sheca.umee.RegAccountActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme"
             android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity
-            android:name="com.sheca.umandroid.MySettingsActivityNew"
+            android:name="com.sheca.umee.MySettingsActivityNew"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingCertTypeActivity"
+            android:name="com.sheca.umee.SettingCertTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingSaveTypeActivity"
+            android:name="com.sheca.umee.SettingSaveTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingLogUploadTypeActivity"
+            android:name="com.sheca.umee.SettingLogUploadTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SettingFingerTypeActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-
-        <activity
-            android:name="com.sheca.umandroid.SettingIFAAFaceTypeActivity"
+            android:name="com.sheca.umee.SettingFingerTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
 
         <activity
-            android:name="com.sheca.umandroid.CertDetailActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.CertListActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.CertDeleteActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.CertChangePwdActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.CertRenewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.CertRevokeActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.CertRenameActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.CertResetActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.CertUnlockActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.DaoFaceActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.UserProtocolActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.ForgetPasswordActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.ForgetPasswordValidActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.SetPasswordActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme"
-            android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name="com.sheca.umandroid.ManualCheckActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.ManualCheckFailActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.ScanBlueToothActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.ScanBlueToothSimActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-        <activity
-            android:name="com.sheca.umandroid.WXPayResultActivity"
+            android:name="com.sheca.umee.SettingIFAAFaceTypeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
 
         <activity
-            android:name="com.sheca.umandroid.GestureSettingActivity"
+            android:name="com.sheca.umee.CertDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.LocalPasswordActivity"
+            android:name="com.sheca.umee.CertListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.ValidateGestureActivity"
+            android:name="com.sheca.umee.CertDeleteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SetGuestureActivity"
+            android:name="com.sheca.umee.CertChangePwdActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.CertRenewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.CertRevokeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.CertRenameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.CertResetActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.CertCashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.CertUnlockActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.DaoFaceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.UserProtocolActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.ForgetPasswordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.ForgetPasswordValidActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.SetPasswordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name="com.sheca.umee.ManualCheckActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.ManualCheckFailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+
+        <activity
+            android:name="com.sheca.umee.GestureSettingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.LocalPasswordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.ValidateGestureActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/UniTrustTheme" />
+        <activity
+            android:name="com.sheca.umee.SetGuestureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -426,13 +415,7 @@
             android:label="@string/app_name" />
 
         <activity
-            android:name="com.sheca.umandroid.WXPayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name="com.sheca.umandroid.CSActivity"
+            android:name="com.sheca.umee.CSActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -476,95 +459,62 @@
         </receiver>
 
         <!-- 【必须】 信鸽receiver广播接收 -->
-        <receiver
-            android:name="com.tencent.android.tpush.XGPushReceiver"
-            android:process=":xg_service_v2">
-            <intent-filter android:priority="0x7fffffff">
+        <!--<receiver-->
+            <!--android:name="com.tencent.android.tpush.XGPushReceiver"-->
+            <!--android:process=":xg_service_v2">-->
+            <!--<intent-filter android:priority="0x7fffffff">-->
 
-                <!-- 【必须】 信鸽SDK的内部广播 -->
-                <action android:name="com.tencent.android.tpush.action.SDK" />
-                <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
-                <!-- 【必须】 系统广播：开屏和网络切换 -->
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <!--&lt;!&ndash; 【必须】 信鸽SDK的内部广播 &ndash;&gt;-->
+                <!--<action android:name="com.tencent.android.tpush.action.SDK" />-->
+                <!--<action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />-->
+                <!--&lt;!&ndash; 【必须】 系统广播：开屏和网络切换 &ndash;&gt;-->
+                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
 
-                <!-- 【可选】 一些常用的系统广播，增强信鸽service的复活机会，请根据需要选择。当然，你也可以添加APP自定义的一些广播让启动service -->
-                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-            </intent-filter>
-            <!-- 【可选】 usb相关的系统广播，增强信鸽service的复活机会，请根据需要添加 -->
-            <intent-filter android:priority="0x7fffffff">
-                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
-                <action android:name="android.intent.action.MEDIA_REMOVED" />
-                <action android:name="android.intent.action.MEDIA_CHECKING" />
-                <action android:name="android.intent.action.MEDIA_EJECT" />
+                <!--&lt;!&ndash; 【可选】 一些常用的系统广播，增强信鸽service的复活机会，请根据需要选择。当然，你也可以添加APP自定义的一些广播让启动service &ndash;&gt;-->
+                <!--<action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />-->
+            <!--</intent-filter>-->
+            <!--&lt;!&ndash; 【可选】 usb相关的系统广播，增强信鸽service的复活机会，请根据需要添加 &ndash;&gt;-->
+            <!--<intent-filter android:priority="0x7fffffff">-->
+                <!--<action android:name="android.intent.action.MEDIA_UNMOUNTED" />-->
+                <!--<action android:name="android.intent.action.MEDIA_REMOVED" />-->
+                <!--<action android:name="android.intent.action.MEDIA_CHECKING" />-->
+                <!--<action android:name="android.intent.action.MEDIA_EJECT" />-->
 
-                <data android:scheme="file" />
-            </intent-filter>
-        </receiver>
+                <!--<data android:scheme="file" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
 
-        <!-- 【必须】 信鸽service -->
-        <service
-            android:name="com.tencent.android.tpush.service.XGPushService"
-            android:exported="true"
-            android:persistent="true"
-            android:process=":xg_service_v2" />
+        <!--&lt;!&ndash; 【必须】 信鸽service &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name="com.tencent.android.tpush.service.XGPushService"-->
+            <!--android:exported="true"-->
+            <!--android:persistent="true"-->
+            <!--android:process=":xg_service_v2" />-->
 
-        <!-- 【必须】 通知service，其中android:name部分要改为当前包名 -->
-        <service
-            android:name="com.tencent.android.tpush.rpc.XGRemoteService"
-            android:exported="true">
-            <intent-filter>
+        <!--&lt;!&ndash; 【必须】 通知service，其中android:name部分要改为当前包名 &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name="com.tencent.android.tpush.rpc.XGRemoteService"-->
+            <!--android:exported="true">-->
+            <!--<intent-filter>-->
 
-                <!-- 【必须】 请修改为当前APP名包.PUSH_ACTION，如demo的包名为：com.qq.xgdemo -->
-                <action android:name="com.sheca.umandroid.PUSH_ACTION" />
-            </intent-filter>
-        </service>
+                <!--&lt;!&ndash; 【必须】 请修改为当前APP名包.PUSH_ACTION，如demo的包名为：com.qq.xgdemo &ndash;&gt;-->
+                <!--<action android:name="com.sheca.umandroid.PUSH_ACTION" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
 
-        <!-- 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
-        <meta-data
-            android:name="XG_V2_ACCESS_ID"
-            android:value="2100160239" />
-        <!-- 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
-        <meta-data
-            android:name="XG_V2_ACCESS_KEY"
-            android:value="A4XDQ3527QYN" />
+        <!--&lt;!&ndash; 【必须】 请修改为APP的AccessId，“21”开头的10位数字，中间没空格 &ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="XG_V2_ACCESS_ID"-->
+            <!--android:value="2100160239" />-->
+        <!--&lt;!&ndash; 【必须】 请修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 &ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="XG_V2_ACCESS_KEY"-->
+            <!--android:value="A4XDQ3527QYN" />-->
 
-        <activity
-            android:name="net.sourceforge.simcpux.wxapi.WXEntryActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop" />
-        <activity
-            android:name="net.sourceforge.simcpux.wxapi.WXPayEntryActivity"
-            android:exported="true"
-            android:launchMode="singleTop" />
-        <activity
-            android:name="net.sourceforge.simcpux.SendToWXActivity"
-            android:label="@string/app_name"
-            android:theme="@style/MMTheme.Basic" />
-        <activity
-            android:name="net.sourceforge.simcpux.AddFavoriteToWXActivity"
-            android:label="@string/app_name"
-            android:theme="@style/MMTheme.Basic" />
-        <activity
-            android:name="net.sourceforge.simcpux.GetFromWXActivity"
-            android:label="@string/app_name"
-            android:theme="@style/MMTheme.Basic" />
-        <activity
-            android:name="net.sourceforge.simcpux.ShowFromWXActivity"
-            android:label="@string/app_name"
-            android:theme="@style/MMTheme.Basic" />
-        <activity
-            android:name="net.sourceforge.simcpux.PayActivity"
-            android:label="@string/app_name"
-            android:theme="@style/MMTheme.Basic" />
 
-        <receiver android:name="net.sourceforge.simcpux.AppRegister">
-            <intent-filter>
-                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".SMSLoginActivity"
@@ -574,64 +524,49 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
-        <activity
-            android:name=".AuthChoiceActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-
 
         <activity
-            android:name=".companyCert.SealChoiceActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/UniTrustTheme" />
-
-        <activity
-            android:name="com.sheca.umandroid.NetworkOnlineActivity"
+            android:name="com.sheca.umee.NetworkOnlineActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme"
             tools:ignore="DuplicateActivity" />
         <activity
-            android:name="com.sheca.umandroid.NetworkSignActivity"
+            android:name="com.sheca.umee.NetworkSignActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.sheca.umandroid.NetworkOnlineTestActivity"
+            android:name="com.sheca.umee.NetworkOnlineTestActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme"
             tools:ignore="DuplicateActivity" />
         <activity
-            android:name="com.sheca.umandroid.SealPreviewActivity"
+            android:name="com.sheca.umee.SealPreviewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme"
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity
-            android:name="com.sheca.umandroid.ApplySealActivity"
+            android:name="com.sheca.umee.ApplySealActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
 
         <activity
-            android:name="com.sheca.umandroid.SaveSealActivity"
+            android:name="com.sheca.umee.SaveSealActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/UniTrustTheme" />
         <activity
-            android:name="com.sheca.umandroid.SealListActivity"
+            android:name="com.sheca.umee.SealListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -721,27 +656,23 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
-        <!-- 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复-->
-        <service
-            android:name=".service.GeTuiIntentService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!-- 个推配置SDK核心服务 -->
-        <!-- process必须指定为":pushservice"，切勿随意更改 -->
-        <service
-            android:name=".service.GeTuiService"
-            android:exported="true"
-            android:label="PushService"
-            android:process=":pushservice"></service>
+        <!--&lt;!&ndash; 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复&ndash;&gt;-->
+        <!--<service-->
+            <!--android:name=".service.GeTuiIntentService"-->
+            <!--android:permission="android.permission.BIND_JOB_SERVICE" />-->
+        <!--&lt;!&ndash; 个推配置SDK核心服务 &ndash;&gt;-->
+        <!--&lt;!&ndash; process必须指定为":pushservice"，切勿随意更改 &ndash;&gt;-->
+        <!--<service-->
+            <!--android:name=".service.GeTuiService"-->
+            <!--android:exported="true"-->
+            <!--android:label="PushService"-->
+            <!--android:process=":pushservice"></service>-->
         <!--快捷签名-->
         <activity
             android:name=".QuickSignAcitvity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".test.MainActivityNew"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.sheca.umplus.dao.MainFaceAuthActivity"
@@ -750,52 +681,47 @@
             android:theme="@style/Theme.notAnimation"></activity>
         <!--单位认证_单位认证-->
         <activity
-            android:name="com.sheca.umandroid.companyCert.CompanyCertifyStep2"
+            android:name="com.sheca.umee.companyCert.CompanyCertifyStep2"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.sheca.umandroid.companyCert.CertSetPwdActivity"
+            android:name="com.sheca.umee.companyCert.CertSetPwdActivity"
             android:exported="false"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.sheca.umandroid.companyCert.SealApplyStep1"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoBack" />
 
-        <activity
-            android:name="com.sheca.umandroid.companyCert.album.PictureSelectorActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.sheca.umandroid.companyCert.album.PictureBaseActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.sheca.umandroid.companyCert.album.PicturePreviewActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name="com.sheca.umandroid.companyCert.album.PictureSelectorActivity"-->
+            <!--android:exported="false"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:windowSoftInputMode="adjustPan" />-->
+        <!--<activity-->
+            <!--android:name="com.sheca.umandroid.companyCert.album.PictureBaseActivity"-->
+            <!--android:exported="false"-->
+            <!--android:screenOrientation="portrait" />-->
+        <!--<activity-->
+            <!--android:name="com.sheca.umandroid.companyCert.album.PicturePreviewActivity"-->
+            <!--android:exported="false"-->
+            <!--android:screenOrientation="portrait" />-->
 
-        <activity
-            android:name="com.sheca.umandroid.companyCert.album.PictureExternalPreviewActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name="com.sheca.umandroid.companyCert.album.PictureExternalPreviewActivity"-->
+            <!--android:exported="false"-->
+            <!--android:screenOrientation="portrait" />-->
 
-        <activity
-            android:name="com.sheca.umandroid.companyCert.album.CameraActivity"
-            android:exported="false"
-            android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-            <!--<action android:name="com.yanyu.mio.intent.action.START_CAMERA" />-->
-            <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.sheca.umandroid.companyCert.album.CameraActivity"-->
+            <!--android:exported="false"-->
+            <!--android:screenOrientation="portrait">-->
+            <!--&lt;!&ndash;<intent-filter>&ndash;&gt;-->
+            <!--&lt;!&ndash;<action android:name="com.yanyu.mio.intent.action.START_CAMERA" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<category android:name="android.intent.category.DEFAULT" />&ndash;&gt;-->
+            <!--&lt;!&ndash;</intent-filter>&ndash;&gt;-->
+        <!--</activity>-->
 
         <!--申请印章_选择证书-->
         <activity
-            android:name="com.sheca.umandroid.companyCert.SealApplyStep3"
+            android:name="com.sheca.umee.companyCert.SealApplyStep3"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoBack" />
@@ -806,7 +732,6 @@
         <!--再次登录界面-->
         <activity
             android:name=".account.ReLoginActivityV33"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             />
 
@@ -818,7 +743,6 @@
 
         <activity
             android:name=".account.LoginActivityPWDV33"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             />
 
@@ -852,6 +776,32 @@
             android:name=".account.ResetPwdActivityV33"
             android:screenOrientation="portrait" />
 
+
+
+        <activity
+            android:name=".MineActivity"
+            android:theme="@style/UniTrustTheme"
+            android:screenOrientation="portrait"></activity>
+
+
+        <activity
+            android:name=".CertManageActivity"
+            android:theme="@style/UniTrustTheme"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".SealManageActivity"
+            android:theme="@style/UniTrustTheme"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".CertResultActivity"
+            android:theme="@style/UniTrustTheme"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SealDownloadActivity"
+            android:theme="@style/UniTrustTheme"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

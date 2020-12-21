@@ -29,6 +29,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:maxLength="16"
             android:digits="0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM_"
             android:id="@+id/edt_pwd"
             android:inputType="textPassword"
@@ -64,6 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#272727"
             android:text="@string/v33_login_tip4"
             android:textSize="12sp" />
 

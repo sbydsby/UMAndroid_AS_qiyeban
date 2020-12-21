@@ -20,32 +20,55 @@
             android:visibility="gone"
             >
 
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移动证书"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"
+                android:textColor="#212121"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申领更方便，用证更轻松"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="14dp"
+                android:textSize="14sp"
+                android:textColor="#212121"
+                />
+
             <ImageView
                 android:id="@+id/nocertview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="23dp"
                 android:layout_gravity="center"
                 android:src="@drawable/no_cert" />
 
             <TextView
-                android:layout_width="match_parent"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_cert"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:textSize="18sp"
-                android:textColor="@color/black_light3"
+                android:text="后台未提交有效证书申请，请联系管理员"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:textSize="15sp"
+                android:textColor="#FFB85B"
                 />
 
             <Button
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/btn_apply"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="@string/module_apply_cert"
+                android:layout_marginTop="64dp"
+
+                android:text="返回"
                 style="@style/btn_ok"
                 />
 

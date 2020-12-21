@@ -29,7 +29,7 @@
         android:textColor="#7ac7f3"
         android:textSize="15sp" />
 
-    <com.sheca.umandroid.layout.VerificationCodeView
+    <com.sheca.umee.layout.VerificationCodeView
         android:id="@+id/verificationcodeview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
