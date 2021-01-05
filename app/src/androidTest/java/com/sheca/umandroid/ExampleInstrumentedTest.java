@@ -1,4 +1,4 @@
-package com.sheca.umee;
+package com.sheca.zhongmei;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

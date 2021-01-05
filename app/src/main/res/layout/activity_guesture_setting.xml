@@ -17,7 +17,7 @@
         android:background="@color/white"
         >
 
-        <com.sheca.umee.layout.ComplicatedItem
+        <com.sheca.zhongmei.layout.ComplicatedItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,7 +32,7 @@
 
     </LinearLayout>
 
-    <com.sheca.umee.layout.ComplicatedItem
+    <com.sheca.zhongmei.layout.ComplicatedItem
         android:id="@+id/item_gesture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.sheca.umee;
+package com.sheca.zhongmei;
 
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;

@@ -83,6 +83,7 @@
         android:textColor="@color/white" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/switch_service"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
@@ -104,7 +105,7 @@
 
 
     <Button
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/testLoginButton"
         android:layout_marginLeft="5dp"
         android:text="测试密码登录"

@@ -1,4 +1,4 @@
-package com.sheca.umee;
+package com.sheca.zhongmei;
 
 import org.junit.Test;
 

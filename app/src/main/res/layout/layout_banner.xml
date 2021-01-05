@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false">
 
-    <com.sheca.umee.widget.BannerViewPager
+    <com.sheca.zhongmei.widget.BannerViewPager
         android:id="@+id/bannerViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -94,7 +94,7 @@
         android:visibility="gone" />
 
 
-    <com.sheca.umee.widget.ArcShapeView
+    <com.sheca.zhongmei.widget.ArcShapeView
         android:id="@+id/bannerArcView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -8,8 +8,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.sheca.umee.LaunchActivity;
-import com.sheca.umee.R;
+import com.sheca.zhongmei.LaunchActivity;
+import com.sheca.zhongmei.R;
 
 /**
  * 

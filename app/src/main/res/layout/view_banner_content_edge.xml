@@ -11,14 +11,14 @@
         android:background="@color/bg_theme_deep"
         ></View>
 
-    <com.sheca.umee.adapter.CycleViewEdgePager
+    <com.sheca.zhongmei.adapter.CycleViewEdgePager
         android:id="@+id/pager_banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         >
-    </com.sheca.umee.adapter.CycleViewEdgePager>
+    </com.sheca.zhongmei.adapter.CycleViewEdgePager>
 
     <LinearLayout
         android:id="@+id/viewGroup"

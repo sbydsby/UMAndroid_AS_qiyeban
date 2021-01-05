@@ -6,7 +6,7 @@ android:background="#F0F4F9"
     android:layout_height="match_parent">
 
 
-    <com.sheca.umee.widget.Banner
+    <com.sheca.zhongmei.widget.Banner
         android:id="@+id/card_banner"
         android:layout_width="match_parent"
         android:layout_height="160dp"

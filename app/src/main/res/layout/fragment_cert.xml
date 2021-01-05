@@ -179,6 +179,7 @@
     </LinearLayout>
 
     <Button
+        android:visibility="gone"
         android:layout_margin="50dp"
         android:layout_width="wrap_content"
         android:id="@+id/btn_apply_org_cert"

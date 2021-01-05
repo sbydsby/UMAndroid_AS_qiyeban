@@ -796,9 +796,10 @@
     <string name="push_transmission_data">收到一条透传测试消息</string>
     <string name="network_invalid">对不起，当前网络不可用!</string>
 
-    <string name="fryzt_rule1">感谢您下载中煤易投！我们非常重视您的个人信息和隐私保护。为了更好地保障您的个人权益，在使用我们的产品前，请您务审慎阅读、充分理解</string>
-    <string name="fryzt_rule2">《中煤易投》</string>
-    <string name="fryzt_rule3">各条款，我们会按照上述协议及政策收集、使用和共享您的个人信息。</string>
+    <string name="fryzt_rule1">欢迎使用中煤易投！我们非常重视您的个人信息和隐私保护。为了更好保障您的个人权益，在使用我们的产品前，请您务必审慎阅读、充分理解</string>
+    <string name="fryzt_rule2">《中煤易投企业版软件许可和服务协议》</string>
+    <string name="fryzt_rule3">《中煤易投企业版软件隐私政策》</string>
+    <string name="fryzt_rule4">全部条款，请您同意并接受全部条款后再开始使用我们的服务。</string>
 
 
     <!-- 自定义相册 -->
@@ -863,7 +864,7 @@
     <string name="v33_login_tip4">密码为8-16位，支持字母、数字及下划线</string>
     <string name="v33_login_tip5">请输入姓名</string>
     <string name="v33_login_tip6">请输入身份证号码</string>
-    <string name="v33_validate">实名认证</string>
+    <string name="v33_validate">经办人信息</string>
     <string name="v33_login_title_pwd">请输入密码</string>
     <string name="v33_login_pwd_tip">登录密码</string>
     <string name="v33_relogin_title">账号：</string>

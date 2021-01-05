@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" 
-    android:background="@color/gray_light"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="true" >
+    <!--<include layout="@layout/title"/>-->
 
-        <TextView
-            android:id="@+id/text_about"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/home_bg"
-            android:ellipsize="end"
-            android:gravity="left"
-            android:padding="10dp"
-            android:singleLine="false"
-            android:text="TextView"
-            android:textColor="#000000"
-            android:textSize="15dp" />
-    </ScrollView>
+    <WebView
+        android:id="@+id/webView_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
